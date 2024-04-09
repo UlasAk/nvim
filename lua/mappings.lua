@@ -13,6 +13,9 @@ map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "tmux Window right (wi
 map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "tmux Window up (with tmux)" })
 map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "tmux Window down (with tmux)" })
 
+-- Window
+map("n", "<leader>sh", "<cmd> split<CR>", { desc = "window Split Window horizontally"})
+map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertically"})
 
 -- M.dap = {
 --   ["<leader>db"] = {

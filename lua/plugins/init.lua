@@ -53,7 +53,7 @@ return {
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     config = function ()
-      local lspconfig = require("nvchad.configs.lspconfig")
+      local lspconfig = require("configs.lspconfig")
       require('rust-tools').setup({
         server = {
           on_attach = lspconfig.on_attach,
@@ -77,7 +77,7 @@ return {
       require("crates").setup {
         lsp = {
           enabled = true,
-          on_attach = require("nvchad.configs.lspconfig").on_attach,
+          on_attach = require("configs.lspconfig").on_attach,
           actions = true,
           completion = true,
           hover = true,
