@@ -90,19 +90,8 @@ M.defaults = function ()
   require "nvchad.lsp"
   local lspconfig = require("lspconfig")
   local lsp_servers = { "html", "cssls", "lua_ls" }
-  -- lsps with default config
-  for _, lsp in ipairs(lsp_servers) do
-    lspconfig[lsp].setup {
-      on_attach = M.on_attach,
-      on_init = M.on_init,
-      capabilities = M.capabilities,
-    }
-  end
   -- lua
   lspconfig.lua_ls.setup({
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     settings = {
       Lua = {
         diagnostics = {
@@ -121,6 +110,15 @@ M.defaults = function ()
       },
     },
   })
+
+  -- lsps with default config
+  for _, lsp in ipairs(lsp_servers) do
+    lspconfig[lsp].setup {
+      on_attach = M.on_attach,
+      on_init = M.on_init,
+      capabilities = M.capabilities,
+    }
+  end
 end
 
 return M;
