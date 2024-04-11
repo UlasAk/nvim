@@ -9,6 +9,12 @@ return {
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function()
+      return require "configs.treesitter"
+    end,
+  },
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false,
     cmd = {
@@ -29,7 +35,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function ()
-      require("nvchad.configs.lspconfig").defaults()
+      require("configs.lspconfig")
     end,
   },
   {
