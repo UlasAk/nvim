@@ -35,7 +35,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function ()
-      require("configs.lspconfig")
+      local lspconfig = require("configs.lsp")
+      lspconfig.defaults()
     end,
   },
   {
@@ -59,7 +60,7 @@ return {
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     config = function ()
-      local lspconfig = require("configs.lspconfig")
+      local lspconfig = require("configs.lsp")
       require('rust-tools').setup({
         server = {
           on_attach = lspconfig.on_attach,
@@ -80,10 +81,11 @@ return {
     'saecki/crates.nvim',
     ft = { "toml" },
     config = function()
+      local on_attach = require("configs.lsp").on_attach
       require("crates").setup {
         lsp = {
           enabled = true,
-          on_attach = require("configs.lspconfig").on_attach,
+          on_attach = on_attach,
           actions = true,
           completion = true,
           hover = true,

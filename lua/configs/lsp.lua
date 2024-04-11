@@ -3,7 +3,7 @@ local map = vim.keymap.set
 local conf = require("nvconfig").ui.lsp
 
 -- basic lsp config
-local on_attach = function(client, bufnr)
+M.on_attach = function(client, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = desc }
   end
@@ -35,8 +35,8 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem = {
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
   snippetSupport = true,
   preselectSupport = true,
@@ -53,61 +53,15 @@ capabilities.textDocument.completion.completionItem = {
     },
   },
 }
-local on_init = function(client, _)
+M.on_init = function(client, _)
   if client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
 end
 
-dofile(vim.g.base46_cache .. "lsp")
-require "nvchad.lsp"
-local lspconfig = require "lspconfig"
-local servers = { "html", "cssls" }
 
-
-
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
-end
-
--- lua
-lspconfig.lua_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  on_init = on_init,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-        },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
-    },
-  },
-})
-
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
-
+-- cmp config
 local cmp = require("cmp")
-
 -- `/` cmdline setup.
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
@@ -131,9 +85,42 @@ cmp.setup.cmdline('/', {
   })
 
 
--- build lspconfig object
-M.on_attach = on_attach
-M.capabilities = capabilities
-M.on_init = on_init
+M.defaults = function ()
+  dofile(vim.g.base46_cache .. "lsp")
+  require "nvchad.lsp"
+  local lspconfig = require("lspconfig")
+  local lsp_servers = { "html", "cssls", "lua_ls" }
+  -- lsps with default config
+  for _, lsp in ipairs(lsp_servers) do
+    lspconfig[lsp].setup {
+      on_attach = M.on_attach,
+      on_init = M.on_init,
+      capabilities = M.capabilities,
+    }
+  end
+  -- lua
+  lspconfig.lua_ls.setup({
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
+            [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
+        },
+      },
+    },
+  })
+end
 
 return M;
