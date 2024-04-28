@@ -4,6 +4,7 @@ return {
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
+    ft = { "lua", "javascript", "typescript" },
     config = function()
       require "configs.conform"
     end,
@@ -34,8 +35,8 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    config = function ()
-      local lspconfig = require("configs.lsp")
+    config = function()
+      local lspconfig = require "configs.lsp"
       lspconfig.defaults()
     end,
   },
@@ -45,29 +46,31 @@ return {
       ensure_installed = {
         "rust-analyzer",
         "prettier",
+        "stylua",
+        "typescript-language-server",
       },
     },
   },
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function ()
+    init = function()
       vim.g.rustfmt_autosave = 1
-    end
+    end,
   },
   {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
-    config = function ()
-      local lspconfig = require("configs.lsp")
-      require('rust-tools').setup({
+    config = function()
+      local lspconfig = require "configs.lsp"
+      require("rust-tools").setup {
         server = {
           on_attach = lspconfig.on_attach,
-          capabilities = lspconfig.capabilities
-        }
-      })
-    end
+          capabilities = lspconfig.capabilities,
+        },
+      }
+    end,
   },
   {
     "mfussenegger/nvim-dap",
@@ -78,7 +81,7 @@ return {
   --   ft = { "rust" },
   -- },
   {
-    'saecki/crates.nvim',
+    "saecki/crates.nvim",
     ft = { "toml" },
     config = function()
       local on_attach = require("configs.lsp").on_attach
@@ -93,7 +96,7 @@ return {
         src = {
           cmp = {
             enabled = true,
-          }
+          },
         },
       }
     end,
@@ -101,64 +104,62 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function()
-      local M = require('nvchad.configs.cmp')
+      local M = require "nvchad.configs.cmp"
       M.completion.completeopt = "menu,menuone,noselect"
       M.mapping["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Insert,
         select = false,
       }
       -- add sources to cmp
-      table.insert(M.sources, {name = "crates"})
+      table.insert(M.sources, { name = "crates" })
       return M
     end,
   },
   {
     "NvChad/nvterm",
-    config = function ()
-      require("nvterm").setup({
+    config = function()
+      require("nvterm").setup {
         terminals = {
           type_opts = {
-            horizontal = { location = "rightbelow", split_ratio = .3},
-            vertical = { location = "rightbelow", split_ratio = .3},
-          }
-        }
-      })
-    end
+            horizontal = { location = "rightbelow", split_ratio = 0.3 },
+            vertical = { location = "rightbelow", split_ratio = 0.3 },
+          },
+        },
+      }
+    end,
   },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-
-    },
+    opts = {},
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    config = function ()
-      require("noice").setup({
+    config = function()
+      require("noice").setup {
         lsp = {
           hover = {
-            enabled = false
+            enabled = false,
           },
           signature = {
-            enabled = false
-          }
-        }
-      })
-    end
+            enabled = false,
+          },
+        },
+      }
+    end,
   },
   {
     "hrsh7th/cmp-buffer",
-    lazy = false
+    lazy = false,
   },
   {
     "hrsh7th/cmp-path",
-    lazy = false
+    lazy = false,
   },
   {
     "hrsh7th/cmp-cmdline",
-    lazy = false
+    lazy = false,
   },
   -- {
   --   "github/copilot.vim",

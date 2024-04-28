@@ -111,6 +111,17 @@ M.defaults = function ()
     },
   })
 
+  lspconfig.tsserver.setup({
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    init_options = {
+      preferences = {
+        disableSuggestions = true
+      }
+    }
+  })
+
   -- lsps with default config
   for _, lsp in ipairs(lsp_servers) do
     lspconfig[lsp].setup {
