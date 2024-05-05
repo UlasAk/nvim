@@ -7,6 +7,7 @@ local options = {
   },
   popupmenu = {
     enabled = true,
+    backend = "cmp",
   },
   lsp = {
     hover = {
@@ -16,7 +17,16 @@ local options = {
       enabled = false,
     },
   },
-  routes = {},
+  routes = {
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "Code actions:",
+      },
+      opts = { replace = false },
+    },
+  },
 }
 
 return options

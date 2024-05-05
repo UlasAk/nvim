@@ -10,6 +10,18 @@ return {
     end,
   },
   {
+    "hrsh7th/cmp-buffer",
+    lazy = false,
+  },
+  {
+    "hrsh7th/cmp-path",
+    lazy = false,
+  },
+  {
+    "hrsh7th/cmp-cmdline",
+    lazy = false,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = function()
       return require "configs.treesitter"
@@ -132,6 +144,7 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
+      "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
@@ -161,18 +174,6 @@ return {
     config = function()
       require("telescope").load_extension "ui-select"
     end,
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    lazy = false,
-  },
-  {
-    "hrsh7th/cmp-path",
-    lazy = false,
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-    lazy = false,
   },
   -- {
   --   "github/copilot.vim",
