@@ -14,8 +14,12 @@ map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "tmux Window up (with tmu
 map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "tmux Window down (with tmux)" })
 
 -- Window
-map("n", "<leader>sh", "<cmd> split<CR>", { desc = "window Split Window horizontally"})
-map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertically"})
+map("n", "<leader>sh", "<cmd> split<CR>", { desc = "window Split Window horizontally" })
+map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertically" })
+
+--Move lines
+map("n", "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
+map("n", "<M-Down>", "<cmd> m+1<CR>", { desc = "Editing Move line down" })
 
 -- M.dap = {
 --   ["<leader>db"] = {
@@ -33,9 +37,7 @@ map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertica
 -- }
 
 -- Crates
-map("n", "<leader>rcu",
-  function()
-    require('crates').upgrade_all_crates()
-  end, { desc = "Update crates" }
-)
+map("n", "<leader>rcu", function()
+  require("crates").upgrade_all_crates()
+end, { desc = "Update crates" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
