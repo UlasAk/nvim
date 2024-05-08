@@ -46,7 +46,7 @@ end
 
 local options = {
   completion = {
-    completeopt = "menu,menuone",
+    completeopt = "menu,menuone,noselect",
   },
 
   window = {
@@ -78,7 +78,7 @@ local options = {
 
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      select = false,
     },
 
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -107,6 +107,7 @@ local options = {
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
+    { name = "crates" },
   },
 }
 

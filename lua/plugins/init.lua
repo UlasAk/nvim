@@ -174,6 +174,7 @@ return {
 
       -- cmp sources plugins
       {
+        "neovim/nvim-lspconfig",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
@@ -182,16 +183,7 @@ return {
       },
     },
     opts = function()
-      local M = require "configs.cmp"
-      M.completion.completeopt = "menu,menuone,noselect"
-      local cmp = require "cmp"
-      M.mapping["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = false,
-      }
-      -- add sources to cmp
-      table.insert(M.sources, { name = "crates" })
-      return M
+      return require "configs.cmp"
     end,
     config = function(_, opts)
       require("cmp").setup(opts)

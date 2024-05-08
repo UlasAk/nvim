@@ -59,39 +59,37 @@ M.on_init = function(client, _)
   end
 end
 
-
 -- cmp config
-local cmp = require("cmp")
+local cmp = require "cmp"
 -- `/` cmdline setup.
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = "buffer" },
+  },
 })
 -- `:` cmdline setup.
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      {
-        name = 'cmdline',
-        option = {
-          ignore_cmds = { 'Man', '!' }
-        }
-      }
-    })
-  })
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path" },
+  }, {
+    {
+      name = "cmdline",
+      option = {
+        ignore_cmds = { "Man", "!" },
+      },
+    },
+  }),
+})
 
-
-M.defaults = function ()
+M.defaults = function()
   dofile(vim.g.base46_cache .. "lsp")
   require "nvchad.lsp"
-  local lspconfig = require("lspconfig")
+  local lspconfig = require "lspconfig"
   local lsp_servers = { "html", "cssls", "lua_ls" }
   -- lua
-  lspconfig.lua_ls.setup({
+  lspconfig.lua_ls.setup {
     settings = {
       Lua = {
         diagnostics = {
@@ -109,18 +107,18 @@ M.defaults = function ()
         },
       },
     },
-  })
+  }
 
-  lspconfig.tsserver.setup({
+  lspconfig.tsserver.setup {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
     init_options = {
       preferences = {
-        disableSuggestions = true
-      }
-    }
-  })
+        disableSuggestions = true,
+      },
+    },
+  }
 
   -- lsps with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -132,4 +130,4 @@ M.defaults = function ()
   end
 end
 
-return M;
+return M
