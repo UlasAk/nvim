@@ -25,9 +25,6 @@ require("lazy").setup({
   -- },
   {
     import = "plugins",
-    config = function()
-      require "options"
-    end,
   },
 }, require "configs.lazy")
 
