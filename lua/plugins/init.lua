@@ -20,6 +20,13 @@ return {
     end,
   },
   {
+    "hrsh7th/cmp-nvim-lsp",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+    },
+    lazy = false,
+  },
+  {
     "hrsh7th/cmp-buffer",
     lazy = false,
   },
