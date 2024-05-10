@@ -58,6 +58,14 @@ g["loaded_ruby_provider"] = 0
 local is_windows = vim.fn.has "win32" ~= 0
 vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
+-- vim window options
+vim.opt.colorcolumn = "160"
+vim.g.nvim_terminal_default_window_settings = {
+  window = {
+    width = 60,
+  },
+}
+
 -- Syntax Highlighting for .conf files
 vim.cmd [[
   au BufEnter,BufRead *.conf setf dosini

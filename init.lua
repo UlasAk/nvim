@@ -39,11 +39,3 @@ require "autocmds"
 vim.schedule(function()
   require "mappings"
 end)
-
--- vim window options
-vim.opt.colorcolumn = "160"
-vim.g.nvim_terminal_default_window_settings = {
-  window = {
-    width = 80,
-  },
-}
