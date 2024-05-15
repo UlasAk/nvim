@@ -1,6 +1,17 @@
 return {
   "nvim-lua/plenary.nvim",
   {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opts = function()
+      return require "configs.nvimtree"
+    end,
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "nvimtree")
+      require("nvim-tree").setup(opts)
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     ft = { "lua", "javascript", "typescript" },
@@ -37,6 +48,17 @@ return {
   {
     "hrsh7th/cmp-cmdline",
     lazy = false,
+  },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-tree.lua",
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
