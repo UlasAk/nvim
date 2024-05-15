@@ -148,10 +148,10 @@ map("n", "<leader>sh", "<cmd> split<CR>", { desc = "window Split Window horizont
 map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertically" })
 
 --Move lines
-map("n", "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
-map("n", "<M-Down>", "<cmd> m+1<CR>", { desc = "Editing Move line down" })
-map("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "Editing Move line up", noremap = true, silent = true })
-map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Editing Move line down", noremap = true, silent = true })
+map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
+map({ "n", "i" }, "<M-Down>", "<cmd> m+1<CR>", { desc = "Editing Move line down" })
+map("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "Editing Move lines up", noremap = true, silent = true })
+map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Editing Move lines down", noremap = true, silent = true })
 
 -- M.dap = {
 --   ["<leader>db"] = {
