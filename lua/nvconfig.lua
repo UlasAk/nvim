@@ -1,4 +1,3 @@
-
 local M = {}
 
 M.ui = {
@@ -24,9 +23,13 @@ M.ui = {
     theme = "default", -- default/vscode/vscode_colored/minimal
     -- default/round/block/arrow separators work only for default statusline theme
     -- round and block will work for minimal theme only
-    separator_style = "default",
+    separator_style = "round",
     order = nil,
-    modules = nil,
+    modules = {
+      cursor = function()
+        return gen_block("", "%l/%c", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
+      end,
+    },
   },
 
   -- lazyload it when there are 1+ buffers
@@ -81,6 +84,26 @@ M.ui = {
       border = "single",
     },
   },
+}
+
+local config = M.ui.statusline
+local sep_style = config.separator_style
+
+sep_style = (sep_style ~= "round" and sep_style ~= "block") and "block" or sep_style
+
+local default_sep_icons = {
+  round = { left = "", right = "" },
+  block = { left = "█", right = "█" },
+}
+
+local separators = (type(sep_style) == "table" and sep_style) or default_sep_icons[sep_style]
+
+local sep_l = separators["left"]
+
+M.ui.statusline.modules = {
+  cursor = function()
+    return "%#St_pos_sep#" .. sep_l .. "%#St_pos_icon# %#St_pos_text# %l/%c %p%% "
+  end,
 }
 
 M.base46 = {
