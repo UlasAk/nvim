@@ -168,6 +168,11 @@ map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Editing Move lines down", nor
 --   }
 -- }
 
+-- LSP
+map("n", "<leader>lad", function()
+  require("telescope.builtin").diagnostics()
+end, { desc = "Lsp All Diagnostics" })
+
 -- Crates
 map("n", "<leader>rcu", function()
   require("crates").upgrade_all_crates()
