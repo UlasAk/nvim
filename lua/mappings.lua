@@ -171,6 +171,11 @@ map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 --   }
 -- }
 
+-- Telescope
+map({ "n", "i" }, "<C-v>", function()
+  require("telescope.builtin").registers()
+end, { desc = "Telescope Registers" })
+
 -- LSP
 map("n", "<leader>lad", function()
   require("telescope.builtin").diagnostics()
