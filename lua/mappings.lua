@@ -135,7 +135,7 @@ end, { desc = "blankline jump to current context" })
 -- CUSTOM mappings ===============================================================================
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+-- map("i", "jk", "<ESC>")
 
 -- Tmux navigation
 map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "tmux Window left (with tmux)" })
@@ -152,6 +152,9 @@ map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
 map({ "n", "i" }, "<M-Down>", "<cmd> m+1<CR>", { desc = "Editing Move line down" })
 map("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "Editing Move lines up", noremap = true, silent = true })
 map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Editing Move lines down", noremap = true, silent = true })
+
+-- Highlighting
+map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- M.dap = {
 --   ["<leader>db"] = {
