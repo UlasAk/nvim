@@ -41,7 +41,7 @@ M.ui = {
   },
 
   nvdash = {
-    load_on_startup = false,
+    load_on_startup = true,
 
     header = {
       "           ▄ ▄                   ",
@@ -67,7 +67,7 @@ M.ui = {
 
   cheatsheet = {
     theme = "grid", -- simple/grid
-    excluded_groups = { "terminal (t)", "autopairs", "Nvim" }, -- can add group name or with mode
+    excluded_groups = {}, -- can add group name or with mode
   },
 
   lsp = { signature = true },
