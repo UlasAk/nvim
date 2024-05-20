@@ -27,7 +27,10 @@ M.on_attach = function(client, bufnr)
   end, opts "Lsp NvRenamer")
 
   map({ "n", "v" }, "<leader>lca", vim.lsp.buf.code_action, opts "Lsp Code action")
-  map("n", "lsr", vim.lsp.buf.references, opts "Lsp Show references")
+  -- map("n", "lsr", vim.lsp.buf.references, opts "Lsp Show references")
+  map("n", "<leader>lsr", function()
+    require("telescope.builtin").lsp_references()
+  end, opts "Lsp Show references")
 
   -- setup signature popup
   if conf.signature and client.server_capabilities.signatureHelpProvider then
