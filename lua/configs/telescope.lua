@@ -1,3 +1,5 @@
+local trouble = require "trouble.providers.telescope"
+
 local options = {
   defaults = {
     vimgrep_arguments = {
@@ -45,7 +47,8 @@ local options = {
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     mappings = {
-      n = { ["q"] = require("telescope.actions").close },
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["q"] = require("telescope.actions").close, ["<c-t>"] = trouble.open_with_trouble },
     },
   },
 

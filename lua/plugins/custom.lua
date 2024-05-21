@@ -20,8 +20,8 @@ return {
     },
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "blankline")
-
       local hooks = require "ibl.hooks"
+
       hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
       require("ibl").setup(opts)
 
@@ -316,6 +316,19 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
       require("telescope").load_extension "ui-select"
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "TodoTelescope",
+    config = function()
+      require("todo-comments").setup()
     end,
   },
   -- {
