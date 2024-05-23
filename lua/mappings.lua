@@ -176,6 +176,7 @@ map({ "n", "i" }, "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
 map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope TODOs" })
+map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Media" })
 
 -- LSP
 map("n", "<leader>lad", function()

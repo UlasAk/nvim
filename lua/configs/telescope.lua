@@ -60,6 +60,10 @@ local options = {
       override_file_sorter = true,
       case_mode = "smart_case",
     },
+    media_files = {
+      filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "webm", "mp4" },
+      find_cmd = "rg",
+    },
     ["ui-select"] = {
       require("telescope.themes").get_dropdown {},
     },
