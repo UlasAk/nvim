@@ -231,7 +231,6 @@ return {
           capabilities = lspconfig.capabilities,
         },
       }
-      vim.lsp.inlay_hint.enable(true)
     end,
   },
   {
