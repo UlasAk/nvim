@@ -10,7 +10,14 @@ return {
       require("nvim-web-devicons").setup(opts)
     end,
   },
-
+  {
+    "neovim/nvim-lspconfig",
+    event = "User FilePost",
+    config = function()
+      local lspconfig = require "configs.lsp"
+      lspconfig.defaults()
+    end,
+  },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "User FilePost",
@@ -53,8 +60,11 @@ return {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     ft = { "lua", "javascript", "typescript" },
-    config = function()
-      require "configs.conform"
+    opts = function()
+      return require "configs.conform"
+    end,
+    config = function(_, opts)
+      require("conform").setup(opts)
     end,
   },
   {
@@ -89,7 +99,6 @@ return {
   },
   {
     "antosha417/nvim-lsp-file-operations",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "LspStart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
@@ -131,14 +140,6 @@ return {
     },
   },
   {
-    "neovim/nvim-lspconfig",
-    event = "User FilePost",
-    config = function()
-      local lspconfig = require "configs.lsp"
-      lspconfig.defaults()
-    end,
-  },
-  {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
@@ -166,27 +167,13 @@ return {
     end,
   },
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    config = function()
-      local lspconfig = require "configs.lsp"
-      require("rust-tools").setup {
-        server = {
-          on_attach = lspconfig.on_attach,
-          capabilities = lspconfig.capabilities,
-        },
-      }
-    end,
-  },
-  {
     "mfussenegger/nvim-dap",
   },
-  -- {
-  --   "mrcjkb/rustaceanvim",
-  --   version = "^4",
-  --   ft = { "rust" },
-  -- },
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    lazy = false,
+  },
   {
     "saecki/crates.nvim",
     ft = { "toml" },
