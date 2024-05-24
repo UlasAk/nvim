@@ -175,8 +175,8 @@ map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 map({ "n", "i" }, "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
-map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope TODOs" })
-map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Media" })
+map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
+map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
 
 -- LSP
 map("n", "<leader>lad", function()
