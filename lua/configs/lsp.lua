@@ -63,6 +63,8 @@ M.on_init = function(client, _)
 end
 
 M.defaults = function()
+  -- enable inlay_hints
+  vim.lsp.inlay_hint.enable(true)
   dofile(vim.g.base46_cache .. "lsp")
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
