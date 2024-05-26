@@ -26,6 +26,15 @@ local options = {
       },
       opts = { replace = false },
     },
+    {
+      filter = {
+        event = "msg_show",
+        warning = true,
+        kind = "",
+        find = "autotag",
+      },
+      opts = { skip = true },
+    },
   },
 }
 
