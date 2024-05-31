@@ -147,8 +147,7 @@ return {
   },
   {
     "antosha417/nvim-lsp-file-operations",
-    events = { "User NvimTreeSetup" },
-    lazy = false,
+    event = { "User NvimTreeSetup" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
