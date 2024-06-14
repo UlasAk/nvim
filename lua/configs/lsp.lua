@@ -68,7 +68,7 @@ M.defaults = function()
   dofile(vim.g.base46_cache .. "lsp")
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
-  local lsp_servers = { "html", "cssls", "lua_ls" }
+  local lsp_servers = { "html", "cssls", "lua_ls", "yamlls" }
   -- lua
   lspconfig.lua_ls.setup {
     settings = {

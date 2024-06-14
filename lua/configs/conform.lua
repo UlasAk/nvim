@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     javascript = { { "prettier", "prettierd" } },
     typescript = { { "prettier", "prettierd" } },
+    yaml = { "yamlfmt" },
   },
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable

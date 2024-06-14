@@ -6,6 +6,8 @@ local options = {
     "typescript-language-server",
     "lua-language-server",
     "stylua",
+    "yaml-language-server",
+    "yamlfmt",
   },
 
   PATH = "skip",
