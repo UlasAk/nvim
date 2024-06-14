@@ -2,8 +2,8 @@ local options = {
   formatters_by_ft = {
     html = { "htmlbeautifier" },
     lua = { "stylua" },
-    javascript = { { "prettier", "prettierd" } },
-    typescript = { { "prettier", "prettierd" } },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
     yaml = { "yamlfmt" },
   },
   format_on_save = function(bufnr)
