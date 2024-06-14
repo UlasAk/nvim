@@ -69,7 +69,7 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "html", "cssls", "lua_ls", "yamlls" }
+  local lsp_servers = { "cssls", "html", "jsonls", "lua_ls", "yamlls" }
   -- lua
   lspconfig.lua_ls.setup {
     settings = {

@@ -3,6 +3,7 @@ local options = {
     html = { "prettier" },
     lua = { "stylua" },
     javascript = { "prettier" },
+    json = { "jsonls" },
     typescript = { "prettier" },
     yaml = { "yamlfmt" },
   },
