@@ -2,6 +2,7 @@ local options = {
   ensure_installed = {
     "angular-language-server",
     "css-lsp",
+    "emmet_language_server",
     "json-lsp",
     "lua-language-server",
     "prettier",

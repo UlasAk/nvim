@@ -69,7 +69,19 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "html", "jsonls", "lua_ls", "yamlls" }
+  local lsp_servers = { "cssls", "emmet_language_server", "html", "jsonls", "lua_ls", "yamlls" }
+
+  -- LSPs with default config
+  for _, lsp in ipairs(lsp_servers) do
+    lspconfig[lsp].setup {
+      on_attach = M.on_attach,
+      on_init = M.on_init,
+      capabilities = M.capabilities,
+    }
+  end
+
+  -- LSPs with specific config
+
   -- lua
   lspconfig.lua_ls.setup {
     settings = {
@@ -90,17 +102,6 @@ M.defaults = function()
       },
     },
   }
-
-  -- LSPs with default config
-  for _, lsp in ipairs(lsp_servers) do
-    lspconfig[lsp].setup {
-      on_attach = M.on_attach,
-      on_init = M.on_init,
-      capabilities = M.capabilities,
-    }
-  end
-
-  -- LSPs with specific config
 
   lspconfig.tsserver.setup {
     on_attach = M.on_attach,
