@@ -357,7 +357,9 @@ return {
       enable_close_on_slash = true, -- Auto close on trailing </
     },
     config = function(_, opts)
-      require("nvim-ts-autotag").setup(opts)
+      require("nvim-ts-autotag").setup {
+        opts = opts,
+      }
     end,
   },
   -- {
