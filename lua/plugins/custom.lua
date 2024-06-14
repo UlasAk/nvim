@@ -59,7 +59,7 @@ return {
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
-    ft = { "lua", "javascript", "typescript", "yaml" },
+    ft = { "html", "lua", "javascript", "typescript", "yaml" },
     opts = function()
       return require "configs.conform"
     end,

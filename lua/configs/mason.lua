@@ -1,6 +1,8 @@
 local options = {
   ensure_installed = {
     "rust-analyzer",
+    "htmlbeautifier",
+    "angular-language-server",
     "prettier",
     "stylua",
     "typescript-language-server",
