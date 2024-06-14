@@ -1,6 +1,6 @@
 local options = {
   formatters_by_ft = {
-    html = { "htmlbeautifier" },
+    html = { "prettier" },
     lua = { "stylua" },
     javascript = { "prettier" },
     typescript = { "prettier" },
