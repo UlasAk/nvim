@@ -1,6 +1,7 @@
 local options = {
   ensure_installed = {
     "rust-analyzer",
+    "css-lsp",
     "htmlbeautifier",
     "angular-language-server",
     "prettier",
