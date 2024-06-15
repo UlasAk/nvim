@@ -1,5 +1,6 @@
 local options = {
   formatters_by_ft = {
+    angular = { "prettier" },
     html = { "prettier" },
     lua = { "stylua" },
     javascript = { "prettier" },
