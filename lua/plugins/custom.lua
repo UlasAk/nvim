@@ -362,6 +362,53 @@ return {
       }
     end,
   },
+  {
+    "tzachar/highlight-undo.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = function()
+      return require "configs.highlight-undo"
+    end,
+    config = function(_, opts)
+      require("highlight-undo").setup(opts)
+    end,
+  },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require("goto-preview").setup()
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFocusFiles", "DiffviewToggleFiles", "DiffviewFileHistory" },
+  },
+  {
+    "mbbill/undotree",
+    cmd = { "UndotreeToggle" },
+  },
+  {
+    "tpope/vim-surround",
+    event = { "BufReadPost", "BufNewFile" },
+  },
+  {
+    "mikavilpas/yazi.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "VeryLazy",
+    ---@type YaziConfig
+    opts = {
+      open_for_directories = false,
+    },
+  },
   -- {
   --   "github/copilot.vim",
   -- },

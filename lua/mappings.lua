@@ -134,7 +134,7 @@ end, { desc = "blankline jump to current context" })
 
 -- CUSTOM mappings ===============================================================================
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
 
 -- Tmux navigation
@@ -155,6 +155,9 @@ map("v", "<M-Down>", ":m '>+1<CR>gv=gv", { desc = "Editing Move lines down", nor
 
 -- Highlighting
 map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
+
+-- Undotree
+map("n", "<leader>u", "<cmd> UndotreeToggle<CR>", { desc = "Undotree Toggle" })
 
 -- M.dap = {
 --   ["<leader>db"] = {
@@ -177,6 +180,14 @@ map({ "n", "i" }, "<C-v>", function()
 end, { desc = "Telescope Registers" })
 map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
 map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
+
+-- Yazi
+map("n", "<leader>o", function()
+  require("yazi").yazi()
+end, { desc = "Yazi Open" })
+map("n", "<leader>ocw", function()
+  require("yazi").yazi(nil, vim.fn.getcwd())
+end, { desc = "Yazi Open CWD" })
 
 -- LSP
 map("n", "<leader>lad", function()
