@@ -1,6 +1,6 @@
 local options = {
   ensure_installed = {
-    -- "angular",
+    "angular",
     "bash",
     "css",
     "javascript",
@@ -37,12 +37,10 @@ local options = {
 --     [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
 --   },
 -- }
---
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "angular.html",
---   callback = function()
---     vim.treesitter.language.register("angular", "angular.html") -- Register the filetype with treesitter for the `angular` language/parser
---   end,
--- })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.component.html",
+  command = "set filetype=angular",
+})
 
 return options
