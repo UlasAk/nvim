@@ -185,7 +185,7 @@ map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Fin
 map("n", "<leader>o", function()
   require("yazi").yazi()
 end, { desc = "Yazi Open" })
-map("n", "<leader>ocw", function()
+map("n", "<leader>cw", function()
   require("yazi").yazi(nil, vim.fn.getcwd())
 end, { desc = "Yazi Open CWD" })
 
