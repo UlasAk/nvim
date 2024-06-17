@@ -69,7 +69,7 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "emmet_language_server", "html", "jsonls", "lua_ls", "yamlls" }
+  local lsp_servers = { "cssls", "emmet_language_server", "jsonls", "lua_ls", "yamlls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -103,6 +103,7 @@ M.defaults = function()
     },
   }
 
+  -- TypeScript
   lspconfig.tsserver.setup {
     on_attach = M.on_attach,
     on_init = M.on_init,
@@ -111,6 +112,38 @@ M.defaults = function()
       preferences = {
         disableSuggestions = true,
       },
+    },
+  }
+
+  -- HTML
+  lspconfig.html.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = {
+      "angular",
+      "html",
+      "templ",
+    },
+  }
+
+  -- Emmet Language Server
+  lspconfig.emmet_language_server.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = {
+      "angular",
+      "htcss",
+      "eruby",
+      "html",
+      "htmldjango",
+      "javascriptreact",
+      "less",
+      "pug",
+      "sass",
+      "scss",
+      "typescriptreactml",
     },
   }
 
