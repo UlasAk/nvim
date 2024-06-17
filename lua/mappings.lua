@@ -199,3 +199,6 @@ map("n", "<leader>rcu", function()
   require("crates").upgrade_all_crates()
 end, { desc = "Update crates" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- Zen Mode
+map("n", "<leader>Z", "<cmd>ZenMode<CR>", { desc = "Zen Toggle Zen Mode" })

@@ -409,6 +409,10 @@ return {
       open_for_directories = false,
     },
   },
+  {
+    "folke/zen-mode.nvim",
+    cmd = { "ZenMode" },
+  },
   -- {
   --   "github/copilot.vim",
   -- },
