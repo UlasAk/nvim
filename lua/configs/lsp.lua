@@ -69,7 +69,7 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "emmet_language_server", "jsonls", "lua_ls", "yamlls" }
+  local lsp_servers = { "cssls", "jsonls", "lua_ls", "yamlls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -147,7 +147,7 @@ M.defaults = function()
     },
   }
 
-  -- Angular LS Setup
+  -- Angular
   local ok, mason_registry = pcall(require, "mason-registry")
   if not ok then
     vim.notify "mason-registry could not be loaded"
@@ -176,7 +176,7 @@ M.defaults = function()
     on_init = M.on_init,
     capabilities = M.capabilities,
     cmd = cmd,
-    on_new_config = function(new_config, new_root_dir)
+    on_new_config = function(new_config, _)
       new_config.cmd = cmd
     end,
     filetypes = { "angular", "typescript", "html", "typescriptreact", "typescript.tsx" },
