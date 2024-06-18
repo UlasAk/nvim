@@ -8,10 +8,10 @@ M.on_attach = function(client, bufnr)
     return { buffer = bufnr, desc = desc }
   end
 
-  map("n", "lgD", vim.lsp.buf.declaration, opts "Lsp Go to declaration")
-  map("n", "lgd", vim.lsp.buf.definition, opts "Lsp Go to definition")
-  map("n", "lh", vim.lsp.buf.hover, opts "Lsp hover information")
-  map("n", "lgi", vim.lsp.buf.implementation, opts "Lsp Go to implementation")
+  map("n", "<leader>lgD", vim.lsp.buf.declaration, opts "Lsp Go to declaration")
+  map("n", "<leader>lgd", vim.lsp.buf.definition, opts "Lsp Go to definition")
+  map("n", "<leader>lh", vim.lsp.buf.hover, opts "Lsp hover information")
+  map("n", "<leader>lgi", vim.lsp.buf.implementation, opts "Lsp Go to implementation")
   map("n", "<leader>lsh", vim.lsp.buf.signature_help, opts "Lsp Show signature help")
   map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts "Lsp Add workspace folder")
   map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts "Lsp Remove workspace folder")
