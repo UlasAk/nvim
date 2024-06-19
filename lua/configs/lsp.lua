@@ -155,6 +155,14 @@ M.defaults = function()
   end
 
   local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
+  local handle_angular_exit = function(code, signal, client_id)
+    if code > 0 then
+      vim.schedule(function()
+        print "Restarting failed Angular LS.."
+        vim.cmd "LspStart angularls"
+      end)
+    end
+  end
 
   local cmd = {
     "ngserver",
@@ -176,6 +184,7 @@ M.defaults = function()
     on_init = M.on_init,
     capabilities = M.capabilities,
     cmd = cmd,
+    on_exit = handle_angular_exit,
     on_new_config = function(new_config, _)
       new_config.cmd = cmd
     end,
