@@ -5,6 +5,7 @@ local options = {
     lua = { "stylua" },
     javascript = { "prettier" },
     json = { "jsonls" },
+    sh = { "shfmt" },
     typescript = { "prettier" },
     yaml = { "yamlfmt" },
   },

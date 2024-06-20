@@ -1,12 +1,14 @@
 local options = {
   ensure_installed = {
     "angular-language-server",
+    "bash-language-server",
     "css-lsp",
     "emmet-language-server",
     "json-lsp",
     "lua-language-server",
     "prettier",
     "rust-analyzer",
+    "shfmt",
     "stylua",
     "typescript-language-server",
     "yaml-language-server",

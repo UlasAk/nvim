@@ -69,7 +69,7 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "jsonls", "lua_ls", "yamlls" }
+  local lsp_servers = { "bashls", "cssls", "jsonls", "lua_ls", "yamlls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
