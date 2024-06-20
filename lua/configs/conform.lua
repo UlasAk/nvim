@@ -1,10 +1,11 @@
 local options = {
   formatters_by_ft = {
     angular = { "prettier" },
+    bash = { "shfmt" },
     html = { "prettier" },
-    lua = { "stylua" },
     javascript = { "prettier" },
-    json = { "jsonls" },
+    json = { "prettier" },
+    lua = { "stylua" },
     sh = { "shfmt" },
     typescript = { "prettier" },
     yaml = { "yamlfmt" },
