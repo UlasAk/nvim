@@ -36,8 +36,8 @@ local options = {
 vim.filetype.add {
   pattern = {
     -- [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
-    [".*%/hypr/.*%.conf"] = "hyprlang",
     [".*%.conf"] = "dosini",
+    [".*%/hypr/.*%.conf"] = "hyprlang",
   },
 }
 
