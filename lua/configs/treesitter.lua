@@ -5,6 +5,7 @@ local options = {
     "css",
     "javascript",
     "html",
+    "hyprlang",
     "ini",
     "json",
     "json5",
@@ -31,16 +32,28 @@ local options = {
   indent = { enable = true },
 }
 
--- Angular Setup
--- vim.filetype.add {
---   pattern = {
---     [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
---   },
--- }
+-- Add Custom Filetypes
+vim.filetype.add {
+  pattern = {
+    -- [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
+    [".*%/hypr/.*%.conf"] = "hyprlang",
+    [".*%.conf"] = "dosini",
+  },
+}
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.component.html",
   command = "set filetype=angular",
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  pattern = "hyprlang",
+  command = "set filetype=hyprlang",
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  pattern = "dosini",
+  command = "set filetype=dosini",
 })
 
 return options
