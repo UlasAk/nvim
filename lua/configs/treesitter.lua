@@ -17,6 +17,7 @@ local options = {
     "python",
     "regex",
     "rust",
+    "ssh_config",
     "toml",
     "typescript",
     "vim",
