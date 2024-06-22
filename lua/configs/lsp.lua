@@ -69,7 +69,7 @@ M.defaults = function()
   require "nvchad.lsp"
   local lspconfig = require "lspconfig"
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "jsonls", "lua_ls", "yamlls" }
+  local lsp_servers = { "cssls", "jsonls", "yamlls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -92,6 +92,9 @@ M.defaults = function()
 
   -- lua
   lspconfig.lua_ls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
     settings = {
       Lua = {
         diagnostics = {
