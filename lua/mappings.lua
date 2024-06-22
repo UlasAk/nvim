@@ -179,6 +179,12 @@ map({ "n", "i" }, "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
 map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
+map("n", "<leader>fc", "<cmd>Telescope commands<CR>", { desc = "Telescope Commands" })
+map("n", "<leader>fv", "<cmd>Telescope vim_options<CR>", { desc = "Telescope Vim Options" })
+map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symbols" })
+map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
+map({ "n", "v" }, "<leader>fg", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
 map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
 
 -- Yazi
