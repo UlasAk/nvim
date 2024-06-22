@@ -33,8 +33,12 @@ return {
           completion = true,
           hover = true,
         },
-        src = {
+        completion = {
+          insert_closing_quote = true,
           cmp = {
+            enabled = true,
+          },
+          crates = {
             enabled = true,
           },
         },
