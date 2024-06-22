@@ -30,4 +30,17 @@ return {
       end, 0)
     end,
   },
+  {
+    "NvChad/nvterm",
+    config = function()
+      require("nvterm").setup {
+        terminals = {
+          type_opts = {
+            horizontal = { location = "rightbelow", split_ratio = 0.3 },
+            vertical = { location = "rightbelow", split_ratio = 0.3 },
+          },
+        },
+      }
+    end,
+  },
 }
