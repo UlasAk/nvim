@@ -22,7 +22,7 @@ return {
   },
   {
     "saecki/crates.nvim",
-    ft = { "toml" },
+    event = { "BufRead Cargo.toml" },
     config = function()
       local on_attach = require("configs.lsp").on_attach
       require("crates").setup {
