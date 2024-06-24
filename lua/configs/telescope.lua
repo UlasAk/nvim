@@ -2,9 +2,6 @@ local trouble = require "trouble.sources.telescope"
 
 local options = {
   pickers = {
-    grep_string = {
-      additional_args = { "--no-ignore", "--hidden" },
-    },
     live_grep = {
       additional_args = { "--no-ignore", "--hidden" },
     },
