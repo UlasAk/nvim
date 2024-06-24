@@ -2,6 +2,98 @@ local M = {}
 local map = vim.keymap.set
 local conf = require("nvconfig").ui.lsp
 
+-- Signature help
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "single",
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "single",
+  focusable = false,
+  relative = "cursor",
+  silent = true,
+})
+
+local signature_help = {}
+
+signature_help.check_triggeredChars = function(triggerChars)
+  local cur_line = vim.api.nvim_get_current_line()
+  local pos = vim.api.nvim_win_get_cursor(0)[2]
+
+  cur_line = cur_line:gsub("%s+$", "") -- rm trailing spaces
+
+  for _, char in ipairs(triggerChars) do
+    if cur_line:sub(pos, pos) == char then
+      return true
+    end
+  end
+end
+
+signature_help.setup = function(client, bufnr)
+  local group = vim.api.nvim_create_augroup("LspSignature", { clear = false })
+  vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
+
+  local triggerChars = client.server_capabilities.signatureHelpProvider.triggerCharacters
+
+  vim.api.nvim_create_autocmd("TextChangedI", {
+    group = group,
+    buffer = bufnr,
+    callback = function()
+      if signature_help.check_triggeredChars(triggerChars) then
+        vim.lsp.buf.signature_help()
+      end
+    end,
+  })
+end
+
+local function apply(curr, win)
+  local newName = vim.trim(vim.fn.getline ".")
+  vim.api.nvim_win_close(win, true)
+
+  if #newName > 0 and newName ~= curr then
+    local params = vim.lsp.util.make_position_params()
+    params.newName = newName
+
+    -- Angular specific check to prevent double renaming
+    if
+      #vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
+      and #vim.lsp.get_clients { bufnr = 0, name = "tsserver" } == 1
+    then
+      vim.lsp.buf.rename(newName, { name = "angularls" })
+    else
+      vim.lsp.buf_request(0, "textDocument/rename", params)
+    end
+  end
+end
+
+local function rename()
+  local currName = vim.fn.expand "<cword>" .. " "
+
+  local win = require("plenary.popup").create(currName, {
+    title = "Rename",
+    style = "minimal",
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    relative = "cursor",
+    borderhighlight = "RenamerBorder",
+    titlehighlight = "RenamerTitle",
+    focusable = true,
+    width = 25,
+    height = 1,
+    line = "cursor+2",
+    col = "cursor-1",
+  })
+
+  vim.cmd "normal A"
+  vim.cmd "startinsert"
+
+  map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
+
+  map({ "i", "n" }, "<CR>", function()
+    apply(currName, win)
+    vim.cmd.stopinsert()
+  end, { buffer = 0 })
+end
+
 -- basic lsp config
 M.on_attach = function(client, bufnr)
   local function opts(desc)
@@ -23,8 +115,8 @@ M.on_attach = function(client, bufnr)
   map("n", "<leader>lD", vim.lsp.buf.type_definition, opts "Lsp Go to type definition")
 
   map("n", "<leader>lr", function()
-    require "nvchad.lsp.renamer"()
-  end, opts "Lsp NvRenamer")
+    rename()
+  end, opts "Lsp Rename")
 
   map({ "n", "v" }, "<leader>lca", vim.lsp.buf.code_action, opts "Lsp Code action")
   -- map("n", "lsr", vim.lsp.buf.references, opts "Lsp Show references")
@@ -34,7 +126,7 @@ M.on_attach = function(client, bufnr)
 
   -- setup signature popup
   if conf.signature and client.server_capabilities.signatureHelpProvider then
-    require("nvchad.lsp.signature").setup(client, bufnr)
+    signature_help.setup(client, bufnr)
   end
 end
 
@@ -66,8 +158,38 @@ M.defaults = function()
   -- enable inlay_hints
   vim.lsp.inlay_hint.enable(true)
   dofile(vim.g.base46_cache .. "lsp")
-  require "nvchad.lsp"
   local lspconfig = require "lspconfig"
+  -- Diagnostic Signs
+  local function lspSymbol(name, icon)
+    local hl = "DiagnosticSign" .. name
+    vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+  end
+  lspSymbol("Error", "󰅙")
+  lspSymbol("Info", "󰋼")
+  lspSymbol("Hint", "󰌵")
+  lspSymbol("Warn", "")
+  vim.diagnostic.config {
+    virtual_text = {
+      prefix = "",
+    },
+    signs = true,
+    underline = true,
+    -- update_in_insert = false,
+    float = {
+      border = "single",
+    },
+  }
+
+  --  LspInfo window borders
+  local win = require "lspconfig.ui.windows"
+  local _default_opts = win.default_opts
+
+  win.default_opts = function(options)
+    local opts = _default_opts(options)
+    opts.border = "single"
+    return opts
+  end
+
   -- LSPs without specific config
   local lsp_servers = { "cssls", "jsonls", "yamlls" }
 
