@@ -215,7 +215,13 @@ M.defaults = function()
   --     ["rust-analyzer"] = {
   --       cargo = {
   --         features = "all",
+  --         buildScripts = {
+  --            enable = true,
+  --         }.
   --       },
+  --       procMacro = {
+  --          enable = true
+  --       }
   --     },
   --   },
   -- }
