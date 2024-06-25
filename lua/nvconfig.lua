@@ -110,4 +110,4 @@ M.base46 = {
   integrations = {},
 }
 
-return M;
+return vim.tbl_deep_extend("force", M, require "chadrc")
