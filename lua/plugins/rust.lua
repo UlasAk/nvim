@@ -14,8 +14,10 @@ return {
       local lspconfig = require "configs.lsp"
       vim.g.rustaceanvim = {
         server = {
+          autostart = true,
           on_attach = lspconfig.on_attach,
           capabilities = lspconfig.capabilities,
+          on_init = lspconfig.on_init,
         },
       }
     end,
