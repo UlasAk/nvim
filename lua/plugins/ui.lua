@@ -9,7 +9,8 @@ return {
         "rcarriga/nvim-notify",
         opts = function()
           return {
-            background_colour = "#00000000",
+            fps = 60,
+            background_colour = "#FDFD9A",
           }
         end,
         config = function(_, opts)
