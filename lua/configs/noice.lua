@@ -17,6 +17,11 @@ local options = {
       enabled = false,
     },
   },
+  commands = {
+    history = {
+      filter = {},
+    },
+  },
   routes = {
     {
       filter = {
@@ -28,10 +33,8 @@ local options = {
     },
     {
       filter = {
-        event = "msg_show",
         warning = true,
-        kind = "",
-        find = "autotag",
+        find = "angularls",
       },
       opts = { skip = true },
     },

@@ -313,7 +313,7 @@ M.defaults = function()
   local handle_angular_exit = function(code, signal, client_id)
     if code > 0 then
       vim.schedule(function()
-        print "Restarting failed Angular LS.."
+        -- print "Restarting failed Angular LS.."
         vim.cmd "LspStart angularls"
       end)
     end
