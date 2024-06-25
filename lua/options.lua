@@ -72,6 +72,7 @@ vim.g.nvim_terminal_default_window_settings = {
 vim.cmd [[
   hi CurSearch guifg=#282737 guibg=#ff0000 
 ]]
+-- Change Noice Mini Background Color (where LSP Progress is shown)
 vim.cmd [[
   hi NoiceMini guifg=#282737 guibg=#1E1E2E
 ]]
