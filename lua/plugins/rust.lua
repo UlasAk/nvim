@@ -18,6 +18,13 @@ return {
           on_attach = lspconfig.on_attach,
           capabilities = lspconfig.capabilities,
           on_init = lspconfig.on_init,
+          default_settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                allFeatures = true,
+              },
+            },
+          },
         },
       }
     end,
