@@ -21,7 +21,7 @@ return {
           default_settings = {
             ["rust-analyzer"] = {
               cargo = {
-                allFeatures = true,
+                features = "all",
               },
             },
           },

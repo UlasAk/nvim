@@ -128,6 +128,9 @@ M.on_attach = function(client, bufnr)
   if conf.signature and client.server_capabilities.signatureHelpProvider then
     signature_help.setup(client, bufnr)
   end
+
+  -- inlay hints
+  vim.lsp.inlay_hint.enable(true)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -155,8 +158,6 @@ M.on_init = function(client, _)
 end
 
 M.defaults = function()
-  -- enable inlay_hints
-  vim.lsp.inlay_hint.enable(true)
   dofile(vim.g.base46_cache .. "lsp")
   local lspconfig = require "lspconfig"
   -- Diagnostic Signs
@@ -203,6 +204,21 @@ M.defaults = function()
   end
 
   -- LSPs with specific config
+
+  -- Rust
+  -- lspconfig.rust_analyzer.setup {
+  --   autostart = true,
+  --   on_attach = M.on_attach,
+  --   capabilities = M.capabilities,
+  --   on_init = M.on_init,
+  --   settings = {
+  --     ["rust-analyzer"] = {
+  --       cargo = {
+  --         features = "all",
+  --       },
+  --     },
+  --   },
+  -- }
 
   -- Bash
   lspconfig.bashls.setup {
