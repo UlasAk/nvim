@@ -76,3 +76,9 @@ vim.cmd [[
 vim.cmd [[
   hi NoiceMini guifg=#282737 guibg=#1E1E2E
 ]]
+-- Change Visual Mode Background Color to see more on transparent background
+vim.schedule(function()
+  vim.cmd [[
+  hi Visual guibg=#76758a
+]]
+end)
