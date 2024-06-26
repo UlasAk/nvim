@@ -14,6 +14,10 @@ return {
       for _, ext in ipairs(opts.extensions_list) do
         telescope.load_extension(ext)
       end
+
+      -- Change Noice Mini Background Color (where LSP Progress is shown)
+      vim.cmd "hi TelescopeMatching guifg=#89b4fa guibg=#76758a"
+      vim.cmd "hi TelescopeSelection guifg=#d9e0ee guibg=#5c5a82"
     end,
   },
   {

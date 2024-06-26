@@ -35,6 +35,9 @@ dofile(vim.g.base46_cache .. "statusline")
 -- load autocmds
 require "autocmds"
 
+-- load colors
+require "colors"
+
 -- load key bindings
 vim.schedule(function()
   require "mappings"

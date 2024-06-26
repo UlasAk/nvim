@@ -67,18 +67,3 @@ vim.g.nvim_terminal_default_window_settings = {
     width = 60,
   },
 }
-
--- Highlight current search item with different color than other search items
-vim.cmd [[
-  hi CurSearch guifg=#282737 guibg=#ff0000 
-]]
--- Change Noice Mini Background Color (where LSP Progress is shown)
-vim.cmd [[
-  hi NoiceMini guifg=#282737 guibg=#1E1E2E
-]]
--- Change Visual Mode Background Color to see more on transparent background
-vim.schedule(function()
-  vim.cmd [[
-  hi Visual guibg=#76758a
-]]
-end)
