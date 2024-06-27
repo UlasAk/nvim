@@ -185,7 +185,7 @@ map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symb
 map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
 map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
 map({ "n", "v" }, "<leader>fg", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
-map("n", "<leader>fp", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
+map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
 
 -- Yazi
 map("n", "<leader>o", function()
