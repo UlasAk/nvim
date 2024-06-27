@@ -1,6 +1,6 @@
 local M = {}
 local map = vim.keymap.set
-local conf = require("nvconfig").ui.lsp
+local conf = require("nvconfig").lsp
 
 -- Signature help
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
