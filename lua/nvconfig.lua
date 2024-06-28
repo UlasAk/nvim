@@ -7,7 +7,7 @@ local options = {
     changed_themes = {},
     theme_toggle = { "catppuccin", "everforest_light" },
     theme = "catppuccin", -- default theme
-    transparency = false,
+    transparency = true,
 
     cmp = {
       icons = true,
