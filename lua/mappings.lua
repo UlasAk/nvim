@@ -196,9 +196,12 @@ map("n", "<leader>cw", function()
 end, { desc = "Yazi Open CWD" })
 
 -- LSP
-map("n", "<leader>lad", function()
+map("n", "<leader>lda", function()
   require("telescope.builtin").diagnostics()
 end, { desc = "Lsp All Diagnostics" })
+map("n", "<leader>ldc", function()
+  require("telescope.builtin").diagnostics { bufnr = 0 }
+end, { desc = "Lsp Diagnostics Current Buf" })
 
 -- Crates
 map("n", "<leader>rcu", function()
