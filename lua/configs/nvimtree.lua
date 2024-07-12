@@ -11,6 +11,11 @@ local options = {
     enable = true,
     update_root = false,
   },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+  },
   view = {
     adaptive_size = false,
     side = "left",
