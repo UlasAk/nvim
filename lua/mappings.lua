@@ -28,10 +28,10 @@ map("n", "<leader>fm", function()
 end, { desc = "format files" })
 
 -- global lsp mappings
-map("n", "<leader>lf", vim.diagnostic.open_float, { desc = "lsp floating diagnostics" })
-map("n", "<leader>[d", vim.diagnostic.goto_prev, { desc = "lsp prev diagnostic" })
-map("n", "<leader>]d", vim.diagnostic.goto_next, { desc = "lsp next diagnostic" })
-map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
+map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Lsp floating diagnostics" })
+map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Lsp prev diagnostic" })
+map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Lsp next diagnostic" })
+map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Lsp diagnostic loclist" })
 
 -- tabufline
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
@@ -196,9 +196,12 @@ map("n", "<leader>cw", function()
 end, { desc = "Yazi Open CWD" })
 
 -- LSP
-map("n", "<leader>lad", function()
+map("n", "<leader>lda", function()
   require("telescope.builtin").diagnostics()
 end, { desc = "Lsp All Diagnostics" })
+map("n", "<leader>ldc", function()
+  require("telescope.builtin").diagnostics { bufnr = 0 }
+end, { desc = "Lsp Diagnostics Current Buf" })
 
 -- Crates
 map("n", "<leader>rcu", function()
