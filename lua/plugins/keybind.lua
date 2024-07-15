@@ -3,8 +3,9 @@ return {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
-    config = function(_, opts)
+    config = function()
       dofile(vim.g.base46_cache .. "whichkey")
+      local opts = require "configs.which-key"
       require("which-key").setup(opts)
     end,
   },
