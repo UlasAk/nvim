@@ -1,8 +1,8 @@
 local options = {
   formatters_by_ft = {
-    angular = { "prettier" },
     bash = { "shfmt" },
     html = { "prettier" },
+    htmlangular = { "prettier" },
     javascript = { "prettier" },
     json = { "prettier" },
     lua = { "stylua" },

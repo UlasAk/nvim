@@ -44,7 +44,7 @@ end
 
 vim.filetype.add {
   pattern = {
-    -- [".*%.component%.html"] = "angular.html", -- Sets the filetype to `angular.html` if it matches the pattern
+    -- [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `angular` if it matches the pattern
     [".*%.conf"] = function(path, _)
       if is_hypr_conf(path) then
         return "hyprlang"
@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufEnter", "BufNewFile" }, {
 
     -- Speziell für Treesitter auf Angular setzen
     if is_angular_template(vim.fn.expand "<afile>:p") then
-      vim.cmd "set filetype=angular"
+      vim.cmd "set filetype=htmlangular"
     end
   end,
   group = "AngularTemplates",

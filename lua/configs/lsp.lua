@@ -276,7 +276,7 @@ M.defaults = function()
     on_init = M.on_init,
     capabilities = M.capabilities,
     filetypes = {
-      "angular",
+      "htmlangular",
       "html",
       "templ",
     },
@@ -288,7 +288,7 @@ M.defaults = function()
     on_init = M.on_init,
     capabilities = M.capabilities,
     filetypes = {
-      "angular",
+      "htmlangular",
       "htcss",
       "eruby",
       "html",
@@ -343,7 +343,7 @@ M.defaults = function()
     on_new_config = function(new_config, _)
       new_config.cmd = cmd
     end,
-    filetypes = { "angular", "typescript", "html", "typescriptreact", "typescript.tsx" },
+    filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
   }
 end
 
