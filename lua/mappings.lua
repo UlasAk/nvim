@@ -186,6 +186,18 @@ map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume l
 map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
 map({ "n", "v" }, "<leader>fg", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
+map("v", "<leader>fz", function()
+  local saved_reg = vim.fn.getreg "v"
+  vim.cmd [[noautocmd sil norm! "vy]]
+  local selection = vim.fn.getreg "v"
+  vim.fn.setreg("v", saved_reg)
+  if selection == nil then
+    return nil
+  end
+  require("telescope.builtin").current_buffer_fuzzy_find {
+    default_text = selection,
+  }
+end, { desc = "telescope find in current buffer" })
 
 -- Yazi
 map("n", "<leader>o", function()
