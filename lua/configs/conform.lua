@@ -1,12 +1,14 @@
 local options = {
   formatters_by_ft = {
     bash = { "shfmt" },
+    bib = { "texlab" },
     html = { "prettier" },
     htmlangular = { "prettier" },
     javascript = { "prettier" },
     json = { "prettier" },
     lua = { "stylua" },
     sh = { "shfmt" },
+    tex = { "latexindent" },
     typescript = { "prettier" },
     yaml = { "yamlfmt" },
   },

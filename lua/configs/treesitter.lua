@@ -9,6 +9,7 @@ local options = {
     "ini",
     "json",
     "json5",
+    "latex",
     "lua",
     "luadoc",
     "markdown",

@@ -345,6 +345,23 @@ M.defaults = function()
     end,
     filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
   }
+
+  -- Latex
+  lspconfig.ltex.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    settings = {
+      ltex = {
+        language = "de-DE",
+      },
+    },
+  }
+  lspconfig.texlab.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+  }
 end
 
 return M
