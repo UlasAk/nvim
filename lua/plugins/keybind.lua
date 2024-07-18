@@ -1,7 +1,8 @@
 return {
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+    event = "VeryLazy",
+    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g", "\\" },
     cmd = "WhichKey",
     config = function()
       dofile(vim.g.base46_cache .. "whichkey")
