@@ -73,6 +73,9 @@ return {
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
     opts = {
+      plugins = {
+        gitsigns = { enabled = false },
+      },
       on_open = function()
         require("gitsigns").detach()
       end,

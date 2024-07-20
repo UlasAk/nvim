@@ -9,6 +9,10 @@ local options = {
   },
 
   on_attach = function(bufnr)
+    if require("lazy.core.config").plugins["zen-mode.nvim"]._.loaded ~= nil and require("zen-mode.view").is_open() then
+      return false
+    end
+
     local gs = package.loaded.gitsigns
 
     local function opts(desc)
