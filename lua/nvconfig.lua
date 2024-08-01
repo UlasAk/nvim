@@ -1,14 +1,6 @@
 local options = {
   ui = {
     ------------------------------- base46 -------------------------------------
-    -- hl = highlights
-    hl_add = {},
-    hl_override = {},
-    changed_themes = {},
-    theme_toggle = { "catppuccin", "everforest_light" },
-    theme = "catppuccin", -- default theme
-    transparency = true,
-
     cmp = {
       icons = true,
       lspkind_text = true,
@@ -65,7 +57,7 @@ local options = {
     },
   },
   term = {
-    winopts = { winhl = "Normal:term,WinSeparator:WinSeparator" },
+    winopts = { winhl = "Normal:term,WinSeparator:WinSeparator", number = false, relativenumber = false },
     sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
     float = {
       relative = "editor",
@@ -82,8 +74,15 @@ local options = {
   },
   lsp = { signature = true },
   base46 = {
+    theme = "catppuccin",
+    hl_add = {},
+    hl_override = {},
     integrations = {},
+    changed_themes = {},
+    transparency = true,
+    theme_toggle = { "catppuccin", "everforest_light" },
   },
+  mason = { cmd = true, pkgs = {} },
 }
 
 local sep_style = options.ui.statusline.separator_style
