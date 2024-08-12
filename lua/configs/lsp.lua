@@ -363,8 +363,6 @@ M.defaults = function()
       "quarto",
       "rmd",
       "context",
-      "html",
-      "xhtml",
       "mail",
       "text",
     },
