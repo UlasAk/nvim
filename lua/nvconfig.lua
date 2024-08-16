@@ -16,11 +16,7 @@ local options = {
       -- round and block will work for minimal theme only
       separator_style = "round",
       order = nil,
-      modules = {
-        cursor = function()
-          return gen_block("", "%l/%c", "%#St_Pos_sep#", "%#St_Pos_bg#", "%#St_Pos_txt#")
-        end,
-      },
+      modules = nil,
     },
 
     -- lazyload it when there are 1+ buffers
@@ -102,6 +98,35 @@ options.ui.statusline.modules = {
   cursor = function()
     return "%#St_pos_sep#" .. sep_l .. "%#St_pos_icon# %#St_pos_text# %l/%c %p%% "
   end,
+  filetype = function()
+    local ok, devicons = pcall(require, "nvim-web-devicons")
+    local icon, icon_highlight_group
+    if ok then
+      icon, icon_highlight_group = devicons.get_icon(vim.fn.expand "%:t")
+      if icon == nil then
+        icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+      end
+      if icon == nil and icon_highlight_group == nil then
+        icon = ""
+        icon_highlight_group = "DevIconDefault"
+      end
+    end
+    return "%#" .. icon_highlight_group .. "#" .. icon .. " " .. vim.bo.filetype .. " "
+  end,
+}
+
+options.ui.statusline.order = {
+  "mode",
+  "file",
+  "git",
+  "%=",
+  "lsp_msg",
+  "%=",
+  "diagnostics",
+  "lsp",
+  "filetype",
+  "cwd",
+  "cursor",
 }
 
 -- return vim.tbl_deep_extend("force", options, require "chadrc")
