@@ -57,7 +57,7 @@ local function apply(curr, win)
     -- Angular specific check to prevent double renaming
     if
       #vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
-      and #vim.lsp.get_clients { bufnr = 0, name = "tsserver" } == 1
+      and #vim.lsp.get_clients { bufnr = 0, name = "ts_ls" } == 1
     then
       vim.lsp.buf.rename(newName, { name = "angularls" })
     else
@@ -259,7 +259,7 @@ M.defaults = function()
   }
 
   -- TypeScript
-  lspconfig.tsserver.setup {
+  lspconfig.ts_ls.setup {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
