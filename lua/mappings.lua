@@ -68,7 +68,7 @@ map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window"
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+-- map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
@@ -184,8 +184,9 @@ map("n", "<leader>fv", "<cmd>Telescope vim_options<CR>", { desc = "Telescope Vim
 map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symbols" })
 map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
 map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
+map("n", "<leader>fma", "<cmd>Telescope marks<CR>", { desc = "Telescope find marks" })
 map({ "n", "v" }, "<leader>fg", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
-map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
+map("n", "<leader>fme", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
 map("v", "<leader>fz", function()
   local saved_reg = vim.fn.getreg "v"
   vim.cmd [[noautocmd sil norm! "vy]]
