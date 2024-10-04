@@ -137,6 +137,10 @@ end, { desc = "blankline jump to current context" })
 -- map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
 
+-- Buffer
+-- map("n", "<C-K>", "<C-y>", { desc = "Buffer Scroll up one line", noremap = true })
+-- map("n", "<C-J>", "<C-e>", { desc = "Buffer Scroll down one line", noremap = true })
+
 -- Tmux navigation
 map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "tmux Window left (with tmux)" })
 map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "tmux Window right (with tmux)" })
