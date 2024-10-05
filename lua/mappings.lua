@@ -136,7 +136,6 @@ end, { desc = "blankline jump to current context" })
 -- ===============================================================================================
 
 -- CUSTOM mappings ===============================================================================
-
 -- map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("i", "jk", "<ESC>")
 
@@ -151,8 +150,11 @@ map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "tmux Window up (with tmu
 map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "tmux Window down (with tmux)" })
 
 -- Window
-map("n", "<leader>sh", "<cmd> split<CR>", { desc = "window Split Window horizontally" })
-map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "window Split Window vertically" })
+map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
+map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
+map("n", "<leader>q", function()
+  require("volt").close()
+end, { desc = "Window Close Volt windows" })
 
 --Move lines
 map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
@@ -241,9 +243,11 @@ map("n", "<RightMouse>", function()
 end, {})
 
 -- Color pickers Hue and Shades
-map("n", "<leader>ph", function()
+map("n", "<leader>pch", function()
+  require("volt").close()
   require("minty.huefy").open()
 end, { desc = "Colors Show Hue picker" })
-map("n", "<leader>ps", function()
+map("n", "<leader>pcs", function()
+  require("volt").close()
   require("minty.shades").open()
 end, { desc = "Colors Show Shades picker" })
