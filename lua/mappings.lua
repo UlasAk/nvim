@@ -239,3 +239,11 @@ map("n", "<RightMouse>", function()
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
 end, {})
+
+-- Color pickers Hue and Shades
+map("n", "<leader>ph", function()
+  require("minty.huefy").open()
+end, { desc = "Colors Show Hue picker" })
+map("n", "<leader>ps", function()
+  require("minty.shades").open()
+end, { desc = "Colors Show Shades picker" })
