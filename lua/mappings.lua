@@ -211,6 +211,9 @@ map("v", "<leader>fz", function()
   }
 end, { desc = "telescope find in current buffer" })
 
+-- Noice
+map("n", "<leader>dm", "<cmd>Noice dismiss<CR>", { desc = "Noice Dismiss messages" })
+
 -- Yazi
 map("n", "<leader>o", function()
   require("yazi").yazi()
