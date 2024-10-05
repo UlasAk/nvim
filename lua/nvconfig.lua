@@ -1,16 +1,31 @@
 local options = {
+
+  base46 = {
+    theme = "catppuccin",
+    hl_add = {},
+    hl_override = {},
+    integrations = {},
+    changed_themes = {},
+    transparency = true,
+    theme_toggle = { "catppuccin", "everforest_light" },
+  },
+
   ui = {
-    ------------------------------- base46 -------------------------------------
     cmp = {
       icons = true,
+      icons_left = true,
       lspkind_text = true,
       style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+      format_colors = {
+        tailwind = true, -- will work for css lsp too
+        icon = "󱓻",
+      },
     },
 
     telescope = { style = "bordered" }, -- borderless / bordered
 
-    ------------------------------- nvchad_ui modules -----------------------------
     statusline = {
+      enabled = true,
       theme = "default", -- default/vscode/vscode_colored/minimal
       -- default/round/block/arrow separators work only for default statusline theme
       -- round and block will work for minimal theme only
@@ -26,32 +41,48 @@ local options = {
       order = { "treeOffset", "buffers", "tabs", "btns" },
       modules = nil,
     },
+  },
 
-    nvdash = {
-      load_on_startup = false,
+  nvdash = {
+    load_on_startup = false,
+    header = {
+      "                            ",
+      "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+      "   ▄▀███▄     ▄██ █████▀    ",
+      "   ██▄▀███▄   ███           ",
+      "   ███  ▀███▄ ███           ",
+      "   ███    ▀██ ███           ",
+      "   ███      ▀ ███           ",
+      "   ▀██ █████▄▀█▀▄██████▄    ",
+      "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+      "                            ",
+      "     Powered By  eovim    ",
+      "                            ",
+    },
 
-      header = {
-        "           ▄ ▄                   ",
-        "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-        "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-        "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-        "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-        "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-        "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-        "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-        "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+    buttons = {
+      { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+      { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
+      { txt = "󰈭  Find Word", keys = "Spc f w", cmd = "Telescope live_grep" },
+      { txt = "󱥚  Themes", keys = "Spc t h", cmd = ":lua require('nvchad.themes').open()" },
+      { txt = "  Mappings", keys = "Spc c h", cmd = "NvCheatsheet" },
+
+      { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+
+      {
+        txt = function()
+          local stats = require("lazy").stats()
+          local ms = math.floor(stats.startuptime) .. " ms"
+          return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+        end,
+        hl = "NvDashLazy",
+        no_gap = true,
       },
 
-      buttons = {
-        { "  Find File", "Spc f f", "Telescope find_files" },
-        { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
-        { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
-        { "  Bookmarks", "Spc m a", "Telescope marks" },
-        { "  Themes", "Spc t h", "Telescope themes" },
-        { "  Mappings", "Spc c h", "NvCheatsheet" },
-      },
+      { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
     },
   },
+
   term = {
     winopts = { winhl = "Normal:term,WinSeparator:WinSeparator", number = false, relativenumber = false },
     sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
@@ -64,21 +95,22 @@ local options = {
       border = "single",
     },
   },
+
+  lsp = { signature = true },
+
   cheatsheet = {
     theme = "grid", -- simple/grid
     excluded_groups = {}, -- can add group name or with mode
   },
-  lsp = { signature = true },
-  base46 = {
-    theme = "catppuccin",
-    hl_add = {},
-    hl_override = {},
-    integrations = {},
-    changed_themes = {},
-    transparency = true,
-    theme_toggle = { "catppuccin", "everforest_light" },
-  },
+
   mason = { cmd = true, pkgs = {} },
+
+  colorify = {
+    enabled = true,
+    mode = "virtual", -- fg, bg, virtual
+    virt_text = "󱓻 ",
+    highlight = { hex = true, lspvars = true },
+  },
 }
 
 local sep_style = options.ui.statusline.separator_style

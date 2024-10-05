@@ -1,3 +1,5 @@
+dofile(vim.g.base46_cache .. "nvimtree")
+
 local options = {
   filters = {
     dotfiles = false,
@@ -17,7 +19,7 @@ local options = {
     show_on_open_dirs = true,
   },
   view = {
-    adaptive_size = false,
+    adaptive_size = true,
     side = "left",
     width = 30,
     preserve_window_proportions = true,

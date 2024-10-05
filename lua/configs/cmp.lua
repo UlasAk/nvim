@@ -137,4 +137,6 @@ cmp.setup.cmdline(":", {
   }),
 })
 
+vim.tbl_deep_extend("force", options, require "nvchad.cmp")
+
 return options

@@ -50,14 +50,14 @@ local function apply(curr, win)
   local newName = vim.trim(vim.fn.getline ".")
   vim.api.nvim_win_close(win, true)
 
-  if #newName > 0 and newName ~= curr then
+  if newName > 0 and newName ~= curr then
     local params = vim.lsp.util.make_position_params()
     params.newName = newName
 
     -- Angular specific check to prevent double renaming
     if
-      #vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
-      and #vim.lsp.get_clients { bufnr = 0, name = "ts_ls" } == 1
+      vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
+      and vim.lsp.get_clients { bufnr = 0, name = "ts_ls" } == 1
     then
       vim.lsp.buf.rename(newName, { name = "angularls" })
     else
