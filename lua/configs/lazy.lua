@@ -11,6 +11,8 @@ local options = {
     },
   },
 
+  checker = { enabled = true },
+
   performance = {
     rtp = {
       disabled_plugins = {
