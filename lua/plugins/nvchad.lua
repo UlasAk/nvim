@@ -1,7 +1,6 @@
 return {
   {
-    "NvChad/base46",
-    branch = "v2.5",
+    "nvchad/base46",
     lazy = false,
     build = function()
       require("base46").load_all_highlights()
@@ -9,8 +8,7 @@ return {
   },
 
   {
-    "NvChad/ui",
-    branch = "v3.0",
+    "nvchad/ui",
     lazy = false,
     config = function()
       require "nvchad"
