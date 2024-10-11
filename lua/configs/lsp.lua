@@ -50,7 +50,7 @@ local function apply(curr, win)
   local newName = vim.trim(vim.fn.getline ".")
   vim.api.nvim_win_close(win, true)
 
-  if newName > 0 and newName ~= curr then
+  if string.len(newName) > 0 and newName ~= curr then
     local params = vim.lsp.util.make_position_params()
     params.newName = newName
 
