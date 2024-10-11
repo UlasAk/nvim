@@ -109,9 +109,9 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find bu
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope find in current buffer" })
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "Telescope pick hidden term" })
+map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
+map("n", "<leader>fgt", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
+map("n", "<leader>fte", "<cmd>Telescope terms<CR>", { desc = "Telescope pick hidden term" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope find files" })
 map(
   "n",
@@ -119,14 +119,14 @@ map(
   "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
   { desc = "telescope find all files" }
 )
-map("n", "<leader>th", function()
-  require("nvchad.themes").open()
+map("n", "<leader>fth", function()
+  require("nvchad.themes").open { style = "flat", border = false }
 end, { desc = "Telescope Nvchad themes" })
 map({ "n", "i" }, "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
 map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Find Messages" })
-map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
+map("n", "<leader>fto", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
 map("n", "<leader>fco", "<cmd>Telescope commands<CR>", { desc = "Telescope Commands" })
 map("n", "<leader>fch", "<cmd>Telescope command_history<CR>", { desc = "Telescope Command history" })
 map("n", "<leader>fv", "<cmd>Telescope vim_options<CR>", { desc = "Telescope Vim Options" })
@@ -134,7 +134,7 @@ map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symb
 map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
 map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
 map("n", "<leader>fma", "<cmd>Telescope marks<CR>", { desc = "Telescope find marks" })
-map({ "n", "v" }, "<leader>fg", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
+map({ "n", "v" }, "<leader>fgs", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
 map("n", "<leader>fme", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
 map("v", "<leader>fz", function()
   local saved_reg = vim.fn.getreg "v"
