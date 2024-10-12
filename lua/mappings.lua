@@ -111,7 +111,7 @@ map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree Focus window"
 -- Telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
+map("n", "<leader>fhe", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope find in current buffer" })
 map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
@@ -153,6 +153,7 @@ map("v", "<leader>fz", function()
     default_text = selection,
   }
 end, { desc = "telescope find in current buffer" })
+map("n", "<leader>fhi", "<cmd>Telescope highlights<CR>", { desc = "Telescope highlights" })
 
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
