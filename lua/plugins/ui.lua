@@ -25,9 +25,6 @@ return {
     end,
   },
   {
-    "nvim-lua/popup.nvim",
-  },
-  {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
     config = function()
