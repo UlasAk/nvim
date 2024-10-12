@@ -47,7 +47,7 @@ return {
   },
   {
     "tzachar/highlight-undo.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    keys = { { "u" }, { "<C-r>" } },
     opts = {
       duration = 1000,
       keymaps = {
