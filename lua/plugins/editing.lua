@@ -48,6 +48,7 @@ return {
   {
     "tzachar/highlight-undo.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    commit = "1ea1c79372d7d93c88fd97543880927b7635e3d2",
     opts = function()
       return require "configs.highlight-undo"
     end,
