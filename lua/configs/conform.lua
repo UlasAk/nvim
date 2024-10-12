@@ -8,7 +8,7 @@ local options = {
     json = { "prettier" },
     lua = { "stylua" },
     sh = { "shfmt" },
-    tex = { "latexindent" },
+    -- tex = { "latexindent" },
     typescript = { "prettier" },
     yaml = { "yamlfmt" },
   },

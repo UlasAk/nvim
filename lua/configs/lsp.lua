@@ -347,37 +347,37 @@ M.defaults = function()
   }
 
   -- Latex
-  lspconfig.ltex.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    filetypes = {
-      "bib",
-      "gitcommit",
-      "org",
-      "plaintex",
-      "rst",
-      "rnoweb",
-      "tex",
-      "pandoc",
-      "quarto",
-      "rmd",
-      "context",
-      "mail",
-      "text",
-    },
-    settings = {
-      ltex = {
-        language = "de-DE",
-        checkFrequency = "save",
-      },
-    },
-  }
-  lspconfig.texlab.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-  }
+  -- lspconfig.ltex.setup {
+  --   on_attach = M.on_attach,
+  --   on_init = M.on_init,
+  --   capabilities = M.capabilities,
+  --   filetypes = {
+  --     "bib",
+  --     "gitcommit",
+  --     "org",
+  --     "plaintex",
+  --     "rst",
+  --     "rnoweb",
+  --     "tex",
+  --     "pandoc",
+  --     "quarto",
+  --     "rmd",
+  --     "context",
+  --     "mail",
+  --     "text",
+  --   },
+  --   settings = {
+  --     ltex = {
+  --       language = "de-DE",
+  --       checkFrequency = "save",
+  --     },
+  --   },
+  -- }
+  -- lspconfig.texlab.setup {
+  --   on_attach = M.on_attach,
+  --   on_init = M.on_init,
+  --   capabilities = M.capabilities,
+  -- }
 end
 
 return M
