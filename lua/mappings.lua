@@ -47,17 +47,22 @@ end, { desc = "General Format file" })
 -- Cheatsheet
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle nvcheatsheet" })
 
--- LSP
+-- Diagnostics
 map("n", "<leader>lda", function()
   require("telescope.builtin").diagnostics()
-end, { desc = "Lsp All Diagnostics" })
+end, { desc = "Diagnostics All Diagnostics" })
 map("n", "<leader>ldc", function()
   require("telescope.builtin").diagnostics { bufnr = 0 }
-end, { desc = "Lsp Diagnostics Current Buf" })
-map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "LSP floating diagnostics" })
-map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "LSP prev diagnostic" })
-map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "LSP next diagnostic" })
-map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
+end, { desc = "Diagnostics Diagnostics Current Buf" })
+map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics floating diagnostics" })
+map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics prev diagnostic" })
+map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics next diagnostic" })
+map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics diagnostic loclist" })
+
+-- Goto-Preview
+map("n", "<leader>lgpd", function()
+  require("goto-preview").goto_preview_definition()
+end, { desc = "Goto-Preview Go to definition (via popup)" })
 
 -- Buffer
 -- map("n", "<C-K>", "<C-y>", { desc = "Buffer Scroll up one line", noremap = true })
