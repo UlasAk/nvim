@@ -66,7 +66,6 @@ return {
   {
     "dmmulroy/tsc.nvim",
     cmd = { "TSC" },
-    ft = { "ts" },
     config = function()
       require("tsc").setup()
     end,
