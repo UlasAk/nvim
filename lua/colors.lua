@@ -8,3 +8,10 @@ vim.schedule(function()
   hi Visual guibg=#76758a
 ]]
 end)
+-- Text color of commented out text
+vim.cmd [[
+  hi Comment guifg=#8886a6
+]]
+vim.cmd [[
+  hi @comment guifg=#8886a6
+]]
