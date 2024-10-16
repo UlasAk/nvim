@@ -121,4 +121,7 @@ return {
       end,
     },
   },
+  {
+    "nvim-pack/nvim-spectre",
+  },
 }

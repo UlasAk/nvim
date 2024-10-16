@@ -155,6 +155,20 @@ map("v", "<leader>fz", function()
 end, { desc = "telescope find in current buffer" })
 map("n", "<leader>fhi", "<cmd>Telescope highlights<CR>", { desc = "Telescope highlights" })
 
+-- Search and Replace
+map("n", "<leader>S", function()
+  require("spectre").toggle()
+end, { desc = "Spectre Toggle" })
+map("n", "<leader>sw", function()
+  require("spectre").open_visual { select_word = true }
+end, { desc = "Spectre Search current word" })
+map("v", "<leader>sw", function()
+  require("spectre").open_visual {}
+end, { desc = "Spectre Search current word" })
+map("n", "<leader>sof", function()
+  require("spectre").open_file_search { select_word = true }
+end, { desc = "Spectre Search on current file" })
+
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 map("n", "<leader>h", function()
