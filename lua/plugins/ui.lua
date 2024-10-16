@@ -54,4 +54,17 @@ return {
     },
     opts = {},
   },
+  {
+    "eandrju/cellular-automaton.nvim",
+  },
+  -- {
+  --   "giusgad/pets.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "giusgad/hologram.nvim" },
+  --   config = function()
+  --     require("pets").setup {
+  --       avoid_statusline = true,
+  --       winblend = 0,
+  --     }
+  --   end,
+  -- },
 }
