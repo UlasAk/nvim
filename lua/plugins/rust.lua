@@ -8,7 +8,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^4",
+    -- version = "^5",
     lazy = false,
     config = function()
       local lspconfig = require "configs.lsp"

@@ -62,6 +62,10 @@ map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics floatin
 map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics prev diagnostic" })
 map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics next diagnostic" })
 map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics diagnostic loclist" })
+map("n", "<leader>ldt", function()
+  local show_virtual_lines_now = require("lsp_lines").toggle()
+  vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
+end, { desc = "Diagnostics toggle virtual text" })
 
 -- Goto-Preview
 map("n", "<leader>lgpd", function()
