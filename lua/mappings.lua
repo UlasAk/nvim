@@ -311,6 +311,10 @@ end)
 map("n", "<leader>hn", function()
   require("harpoon"):list():next()
 end)
+map("n", "<leader>hl", function()
+  local harpoon = require "harpoon"
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
 map("n", "<leader>fha", function()
   local conf = require("telescope.config").values
   local function toggle_telescope(harpoon_files)
