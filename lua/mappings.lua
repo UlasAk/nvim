@@ -179,10 +179,10 @@ end, { desc = "Spectre Search on current file" })
 
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
-map("n", "<leader>h", function()
+map("n", "<leader>th", function()
   require("nvchad.term").new { pos = "sp" }
 end, { desc = "Terminal new horizontal term" })
-map("n", "<leader>v", function()
+map("n", "<leader>tv", function()
   require("nvchad.term").new { pos = "vsp" }
 end, { desc = "Terminal new vertical window" })
 map({ "n", "t" }, "<A-v>", function()
@@ -288,3 +288,47 @@ map("n", "<leader>rr", function()
     end,
   }
 end, { desc = "Runner Run Current File" })
+
+-- Harpoon
+map("n", "<leader>ha", function()
+  require("harpoon"):list():add()
+end)
+-- map("n", "<C-h>", function()
+--   require("harpoon"):list():select(1)
+-- end)
+-- map("n", "<C-t>", function()
+--   require("harpoon"):list():select(2)
+-- end)
+-- map("n", "<C-n>", function()
+--   require("harpoon"):list():select(3)
+-- end)
+-- map("n", "<C-s>", function()
+--   require("harpoon"):list():select(4)
+-- end)
+map("n", "<leader>hp", function()
+  require("harpoon"):list():prev()
+end)
+map("n", "<leader>hn", function()
+  require("harpoon"):list():next()
+end)
+map("n", "<leader>fha", function()
+  local conf = require("telescope.config").values
+  local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+      table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers")
+      .new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table {
+          results = file_paths,
+        },
+        previewer = conf.file_previewer {},
+        sorter = conf.generic_sorter {},
+      })
+      :find()
+  end
+  toggle_telescope(require("harpoon"):list())
+end, { desc = "Telescope harpoon" })
