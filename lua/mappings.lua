@@ -1,12 +1,12 @@
 local map = vim.keymap.set
 
 -- Jump
-map("i", "<C-b>", "<ESC>^i", { desc = "Jump beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "Jump end of line" })
-map("i", "<C-h>", "<Left>", { desc = "Jump left" })
-map("i", "<C-l>", "<Right>", { desc = "Jump right" })
-map("i", "<C-j>", "<Down>", { desc = "Jump down" })
-map("i", "<C-k>", "<Up>", { desc = "Jump up" })
+map("i", "<C-b>", "<ESC>^i", { desc = "Jump Beginning of line" })
+map("i", "<C-e>", "<End>", { desc = "Jump End of line" })
+map("i", "<C-h>", "<Left>", { desc = "Jump Left" })
+map("i", "<C-l>", "<Right>", { desc = "Jump Right" })
+map("i", "<C-j>", "<Down>", { desc = "Jump Down" })
+map("i", "<C-k>", "<Up>", { desc = "Jump Up" })
 
 --Move lines
 map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
@@ -19,7 +19,7 @@ map("v", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "Editing Move lines up", noremap 
 map("v", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Editing Move lines down", noremap = true, silent = true })
 
 -- Highlights
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General clear highlights" })
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
@@ -45,11 +45,11 @@ map("n", "<leader>fm", function()
 end, { desc = "General Format file" })
 
 -- Line numbers
-map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle relative number" })
+map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
+map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Cheatsheet
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle nvcheatsheet" })
+map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle Cheatsheet" })
 
 -- Diagnostics
 map("n", "<leader>lda", function()
@@ -58,14 +58,14 @@ end, { desc = "Diagnostics All Diagnostics" })
 map("n", "<leader>ldc", function()
   require("telescope.builtin").diagnostics { bufnr = 0 }
 end, { desc = "Diagnostics Diagnostics Current Buf" })
-map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics floating diagnostics" })
-map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics prev diagnostic" })
-map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics next diagnostic" })
-map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics diagnostic loclist" })
+map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
+map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics Prev diagnostic" })
+map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics Next diagnostic" })
+map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnostic loclist" })
 map("n", "<leader>ldt", function()
   local show_virtual_lines_now = require("lsp_lines").toggle()
   vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
-end, { desc = "Diagnostics toggle virtual text" })
+end, { desc = "Diagnostics Toggle virtual text" })
 
 -- Goto-Preview
 map("n", "<leader>lgpd", function()
@@ -93,62 +93,62 @@ map("n", "<leader>br", function()
 end, { desc = "Buffer Move buffer to right" })
 map("n", "<tab>", function()
   require("nvchad.tabufline").next()
-end, { desc = "Buffer goto next" })
+end, { desc = "Buffer Goto next" })
 map("n", "<S-tab>", function()
   require("nvchad.tabufline").prev()
-end, { desc = "Buffer goto prev" })
+end, { desc = "Buffer Goto prev" })
 map("n", "<leader>x", function()
   require("nvchad.tabufline").close_buffer()
-end, { desc = "Buffer close" })
+end, { desc = "Buffer Close" })
 
 -- Comment
 map("n", "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
-end, { desc = "Comment toggle" })
+end, { desc = "Comment Toggle" })
 map(
   "v",
   "<leader>/",
   "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-  { desc = "comment toggle" }
+  { desc = "Comment Toggle" }
 )
 
 -- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
-map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "Nvimtree Focus window" })
+map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree Toggle window" })
+map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "NvimTree Focus window" })
 
 -- Telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope find buffers" })
-map("n", "<leader>fhe", "<cmd>Telescope help_tags<CR>", { desc = "Telescope help page" })
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope find oldfiles" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope find in current buffer" })
-map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope git commits" })
-map("n", "<leader>fgt", "<cmd>Telescope git_status<CR>", { desc = "Telescope git status" })
-map("n", "<leader>fte", "<cmd>Telescope terms<CR>", { desc = "Telescope pick hidden term" })
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope find files" })
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Telescope Live grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope Buffers" })
+map("n", "<leader>fhe", "<cmd>Telescope help_tags<CR>", { desc = "Telescope Help page" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Oldfiles" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope Current Buffer" })
+map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
+map("n", "<leader>fgt", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git status" })
+map("n", "<leader>fte", "<cmd>Telescope terms<CR>", { desc = "Telescope Terminals" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Files" })
 map(
   "n",
   "<leader>fa",
   "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
+  { desc = "telescope Files (all)" }
 )
 map("n", "<leader>fth", function()
   require("nvchad.themes").open { style = "flat", border = false }
-end, { desc = "Telescope Nvchad themes" })
+end, { desc = "Telescope Themes (NVChad)" })
 map({ "n", "i" }, "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
-map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Find Messages" })
-map("n", "<leader>fto", "<cmd>TodoTelescope<CR>", { desc = "Telescope Find TODOs" })
+map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Messages" })
+map("n", "<leader>fto", "<cmd>TodoTelescope<CR>", { desc = "Telescope TODOs" })
 map("n", "<leader>fco", "<cmd>Telescope commands<CR>", { desc = "Telescope Commands" })
 map("n", "<leader>fch", "<cmd>Telescope command_history<CR>", { desc = "Telescope Command history" })
 map("n", "<leader>fv", "<cmd>Telescope vim_options<CR>", { desc = "Telescope Vim Options" })
 map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symbols" })
 map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
-map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keymaps: Normal" })
-map("n", "<leader>fma", "<cmd>Telescope marks<CR>", { desc = "Telescope find marks" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Mappings" })
+map("n", "<leader>fma", "<cmd>Telescope marks<CR>", { desc = "Telescope Marks" })
 map({ "n", "v" }, "<leader>fgs", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
-map("n", "<leader>fme", "<cmd>Telescope media_files<CR>", { desc = "Telescope Find Media" })
+map("n", "<leader>fme", "<cmd>Telescope media_files<CR>", { desc = "Telescope Media" })
 map("v", "<leader>fz", function()
   local saved_reg = vim.fn.getreg "v"
   vim.cmd [[noautocmd sil norm! "vy]]
@@ -160,8 +160,8 @@ map("v", "<leader>fz", function()
   require("telescope.builtin").current_buffer_fuzzy_find {
     default_text = selection,
   }
-end, { desc = "telescope find in current buffer" })
-map("n", "<leader>fhi", "<cmd>Telescope highlights<CR>", { desc = "Telescope highlights" })
+end, { desc = "Telescope Current Buffer" })
+map("n", "<leader>fhi", "<cmd>Telescope highlights<CR>", { desc = "Telescope Highlights" })
 
 -- Search and Replace
 map("n", "<leader>S", function()
@@ -181,28 +181,28 @@ end, { desc = "Spectre Search on current file" })
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 map("n", "<leader>th", function()
   require("nvchad.term").new { pos = "sp" }
-end, { desc = "Terminal new horizontal term" })
+end, { desc = "Terminal New horizontal term" })
 map("n", "<leader>tv", function()
   require("nvchad.term").new { pos = "vsp" }
-end, { desc = "Terminal new vertical window" })
+end, { desc = "Terminal New vertical window" })
 map({ "n", "t" }, "<A-v>", function()
   require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
-end, { desc = "Terminal toggleable vertical term" })
+end, { desc = "Terminal Toggleable vertical term" })
 
 map({ "n", "t" }, "<A-h>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "Terminal new horizontal term" })
+end, { desc = "Terminal New horizontal term" })
 
 map({ "n", "t" }, "<A-f>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-end, { desc = "Terminal toggle floating term" })
+end, { desc = "Terminal Toggle floating term" })
 
 -- Whichkey
-map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
+map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Whichkey All keymaps" })
 
 map("n", "<leader>wk", function()
   vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
-end, { desc = "whichkey query lookup" })
+end, { desc = "Whichkey Query lookup" })
 
 -- Blankline
 map("n", "<leader>cc", function()
@@ -218,7 +218,7 @@ map("n", "<leader>cc", function()
       vim.api.nvim_feedkeys("_", "n", true)
     end
   end
-end, { desc = "blankline jump to current context" })
+end, { desc = "Blankline Jump to current context" })
 
 -- Undotree
 map("n", "<leader>u", "<cmd> UndotreeToggle<CR>", { desc = "Undotree Toggle" })
@@ -253,7 +253,7 @@ end, { desc = "Yazi Open CWD" })
 -- Crates
 map("n", "<leader>rcu", function()
   require("crates").upgrade_all_crates()
-end, { desc = "Update crates" })
+end, { desc = "Update Crates" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Zen Mode
@@ -265,7 +265,7 @@ map("n", "<RightMouse>", function()
 
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
-end, {})
+end, { desc = "Menu Open Context menu" })
 
 -- Color pickers Hue and Shades
 map("n", "<leader>pch", function()
@@ -292,7 +292,7 @@ end, { desc = "Runner Run Current File" })
 -- Harpoon
 map("n", "<leader>ha", function()
   require("harpoon"):list():add()
-end)
+end, { desc = "Harpoon Add" })
 -- map("n", "<C-h>", function()
 --   require("harpoon"):list():select(1)
 -- end)
@@ -307,14 +307,14 @@ end)
 -- end)
 map("n", "<leader>hp", function()
   require("harpoon"):list():prev()
-end)
+end, { desc = "Harpoon Previous" })
 map("n", "<leader>hn", function()
   require("harpoon"):list():next()
-end)
+end, { desc = "Harpoon Next" })
 map("n", "<leader>hl", function()
   local harpoon = require "harpoon"
   harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, { desc = "Harpoon List" })
 map("n", "<leader>fha", function()
   local conf = require("telescope.config").values
   local function toggle_telescope(harpoon_files)
@@ -361,4 +361,4 @@ map("n", "<leader>fha", function()
       :find()
   end
   toggle_telescope(require("harpoon"):list())
-end, { desc = "Telescope harpoon" })
+end, { desc = "Telescope Harpoon" })
