@@ -59,6 +59,29 @@ return {
     cmd = "CellularAutomaton",
   },
   -- {
+  --   "akinsho/bufferline.nvim",
+  --   version = "*",
+  --   dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
+  --   opts = function()
+  --     return require "configs.bufferline"
+  --   end,
+  --   config = function(_, opts)
+  --     vim.opt.termguicolors = true
+  --     require("bufferline").setup { options = opts.options }
+  --     opts.setup_colors()
+  --     require("transparent").clear_prefix "BufferLine"
+  --   end,
+  -- },
+  -- {
+  --   "willothy/nvim-cokeline",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim", -- Required for v0.4.0+
+  --     "nvim-tree/nvim-web-devicons", -- If you want devicons
+  --     "stevearc/resession.nvim", -- Optional, for persistent history
+  --   },
+  --   config = true,
+  -- },
+  -- {
   --   "giusgad/pets.nvim",
   --   dependencies = { "MunifTanjim/nui.nvim", "giusgad/hologram.nvim" },
   --   config = function()
