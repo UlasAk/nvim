@@ -28,22 +28,13 @@ local setup_colors = function()
   vim.cmd [[
   hi BufferLineHintDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5 guibg=#14161b
 ]]
-  vim.cmd [[
-  hi BufferLineDevIconLua guifg=#89b4fa
-]]
-  vim.cmd [[
-  hi BufferLineDevIconLuaInactive guifg=#89b4fa
-]]
-  vim.cmd [[
-  hi BufferLineDevIconLuaSelected guifg=#89b4fa
-]]
 end
 
 return {
   setup_colors = setup_colors,
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
-    style_preset = bufferline.style_preset.minimal, -- bufferline.style_preset.default or bufferline.style_preset.minimal,
+    style_preset = bufferline.style_preset.default, -- bufferline.style_preset.default or bufferline.style_preset.minimal,
     themable = true, -- true | false, -- allows highlight groups to be overriden i.e. sets highlights as default
     numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
     close_command = "confirm bd %d", -- can be a string | function, | false see "Mouse actions"

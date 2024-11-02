@@ -58,20 +58,20 @@ return {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton",
   },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   version = "*",
-  --   dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
-  --   opts = function()
-  --     return require "configs.bufferline"
-  --   end,
-  --   config = function(_, opts)
-  --     vim.opt.termguicolors = true
-  --     require("bufferline").setup { options = opts.options }
-  --     opts.setup_colors()
-  --     require("transparent").clear_prefix "BufferLine"
-  --   end,
-  -- },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
+    opts = function()
+      return require "configs.bufferline"
+    end,
+    config = function(_, opts)
+      vim.opt.termguicolors = true
+      require("bufferline").setup { options = opts.options }
+      opts.setup_colors()
+      require("transparent").clear_prefix "BufferLine"
+    end,
+  },
   -- {
   --   "willothy/nvim-cokeline",
   --   dependencies = {
