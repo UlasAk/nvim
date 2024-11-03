@@ -14,4 +14,5 @@ return {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewFocusFiles", "DiffviewToggleFiles", "DiffviewFileHistory" },
   },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
 }
