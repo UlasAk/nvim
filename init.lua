@@ -38,6 +38,9 @@ dofile(vim.g.base46_cache .. "statusline")
 -- load autocmds
 require "autocmds"
 
+-- load custom commands
+require "commands"
+
 -- load colors
 require("colors").init_colors()
 
