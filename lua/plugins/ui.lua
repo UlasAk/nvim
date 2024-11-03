@@ -68,8 +68,13 @@ return {
     config = function(_, opts)
       vim.opt.termguicolors = true
       require("bufferline").setup { options = opts.options }
-      opts.setup_colors()
-      require("transparent").clear_prefix "BufferLine"
+      if require("colors").transparent then
+        local bufferline_highlights = require "bufferline.highlights"
+        bufferline_highlights.set_icon_highlight = opts.set_icon_highlight_func
+        bufferline_highlights.reset_icon_hl_cache = opts.reset_icon_hl_cache_func
+        require("transparent").clear_prefix "BufferLine"
+      end
+      opts.setup_custom_colors()
     end,
   },
   -- {

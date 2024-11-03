@@ -10,7 +10,7 @@ local options = {
     hl_override = {},
     integrations = {},
     changed_themes = {},
-    transparency = true,
+    transparency = require("colors").transparent,
     theme_toggle = { "catppuccin", "everforest_light" },
   },
 
