@@ -220,9 +220,6 @@ M.setup_custom_colors = function()
   vim.cmd [[
   hi BufferLineInfoDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3 guibg=#14161b
 ]]
-  vim.cmd [[
-  hi BufferLineBufferSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#e0e2ea guisp=#fdfd96
-]]
 end
 
 local constants = require "bufferline.constants"
