@@ -133,42 +133,42 @@ M.options = {
   pick = {
     alphabet = "abcdefghijklmopqrstuvwxyz",
   },
-  groups = {
-    options = {
-      toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
-    },
-    items = {
-      {
-        name = "Code",
-        highlight = { underline = true, undercurl = false, sp = "yellow" },
-        auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-        priority = 1, -- determines where it will appear relative to other groups (Optional)
-        icon = " ", -- Optional
-        matcher = function(_)
-          local path = vim.api.nvim_buf_get_name(0)
-          return path:match ".*src.*"
-        end,
-        -- separator = { -- Optional
-        --   style = require('bufferline.groups').separator.tab
-        -- },
-      },
-      bufferline.groups.builtin.ungrouped,
-      {
-        name = "Docs",
-        highlight = { underline = false, undercurl = true, sp = "blue" },
-        auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-        priority = 2, -- determines where it will appear relative to other groups (Optional)
-        icon = " ", -- Optional
-        matcher = function(_)
-          local path = vim.api.nvim_buf_get_name(0)
-          return path:match "%.md" or path:match "%.txt"
-        end,
-        -- separator = { -- Optional
-        --   style = require('bufferline.groups').separator.tab
-        -- },
-      },
-    },
-  },
+  -- groups = {
+  --   options = {
+  --     toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+  --   },
+  --   items = {
+  --     {
+  --       name = "Code",
+  --       highlight = { underline = true, undercurl = false, sp = "yellow" },
+  --       auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+  --       priority = 1, -- determines where it will appear relative to other groups (Optional)
+  --       icon = " ", -- Optional
+  --       matcher = function(_)
+  --         local path = vim.api.nvim_buf_get_name(0)
+  --         return path:match ".*src.*"
+  --       end,
+  --       -- separator = { -- Optional
+  --       --   style = require('bufferline.groups').separator.tab
+  --       -- },
+  --     },
+  --     bufferline.groups.builtin.ungrouped,
+  --     {
+  --       name = "Docs",
+  --       highlight = { underline = false, undercurl = true, sp = "blue" },
+  --       auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
+  --       priority = 2, -- determines where it will appear relative to other groups (Optional)
+  --       icon = " ", -- Optional
+  --       matcher = function(_)
+  --         local path = vim.api.nvim_buf_get_name(0)
+  --         return path:match "%.md" or path:match "%.txt"
+  --       end,
+  --       -- separator = { -- Optional
+  --       --   style = require('bufferline.groups').separator.tab
+  --       -- },
+  --     },
+  --   },
+  -- },
 }
 
 M.setup_custom_colors = function()
