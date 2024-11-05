@@ -1,8 +1,10 @@
 local options = {
-  ensure_installed = {
+  ensure_installed_mason_names = {
     "angular-language-server",
     "bash-language-server",
     "css-lsp",
+    "docker-compose-language-service",
+    "dockerfile-language-server",
     "emmet-language-server",
     "json-lsp",
     -- "latexindent",
@@ -12,10 +14,23 @@ local options = {
     "rust-analyzer",
     "shfmt",
     "stylua",
-    "texlab",
+    -- "texlab",
     "typescript-language-server",
     "yaml-language-server",
     "yamlfmt",
+  },
+  ensure_installed = {
+    "angularls",
+    "bashls",
+    "cssls",
+    "docker_compose_language_service",
+    "dockerls",
+    "emmet_language_server",
+    "jsonls",
+    "lua_ls",
+    "rust_analyzer",
+    "ts_ls",
+    "yamlls",
   },
 
   PATH = "skip",

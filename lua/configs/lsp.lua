@@ -192,7 +192,7 @@ M.defaults = function()
   end
 
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "jsonls", "yamlls" }
+  local lsp_servers = { "cssls", "docker_compose_language_service", "jsonls", "yamlls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -204,103 +204,6 @@ M.defaults = function()
   end
 
   -- LSPs with specific config
-
-  -- Rust
-  -- lspconfig.rust_analyzer.setup {
-  --   autostart = true,
-  --   on_attach = M.on_attach,
-  --   capabilities = M.capabilities,
-  --   on_init = M.on_init,
-  --   settings = {
-  --     ["rust-analyzer"] = {
-  --       cargo = {
-  --         features = "all",
-  --         buildScripts = {
-  --            enable = true,
-  --         }.
-  --       },
-  --       procMacro = {
-  --          enable = true
-  --       }
-  --     },
-  --   },
-  -- }
-
-  -- Bash
-  lspconfig.bashls.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    filetypes = { "sh", "bash" },
-  }
-
-  -- lua
-  lspconfig.lua_ls.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-        workspace = {
-          library = {
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-            [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-            [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-          },
-          maxPreload = 100000,
-          preloadFileSize = 10000,
-        },
-      },
-    },
-  }
-
-  -- TypeScript
-  lspconfig.ts_ls.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    init_options = {
-      preferences = {
-        disableSuggestions = true,
-      },
-    },
-  }
-
-  -- HTML
-  lspconfig.html.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    filetypes = {
-      "htmlangular",
-      "html",
-      "templ",
-    },
-  }
-
-  -- Emmet Language Server
-  lspconfig.emmet_language_server.setup {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    filetypes = {
-      "htmlangular",
-      "htcss",
-      "eruby",
-      "html",
-      "htmldjango",
-      "javascriptreact",
-      "less",
-      "pug",
-      "sass",
-      "scss",
-      "typescriptreactml",
-    },
-  }
 
   -- Angular
   local ok, mason_registry = pcall(require, "mason-registry")
@@ -344,6 +247,98 @@ M.defaults = function()
       new_config.cmd = cmd
     end,
     filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
+  }
+
+  -- Bash
+  lspconfig.bashls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = { "sh", "bash" },
+  }
+
+  -- Dockerfile Language Server
+  lspconfig.dockerls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    settings = {
+      docker = {
+        languageserver = {
+          formatter = {
+            ignoreMultilineInstructions = true,
+          },
+        },
+      },
+    },
+  }
+
+  -- Emmet Language Server
+  lspconfig.emmet_language_server.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = {
+      "htmlangular",
+      "htcss",
+      "eruby",
+      "html",
+      "htmldjango",
+      "javascriptreact",
+      "less",
+      "pug",
+      "sass",
+      "scss",
+      "typescriptreactml",
+    },
+  }
+
+  -- HTML
+  lspconfig.html.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = {
+      "htmlangular",
+      "html",
+      "templ",
+    },
+  }
+
+  -- lua
+  lspconfig.lua_ls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
+            [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
+        },
+      },
+    },
+  }
+
+  -- TypeScript
+  lspconfig.ts_ls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    init_options = {
+      preferences = {
+        disableSuggestions = true,
+      },
+    },
   }
 
   -- Latex

@@ -55,12 +55,23 @@ return {
 
       -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.ensure_installed and opts.ensure_installed > 0 then
-          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
+        if opts.ensure_installed_mason_names and opts.ensure_installed_mason_names > 0 then
+          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed_mason_names, " "))
         end
       end, {})
 
       vim.g.mason_binaries_list = opts.ensure_installed
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    lazy = false,
+    opts = function()
+      local mason_opts = require "configs.mason"
+      return {
+        ensure_installed = mason_opts.ensure_installed,
+        automatic_installation = true,
+      }
     end,
   },
   {
