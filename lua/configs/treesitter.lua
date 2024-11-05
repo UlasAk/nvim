@@ -48,9 +48,22 @@ local function is_tmux_conf(path)
   return path:match "%tmux.conf$"
 end
 
+local function check_yaml_file(path)
+  if path:match ".*docker.*compose.*$" and (path:match "%.yaml$" or path:match "%.yml$") then
+    return "yaml.docker-compose"
+  end
+  return "yaml"
+end
+
 vim.filetype.add {
   pattern = {
     -- [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `angular` if it matches the pattern
+    [".*%.yaml"] = function(path, _)
+      return check_yaml_file(path)
+    end,
+    [".*%.yml"] = function(path, _)
+      return check_yaml_file(path)
+    end,
     [".*%.conf"] = function(path, _)
       if is_hypr_conf(path) then
         return "hyprlang"

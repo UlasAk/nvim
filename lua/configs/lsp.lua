@@ -192,7 +192,7 @@ M.defaults = function()
   end
 
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "docker_compose_language_service", "jsonls", "yamlls" }
+  local lsp_servers = { "cssls", "docker_compose_language_service", "jsonls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
@@ -339,6 +339,13 @@ M.defaults = function()
         disableSuggestions = true,
       },
     },
+  }
+
+  lspconfig.yamlls.setup {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+    filetypes = { "yaml", "yaml.gitlab" },
   }
 
   -- Latex
