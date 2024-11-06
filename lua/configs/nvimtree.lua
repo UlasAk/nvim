@@ -39,7 +39,8 @@ local options = {
   renderer = {
     root_folder_label = false,
     highlight_git = true,
-    highlight_opened_files = "none",
+    highlight_opened_files = "name",
+    highlight_diagnostics = true,
 
     indent_markers = {
       enable = true,
