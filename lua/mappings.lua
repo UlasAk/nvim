@@ -51,6 +51,18 @@ map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 -- Cheatsheet
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle Cheatsheet" })
 
+-- Folds
+map("n", "zR", require("ufo").openAllFolds, { desc = "Folds Open all folds" })
+map("n", "zM", require("ufo").closeAllFolds, { desc = "Folds Close all folds" })
+map("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Folds Open all folds" })
+map("n", "zp", function()
+  local winid = require("ufo").peekFoldedLinesUnderCursor()
+  -- if not winid then
+  --   -- vim.lsp.buf.hover()
+  --   vim.cmd [[ Lspsaga hover_doc ]]
+  -- end
+end, { desc = "Folds Peek into fold" })
+
 -- Diagnostics
 map("n", "<leader>lda", function()
   require("telescope.builtin").diagnostics()
