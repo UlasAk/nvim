@@ -173,52 +173,52 @@ M.options = {
 
 M.setup_custom_colors = function()
   vim.cmd [[
-  hi BufferLineErrorVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8 guibg=#14161b
+  hi BufferLineErrorVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8
 ]]
   vim.cmd [[
   hi BufferLineErrorSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#f38ba8 guisp=#f38ba8
 ]]
   vim.cmd [[
-  hi BufferLineErrorDiagnostic cterm=bold,italic gui=bold,italic guifg=#f38ba8 guibg=#14161b
+  hi BufferLineErrorDiagnostic cterm=bold,italic gui=bold,italic guifg=#f38ba8
 ]]
   vim.cmd [[
-  hi BufferLineErrorDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8 guibg=#14161b
+  hi BufferLineErrorDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8
 ]]
   vim.cmd [[
-  hi BufferLineWarningVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 guibg=#14161b 
+  hi BufferLineWarningVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 
 ]]
   vim.cmd [[
   hi BufferLineWarningSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#fae3b0 guisp=#fae3b0
 ]]
   vim.cmd [[
-  hi BufferLineWarningDiagnostic cterm=bold,italic gui=bold,italic guifg=#fae3b0 guibg=#14161b 
+  hi BufferLineWarningDiagnostic cterm=bold,italic gui=bold,italic guifg=#fae3b0 
 ]]
   vim.cmd [[
-  hi BufferLineWarningDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 guibg=#14161b 
+  hi BufferLineWarningDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 
 ]]
   vim.cmd [[
-  hi BufferLineHintVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5 guibg=#14161b 
+  hi BufferLineHintVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5 
 ]]
   vim.cmd [[
   hi BufferLineHintSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#d0a9e5 guisp=#d0a9e5
 ]]
   vim.cmd [[
-  hi BufferLineHintDiagnostic cterm=bold,italic gui=bold,italic guifg=#d0a9e5 guibg=#14161b 
+  hi BufferLineHintDiagnostic cterm=bold,italic gui=bold,italic guifg=#d0a9e5 
 ]]
   vim.cmd [[
-  hi BufferLineHintDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5 guibg=#14161b
+  hi BufferLineHintDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5
 ]]
   vim.cmd [[
-  hi BufferLineInfoVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3 guibg=#14161b
+  hi BufferLineInfoVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3
 ]]
   vim.cmd [[
   hi BufferLineInfoSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#abe9b3 guisp=#abe9b3
 ]]
   vim.cmd [[
-  hi BufferLineInfoDiagnostic cterm=bold,italic gui=bold,italic guifg=#abe9b3 guibg=#14161b
+  hi BufferLineInfoDiagnostic cterm=bold,italic gui=bold,italic guifg=#abe9b3
 ]]
   vim.cmd [[
-  hi BufferLineInfoDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3 guibg=#14161b
+  hi BufferLineInfoDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3
 ]]
 end
 

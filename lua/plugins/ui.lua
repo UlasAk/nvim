@@ -66,7 +66,6 @@ return {
       return require "configs.bufferline"
     end,
     config = function(_, opts)
-      vim.opt.termguicolors = true
       require("bufferline").setup { options = opts.options }
       if require("colors").transparent then
         local bufferline_highlights = require "bufferline.highlights"

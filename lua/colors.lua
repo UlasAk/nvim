@@ -3,6 +3,7 @@ local M = {
 }
 
 M.init_colors = function()
+  vim.opt.termguicolors = true
   -- Highlight current search item with different color than other search items
   vim.cmd [[
   hi CurSearch guifg=#282737 guibg=#ff0000 
