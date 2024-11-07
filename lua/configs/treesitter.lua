@@ -8,6 +8,7 @@ local options = {
     "angular",
     "bash",
     "css",
+    "dart",
     "javascript",
     "html",
     "hyprlang",
