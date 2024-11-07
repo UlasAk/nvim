@@ -18,7 +18,8 @@ return {
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "nvimtree")
-      require("nvim-tree").setup(opts)
+      require("nvim-tree").setup(opts.options)
+      opts.setup_colors()
     end,
   },
   {

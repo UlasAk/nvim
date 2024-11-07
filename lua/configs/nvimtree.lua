@@ -1,6 +1,14 @@
+local M = {}
+
 dofile(vim.g.base46_cache .. "nvimtree")
 
-local options = {
+M.setup_colors = function()
+  vim.cmd [[
+  hi NvimTreeCursorLine guibg=#474656
+]]
+end
+
+M.options = {
   filters = {
     dotfiles = false,
   },
@@ -81,4 +89,4 @@ local options = {
   },
 }
 
-return options
+return M
