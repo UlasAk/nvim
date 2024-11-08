@@ -39,6 +39,10 @@ return {
         -- type: string
         local app_version = decorations.app_version
         if app_version then
+          local comment_pos, _ = string.find(app_version, "#")
+          if comment_pos then
+            app_version = string.gsub(string.sub(app_version, 0, comment_pos - 1), "%s+", "")
+          end
           table.insert(information_table, app_version)
         end
 
@@ -58,7 +62,9 @@ return {
         return nil
       end
       local pos = indexOf(statusline.order, "diagnostics")
-      table.insert(statusline.order, pos, "flutter")
+      if pos then
+        table.insert(statusline.order, pos, "flutter")
+      end
 
       -- Setup
       local lspconfig = require "configs.lsp"
@@ -104,17 +110,17 @@ return {
             -- require("dap.ext.vscode").load_launchjs()
           end,
         },
-        flutter_path = nil, -- <-- this takes priority over the lookup
-        flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
+        flutter_path = nil,                         -- <-- this takes priority over the lookup
+        flutter_lookup_cmd = nil,                   -- example "dirname $(which flutter)" or "asdf where flutter"
         root_patterns = { ".git", "pubspec.yaml" }, -- patterns to find the root of your flutter project
-        fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+        fvm = false,                                -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
         widget_guides = {
           enabled = true,
         },
         closing_tags = {
           highlight = "ErrorMsg", -- highlight for the closing tag
-          prefix = ">", -- character to use for close tag e.g. > Widget
-          priority = 10, -- priority of virtual text in current line
+          prefix = ">",           -- character to use for close tag e.g. > Widget
+          priority = 10,          -- priority of virtual text in current line
           -- consider to configure this when there is a possibility of multiple virtual text items in one line
           -- see `priority` option in |:help nvim_buf_set_extmark| for more info
           enabled = true, -- set to false to disable
@@ -125,15 +131,15 @@ return {
           -- takes a log_line as string argument; returns a boolean or nil;
           -- the log_line is only added to the output if the function returns true
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = "tabedit", -- command to use to open the log buffer
+          open_cmd = "tabedit",  -- command to use to open the log buffer
         },
         dev_tools = {
-          autostart = false, -- autostart devtools server if not detected
+          autostart = false,         -- autostart devtools server if not detected
           auto_open_browser = false, -- Automatically opens devtools in the browser
         },
         outline = {
           open_cmd = "30vnew", -- command to use to open the outline buffer
-          auto_open = false, -- if true this will open the outline automatically when it is first populated
+          auto_open = false,   -- if true this will open the outline automatically when it is first populated
         },
         lsp = {
           color = { -- show the derived colours for dart variables
@@ -159,7 +165,7 @@ return {
             -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
-            updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+            updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
           },
         },
       }
