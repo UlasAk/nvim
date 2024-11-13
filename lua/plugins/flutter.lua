@@ -171,4 +171,7 @@ return {
       }
     end,
   },
+  {
+    'wa11breaker/flutter-bloc.nvim'
+  }
 }
