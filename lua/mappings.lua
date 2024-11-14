@@ -7,6 +7,7 @@ map("i", "<C-h>", "<Left>", { desc = "Jump Left" })
 map("i", "<C-l>", "<Right>", { desc = "Jump Right" })
 map("i", "<C-j>", "<Down>", { desc = "Jump Down" })
 map("i", "<C-k>", "<Up>", { desc = "Jump Up" })
+map("n", "<C-i>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 
 --Move lines
 map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
