@@ -164,7 +164,7 @@ map(
 map("n", "<leader>fth", function()
   require("nvchad.themes").open { style = "flat", border = false }
 end, { desc = "Telescope Themes (NVChad)" })
-map({ "n", "i" }, "<leader>v", function()
+map("n", "<C-v>", function()
   require("telescope.builtin").registers()
 end, { desc = "Telescope Registers" })
 map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Messages" })
