@@ -2,5 +2,6 @@
 
 ## Needed Packages
 - fzf
+- node/npm
 - ripgrep
 - yazi
