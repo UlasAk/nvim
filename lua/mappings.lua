@@ -269,7 +269,15 @@ map("n", "<leader>u", "<cmd> UndotreeToggle<CR>", { desc = "Undotree Toggle" })
 -- }
 
 -- Noice
-map("n", "<leader>dm", "<cmd>Noice dismiss<CR>", { desc = "Noice Dismiss messages" })
+-- map("n", "<leader>dm", "<cmd>Noice dismiss<CR>", { desc = "Noice Dismiss messages" })
+
+-- Snacks/Notifications
+map("n", "<leader>dm", function()
+  Snacks.notifier.hide()
+end, { desc = "Notifications Dismiss messages" })
+map("n", "<leader>fn", function()
+  Snacks.notifier.show_history()
+end, { desc = "Notifications Show history" })
 
 -- Yazi
 map("n", "<leader>o", function()

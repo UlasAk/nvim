@@ -25,24 +25,32 @@ return {
     end,
   },
   {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
-    config = function()
-      require("dashboard").setup {
-        theme = "hyper",
-        shortcut_type = "number",
-        config = {
-          week_header = {
-            enable = true,
-          },
-          shortcut = {},
-          footer = {},
-        },
-      }
-      vim.cmd "hi DashboardHeader guifg=#FDFD9A"
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = function()
+      return require "configs.snacks"
     end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   event = "VimEnter",
+  --   config = function()
+  --     require("dashboard").setup {
+  --       theme = "hyper",
+  --       shortcut_type = "number",
+  --       config = {
+  --         week_header = {
+  --           enable = true,
+  --         },
+  --         shortcut = {},
+  --         footer = {},
+  --       },
+  --     }
+  --     vim.cmd "hi DashboardHeader guifg=#FDFD9A"
+  --   end,
+  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  -- },
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
