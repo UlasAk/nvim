@@ -23,6 +23,9 @@ return {
     event = "InsertEnter",
     dependencies = {
       {
+        "folke/lazydev.nvim",
+      },
+      {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
