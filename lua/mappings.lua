@@ -38,6 +38,10 @@ map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertica
 map("n", "<leader>q", function()
   require("volt").close()
 end, { desc = "Window Close all Volt windows" })
+map("n", "<C-#>", "<cmd> vertical resize +1<CR>", { desc = "Window Increase width" })
+map("n", "<C-ö>", "<cmd> vertical resize -1<CR>", { desc = "Window Decrease width" })
+map("n", "<C-ü>", "<cmd> resize +1<CR>", { desc = "Window Increase height" })
+map("n", "<C-ä>", "<cmd> resize -1<CR>", { desc = "Window Decrease height" })
 
 -- File operations
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
