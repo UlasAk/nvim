@@ -118,8 +118,8 @@ return {
           enabled = true,
         },
         closing_tags = {
-          highlight = "ErrorMsg", -- highlight for the closing tag
-          prefix = ">", -- character to use for close tag e.g. > Widget
+          highlight = "htmlBoldItalic", -- highlight for the closing tag
+          prefix = "> ", -- character to use for close tag e.g. > Widget
           priority = 10, -- priority of virtual text in current line
           -- consider to configure this when there is a possibility of multiple virtual text items in one line
           -- see `priority` option in |:help nvim_buf_set_extmark| for more info
@@ -131,14 +131,14 @@ return {
           -- takes a log_line as string argument; returns a boolean or nil;
           -- the log_line is only added to the output if the function returns true
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = "tabedit", -- command to use to open the log buffer
+          open_cmd = "70vnew", -- command to use to open the log buffer
         },
         dev_tools = {
           autostart = false, -- autostart devtools server if not detected
           auto_open_browser = false, -- Automatically opens devtools in the browser
         },
         outline = {
-          open_cmd = "30vnew", -- command to use to open the outline buffer
+          open_cmd = "60vnew", -- command to use to open the outline buffer
           auto_open = false, -- if true this will open the outline automatically when it is first populated
         },
         lsp = {
