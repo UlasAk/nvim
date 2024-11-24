@@ -418,3 +418,16 @@ end, { desc = "Persistence Load last session" })
 map("n", "<leader>pq", function()
   require("persistence").stop()
 end, { desc = "Persistence Stop persistence" })
+
+-- Indent Highlights
+local indent_enabled = false
+map("n", "<leader>it", function()
+  if indent_enabled then
+    vim.cmd "DisableHLChunk"
+    vim.cmd "DisableHLLineNum"
+  else
+    vim.cmd "EnableHLChunk"
+    vim.cmd "EnableHLLineNum"
+  end
+  indent_enabled = not indent_enabled
+end, { desc = "Indent Toggle Line Number and Chunks" })

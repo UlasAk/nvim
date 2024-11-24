@@ -17,6 +17,30 @@ return {
     end,
   },
   {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("hlchunk").setup {
+        chunk = {
+          enable = true,
+          style = "#fdfd96",
+        },
+        indent = {
+          enable = false,
+        },
+        line_num = {
+          enable = true,
+          style = "#fdfd96",
+        },
+        blank = {
+          enable = false,
+        },
+      }
+      vim.cmd "DisableHLChunk"
+      vim.cmd "DisableHLLineNum"
+    end,
+  },
+  {
     "numToStr/Comment.nvim",
     keys = {
       { "gcc", mode = "n", desc = "comment toggle current line" },
