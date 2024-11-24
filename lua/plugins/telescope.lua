@@ -52,4 +52,8 @@ return {
       harpoon:setup()
     end,
   },
+  {
+    "isak102/telescope-git-file-history.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
 }
