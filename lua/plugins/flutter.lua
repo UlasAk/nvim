@@ -131,7 +131,8 @@ return {
           -- takes a log_line as string argument; returns a boolean or nil;
           -- the log_line is only added to the output if the function returns true
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = "70vnew", -- command to use to open the log buffer
+          open_cmd = "botright 70vnew", -- command to use to open the log buffer
+          focus_on_open = false,
         },
         dev_tools = {
           autostart = false, -- autostart devtools server if not detected
