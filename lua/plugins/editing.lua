@@ -7,13 +7,17 @@ return {
       scope = { char = "│", highlight = "IblScopeChar" },
     },
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "blankline")
+      vim.cmd "hi IblScopeChar guifg=#fdfd96"
+      vim.cmd "hi IblScope guifg=#fdfd96"
+      vim.cmd "hi IblChar guifg=#383747"
+      -- dofile(vim.g.base46_cache .. "blankline")
+      require("ibl").setup(opts)
       local hooks = require "ibl.hooks"
 
       hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-      require("ibl").setup(opts)
 
-      dofile(vim.g.base46_cache .. "blankline")
+      -- dofile(vim.g.base46_cache .. "blankline")
+      require("ibl").refresh()
     end,
   },
   {

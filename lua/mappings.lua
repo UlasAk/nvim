@@ -420,14 +420,26 @@ map("n", "<leader>pq", function()
 end, { desc = "Persistence Stop persistence" })
 
 -- Indent Highlights
-local indent_enabled = false
-map("n", "<leader>it", function()
-  if indent_enabled then
+map("n", "<leader>its", function()
+  vim.cmd "IBLToggleScope"
+end, { desc = "Indent Toggle Line Number" })
+local indent_chunk_enabled = false
+map("n", "<leader>itc", function()
+  if indent_chunk_enabled then
+    vim.cmd "DisableHLChunk"
+  else
+    vim.cmd "EnableHLChunk"
+  end
+  indent_chunk_enabled = not indent_chunk_enabled
+end, { desc = "Indent Toggle Chunks" })
+local indent_line_num_enabled = false
+map("n", "<leader>itl", function()
+  if indent_line_num_enabled then
     vim.cmd "DisableHLChunk"
     vim.cmd "DisableHLLineNum"
   else
     vim.cmd "EnableHLChunk"
     vim.cmd "EnableHLLineNum"
   end
-  indent_enabled = not indent_enabled
-end, { desc = "Indent Toggle Line Number and Chunks" })
+  indent_line_num_enabled = not indent_line_num_enabled
+end, { desc = "Indent Toggle Line Number" })
