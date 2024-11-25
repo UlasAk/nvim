@@ -108,7 +108,7 @@ M.options = {
   move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
   -- can also be a table containing 2 custom separators
   -- [focused and unfocused]. eg: { '|', '|' }
-  separator_style = "slant", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
+  separator_style = "thick", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
   enforce_regular_tabs = false, -- false | true,
   always_show_bufferline = true, -- true | false,
   auto_toggle_bufferline = true, -- true | false,
@@ -219,6 +219,9 @@ M.setup_custom_colors = function()
 ]]
   vim.cmd [[
   hi BufferLineInfoDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3
+]]
+  vim.cmd [[
+  hi BufferLineSeparator guifg=#ffffff
 ]]
 end
 
