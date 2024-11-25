@@ -158,6 +158,7 @@ map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = 
 -- map("n", "<leader><leader>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope Current Buffer" })
 map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
 map("n", "<leader>fgt", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git status" })
+map("n", "<leader>fgh", "<cmd>Telescope git_file_history<CR>", { desc = "Telescope Git file history" })
 map("n", "<leader>fte", "<cmd>Telescope terms<CR>", { desc = "Telescope Terminals" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Files" })
 map(
