@@ -142,10 +142,9 @@ return {
     end,
   },
   {
-    "echasnovski/mini.animate",
-    version = false,
+    "petertriho/nvim-scrollbar",
     config = function()
-      require("mini.animate").setup()
+      require("scrollbar").setup()
     end,
   },
   -- {
