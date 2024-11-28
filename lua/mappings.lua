@@ -154,7 +154,11 @@ map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Telescope Live 
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope Buffers" })
 map("n", "<leader>fhe", "<cmd>Telescope help_tags<CR>", { desc = "Telescope Help page" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Oldfiles" })
-map("n", "<leader><leader>", "<cmd>Telescope oldfiles<CR>", { desc = "Telescope Oldfiles" })
+map("n", "<leader><leader>", function()
+  require("telescope.builtin").oldfiles {
+    only_cwd = true,
+  }
+end, { desc = "Telescope Oldfiles in cwd" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope Current Buffer" })
 -- map("n", "<leader><leader>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Telescope Current Buffer" })
 map("n", "<leader>fgc", "<cmd>Telescope git_commits<CR>", { desc = "Telescope Git commits" })
