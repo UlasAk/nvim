@@ -140,6 +140,7 @@ return {
     opts = {
       plugins = {
         gitsigns = { enabled = false },
+        twilight = { enabled = false },
       },
       on_open = function()
         require("gitsigns").detach()
