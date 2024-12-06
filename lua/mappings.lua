@@ -310,11 +310,11 @@ map("n", "<RightMouse>", function()
 end, { desc = "Menu Open Context menu" })
 
 -- Color pickers Hue and Shades
-map("n", "<leader>pch", function()
+map("n", "<leader>cph", function()
   require("volt").close()
   require("minty.huefy").open()
 end, { desc = "Colors Show Hue picker" })
-map("n", "<leader>pcs", function()
+map("n", "<leader>cps", function()
   require("volt").close()
   require("minty.shades").open()
 end, { desc = "Colors Show Shades picker" })
