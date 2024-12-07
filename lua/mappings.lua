@@ -131,6 +131,9 @@ map("n", "<leader>x", function()
   require("bufferline.ui").refresh()
 end, { desc = "Buffer Close" })
 
+-- Lazy
+map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
+
 -- Comment
 map("n", "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
