@@ -46,7 +46,7 @@ map("n", "<C-ä>", "<cmd> resize -1<CR>", { desc = "Window Decrease height" })
 -- File operations
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
-map("n", "<leader>fm", function()
+map("n", "<leader>bf", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "General Format file" })
 
