@@ -165,5 +165,18 @@ return {
   --       winblend = 0,
   --     }
   --   end,
-  -- },
+  {
+    "tamton-aquib/duck.nvim",
+    config = function()
+      vim.keymap.set("n", "<leader>dd", function()
+        require("duck").hatch()
+      end, { desc = "Duck Hatch duck" })
+      vim.keymap.set("n", "<leader>dk", function()
+        require("duck").cook()
+      end, { desc = "Duck Kill duck" })
+      vim.keymap.set("n", "<leader>da", function()
+        require("duck").cook_all()
+      end, { desc = "Duck Kill all ducks" })
+    end,
+  }, -- },
 }
