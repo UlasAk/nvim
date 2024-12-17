@@ -22,6 +22,10 @@ return {
       require("noice").setup(require "configs.noice")
       -- Change Noice Mini Background Color (where LSP Progress is shown)
       vim.cmd "hi NoiceMini guifg=#282737 guibg=#1E1E2E"
+
+      local map = vim.keymap.set
+      map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Messages" })
+      -- map("n", "<leader>dm", "<cmd>Noice dismiss<CR>", { desc = "Noice Dismiss messages" })
     end,
   },
   {
@@ -87,6 +91,14 @@ return {
           })
         end,
       })
+
+      local map = vim.keymap.set
+      map("n", "<leader>dm", function()
+        Snacks.notifier.hide()
+      end, { desc = "Notifications Dismiss messages" })
+      map("n", "<leader>fn", function()
+        Snacks.notifier.show_history()
+      end, { desc = "Notifications Show history" })
     end,
   },
   -- {
@@ -139,6 +151,36 @@ return {
         require("transparent").clear_prefix "BufferLine"
       end
       opts.setup_custom_colors()
+
+      local map = vim.keymap.set
+      map("n", "<leader>ba", function()
+        require("bufferline").close_others()
+      end, { desc = "Buffer Close all except for current" })
+      map("n", "<leader>bcl", function()
+        require("bufferline").close_in_direction "left"
+      end, { desc = "Buffer Close buffers to the left" })
+      map("n", "<leader>bcr", function()
+        require("bufferline").close_in_direction "right"
+      end, { desc = "Buffer Close buffers to the right" })
+      map("n", "<leader>bl", function()
+        require("bufferline").move(-1)
+      end, { desc = "Buffer Move buffer to left" })
+      map("n", "<leader>br", function()
+        require("bufferline").move(1)
+      end, { desc = "Buffer Move buffer to right" })
+      -- map("n", "<tab>", function()
+      --   require("bufferline").cycle(1)
+      -- end, { desc = "Buffer Goto next" })
+      -- map("n", "<S-tab>", function()
+      --   require("bufferline").cycle(-1)
+      -- end, { desc = "Buffer Goto prev" })
+      map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Buffer Goto next", noremap = true })
+      map("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Buffer Goto prev" })
+      map("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Buffer Pick" })
+      map("n", "<leader>x", function()
+        require("utils").close_buffer()
+        require("bufferline.ui").refresh()
+      end, { desc = "Buffer Close" })
     end,
   },
   {

@@ -20,6 +20,10 @@ return {
       dofile(vim.g.base46_cache .. "nvimtree")
       require("nvim-tree").setup(opts.options)
       opts.setup_colors()
+
+      local map = vim.keymap.set
+      map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree Toggle window" })
+      map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "NvimTree Focus window" })
     end,
   },
   {
@@ -32,6 +36,15 @@ return {
     opts = {
       open_for_directories = false,
     },
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>o", function()
+        require("yazi").yazi()
+      end, { desc = "Yazi Open" })
+      map("n", "<leader>cw", function()
+        require("yazi").yazi(nil, vim.fn.getcwd())
+      end, { desc = "Yazi Open CWD" })
+    end,
   },
   {
     "stevearc/oil.nvim",
@@ -41,6 +54,9 @@ return {
     end,
     config = function(_, opts)
       require("oil").setup(opts)
+
+      local map = vim.keymap.set
+      map("n", "-", "<cmd>Oil<CR>", { desc = "Oil Open parent directory" })
     end,
   },
 }

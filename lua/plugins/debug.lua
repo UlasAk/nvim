@@ -1,6 +1,15 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", { desc = "Debug Toggle Breakpoint" })
+      map("n", "<leader>ds", function()
+        local widgets = require "dap.ui.widgets"
+        local sidebar = widgets.sidebar(widgets.scopes)
+        sidebar.open()
+      end, { desc = "Debug Open sidebar" })
+    end,
   },
   {
     "folke/lazydev.nvim",

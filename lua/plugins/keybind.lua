@@ -8,6 +8,12 @@ return {
       dofile(vim.g.base46_cache .. "whichkey")
       local opts = require "configs.which-key"
       require("which-key").setup(opts)
+
+      local map = vim.keymap.set
+      map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "Whichkey All keymaps" })
+      map("n", "<leader>wk", function()
+        vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+      end, { desc = "Whichkey Query lookup" })
     end,
   },
   {
@@ -27,6 +33,13 @@ return {
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window Go to window left (with tmux)" })
+      map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window Go to window right (with tmux)" })
+      map("n", "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window Go to window up (with tmux)" })
+      map("n", "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window Go to Window down (with tmux)" })
+    end,
   },
   {
     "abecodes/tabout.nvim",

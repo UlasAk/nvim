@@ -9,5 +9,20 @@ return {
       need = 1,
       branch = true, -- use git branch to save session
     },
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>ps", function()
+        require("persistence").select()
+      end, { desc = "Persistence Select session" })
+      map("n", "<leader>pc", function()
+        require("persistence").load()
+      end, { desc = "Persistence Load session for current directory" })
+      map("n", "<leader>pl", function()
+        require("persistence").load { last = true }
+      end, { desc = "Persistence Load last session" })
+      map("n", "<leader>pq", function()
+        require("persistence").stop()
+      end, { desc = "Persistence Stop persistence" })
+    end,
   },
 }

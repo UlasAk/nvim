@@ -32,6 +32,22 @@ return {
 
       -- dofile(vim.g.base46_cache .. "blankline")
       require("ibl").refresh()
+
+      local map = vim.keymap.set
+      map("n", "<leader>cc", function()
+        local config = { scope = {} }
+        config.scope.exclude = { language = {}, node_type = {} }
+        config.scope.include = { node_type = {} }
+        local node = require("ibl.scope").get(vim.api.nvim_get_current_buf(), config)
+
+        if node then
+          local start_row, _, end_row, _ = node:range()
+          if start_row ~= end_row then
+            vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
+            vim.api.nvim_feedkeys("_", "n", true)
+          end
+        end
+      end, { desc = "Blankline Jump to current context" })
     end,
   },
   {
@@ -56,10 +72,36 @@ return {
       }
       vim.cmd "DisableHLChunk"
       vim.cmd "DisableHLLineNum"
+
+      local map = vim.keymap.set
+      map("n", "<leader>its", function()
+        vim.cmd "IBLToggleScope"
+      end, { desc = "Indent Toggle Line Number" })
+      local indent_chunk_enabled = false
+      map("n", "<leader>itc", function()
+        if indent_chunk_enabled then
+          vim.cmd "DisableHLChunk"
+        else
+          vim.cmd "EnableHLChunk"
+        end
+        indent_chunk_enabled = not indent_chunk_enabled
+      end, { desc = "Indent Toggle Chunks" })
+      local indent_line_num_enabled = false
+      map("n", "<leader>itl", function()
+        if indent_line_num_enabled then
+          vim.cmd "DisableHLChunk"
+          vim.cmd "DisableHLLineNum"
+        else
+          vim.cmd "EnableHLChunk"
+          vim.cmd "EnableHLLineNum"
+        end
+        indent_line_num_enabled = not indent_line_num_enabled
+      end, { desc = "Indent Toggle Line Number" })
     end,
   },
   {
     "numToStr/Comment.nvim",
+    event = { "BufReadPre" },
     keys = {
       { "gcc", mode = "n", desc = "comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "comment toggle linewise" },
@@ -70,6 +112,17 @@ return {
     },
     config = function(_, opts)
       require("Comment").setup(opts)
+
+      local map = vim.keymap.set
+      map("n", "<leader>/", function()
+        require("Comment.api").toggle.linewise.current()
+      end, { desc = "Comment Toggle" })
+      map(
+        "v",
+        "<leader>/",
+        "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+        { desc = "Comment Toggle" }
+      )
     end,
   },
   {
@@ -132,11 +185,20 @@ return {
     },
     config = function(_, opts)
       require("goto-preview").setup(opts)
+
+      local map = vim.keymap.set
+      map("n", "<leader>lgpd", function()
+        require("goto-preview").goto_preview_definition()
+      end, { desc = "Goto-Preview Go to definition (via popup)" })
     end,
   },
   {
     "mbbill/undotree",
     cmd = { "UndotreeToggle" },
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>u", "<cmd> UndotreeToggle<CR>", { desc = "Undotree Toggle" })
+    end,
   },
   {
     "kylechui/nvim-surround",
@@ -151,6 +213,9 @@ return {
   {
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
+    keys = {
+      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
+    },
     opts = {
       plugins = {
         gitsigns = { enabled = false },
@@ -169,6 +234,21 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>S", function()
+        require("spectre").toggle()
+      end, { desc = "Spectre Toggle" })
+      map("n", "<leader>sw", function()
+        require("spectre").open_visual { select_word = true }
+      end, { desc = "Spectre Search current word" })
+      map("v", "<leader>sw", function()
+        require("spectre").open_visual {}
+      end, { desc = "Spectre Search current word" })
+      map("n", "<leader>sof", function()
+        require("spectre").open_file_search { select_word = true }
+      end, { desc = "Spectre Search on current file" })
+    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -255,6 +335,18 @@ return {
       end
       opts["fold_virt_text_handler"] = handler
       require("ufo").setup(opts)
+
+      local map = vim.keymap.set
+      map("n", "zR", require("ufo").openAllFolds, { desc = "Folds Open all folds" })
+      map("n", "zM", require("ufo").closeAllFolds, { desc = "Folds Close all folds" })
+      map("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Folds Open all folds" })
+      map("n", "zp", function()
+        local winid = require("ufo").peekFoldedLinesUnderCursor()
+        -- if not winid then
+        --   -- vim.lsp.buf.hover()
+        --   vim.cmd [[ Lspsaga hover_doc ]]
+        -- end
+      end, { desc = "Folds Peek into fold" })
     end,
   },
   {
@@ -284,6 +376,9 @@ return {
         ---@type table Presets for languages
         -- langs = {}, -- See the default presets in lua/treesj/langs
       }
+
+      local map = vim.keymap.set
+      map("n", "<leader>m", "<cmd>TSJToggle<CR>", { desc = "TreeSJ Toggle node unser cursor" })
     end,
   },
 }

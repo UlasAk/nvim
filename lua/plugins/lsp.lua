@@ -17,6 +17,11 @@ return {
     end,
     config = function(_, opts)
       require("conform").setup(opts)
+      local map = vim.keymap.set
+
+      map("n", "<leader>bf", function()
+        require("conform").format { lsp_fallback = true }
+      end, { desc = "General Format file" })
     end,
   },
   {
@@ -190,6 +195,12 @@ return {
       local lsp_lines = require "lsp_lines"
       lsp_lines.setup()
       lsp_lines.toggle()
+
+      local map = vim.keymap.set
+      map("n", "<leader>ldt", function()
+        local show_virtual_lines_now = require("lsp_lines").toggle()
+        vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
+      end, { desc = "Diagnostics Toggle virtual text" })
     end,
   },
 }

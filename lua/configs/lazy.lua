@@ -48,4 +48,7 @@ local options = {
   },
 }
 
+local map = vim.keymap.set
+map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
+
 return options
