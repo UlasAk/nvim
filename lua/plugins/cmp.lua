@@ -1,55 +1,55 @@
 return {
-  -- {
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+    },
+    lazy = false,
+  },
+  {
+    "hrsh7th/cmp-buffer",
+    lazy = false,
+  },
+  {
+    "hrsh7th/cmp-path",
+    lazy = false,
+  },
+  {
+    "hrsh7th/cmp-cmdline",
+    lazy = false,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      {
+        "folke/lazydev.nvim",
+      },
 
-  --   dependencies = {
-  --     "neovim/nvim-lspconfig",
-  --   },
-  --   lazy = false,
-  -- },
-  -- {
-  --   "hrsh7th/cmp-buffer",
-  --   lazy = false,
-  -- },
-  -- {
-  --   "hrsh7th/cmp-path",
-  --   lazy = false,
-  -- },
-  -- {
-  --   "hrsh7th/cmp-cmdline",
-  --   lazy = false,
-  -- },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   event = "InsertEnter",
-  --   dependencies = {
-  --     {
-  --       "folke/lazydev.nvim",
-  --     },
-  --
-  --     {
-  --       "L3MON4D3/LuaSnip",
-  --     },
-  --     {
-  --       "windwp/nvim-autopairs",
-  --     },
-  --
-  --     -- cmp sources plugins
-  --     {
-  --       "neovim/nvim-lspconfig",
-  --       "saadparwaiz1/cmp_luasnip",
-  --       "hrsh7th/cmp-nvim-lua",
-  --       "hrsh7th/cmp-nvim-lsp",
-  --       "hrsh7th/cmp-buffer",
-  --       "hrsh7th/cmp-path",
-  --     },
-  --   },
-  --   opts = function()
-  --     return require "configs.cmp"
-  --   end,
-  --   config = function(_, opts)
-  --     require("cmp").setup(opts)
-  --   end,
-  -- },
+      {
+        "L3MON4D3/LuaSnip",
+      },
+      {
+        "windwp/nvim-autopairs",
+      },
+
+      -- cmp sources plugins
+      {
+        "neovim/nvim-lspconfig",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+      },
+    },
+    opts = function()
+      return require "configs.cmp"
+    end,
+    config = function(_, opts)
+      require("cmp").setup(opts)
+    end,
+  },
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
@@ -75,6 +75,9 @@ return {
         ["<Tab>"] = { "select_next", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
+        cmdline = {
+          preset = "super-tab",
+        },
       },
 
       appearance = {
@@ -92,8 +95,9 @@ return {
       sources = {
         default = { "lsp", "path", "luasnip", "buffer", "crates", "lazydev", "nvim_lua" },
         -- optionally disable cmdline completions
-        -- cmdline = {},
-      }, -- Controls how the completion items are rendered on the popup window
+        cmdline = {},
+      },
+      -- Controls how the completion items are rendered on the popup window
       draw = {
         -- Aligns the keyword you've typed to a component in the menu
         align_to_component = "label", -- or 'none' to disable
