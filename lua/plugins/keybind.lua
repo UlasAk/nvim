@@ -75,16 +75,16 @@ return {
     event = "InsertCharPre", -- Set the event to 'InsertCharPre' for better compatibility
     priority = 1000,
   },
-  {
-    "kwkarlwang/bufjump.nvim",
-    config = function()
-      require("bufjump").setup {
-        forward_key = "<C-n>",
-        backward_key = "<C-p>",
-        forward_same_buf_key = "<M-i>",
-        backward_same_buf_key = "<M-o>",
-        on_success = nil,
-      }
-    end,
-  },
+  -- {
+  --   "kwkarlwang/bufjump.nvim",
+  --   config = function()
+  --     require("bufjump").setup {
+  --       forward_key = "<C-n>",
+  --       backward_key = "<C-p>",
+  --       forward_same_buf_key = "<M-i>",
+  --       backward_same_buf_key = "<M-o>",
+  --       on_success = nil,
+  --     }
+  --   end,
+  -- },
 }
