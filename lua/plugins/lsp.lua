@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "saghen/blink.cmp" },
+    -- dependencies = { "saghen/blink.cmp" },
     event = "User FilePost",
     config = function()
       local lspconfig = require "configs.lsp"
