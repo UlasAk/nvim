@@ -25,10 +25,6 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
-map("n", "<C-h>", "<C-w>h", { desc = "Window Go to window left" })
-map("n", "<C-l>", "<C-w>l", { desc = "Window Go to window right" })
-map("n", "<C-j>", "<C-w>j", { desc = "Window Go to window down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Window Go to window up" })
 map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
 map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
 map("n", "<C-#>", "<cmd> vertical resize +1<CR>", { desc = "Window Increase width" })
