@@ -39,6 +39,7 @@ return {
     config = function(_, opts)
       require("auto-session").setup(opts)
       vim.keymap.set("n", "<leader>fse", "<cmd>SessionSearch<CR>", { desc = "Telescope Sessions" })
+      vim.keymap.set("n", "<leader>sd", "<cmd>SessionDelete<CR>", { desc = "Session Delete current session" })
     end,
   },
 }
