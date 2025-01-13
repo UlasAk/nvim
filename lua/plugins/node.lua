@@ -39,4 +39,19 @@ return {
       )
     end,
   },
+  -- {
+  --   "antonk52/npm_scripts.nvim",
+  --   config = function()
+  --     require("npm_scripts").setup {}
+  --   end,
+  -- },
+  {
+    "sajjathossain/nvim-npm",
+    config = true,
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "akinsho/toggleterm.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
 }
