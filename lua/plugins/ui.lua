@@ -93,9 +93,9 @@ return {
       })
 
       local map = vim.keymap.set
-      map("n", "<leader>dm", function()
+      map("n", "<leader>dn", function()
         Snacks.notifier.hide()
-      end, { desc = "Notifications Dismiss messages" })
+      end, { desc = "Notifications Dismiss notifications" })
       map("n", "<leader>fn", function()
         Snacks.notifier.show_history()
       end, { desc = "Notifications Show history" })
