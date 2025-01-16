@@ -34,6 +34,9 @@ return {
     ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { "~/", "~/Downloads", "/" },
+      session_lens = {
+        previewer = true,
+      },
       -- log_level = 'debug',
     },
     config = function(_, opts)
