@@ -37,6 +37,9 @@ return {
       session_lens = {
         previewer = true,
       },
+      pre_save_cmds = {
+        "bw __FLUTTER_DEV_LOG__",
+      },
       -- log_level = 'debug',
     },
     config = function(_, opts)
