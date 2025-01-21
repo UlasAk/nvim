@@ -200,17 +200,43 @@ return {
     cmd = "Trouble",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  -- {
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   config = function()
+  --     local lsp_lines = require "lsp_lines"
+  --     lsp_lines.setup()
+  --     lsp_lines.toggle()
+  --
+  --     local map = vim.keymap.set
+  --     map("n", "<leader>ldt", function()
+  --       local show_virtual_lines_now = require("lsp_lines").toggle()
+  --       vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
+  --     end, { desc = "Diagnostics Toggle virtual text" })
+  --   end,
+  -- },
   {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      local lsp_lines = require "lsp_lines"
-      lsp_lines.setup()
-      lsp_lines.toggle()
-
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    opts = {
+      options = {
+        use_icons_from_diagnostic = false,
+        multilines = {
+          enabled = true,
+          always_show = true,
+        },
+        show_all_diags_on_cursorline = true,
+      },
+    },
+    config = function(_, opts)
+      require("tiny-inline-diagnostic").setup(opts)
+      vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
       local map = vim.keymap.set
+      local show_virtual_lines_now = true
       map("n", "<leader>ldt", function()
-        local show_virtual_lines_now = require("lsp_lines").toggle()
-        vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
+        require("tiny-inline-diagnostic").toggle()
+        vim.diagnostic.config { virtual_text = show_virtual_lines_now }
+        show_virtual_lines_now = not show_virtual_lines_now
       end, { desc = "Diagnostics Toggle virtual text" })
     end,
   },
