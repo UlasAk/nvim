@@ -143,4 +143,14 @@ return {
       }
     end,
   },
+  {
+    "echasnovski/mini.files",
+    version = false,
+    config = function()
+      local map = vim.keymap.set
+      map("n", "m", function()
+        require("mini.files").open()
+      end, { desc = "Mini Files" })
+    end,
+  },
 }
