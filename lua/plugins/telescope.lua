@@ -43,7 +43,7 @@ return {
       map("n", "<leader>fgt", "<cmd>Telescope git_status<CR>", { desc = "Telescope Git status" })
       map("n", "<leader>fgh", "<cmd>Telescope git_file_history<CR>", { desc = "Telescope Git file history" })
       map("n", "<leader>fte", "<cmd>Telescope terms<CR>", { desc = "Telescope Terminals" })
-      map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Files" })
+      -- map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Files" })
       map(
         "n",
         "<leader>fa",
@@ -192,5 +192,25 @@ return {
   {
     "isak102/telescope-git-file-history.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
+  },
+  {
+    "danielfalk/smart-open.nvim",
+    branch = "0.2.x",
+    dependencies = {
+      "kkharji/sqlite.lua",
+      -- Only required if using match_algorithm fzf
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+      { "nvim-telescope/telescope-fzy-native.nvim" },
+    },
+    config = function()
+      require("telescope").load_extension "smart_open"
+      vim.keymap.set("n", "<leader>ff", function()
+        require("telescope").extensions.smart_open.smart_open {
+          cwd_only = true,
+          filename_first = true,
+        }
+      end)
+    end,
   },
 }
