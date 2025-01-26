@@ -20,7 +20,11 @@ return {
     "OXY2DEV/markview.nvim",
     lazy = false,
     config = function()
-      require("markview").setup()
+      require("markview").setup {
+        markdown = { code_blocks = {
+          label_direction = "left",
+        } },
+      }
       require("markview.extras.checkboxes").setup {
         --- Default checkbox state(used when adding checkboxes).
         ---@type string
