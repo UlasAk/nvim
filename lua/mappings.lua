@@ -27,10 +27,10 @@ map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 -- Window operations
 map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
 map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
-map("n", "<C-#>", "<cmd> vertical resize +1<CR>", { desc = "Window Increase width" })
-map("n", "<C-ö>", "<cmd> vertical resize -1<CR>", { desc = "Window Decrease width" })
-map("n", "<C-ü>", "<cmd> resize +1<CR>", { desc = "Window Increase height" })
-map("n", "<C-ä>", "<cmd> resize -1<CR>", { desc = "Window Decrease height" })
+map("n", "<C-M-Right>", "<cmd> vertical resize +5<CR>", { desc = "Window Increase width" })
+map("n", "<C-M-Left>", "<cmd> vertical resize -5<CR>", { desc = "Window Decrease width" })
+map("n", "<C-M-Up>", "<cmd> resize +5<CR>", { desc = "Window Increase height" })
+map("n", "<C-M-Down>", "<cmd> resize -5<CR>", { desc = "Window Decrease height" })
 
 -- File operations
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
