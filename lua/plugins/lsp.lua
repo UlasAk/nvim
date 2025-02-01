@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -17,8 +19,6 @@ return {
     end,
     config = function(_, opts)
       require("conform").setup(opts)
-      local map = vim.keymap.set
-
       map("n", "<leader>bf", function()
         require("conform").format { lsp_fallback = true }
       end, { desc = "General Format file" })
@@ -200,22 +200,16 @@ return {
     cmd = "Trouble",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  -- {
-  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-  --   config = function()
-  --     local lsp_lines = require "lsp_lines"
-  --     lsp_lines.setup()
-  --     lsp_lines.toggle()
-  --
-  --     local map = vim.keymap.set
-  --     map("n", "<leader>ldt", function()
-  --       local show_virtual_lines_now = require("lsp_lines").toggle()
-  --       vim.diagnostic.config { virtual_text = not show_virtual_lines_now }
-  --     end, { desc = "Diagnostics Toggle virtual text" })
-  --   end,
-  -- },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      vim.diagnostic.config { virtual_text = require("lsp_lines").toggle() }
+    end,
+  },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
+    dependencies = { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
     event = "VeryLazy", -- Or `LspAttach`
     priority = 1000, -- needs to be loaded in first
     opts = {
@@ -229,14 +223,17 @@ return {
       },
     },
     config = function(_, opts)
-      require("tiny-inline-diagnostic").setup(opts)
-      vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
-      local map = vim.keymap.set
-      local show_virtual_lines_now = true
+      local tiny_inline_diagnostic = require "tiny-inline-diagnostic"
+      tiny_inline_diagnostic.setup(opts)
+      --tiny-inline-diagnostic and lsp_lines toggle through
+      local show_lsp_lines = vim.diagnostic.config().virtual_text
       map("n", "<leader>ldt", function()
-        require("tiny-inline-diagnostic").toggle()
-        vim.diagnostic.config { virtual_text = show_virtual_lines_now }
-        show_virtual_lines_now = not show_virtual_lines_now
+        show_lsp_lines = require("lsp_lines").toggle()
+        if show_lsp_lines then
+          require("tiny-inline-diagnostic").disable()
+        else
+          require("tiny-inline-diagnostic").enable()
+        end
       end, { desc = "Diagnostics Toggle virtual text" })
     end,
   },
