@@ -33,7 +33,7 @@ map("n", "<C-M-Up>", "<cmd> resize +5<CR>", { desc = "Window Increase height" })
 map("n", "<C-M-Down>", "<cmd> resize -5<CR>", { desc = "Window Decrease height" })
 
 -- File operations
-map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
+-- map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
