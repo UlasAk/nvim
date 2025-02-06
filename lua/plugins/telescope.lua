@@ -88,6 +88,10 @@ return {
     end,
   },
   {
+    "aznhe21/actions-preview.nvim",
+    opts = require "configs.actions-preview",
+  },
+  {
     "nvim-telescope/telescope-media-files.nvim",
     dependencies = { "nvim-lua/popup.nvim" },
     cmd = "Telescope media_files",
