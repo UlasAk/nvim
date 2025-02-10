@@ -8,12 +8,14 @@ return {
     },
     config = function()
       -- Mappings
-      vim.keymap.set("n", "<leader>flc", function()
+      local map = vim.keymap.set
+      map("n", "<leader>flc", function()
         require("telescope").extensions.flutter.commands()
       end, { desc = "Telescope Flutter commands" })
-      vim.keymap.set("n", "<leader>flv", function()
+      map("n", "<leader>flv", function()
         require("telescope").extensions.flutter.fvm()
       end, { desc = "Telescope Flutter commands" })
+      map("n", "<leader>fld", "<cmd>FlutterDevices<CR>", { desc = "Flutter Select Device" })
 
       -- Statusline
       local function flutterStatusLine()
