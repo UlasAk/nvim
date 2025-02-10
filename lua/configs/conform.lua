@@ -2,6 +2,7 @@ local options = {
   formatters_by_ft = {
     bash = { "shfmt" },
     bib = { "texlab" },
+    cs = { "csharpier" },
     html = { "prettier" },
     htmlangular = { "prettier" },
     javascript = { "prettier" },

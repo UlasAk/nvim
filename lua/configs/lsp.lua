@@ -202,15 +202,17 @@ M.defaults = function()
   end
 
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "docker_compose_language_service", "jsonls", "kotlin_language_server" }
+  local lsp_servers = { "csharp_ls", "cssls", "docker_compose_language_service", "jsonls", "kotlin_language_server" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
-    lspconfig[lsp].setup {
-      on_attach = M.on_attach,
-      on_init = M.on_init,
-      capabilities = M.capabilities,
-    }
+    if lspconfig[lsp] ~= nil then
+      lspconfig[lsp].setup {
+        on_attach = M.on_attach,
+        on_init = M.on_init,
+        capabilities = M.capabilities,
+      }
+    end
   end
 
   -- LSPs with specific config
