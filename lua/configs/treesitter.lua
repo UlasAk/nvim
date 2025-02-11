@@ -10,7 +10,6 @@ local options = {
     "css",
     "dart",
     "dockerfile",
-    "dosini",
     "javascript",
     "html",
     "hyprlang",
