@@ -27,6 +27,7 @@ local options = {
     "regex",
     "rust",
     "ssh_config",
+    "terraform",
     "tmux",
     "toml",
     "typescript",
