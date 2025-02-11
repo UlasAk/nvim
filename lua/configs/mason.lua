@@ -2,7 +2,6 @@ local options = {
   ensure_installed_mason_names = {
     "angular-language-server",
     "bash-language-server",
-    "csharp-language-server",
     "css-lsp",
     "docker-compose-language-service",
     "dockerfile-language-server",
@@ -25,7 +24,6 @@ local options = {
   ensure_installed = {
     "angularls",
     "bashls",
-    "csharp_ls",
     "cssls",
     "docker_compose_language_service",
     "dockerls",
@@ -60,6 +58,10 @@ local options = {
   },
 
   max_concurrent_installers = 10,
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+  },
 }
 
 return options
