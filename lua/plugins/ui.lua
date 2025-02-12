@@ -189,24 +189,6 @@ return {
       require("scrollbar").setup()
     end,
   },
-  -- {
-  --   "willothy/nvim-cokeline",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim", -- Required for v0.4.0+
-  --     "nvim-tree/nvim-web-devicons", -- If you want devicons
-  --     "stevearc/resession.nvim", -- Optional, for persistent history
-  --   },
-  --   config = true,
-  -- },
-  -- {
-  --   "giusgad/pets.nvim",
-  --   dependencies = { "MunifTanjim/nui.nvim", "giusgad/hologram.nvim" },
-  --   config = function()
-  --     require("pets").setup {
-  --       avoid_statusline = true,
-  --       winblend = 0,
-  --     }
-  --   end,
   {
     "tamton-aquib/duck.nvim",
     config = function()
@@ -220,5 +202,94 @@ return {
         require("duck").cook_all()
       end, { desc = "Duck Kill all ducks" })
     end,
-  }, -- },
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("hlchunk").setup {
+        chunk = {
+          enable = true,
+          style = "#fdfd96",
+        },
+        indent = {
+          enable = false,
+        },
+        line_num = {
+          enable = true,
+          style = "#fdfd96",
+        },
+        blank = {
+          enable = false,
+        },
+      }
+      vim.cmd "DisableHLChunk"
+      vim.cmd "DisableHLLineNum"
+
+      local map = vim.keymap.set
+      map("n", "<leader>its", function()
+        vim.cmd "IBLToggleScope"
+      end, { desc = "Indent Toggle Line Number" })
+      local indent_chunk_enabled = false
+      map("n", "<leader>itc", function()
+        if indent_chunk_enabled then
+          vim.cmd "DisableHLChunk"
+        else
+          vim.cmd "EnableHLChunk"
+        end
+        indent_chunk_enabled = not indent_chunk_enabled
+      end, { desc = "Indent Toggle Chunks" })
+      local indent_line_num_enabled = false
+      map("n", "<leader>itl", function()
+        if indent_line_num_enabled then
+          vim.cmd "DisableHLChunk"
+          vim.cmd "DisableHLLineNum"
+        else
+          vim.cmd "EnableHLChunk"
+          vim.cmd "EnableHLLineNum"
+        end
+        indent_line_num_enabled = not indent_line_num_enabled
+      end, { desc = "Indent Toggle Line Number" })
+    end,
+  },
+  {
+    "tzachar/highlight-undo.nvim",
+    keys = { { "u" }, { "<C-r>" } },
+    opts = {
+      duration = 1000,
+      keymaps = {
+        paste = {
+          disabled = true,
+        },
+        Paste = {
+          disabled = true,
+        },
+      },
+    },
+    config = function(_, opts)
+      require("highlight-undo").setup(opts)
+    end,
+  },
+  {
+    "folke/zen-mode.nvim",
+    cmd = { "ZenMode" },
+    keys = {
+      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
+    },
+    opts = {
+      plugins = {
+        gitsigns = { enabled = false },
+        twilight = { enabled = false },
+      },
+      on_open = function()
+        require("gitsigns").detach()
+      end,
+      on_close = function()
+        require("gitsigns").attach()
+      end,
+    },
+  },
+  {
+    "folke/twilight.nvim",
+  },
 }

@@ -51,55 +51,6 @@ return {
     end,
   },
   {
-    "shellRaining/hlchunk.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("hlchunk").setup {
-        chunk = {
-          enable = true,
-          style = "#fdfd96",
-        },
-        indent = {
-          enable = false,
-        },
-        line_num = {
-          enable = true,
-          style = "#fdfd96",
-        },
-        blank = {
-          enable = false,
-        },
-      }
-      vim.cmd "DisableHLChunk"
-      vim.cmd "DisableHLLineNum"
-
-      local map = vim.keymap.set
-      map("n", "<leader>its", function()
-        vim.cmd "IBLToggleScope"
-      end, { desc = "Indent Toggle Line Number" })
-      local indent_chunk_enabled = false
-      map("n", "<leader>itc", function()
-        if indent_chunk_enabled then
-          vim.cmd "DisableHLChunk"
-        else
-          vim.cmd "EnableHLChunk"
-        end
-        indent_chunk_enabled = not indent_chunk_enabled
-      end, { desc = "Indent Toggle Chunks" })
-      local indent_line_num_enabled = false
-      map("n", "<leader>itl", function()
-        if indent_line_num_enabled then
-          vim.cmd "DisableHLChunk"
-          vim.cmd "DisableHLLineNum"
-        else
-          vim.cmd "EnableHLChunk"
-          vim.cmd "EnableHLLineNum"
-        end
-        indent_line_num_enabled = not indent_line_num_enabled
-      end, { desc = "Indent Toggle Line Number" })
-    end,
-  },
-  {
     "numToStr/Comment.nvim",
     event = { "BufReadPre" },
     keys = {
@@ -141,58 +92,6 @@ return {
     end,
   },
   {
-    "tzachar/highlight-undo.nvim",
-    keys = { { "u" }, { "<C-r>" } },
-    opts = {
-      duration = 1000,
-      keymaps = {
-        paste = {
-          disabled = true,
-        },
-        Paste = {
-          disabled = true,
-        },
-      },
-    },
-    config = function(_, opts)
-      require("highlight-undo").setup(opts)
-    end,
-  },
-  {
-    "rmagatti/goto-preview",
-    event = "BufEnter",
-    opts = {
-      width = 120, -- Width of the floating window
-      height = 15, -- Height of the floating window
-      border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
-      default_mappings = false, -- Bind default mappings
-      debug = false, -- Print debug information
-      opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
-      resizing_mappings = false, -- Binds arrow keys to resizing the floating window.
-      post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
-      post_close_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
-      references = { -- Configure the telescope UI for slowing the references cycling window.
-        telescope = require("telescope.themes").get_dropdown { hide_preview = false },
-      },
-      -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
-      focus_on_open = true, -- Focus the floating window when opening it.
-      dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
-      force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-      bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
-      stack_floating_preview_windows = true, -- Whether to nest floating windows
-      preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
-      zindex = 1, -- Starting zindex for the stack of floating windows
-    },
-    config = function(_, opts)
-      require("goto-preview").setup(opts)
-
-      local map = vim.keymap.set
-      map("n", "<leader>lgpd", function()
-        require("goto-preview").goto_preview_definition()
-      end, { desc = "Goto-Preview Go to definition (via popup)" })
-    end,
-  },
-  {
     "mbbill/undotree",
     cmd = { "UndotreeToggle" },
     config = function()
@@ -208,46 +107,6 @@ return {
       require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults
       }
-    end,
-  },
-  {
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
-    keys = {
-      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
-    },
-    opts = {
-      plugins = {
-        gitsigns = { enabled = false },
-        twilight = { enabled = false },
-      },
-      on_open = function()
-        require("gitsigns").detach()
-      end,
-      on_close = function()
-        require("gitsigns").attach()
-      end,
-    },
-  },
-  {
-    "folke/twilight.nvim",
-  },
-  {
-    "nvim-pack/nvim-spectre",
-    config = function()
-      local map = vim.keymap.set
-      map("n", "<leader>S", function()
-        require("spectre").toggle()
-      end, { desc = "Spectre Toggle" })
-      map("n", "<leader>sw", function()
-        require("spectre").open_visual { select_word = true }
-      end, { desc = "Spectre Search current word" })
-      map("v", "<leader>sw", function()
-        require("spectre").open_visual {}
-      end, { desc = "Spectre Search current word" })
-      map("n", "<leader>sof", function()
-        require("spectre").open_file_search { select_word = true }
-      end, { desc = "Spectre Search on current file" })
     end,
   },
   {

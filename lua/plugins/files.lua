@@ -59,4 +59,22 @@ return {
       map("n", "-", "<cmd>Oil<CR>", { desc = "Oil Open parent directory" })
     end,
   },
+  {
+    "nvim-pack/nvim-spectre",
+    config = function()
+      local map = vim.keymap.set
+      map("n", "<leader>S", function()
+        require("spectre").toggle()
+      end, { desc = "Spectre Toggle" })
+      map("n", "<leader>sw", function()
+        require("spectre").open_visual { select_word = true }
+      end, { desc = "Spectre Search current word" })
+      map("v", "<leader>sw", function()
+        require("spectre").open_visual {}
+      end, { desc = "Spectre Search current word" })
+      map("n", "<leader>sof", function()
+        require("spectre").open_file_search { select_word = true }
+      end, { desc = "Spectre Search on current file" })
+    end,
+  },
 }
