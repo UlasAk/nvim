@@ -62,7 +62,7 @@ return {
       map("n", "<leader>fv", "<cmd>Telescope vim_options<CR>", { desc = "Telescope Vim Options" })
       map("n", "<leader>fsy", "<cmd>Telescope treesitter<CR>", { desc = "Telescope Symbols" })
       map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Telescope Resume last search" })
-      map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Mappings" })
+      map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Telescope Keybindings" })
       map("n", "<leader>fma", "<cmd>Telescope marks<CR>", { desc = "Telescope Marks" })
       map({ "n", "v" }, "<leader>fgs", "<cmd>Telescope grep_string<CR>", { desc = "Telescope Grep String" })
       map("n", "<leader>fme", "<cmd>Telescope media_files<CR>", { desc = "Telescope Media" })
