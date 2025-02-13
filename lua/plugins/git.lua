@@ -5,16 +5,15 @@ return {
     opts = function()
       return require "configs.gitsigns"
     end,
-    config = function(_, opts)
+    init = function()
       dofile(vim.g.base46_cache .. "git")
-      require("gitsigns").setup(opts)
     end,
   },
   {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewFocusFiles", "DiffviewToggleFiles", "DiffviewFileHistory" },
   },
-  { "akinsho/git-conflict.nvim", version = "*", config = true },
+  { "akinsho/git-conflict.nvim", version = "*", event = "BufReadPost", opts = {} },
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -22,7 +21,8 @@ return {
       "sindrets/diffview.nvim", -- optional - Diff integration
       "nvim-telescope/telescope.nvim", -- optional
     },
-    config = true,
+    cmd = { "Neogit", "NeogitCommit", "NeogitLogCurrent", "NeogitResetState" },
+    opts = {},
   },
   {
     "kdheepak/lazygit.nvim",
@@ -41,7 +41,7 @@ return {
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { "<leader>lgz", "<cmd>LazyGit<cr>", desc = "Git LazyGit" },
+      { "<leader>lzg", "<cmd>LazyGit<cr>", desc = "Git LazyGit" },
     },
   },
 }

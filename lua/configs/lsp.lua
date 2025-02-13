@@ -105,29 +105,35 @@ M.on_attach = function(client, bufnr)
   vim.lsp.inlay_hint.enable(true)
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+local make_capabilities = function()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  capabilities.textDocument.completion.completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = { valueSet = { 1 } },
+    resolveSupport = {
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
     },
-  },
-}
-M.capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true,
-}
--- M.capabilities = require("blink.cmp").get_lsp_capabilities(M.capabilities)
+  }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+  -- capabilities = require("blink.cmp").get_lsp_capabilities(M.capabilities)
+  return capabilities
+end
+
+M.capabilities = make_capabilities()
 M.on_init = function(client, _)
   if client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil

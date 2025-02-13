@@ -3,7 +3,6 @@ local map = vim.keymap.set
 return {
   {
     "neovim/nvim-lspconfig",
-    -- dependencies = { "saghen/blink.cmp" },
     event = "User FilePost",
     config = function()
       local lspconfig = require "configs.lsp"
@@ -13,27 +12,49 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
-    -- ft = { "html", "lua", "javascript", "typescript", "yaml" },
-    opts = function()
-      return require "configs.conform"
+    ft = function()
+      local filetype_map = require("configs.conform").filetypes
+      local filetypes = {}
+      for key, _ in pairs(filetype_map) do
+        table.insert(filetypes, key)
+      end
+      return filetypes
     end,
-    config = function(_, opts)
-      require("conform").setup(opts)
-      map("n", "<leader>bf", function()
-        require("conform").format { lsp_fallback = true }
-      end, { desc = "General Format file" })
+    keys = {
+      {
+        "<leader>bf",
+        function()
+          require("conform").format { lsp_fallback = true }
+        end,
+        desc = "General Format file",
+      },
+    },
+    opts = function()
+      return require("configs.conform").options
     end,
   },
   {
     "antosha417/nvim-lsp-file-operations",
-    event = { "User NvimTreeSetup" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
+      "neovim/nvim-lspconfig",
     },
+    event = { "User NvimTreeSetup" },
     config = function()
-      require("lsp-file-operations").setup()
+      local lsp_file_operations = require "lsp-file-operations"
+      lsp_file_operations.setup()
+
+      -- Set global defaults for all servers
+      local lspconfig = require "lspconfig"
+      local custom_lspconfig = require "configs.lsp"
+      lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+        capabilities = vim.tbl_deep_extend(
+          "force",
+          custom_lspconfig.capabilities,
+          lsp_file_operations.default_capabilities()
+        ),
+      })
     end,
   },
   {
@@ -54,6 +75,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup {
         textobjects = {
@@ -170,7 +192,6 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
     opts = function()
       local mason_opts = require "configs.mason"
       return {
@@ -182,15 +203,13 @@ return {
   {
     "dmmulroy/tsc.nvim",
     cmd = { "TSC" },
-    config = function()
-      require("tsc").setup()
-    end,
+    opts = {},
   },
   {
     "OlegGulevskyy/better-ts-errors.nvim",
     ft = { "typescript" },
     dependencies = { "MunifTanjim/nui.nvim" },
-    config = {
+    opts = {
       keymaps = {
         toggle = "<leader>lt", -- default '<leader>dd'
         go_to_definition = "<leader>lgtd", -- default '<leader>dx'
@@ -199,11 +218,12 @@ return {
   },
   {
     "folke/trouble.nvim",
-    cmd = "Trouble",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Trouble",
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = "LspAttach",
     config = function()
       require("lsp_lines").setup()
       vim.diagnostic.config { virtual_text = require("lsp_lines").toggle() }
@@ -212,8 +232,26 @@ return {
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     dependencies = { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
-    event = "VeryLazy", -- Or `LspAttach`
     priority = 1000, -- needs to be loaded in first
+    event = "VeryLazy", -- Or `LspAttach`
+    keys = function()
+      --tiny-inline-diagnostic and lsp_lines toggle through
+      local show_lsp_lines = vim.diagnostic.config().virtual_text
+      return {
+        {
+          "<leader>ldt",
+          function()
+            show_lsp_lines = require("lsp_lines").toggle()
+            if show_lsp_lines then
+              require("tiny-inline-diagnostic").disable()
+            else
+              require("tiny-inline-diagnostic").enable()
+            end
+          end,
+          desc = "Diagnostics Toggle virtual text",
+        },
+      }
+    end,
     opts = {
       options = {
         use_icons_from_diagnostic = false,
@@ -225,23 +263,20 @@ return {
       },
     },
     config = function(_, opts)
-      local tiny_inline_diagnostic = require "tiny-inline-diagnostic"
-      tiny_inline_diagnostic.setup(opts)
-      --tiny-inline-diagnostic and lsp_lines toggle through
-      local show_lsp_lines = vim.diagnostic.config().virtual_text
-      map("n", "<leader>ldt", function()
-        show_lsp_lines = require("lsp_lines").toggle()
-        if show_lsp_lines then
-          require("tiny-inline-diagnostic").disable()
-        else
-          require("tiny-inline-diagnostic").enable()
-        end
-      end, { desc = "Diagnostics Toggle virtual text" })
+      require("tiny-inline-diagnostic").setup(opts)
     end,
   },
   {
     "rmagatti/goto-preview",
-    event = "BufEnter",
+    keys = {
+      {
+        "<leader>lgpd",
+        function()
+          require("goto-preview").goto_preview_definition()
+        end,
+        desc = "Goto-Preview Go to definition (via popup)",
+      },
+    },
     opts = {
       width = 120, -- Width of the floating window
       height = 15, -- Height of the floating window
@@ -264,12 +299,5 @@ return {
       preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
       zindex = 1, -- Starting zindex for the stack of floating windows
     },
-    config = function(_, opts)
-      require("goto-preview").setup(opts)
-
-      map("n", "<leader>lgpd", function()
-        require("goto-preview").goto_preview_definition()
-      end, { desc = "Goto-Preview Go to definition (via popup)" })
-    end,
   },
 }

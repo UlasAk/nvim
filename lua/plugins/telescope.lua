@@ -252,6 +252,7 @@ return {
   {
     "nvim-telescope/telescope-dap.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
+    event = "LspAttach",
     config = function()
       require("telescope").load_extension "dap"
     end,
@@ -259,6 +260,7 @@ return {
   {
     "HUAHUAI23/telescope-dapzzzz",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    event = "LspAttach",
     config = function()
       -- :Telescope i23 dap23
       -- input your configuration file directory, /path/of/project/.vscode is default

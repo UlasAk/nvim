@@ -1,18 +1,22 @@
-local options = {
-  formatters_by_ft = {
-    bash = { "shfmt" },
-    bib = { "texlab" },
-    cs = { "csharpier" },
-    html = { "prettier" },
-    htmlangular = { "prettier" },
-    javascript = { "prettier" },
-    json = { "prettier" },
-    lua = { "stylua" },
-    sh = { "shfmt" },
-    -- tex = { "latexindent" },
-    typescript = { "prettier" },
-    yaml = { "yamlfmt" },
-  },
+local M = {}
+
+M.filetypes = {
+  bash = { "shfmt" },
+  bib = { "texlab" },
+  cs = { "csharpier" },
+  html = { "prettier" },
+  htmlangular = { "prettier" },
+  javascript = { "prettier" },
+  json = { "prettier" },
+  lua = { "stylua" },
+  sh = { "shfmt" },
+  -- tex = { "latexindent" },
+  typescript = { "prettier" },
+  yaml = { "yamlfmt" },
+}
+
+M.options = {
+  formatters_by_ft = M.filetypes,
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -40,4 +44,4 @@ end, {
   desc = "Re-enable autoformat-on-save",
 })
 
-return options
+return M

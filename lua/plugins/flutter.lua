@@ -6,71 +6,26 @@ return {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
-    config = function()
-      -- Mappings
-      local map = vim.keymap.set
-      map("n", "<leader>flc", function()
-        require("telescope").extensions.flutter.commands()
-      end, { desc = "Telescope Flutter commands" })
-      map("n", "<leader>flv", function()
-        require("telescope").extensions.flutter.fvm()
-      end, { desc = "Telescope Flutter commands" })
-      map("n", "<leader>fld", "<cmd>FlutterDevices<CR>", { desc = "Flutter Select Device" })
-
-      -- Statusline
-      local function flutterStatusLine()
-        local decorations = vim.g.flutter_tools_decorations
-        if not decorations then
-          return ""
-        end
-
-        local information_table = {}
-
-        -- type: Device
-        local device = decorations.device
-        if device then
-          table.insert(information_table, device.name)
-        end
-
-        -- tpye: flutter.ProjectConfig
-        local project_config = decorations.project_config
-        if project_config and project_config.name then
-          table.insert(information_table, project_config.name)
-        end
-
-        -- type: string
-        local app_version = decorations.app_version
-        if app_version then
-          local comment_pos, _ = string.find(app_version, "#")
-          if comment_pos then
-            app_version = string.gsub(string.sub(app_version, 0, comment_pos - 1), "%s+", "")
-          end
-          table.insert(information_table, app_version)
-        end
-
-        return table.concat(information_table, " - ")
-      end
-
-      local statusline = require("chadrc").ui.statusline
-      statusline.modules.flutter = function()
-        return flutterStatusLine()
-      end
-      local function indexOf(table, value)
-        for i, v in ipairs(table) do
-          if v == value then
-            return i
-          end
-        end
-        return nil
-      end
-      local pos = indexOf(statusline.order, "diagnostics")
-      if pos then
-        table.insert(statusline.order, pos, "flutter")
-      end
-
-      -- Setup
+    keys = {
+      {
+        "<leader>flc",
+        function()
+          require("telescope").extensions.flutter.commands()
+        end,
+        desc = "Telescope Flutter commands",
+      },
+      {
+        "<leader>flv",
+        function()
+          require("telescope").extensions.flutter.fvm()
+        end,
+        desc = "Telescope Flutter commands",
+      },
+      { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
+    },
+    opts = function()
       local lspconfig = require "configs.lsp"
-      require("flutter-tools").setup {
+      return {
         ui = {
           -- the border type to use for all floating windows, the same options/formats
           -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
@@ -173,12 +128,70 @@ return {
         },
       }
     end,
+    config = function(_, opts)
+      -- Statusline
+      local function flutterStatusLine()
+        local decorations = vim.g.flutter_tools_decorations
+        if not decorations then
+          return ""
+        end
+
+        local information_table = {}
+
+        -- type: Device
+        local device = decorations.device
+        if device then
+          table.insert(information_table, device.name)
+        end
+
+        -- tpye: flutter.ProjectConfig
+        local project_config = decorations.project_config
+        if project_config and project_config.name then
+          table.insert(information_table, project_config.name)
+        end
+
+        -- type: string
+        local app_version = decorations.app_version
+        if app_version then
+          local comment_pos, _ = string.find(app_version, "#")
+          if comment_pos then
+            app_version = string.gsub(string.sub(app_version, 0, comment_pos - 1), "%s+", "")
+          end
+          table.insert(information_table, app_version)
+        end
+
+        return table.concat(information_table, " - ")
+      end
+
+      local statusline = require("chadrc").ui.statusline
+      statusline.modules.flutter = function()
+        return flutterStatusLine()
+      end
+      local function indexOf(table, value)
+        for i, v in ipairs(table) do
+          if v == value then
+            return i
+          end
+        end
+        return nil
+      end
+      local pos = indexOf(statusline.order, "diagnostics")
+      if pos then
+        table.insert(statusline.order, pos, "flutter")
+      end
+
+      -- Setup
+      require("flutter-tools").setup(opts)
+    end,
   },
   {
     "wa11breaker/flutter-bloc.nvim",
+    cmd = { "FlutterCreateBloc", "FlutterCreateCubit" },
   },
   {
     "akinsho/pubspec-assist.nvim",
+    event = "BufEnter *pubspec.yaml",
+    cmd = { "PubspecAssistAddPackage", "PubspecAssistPickVersion", "PubspecAssistAddDevPackage" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("pubspec-assist").setup()

@@ -1,6 +1,8 @@
 return {
   {
     "windwp/nvim-autopairs",
+    dependencies = { "hrsh7th/nvim-cmp" },
+    event = "InsertEnter",
     opts = {
       fast_wrap = {},
       disable_filetype = { "TelescopePrompt", "vim" },
@@ -20,6 +22,26 @@ return {
       indent = { char = "│", highlight = "IblChar" },
       scope = { char = "│", highlight = "IblScopeChar" },
     },
+    keys = {
+      {
+        "<leader>cc",
+        function()
+          local config = { scope = {} }
+          config.scope.exclude = { language = {}, node_type = {} }
+          config.scope.include = { node_type = {} }
+          local node = require("ibl.scope").get(vim.api.nvim_get_current_buf(), config)
+
+          if node then
+            local start_row, _, end_row, _ = node:range()
+            if start_row ~= end_row then
+              vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
+              vim.api.nvim_feedkeys("_", "n", true)
+            end
+          end
+        end,
+        desc = "Blankline Jump to current context",
+      },
+    },
     config = function(_, opts)
       vim.cmd "hi IblScopeChar guifg=#fdfd96"
       vim.cmd "hi IblScope guifg=#fdfd96"
@@ -32,22 +54,6 @@ return {
 
       -- dofile(vim.g.base46_cache .. "blankline")
       require("ibl").refresh()
-
-      local map = vim.keymap.set
-      map("n", "<leader>cc", function()
-        local config = { scope = {} }
-        config.scope.exclude = { language = {}, node_type = {} }
-        config.scope.include = { node_type = {} }
-        local node = require("ibl.scope").get(vim.api.nvim_get_current_buf(), config)
-
-        if node then
-          local start_row, _, end_row, _ = node:range()
-          if start_row ~= end_row then
-            vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
-            vim.api.nvim_feedkeys("_", "n", true)
-          end
-        end
-      end, { desc = "Blankline Jump to current context" })
     end,
   },
   {
@@ -60,25 +66,38 @@ return {
       { "gbc", mode = "n", desc = "comment toggle current block" },
       { "gb", mode = { "n", "o" }, desc = "comment toggle blockwise" },
       { "gb", mode = "x", desc = "comment toggle blockwise (visual)" },
-    },
-    config = function(_, opts)
-      require("Comment").setup(opts)
-
-      local map = vim.keymap.set
-      map("n", "<leader>/", function()
-        require("Comment.api").toggle.linewise.current()
-      end, { desc = "Comment Toggle" })
-      map(
-        "v",
+      {
+        "<leader>/",
+        function()
+          require("Comment.api").toggle.linewise.current()
+        end,
+        desc = "Comment Toggle",
+      },
+      {
         "<leader>/",
         "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-        { desc = "Comment Toggle" }
-      )
-    end,
+        desc = "Comment Toggle",
+        mode = "v",
+      },
+    },
+    opts = {},
   },
   {
     "windwp/nvim-ts-autotag",
-    event = { "BufReadPost", "BufNewFile" },
+    ft = {
+      "angular",
+      "angular.html",
+      "html",
+      "htmlangular",
+      "javascript",
+      "jsx",
+      "markdown",
+      "php",
+      "tsx",
+      "typescript",
+      "vue",
+      "xml",
+    },
     opts = {
       -- Defaults
       enable_close = true, -- Auto close tags
@@ -94,20 +113,15 @@ return {
   {
     "mbbill/undotree",
     cmd = { "UndotreeToggle" },
-    config = function()
-      local map = vim.keymap.set
-      map("n", "<leader>u", "<cmd> UndotreeToggle<CR>", { desc = "Undotree Toggle" })
-    end,
+    keys = {
+      { "<leader>u", "<cmd> UndotreeToggle<CR>", desc = "Undotree Toggle" },
+    },
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup {
-        -- Configuration here, or leave empty to use defaults
-      }
-    end,
+    event = "InsertEnter",
+    opts = {},
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -128,7 +142,42 @@ return {
         end,
       },
     },
-    event = "VeryLazy",
+    event = "BufReadPost",
+    keys = {
+
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        desc = "Folds Open all folds",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        desc = "Folds Close all folds",
+      },
+      {
+        "zr",
+        function()
+          require("ufo").openFoldsExceptKinds()
+        end,
+        desc = "Folds Open all folds",
+      },
+      {
+        "zp",
+        function()
+          local winid = require("ufo").peekFoldedLinesUnderCursor()
+          -- if not winid then
+          --   -- vim.lsp.buf.hover()
+          --   vim.cmd [[ Lspsaga hover_doc ]]
+          -- end
+        end,
+        desc = "Folds Peek into fold",
+      },
+    },
     opts = {
       provider_selector = function(bufnr, filetype, buftype)
         return { "treesitter", "indent" }
@@ -194,61 +243,51 @@ return {
       end
       opts["fold_virt_text_handler"] = handler
       require("ufo").setup(opts)
-
-      local map = vim.keymap.set
-      map("n", "zR", require("ufo").openAllFolds, { desc = "Folds Open all folds" })
-      map("n", "zM", require("ufo").closeAllFolds, { desc = "Folds Close all folds" })
-      map("n", "zr", require("ufo").openFoldsExceptKinds, { desc = "Folds Open all folds" })
-      map("n", "zp", function()
-        local winid = require("ufo").peekFoldedLinesUnderCursor()
-        -- if not winid then
-        --   -- vim.lsp.buf.hover()
-        --   vim.cmd [[ Lspsaga hover_doc ]]
-        -- end
-      end, { desc = "Folds Peek into fold" })
     end,
   },
   {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
-    config = function()
-      require("treesj").setup {
-        ---@type boolean Use default keymaps (<space>m - toggle, <space>j - join, <space>s - split)
-        use_default_keymaps = false,
-        ---@type boolean Node with syntax error will not be formatted
-        check_syntax_error = true,
-        ---If line after join will be longer than max value,
-        ---@type number If line after join will be longer than max value, node will not be formatted
-        max_join_length = 120,
-        ---Cursor behavior:
-        ---hold - cursor follows the node/place on which it was called
-        ---start - cursor jumps to the first symbol of the node being formatted
-        ---end - cursor jumps to the last symbol of the node being formatted
-        ---@type 'hold'|'start'|'end'
-        cursor_behavior = "hold",
-        ---@type boolean Notify about possible problems or not
-        notify = true,
-        ---@type boolean Use `dot` for repeat action
-        dot_repeat = true,
-        ---@type nil|function Callback for treesj error handler. func (err_text, level, ...other_text)
-        on_error = nil,
-        ---@type table Presets for languages
-        -- langs = {}, -- See the default presets in lua/treesj/langs
-      }
-
-      local map = vim.keymap.set
-      map("n", "<leader>m", "<cmd>TSJToggle<CR>", { desc = "TreeSJ Toggle node unser cursor" })
-    end,
+    keys = {
+      { "<leader>m", "<cmd>TSJToggle<CR>", desc = "TreeSJ Toggle node unser cursor" },
+    },
+    event = "BufReadPost",
+    opts = {
+      ---@type boolean Use default keymaps (<space>m - toggle, <space>j - join, <space>s - split)
+      use_default_keymaps = false,
+      ---@type boolean Node with syntax error will not be formatted
+      check_syntax_error = true,
+      ---If line after join will be longer than max value,
+      ---@type number If line after join will be longer than max value, node will not be formatted
+      max_join_length = 120,
+      ---Cursor behavior:
+      ---hold - cursor follows the node/place on which it was called
+      ---start - cursor jumps to the first symbol of the node being formatted
+      ---end - cursor jumps to the last symbol of the node being formatted
+      ---@type 'hold'|'start'|'end'
+      cursor_behavior = "hold",
+      ---@type boolean Notify about possible problems or not
+      notify = true,
+      ---@type boolean Use `dot` for repeat action
+      dot_repeat = true,
+      ---@type nil|function Callback for treesj error handler. func (err_text, level, ...other_text)
+      on_error = nil,
+      ---@type table Presets for languages
+      -- langs = {}, -- See the default presets in lua/treesj/langs
+    },
   },
   {
     "sunnytamang/select-undo.nvim",
-    config = function()
-      require("select-undo").setup {
-        persistent_undo = true, -- Enables persistent undo history
-        mapping = true, -- Enables default keybindings
-        line_mapping = "gu", -- Undo for entire lines
-        partial_mapping = "gcu", -- Undo for selected characters -- Note: dont use this line as gu can also handle partial undo
-      }
-    end,
+    keys = {
+      { "gu" },
+      { "gcu" },
+    },
+    cmd = { "SelectUndoLine", "SelectUndoPartial" },
+    opts = {
+      persistent_undo = true, -- Enables persistent undo history
+      mapping = true, -- Enables default keybindings
+      line_mapping = "gu", -- Undo for entire lines
+      partial_mapping = "gcu", -- Undo for selected characters -- Note: dont use this line as gu can also handle partial undo
+    },
   },
 }

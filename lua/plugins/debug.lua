@@ -1,27 +1,35 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    event = "LspAttach",
+    keys = {
+      { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
+      { "<leader>dba", "<cmd>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
+      { "<leader>dc", "<cmd>DapContinue<CR>", desc = "Debug Continue" },
+      { "<leader>dsov", "<cmd>DapStepOver<CR>", desc = "Debug Step Over" },
+      { "<leader>dsou", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
+      { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
+      { "<leader>dr", "<cmd>DapToggleRepl<CR>", desc = "Debug Toggle Repl" },
+      { "<leader>dd", "<cmd>DapDisconnect<CR>", desc = "Debug Disconnect" },
+      { "<leader>dt", "<cmd>DapTerminate<CR>", desc = "Debug Terminate" },
+      {
+        "<leader>ds",
+        function()
+          local widgets = require "dap.ui.widgets"
+          local sidebar = widgets.sidebar(widgets.scopes)
+          sidebar.open()
+        end,
+        desc = "Debug Open sidebar",
+      },
+    },
     config = function()
-      local map = vim.keymap.set
-      map("n", "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", { desc = "Debug Toggle Breakpoint" })
-      map("n", "<leader>dba", "<cmd>DapClearBreakpoints<CR>", { desc = "Debug Clear Breakpoints" })
-      map("n", "<leader>dc", "<cmd>DapContinue<CR>", { desc = "Debug Continue" })
-      map("n", "<leader>dsov", "<cmd>DapStepOver<CR>", { desc = "Debug Step Over" })
-      map("n", "<leader>dsou", "<cmd>DapStepOut<CR>", { desc = "Debug Step Out" })
-      map("n", "<leader>dsi", "<cmd>DapStepIn<CR>", { desc = "Debug Step In" })
-      map("n", "<leader>dr", "<cmd>DapToggleRepl<CR>", { desc = "Debug Toggle Repl" })
-      map("n", "<leader>dd", "<cmd>DapDisconnect<CR>", { desc = "Debug Disconnect" })
-      map("n", "<leader>dt", "<cmd>DapTerminate<CR>", { desc = "Debug Terminate" })
-      map("n", "<leader>ds", function()
-        local widgets = require "dap.ui.widgets"
-        local sidebar = widgets.sidebar(widgets.scopes)
-        sidebar.open()
-      end, { desc = "Debug Open sidebar" })
+      require("configs.dap").setup_adapters()
     end,
   },
   {
     "theHamsta/nvim-dap-virtual-text",
     dependencies = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" },
+    event = "LspAttach",
     config = function()
       require("nvim-dap-virtual-text").setup {
         enabled = true, -- enable this plugin (the default)
@@ -72,16 +80,20 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", "folke/lazydev.nvim" },
-    config = function()
-      local map = vim.keymap.set
-      map("n", "<leader>dut", function()
-        require("dapui").toggle()
-      end, { desc = "Debug Toggle UI" })
-    end,
+    keys = {
+      {
+        "<leader>dut",
+        function()
+          require("dapui").toggle()
+        end,
+        desc = "Debug Toggle UI",
+      },
+    },
   },
-  { "Bilal2453/luvit-meta", lazy = true },
+  { "Bilal2453/luvit-meta" },
   {
     "LiadOz/nvim-dap-repl-highlights",
+    event = "LspAttach",
     config = function()
       require("nvim-dap-repl-highlights").setup()
       vim.api.nvim_create_user_command("DapReplHighlightsSetup", function()

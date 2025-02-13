@@ -8,19 +8,15 @@ return {
         dependencies = {
           "neovim/nvim-lspconfig",
         },
-        lazy = false,
       },
       {
         "hrsh7th/cmp-buffer",
-        lazy = false,
       },
       {
         "hrsh7th/cmp-path",
-        lazy = false,
       },
       {
         "hrsh7th/cmp-cmdline",
-        lazy = false,
       },
       {
         "rcarriga/cmp-dap",
@@ -32,10 +28,6 @@ return {
       {
         "L3MON4D3/LuaSnip",
       },
-      {
-        "windwp/nvim-autopairs",
-      },
-
       -- cmp sources plugins
       {
         "neovim/nvim-lspconfig",
