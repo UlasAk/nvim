@@ -46,7 +46,7 @@ signature_help.setup = function(client, bufnr)
   })
 end
 
-local function apply(curr, win)
+local function apply_rename(curr, win)
   local newName = vim.trim(vim.fn.getline ".")
   vim.api.nvim_win_close(win, true)
 
@@ -89,46 +89,13 @@ local function rename()
   map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
 
   map({ "i", "n" }, "<CR>", function()
-    apply(currName, win)
+    apply_rename(currName, win)
     vim.cmd.stopinsert()
   end, { buffer = 0 })
 end
 
 -- basic lsp config
 M.on_attach = function(client, bufnr)
-  local function opts(desc)
-    return { buffer = bufnr, desc = desc }
-  end
-
-  map("n", "<leader>lgD", vim.lsp.buf.declaration, opts "Lsp Go to declaration")
-  map("n", "<leader>lgd", function()
-    require("telescope.builtin").lsp_definitions()
-  end, opts "Lsp Go to definition")
-  map("n", "<leader>lh", vim.lsp.buf.hover, opts "Lsp hover information")
-  map("n", "<leader>lgi", function()
-    require("telescope.builtin").lsp_implementations()
-  end, opts "Lsp Go to implementation")
-  map("n", "<leader>lsh", vim.lsp.buf.signature_help, opts "Lsp Show signature help")
-  map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts "Lsp Add workspace folder")
-  map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts "Lsp Remove workspace folder")
-
-  map("n", "<leader>lw", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, opts "Lsp List workspace folders")
-
-  map("n", "<leader>lD", function()
-    require("telescope.builtin").lsp_type_definitions()
-  end, opts "Lsp Go to type definition")
-
-  map("n", "<leader>lr", function()
-    rename()
-  end, opts "Lsp Rename")
-
-  map({ "n", "v", "x" }, "<leader>lca", require("actions-preview").code_actions, opts "Lsp Code action")
-  map("n", "<leader>lsr", function()
-    require("telescope.builtin").lsp_references()
-  end, opts "Lsp Show references")
-
   -- setup signature popup
   if conf.signature and client.server_capabilities.signatureHelpProvider then
     signature_help.setup(client, bufnr)
@@ -165,6 +132,41 @@ M.on_init = function(client, _)
   if client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
+end
+
+M.setup_keymaps = function()
+  local function opts(desc)
+    return { desc = desc }
+  end
+
+  map("n", "<leader>lgD", vim.lsp.buf.declaration, opts "Lsp Go to declaration")
+  map("n", "<leader>lgd", function()
+    require("telescope.builtin").lsp_definitions()
+  end, opts "Lsp Go to definition")
+  map("n", "<leader>lh", vim.lsp.buf.hover, opts "Lsp hover information")
+  map("n", "<leader>lgi", function()
+    require("telescope.builtin").lsp_implementations()
+  end, opts "Lsp Go to implementation")
+  map("n", "<leader>lsh", vim.lsp.buf.signature_help, opts "Lsp Show signature help")
+  map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts "Lsp Add workspace folder")
+  map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts "Lsp Remove workspace folder")
+
+  map("n", "<leader>lw", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts "Lsp List workspace folders")
+
+  map("n", "<leader>lD", function()
+    require("telescope.builtin").lsp_type_definitions()
+  end, opts "Lsp Go to type definition")
+
+  map("n", "<leader>lr", function()
+    rename()
+  end, opts "Lsp Rename")
+
+  map({ "n", "v", "x" }, "<leader>lca", require("actions-preview").code_actions, opts "Lsp Code action")
+  map("n", "<leader>lsr", function()
+    require("telescope.builtin").lsp_references()
+  end, opts "Lsp Show references")
 end
 
 M.defaults = function()

@@ -120,6 +120,12 @@ if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
   options.window.completion.border = border "CmpBorder"
 end
 
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+  sources = {
+    { name = "dap" },
+  },
+})
+
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),

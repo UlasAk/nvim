@@ -8,6 +8,7 @@ return {
     config = function()
       local lspconfig = require "configs.lsp"
       lspconfig.defaults()
+      lspconfig.setup_keymaps()
     end,
   },
   {
@@ -37,6 +38,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "LiadOz/nvim-dap-repl-highlights" },
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
@@ -265,7 +267,6 @@ return {
     config = function(_, opts)
       require("goto-preview").setup(opts)
 
-      local map = vim.keymap.set
       map("n", "<leader>lgpd", function()
         require("goto-preview").goto_preview_definition()
       end, { desc = "Goto-Preview Go to definition (via popup)" })

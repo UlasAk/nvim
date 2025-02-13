@@ -9,6 +9,7 @@ local options = {
     "bash",
     "css",
     "dart",
+    "dap_repl",
     "dockerfile",
     "javascript",
     "html",

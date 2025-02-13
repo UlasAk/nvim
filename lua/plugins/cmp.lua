@@ -1,27 +1,30 @@
 return {
   {
-    "hrsh7th/cmp-nvim-lsp",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    },
-    lazy = false,
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    lazy = false,
-  },
-  {
-    "hrsh7th/cmp-path",
-    lazy = false,
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-    lazy = false,
-  },
-  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
+      {
+        "hrsh7th/cmp-nvim-lsp",
+        dependencies = {
+          "neovim/nvim-lspconfig",
+        },
+        lazy = false,
+      },
+      {
+        "hrsh7th/cmp-buffer",
+        lazy = false,
+      },
+      {
+        "hrsh7th/cmp-path",
+        lazy = false,
+      },
+      {
+        "hrsh7th/cmp-cmdline",
+        lazy = false,
+      },
+      {
+        "rcarriga/cmp-dap",
+      },
       {
         "folke/lazydev.nvim",
       },
