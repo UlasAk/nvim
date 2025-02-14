@@ -38,9 +38,18 @@ return {
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
-    config = function()
+    keys = {
+      {
+        "<leader>rcu",
+        function()
+          require("crates").upgrade_all_crates()
+        end,
+        desc = "Update Crates",
+      },
+    },
+    opts = function()
       local on_attach = require("configs.lsp").on_attach
-      require("crates").setup {
+      return {
         lsp = {
           enabled = true,
           on_attach = on_attach,
@@ -58,12 +67,6 @@ return {
           },
         },
       }
-
-      local map = vim.keymap.set
-      map("n", "<leader>rcu", function()
-        require("crates").upgrade_all_crates()
-      end, { desc = "Update Crates" })
-      -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
     end,
   },
 }

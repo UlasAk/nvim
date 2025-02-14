@@ -3,7 +3,7 @@ local map = vim.keymap.set
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "User FilePost",
+    event = "BufReadPost",
     config = function()
       local lspconfig = require "configs.lsp"
       lspconfig.defaults()

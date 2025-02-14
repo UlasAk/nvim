@@ -28,7 +28,10 @@ return {
   {
     "rmagatti/auto-session",
     lazy = false,
-
+    keys = {
+      { "<leader>fse", "<cmd>SessionSearch<CR>", desc = "Telescope Sessions" },
+      { "<leader>sd", "<cmd>SessionDelete<CR>", desc = "Session Delete current session" },
+    },
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
@@ -42,10 +45,5 @@ return {
       },
       -- log_level = 'debug',
     },
-    config = function(_, opts)
-      require("auto-session").setup(opts)
-      vim.keymap.set("n", "<leader>fse", "<cmd>SessionSearch<CR>", { desc = "Telescope Sessions" })
-      vim.keymap.set("n", "<leader>sd", "<cmd>SessionDelete<CR>", { desc = "Session Delete current session" })
-    end,
   },
 }
