@@ -68,27 +68,6 @@ return {
       --   end,
       --   desc = "Buffer Close",
       -- },
-      {
-        "<leader>th",
-        function()
-          require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-        end,
-        desc = "Terminal Toggle horizontal term",
-      },
-      {
-        "<leader>tv",
-        function()
-          require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
-        end,
-        desc = "Terminal Toggle vertical term",
-      },
-      {
-        "<leader>tf",
-        function()
-          require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-        end,
-        desc = "Terminal Toggle floating term",
-      },
       -- Code runner
       {
         "<leader>rr",
@@ -149,6 +128,29 @@ return {
   },
   {
     "NvChad/nvterm",
+    keys = {
+      {
+        "<leader>th",
+        function()
+          require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
+        end,
+        desc = "Terminal Toggle horizontal term",
+      },
+      {
+        "<leader>tv",
+        function()
+          require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
+        end,
+        desc = "Terminal Toggle vertical term",
+      },
+      {
+        "<leader>tf",
+        function()
+          require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+        end,
+        desc = "Terminal Toggle floating term",
+      },
+    },
     opts = {
       terminals = {
         type_opts = {
