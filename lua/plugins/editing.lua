@@ -119,7 +119,7 @@ return {
   },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "InsertEnter",
     opts = {},
   },
@@ -249,7 +249,7 @@ return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
     keys = {
-      { "<leader>m", "<cmd>TSJToggle<CR>", desc = "TreeSJ Toggle node unser cursor" },
+      { "<leader>tn", "<cmd>TSJToggle<CR>", desc = "TreeSJ Toggle node unser cursor" },
     },
     event = "BufReadPost",
     opts = {

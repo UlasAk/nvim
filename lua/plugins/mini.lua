@@ -141,7 +141,7 @@ return {
     version = false,
     keys = {
       {
-        "m",
+        "<leader>m",
         function()
           require("mini.files").open()
         end,
