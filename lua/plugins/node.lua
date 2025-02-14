@@ -57,10 +57,8 @@ return {
       "rcarriga/nvim-notify",
     },
     cond = function()
-      local cwd = vim.fn.getcwd() -- Holt das aktuelle Arbeitsverzeichnis
-      local package_json_path = cwd .. "/package.json" -- Pfad zur package.json
-
-      -- Überprüfen, ob die Datei existiert
+      local cwd = vim.fn.getcwd()
+      local package_json_path = cwd .. "/package.json"
       if vim.fn.filereadable(package_json_path) == 1 then
         return true
       else
