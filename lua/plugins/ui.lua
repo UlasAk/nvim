@@ -1,40 +1,46 @@
 return {
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
       {
         "rcarriga/nvim-notify",
-        opts = function()
-          return {
-            fps = 60,
-            background_colour = "#FDFD9A",
-          }
-        end,
-        config = function(_, opts)
-          require("notify").setup(opts)
-        end,
+        opts = {
+          fps = 60,
+          background_colour = "#FDFD9A",
+        },
       },
     },
-    config = function()
-      require("noice").setup(require "configs.noice")
-      -- Change Noice Mini Background Color (where LSP Progress is shown)
-      vim.cmd "hi NoiceMini guifg=#282737 guibg=#1E1E2E"
-
-      local map = vim.keymap.set
-      map("n", "<leader>fmsg", "<cmd>Noice telescope<CR>", { desc = "Telescope Messages" })
-      -- map("n", "<leader>dm", "<cmd>Noice dismiss<CR>", { desc = "Noice Dismiss messages" })
-    end,
+    event = "VeryLazy",
+    keys = {
+      { "<leader>fmsg", "<cmd>Noice telescope<CR>", desc = "Telescope Messages" },
+      -- { "<leader>dm", "<cmd>Noice dismiss<CR>", desc = "Noice Dismiss messages" },
+    },
+    opts = require "configs.noice",
   },
   {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    opts = function()
-      return require "configs.snacks"
-    end,
+    keys = {
+
+      {
+        "<leader>dn",
+        function()
+          Snacks.notifier.hide()
+        end,
+        desc = "Notifications Dismiss notifications",
+      },
+      {
+        "<leader>fn",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notifications Show history",
+      },
+    },
+    opts = require "configs.snacks",
     init = function()
       -- Setup colors
       vim.cmd [[
@@ -91,14 +97,6 @@ return {
           })
         end,
       })
-
-      local map = vim.keymap.set
-      map("n", "<leader>dn", function()
-        Snacks.notifier.hide()
-      end, { desc = "Notifications Dismiss notifications" })
-      map("n", "<leader>fn", function()
-        Snacks.notifier.show_history()
-      end, { desc = "Notifications Show history" })
     end,
   },
   -- {
@@ -137,8 +135,63 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
+    lazy = false,
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
+    keys = {
+      {
+        "<leader>ba",
+        function()
+          require("bufferline").close_others()
+        end,
+        desc = "Buffer Close all except for current",
+      },
+      {
+        "<leader>bcl",
+        function()
+          require("bufferline").close_in_direction "left"
+        end,
+        desc = "Buffer Close buffers to the left",
+      },
+      {
+        "<leader>bcr",
+        function()
+          require("bufferline").close_in_direction "right"
+        end,
+        desc = "Buffer Close buffers to the right",
+      },
+      {
+        "<leader>bl",
+        function()
+          require("bufferline").move(-1)
+        end,
+        desc = "Buffer Move buffer to left",
+      },
+      {
+        "<leader>br",
+        function()
+          require("bufferline").move(1)
+        end,
+        desc = "Buffer Move buffer to right",
+      },
+      -- {"<tab>", function()
+      --   require("bufferline").cycle(1)
+      -- end, desc = "Buffer Goto next" },
+      -- {"<S-tab>", function()
+      --   require("bufferline").cycle(-1)
+      -- end, desc = "Buffer Goto prev" },
+      { "<tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Goto next", noremap = true },
+      { "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Goto prev" },
+      { "<leader>bp", "<cmd>BufferLinePick<CR>", desc = "Buffer Pick" },
+      {
+        "<leader>x",
+        function()
+          require("utils").close_buffer()
+          require("bufferline.ui").refresh()
+        end,
+        desc = "Buffer Close",
+      },
+    },
     opts = function()
       return require "configs.bufferline"
     end,
@@ -151,145 +204,133 @@ return {
         require("transparent").clear_prefix "BufferLine"
       end
       opts.setup_custom_colors()
-
-      local map = vim.keymap.set
-      map("n", "<leader>ba", function()
-        require("bufferline").close_others()
-      end, { desc = "Buffer Close all except for current" })
-      map("n", "<leader>bcl", function()
-        require("bufferline").close_in_direction "left"
-      end, { desc = "Buffer Close buffers to the left" })
-      map("n", "<leader>bcr", function()
-        require("bufferline").close_in_direction "right"
-      end, { desc = "Buffer Close buffers to the right" })
-      map("n", "<leader>bl", function()
-        require("bufferline").move(-1)
-      end, { desc = "Buffer Move buffer to left" })
-      map("n", "<leader>br", function()
-        require("bufferline").move(1)
-      end, { desc = "Buffer Move buffer to right" })
-      -- map("n", "<tab>", function()
-      --   require("bufferline").cycle(1)
-      -- end, { desc = "Buffer Goto next" })
-      -- map("n", "<S-tab>", function()
-      --   require("bufferline").cycle(-1)
-      -- end, { desc = "Buffer Goto prev" })
-      map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Buffer Goto next", noremap = true })
-      map("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Buffer Goto prev" })
-      map("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Buffer Pick" })
-      map("n", "<leader>x", function()
-        require("utils").close_buffer()
-        require("bufferline.ui").refresh()
-      end, { desc = "Buffer Close" })
     end,
   },
   {
     "petertriho/nvim-scrollbar",
-    config = function()
-      require("scrollbar").setup()
-    end,
+    opts = {},
   },
   {
     "tamton-aquib/duck.nvim",
-    config = function()
-      vim.keymap.set("n", "<leader>dun", function()
-        require("duck").hatch()
-      end, { desc = "Duck Hatch duck" })
-      vim.keymap.set("n", "<leader>duk", function()
-        require("duck").cook()
-      end, { desc = "Duck Kill duck" })
-      vim.keymap.set("n", "<leader>dua", function()
-        require("duck").cook_all()
-      end, { desc = "Duck Kill all ducks" })
-    end,
+    keys = {
+      {
+        "<leader>dun",
+        function()
+          require("duck").hatch()
+        end,
+        desc = "Duck Hatch duck",
+      },
+      {
+        "<leader>duk",
+        function()
+          require("duck").cook()
+        end,
+        desc = "Duck Kill duck",
+      },
+      {
+        "<leader>dua",
+        function()
+          require("duck").cook_all()
+        end,
+        desc = "Duck Kill all ducks",
+      },
+    },
   },
   {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("hlchunk").setup {
-        chunk = {
-          enable = true,
-          style = "#fdfd96",
-        },
-        indent = {
-          enable = false,
-        },
-        line_num = {
-          enable = true,
-          style = "#fdfd96",
-        },
-        blank = {
-          enable = false,
-        },
-      }
-      vim.cmd "DisableHLChunk"
-      vim.cmd "DisableHLLineNum"
-
-      local map = vim.keymap.set
-      map("n", "<leader>its", function()
-        vim.cmd "IBLToggleScope"
-      end, { desc = "Indent Toggle Line Number" })
-      local indent_chunk_enabled = false
-      map("n", "<leader>itc", function()
-        if indent_chunk_enabled then
-          vim.cmd "DisableHLChunk"
-        else
-          vim.cmd "EnableHLChunk"
-        end
-        indent_chunk_enabled = not indent_chunk_enabled
-      end, { desc = "Indent Toggle Chunks" })
-      local indent_line_num_enabled = false
-      map("n", "<leader>itl", function()
-        if indent_line_num_enabled then
-          vim.cmd "DisableHLChunk"
-          vim.cmd "DisableHLLineNum"
-        else
-          vim.cmd "EnableHLChunk"
-          vim.cmd "EnableHLLineNum"
-        end
-        indent_line_num_enabled = not indent_line_num_enabled
-      end, { desc = "Indent Toggle Line Number" })
-    end,
-  },
-  {
-    "tzachar/highlight-undo.nvim",
-    keys = { { "u" }, { "<C-r>" } },
-    opts = {
-      duration = 1000,
-      keymaps = {
-        paste = {
-          disabled = true,
-        },
-        Paste = {
-          disabled = true,
-        },
-      },
-    },
-    config = function(_, opts)
-      require("highlight-undo").setup(opts)
-    end,
-  },
-  {
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
     keys = {
-      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
-    },
-    opts = {
-      plugins = {
-        gitsigns = { enabled = false },
-        twilight = { enabled = false },
+      {
+        "<leader>its",
+        function()
+          vim.cmd "IBLToggleScope"
+        end,
+        { desc = "Indent Toggle Line Number" },
+        { "<leader>itc", desc = "Indent Toggle Chunks" },
+        { "<leader>itl", desc = "Indent Toggle Line Number" },
       },
-      on_open = function()
-        require("gitsigns").detach()
-      end,
-      on_close = function()
-        require("gitsigns").attach()
+      config = function()
+        require("hlchunk").setup {
+          chunk = {
+            enable = true,
+            style = "#fdfd96",
+          },
+          indent = {
+            enable = false,
+          },
+          line_num = {
+            enable = true,
+            style = "#fdfd96",
+          },
+          blank = {
+            enable = false,
+          },
+        }
+        vim.cmd "DisableHLChunk"
+        vim.cmd "DisableHLLineNum"
+
+        local map = vim.keymap.set
+        local indent_chunk_enabled = false
+        map("n", "<leader>itc", function()
+          if indent_chunk_enabled then
+            vim.cmd "DisableHLChunk"
+          else
+            vim.cmd "EnableHLChunk"
+          end
+          indent_chunk_enabled = not indent_chunk_enabled
+        end, { desc = "Indent Toggle Chunks" })
+        local indent_line_num_enabled = false
+        map("n", "<leader>itl", function()
+          if indent_line_num_enabled then
+            vim.cmd "DisableHLChunk"
+            vim.cmd "DisableHLLineNum"
+          else
+            vim.cmd "EnableHLChunk"
+            vim.cmd "EnableHLLineNum"
+          end
+          indent_line_num_enabled = not indent_line_num_enabled
+        end, { desc = "Indent Toggle Line Number" })
       end,
     },
-  },
-  {
-    "folke/twilight.nvim",
+    {
+      "tzachar/highlight-undo.nvim",
+      keys = { { "u" }, { "<C-r>" } },
+      opts = {
+        duration = 1000,
+        keymaps = {
+          paste = {
+            disabled = true,
+          },
+          Paste = {
+            disabled = true,
+          },
+        },
+      },
+      config = function(_, opts)
+        require("highlight-undo").setup(opts)
+      end,
+    },
+    {
+      "folke/zen-mode.nvim",
+      cmd = { "ZenMode" },
+      keys = {
+        { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
+      },
+      opts = {
+        plugins = {
+          gitsigns = { enabled = false },
+          twilight = { enabled = false },
+        },
+        on_open = function()
+          require("gitsigns").detach()
+        end,
+        on_close = function()
+          require("gitsigns").attach()
+        end,
+      },
+    },
+    {
+      "folke/twilight.nvim",
+    },
   },
 }
