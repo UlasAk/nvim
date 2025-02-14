@@ -169,7 +169,6 @@ M.setup_keymaps = function()
     rename()
   end, opts "Lsp Rename")
 
-  map({ "n", "v", "x" }, "<leader>lca", require("actions-preview").code_actions, opts "Lsp Code action")
   map("n", "<leader>lsr", function()
     require("telescope.builtin").lsp_references()
   end, opts "Lsp Show references")

@@ -109,6 +109,16 @@ return {
   },
   {
     "aznhe21/actions-preview.nvim",
+    keys = {
+      {
+        "<leader>lca",
+        function()
+          require("actions-preview").code_actions()
+        end,
+        mode = { "n", "v", "x" },
+        desc = "Lsp Code action",
+      },
+    },
     opts = require "configs.actions-preview",
   },
   {
