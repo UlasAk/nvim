@@ -73,7 +73,7 @@ local options = {
     },
   },
 
-  extensions_list = { "git_file_history", "themes", "terms", "ui-select" },
+  extensions_list = { "themes", "terms" },
   extensions = {
     fzf = {
       fuzzy = true,
