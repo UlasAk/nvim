@@ -6,7 +6,6 @@ return {
       require("base46").load_all_highlights()
     end,
   },
-
   {
     "nvchad/ui",
     lazy = false,
@@ -115,7 +114,7 @@ return {
     "NvChad/nvim-colorizer.lua",
     event = "User FilePost",
     opts = {
-      filetypes = { "*" },
+      filetypes = { "*", "!dart" },
       user_default_options = {
         RGB = true, -- #RGB hex codes
         RRGGBB = true, -- #RRGGBB hex codes
