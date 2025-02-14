@@ -1,7 +1,17 @@
 return {
   {
     "vuki656/package-info.nvim",
-    dependencies = "MunifTanjim/nui.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
+    event = "BufEnter *package.json",
+    keys = {
+      {
+        "<leader>pi",
+        "<cmd>Telescope package_info<CR>",
+        desc = "Telescope NPM Package Info",
+        silent = true,
+        noremap = true,
+      },
+    },
     opts = {
       colors = {
         up_to_date = "#3C4048", -- Text color for up to date dependency virtual text
@@ -31,12 +41,6 @@ return {
       vim.cmd "hi PackageInfoUpToDateVersion guifg=#abe9b3"
       vim.cmd "hi PackageInfoOutdatedVersion guifg=#d19a66"
       vim.cmd "hi PackageInfoInvalidVersion guifg=#ee4b2b"
-      vim.keymap.set(
-        "n",
-        "<leader>pi",
-        "<cmd>Telescope package_info<CR>",
-        { desc = "Telescope NPM Package Info", silent = true, noremap = true }
-      )
     end,
   },
   -- {
@@ -47,11 +51,22 @@ return {
   -- },
   {
     "sajjathossain/nvim-npm",
-    config = true,
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "akinsho/toggleterm.nvim",
       "rcarriga/nvim-notify",
     },
+    cond = function()
+      local cwd = vim.fn.getcwd() -- Holt das aktuelle Arbeitsverzeichnis
+      local package_json_path = cwd .. "/package.json" -- Pfad zur package.json
+
+      -- Überprüfen, ob die Datei existiert
+      if vim.fn.filereadable(package_json_path) == 1 then
+        return true
+      else
+        return false
+      end
+    end,
+    opts = {},
   },
 }
