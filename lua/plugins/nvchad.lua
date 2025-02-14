@@ -128,6 +128,7 @@ return {
   },
   {
     "NvChad/nvterm",
+    dependencies = { "nvchad/ui" },
     keys = {
       {
         "<leader>th",
