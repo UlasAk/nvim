@@ -89,6 +89,7 @@ return {
         desc = "Debug Toggle UI",
       },
     },
+    opts = {},
   },
   { "Bilal2453/luvit-meta" },
   {
