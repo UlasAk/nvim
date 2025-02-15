@@ -6,6 +6,8 @@ return {
       "nvim-neotest/nvim-nio",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+      -- Language specifics
+      "sidlatau/neotest-dart",
       "nvim-neotest/neotest-jest",
       "weilbith/neotest-gradle",
     },
