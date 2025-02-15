@@ -22,7 +22,10 @@ M.init_colors = function()
 ]]
     -- Line number color
     vim.cmd [[
-  hi LineNr guifg=#666484
+  hi LineNr guifg=#8886a6
+]]
+    vim.cmd [[
+  hi CursorLineNr guifg=#fdfd96
 ]]
   end)
 end
