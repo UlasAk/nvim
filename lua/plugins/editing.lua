@@ -290,4 +290,9 @@ return {
       partial_mapping = "gcu", -- Undo for selected characters -- Note: dont use this line as gu can also handle partial undo
     },
   },
+  {
+    "monaqa/dial.nvim",
+    keys = {},
+    opts = {},
+  },
 }
