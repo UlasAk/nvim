@@ -71,6 +71,7 @@ return {
   },
   {
     "folke/lazydev.nvim",
+    dependencies = { "Bilal2453/luvit-meta" },
     ft = "lua", -- only load on lua files
     opts = {
       library = {
@@ -93,7 +94,7 @@ return {
     },
     opts = {},
   },
-  { "Bilal2453/luvit-meta" },
+  { "Bilal2453/luvit-meta", ft = "lua" },
   {
     "LiadOz/nvim-dap-repl-highlights",
     event = "LspAttach",

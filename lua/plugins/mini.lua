@@ -2,7 +2,7 @@ return {
   {
     "echasnovski/mini.cursorword",
     version = false,
-    event = "BufReadPost",
+    event = "BufEnter",
     opts = { delay = 100 },
   },
   {
@@ -152,6 +152,7 @@ return {
   {
     "echasnovski/mini.ai",
     version = false,
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       -- Table with textobject id as fields, textobject specification as values.
       -- Also use this to disable builtin textobjects. See |MiniAi.config|.

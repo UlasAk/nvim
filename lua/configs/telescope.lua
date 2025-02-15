@@ -1,5 +1,3 @@
-local trouble = require "trouble.sources.telescope"
-
 local options = {
   pickers = {
     live_grep = {
@@ -57,7 +55,6 @@ local options = {
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     mappings = {
       i = {
-        ["<c-t>"] = trouble.open,
         ["<C-Down>"] = require("telescope.actions").preview_scrolling_down,
         ["<C-Up>"] = require("telescope.actions").preview_scrolling_up,
         ["<C-Left>"] = require("telescope.actions").preview_scrolling_left,
@@ -65,7 +62,6 @@ local options = {
       },
       n = {
         ["q"] = require("telescope.actions").close,
-        ["<c-t>"] = trouble.open,
         ["<C-Down>"] = require("telescope.actions").preview_scrolling_down,
         ["<C-Up>"] = require("telescope.actions").preview_scrolling_up,
         ["<C-Left>"] = require("telescope.actions").preview_scrolling_left,

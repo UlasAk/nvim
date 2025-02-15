@@ -241,99 +241,108 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    keys = function()
+      local indent_chunk_enabled = false
+      local indent_line_num_enabled = false
+      return {
+        {
+          "<leader>its",
+          function()
+            vim.cmd "IBLToggleScope"
+          end,
+          { desc = "Indent Toggle Line Number" },
+          { "<leader>itc", desc = "Indent Toggle Chunks" },
+          { "<leader>itl", desc = "Indent Toggle Line Number" },
+        },
+        {
+          "<leader>itl",
+          function()
+            if indent_line_num_enabled then
+              vim.cmd "DisableHLChunk"
+              vim.cmd "DisableHLLineNum"
+            else
+              vim.cmd "EnableHLChunk"
+              vim.cmd "EnableHLLineNum"
+            end
+            indent_line_num_enabled = not indent_line_num_enabled
+          end,
+          desc = "Indent Toggle Line Number",
+        },
+        {
+          "<leader>itc",
+          function()
+            if indent_chunk_enabled then
+              vim.cmd "DisableHLChunk"
+            else
+              vim.cmd "EnableHLChunk"
+            end
+            indent_chunk_enabled = not indent_chunk_enabled
+          end,
+          desc = "Indent Toggle Chunks",
+        },
+      }
+    end,
+    opts = {
+      chunk = {
+        enable = true,
+        style = "#fdfd96",
+      },
+      indent = {
+        enable = false,
+      },
+      line_num = {
+        enable = true,
+        style = "#fdfd96",
+      },
+      blank = {
+        enable = false,
+      },
+    },
+    config = function(_, opts)
+      require("hlchunk").setup(opts)
+      vim.cmd "DisableHLChunk"
+      vim.cmd "DisableHLLineNum"
+    end,
+  },
+  {
+    "tzachar/highlight-undo.nvim",
+    keys = { { "u" }, { "<C-r>" } },
+    opts = {
+      duration = 1000,
+      keymaps = {
+        paste = {
+          disabled = true,
+        },
+        Paste = {
+          disabled = true,
+        },
+      },
+    },
+    config = function(_, opts)
+      require("highlight-undo").setup(opts)
+    end,
+  },
+  {
+    "folke/zen-mode.nvim",
+    cmd = { "ZenMode" },
     keys = {
-      {
-        "<leader>its",
-        function()
-          vim.cmd "IBLToggleScope"
-        end,
-        { desc = "Indent Toggle Line Number" },
-        { "<leader>itc", desc = "Indent Toggle Chunks" },
-        { "<leader>itl", desc = "Indent Toggle Line Number" },
+      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
+    },
+    opts = {
+      plugins = {
+        gitsigns = { enabled = false },
+        twilight = { enabled = false },
       },
-      config = function()
-        require("hlchunk").setup {
-          chunk = {
-            enable = true,
-            style = "#fdfd96",
-          },
-          indent = {
-            enable = false,
-          },
-          line_num = {
-            enable = true,
-            style = "#fdfd96",
-          },
-          blank = {
-            enable = false,
-          },
-        }
-        vim.cmd "DisableHLChunk"
-        vim.cmd "DisableHLLineNum"
-
-        local map = vim.keymap.set
-        local indent_chunk_enabled = false
-        map("n", "<leader>itc", function()
-          if indent_chunk_enabled then
-            vim.cmd "DisableHLChunk"
-          else
-            vim.cmd "EnableHLChunk"
-          end
-          indent_chunk_enabled = not indent_chunk_enabled
-        end, { desc = "Indent Toggle Chunks" })
-        local indent_line_num_enabled = false
-        map("n", "<leader>itl", function()
-          if indent_line_num_enabled then
-            vim.cmd "DisableHLChunk"
-            vim.cmd "DisableHLLineNum"
-          else
-            vim.cmd "EnableHLChunk"
-            vim.cmd "EnableHLLineNum"
-          end
-          indent_line_num_enabled = not indent_line_num_enabled
-        end, { desc = "Indent Toggle Line Number" })
+      on_open = function()
+        require("gitsigns").detach()
+      end,
+      on_close = function()
+        require("gitsigns").attach()
       end,
     },
-    {
-      "tzachar/highlight-undo.nvim",
-      keys = { { "u" }, { "<C-r>" } },
-      opts = {
-        duration = 1000,
-        keymaps = {
-          paste = {
-            disabled = true,
-          },
-          Paste = {
-            disabled = true,
-          },
-        },
-      },
-      config = function(_, opts)
-        require("highlight-undo").setup(opts)
-      end,
-    },
-    {
-      "folke/zen-mode.nvim",
-      cmd = { "ZenMode" },
-      keys = {
-        { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
-      },
-      opts = {
-        plugins = {
-          gitsigns = { enabled = false },
-          twilight = { enabled = false },
-        },
-        on_open = function()
-          require("gitsigns").detach()
-        end,
-        on_close = function()
-          require("gitsigns").attach()
-        end,
-      },
-    },
-    {
-      "folke/twilight.nvim",
-      cmd = "Twilight",
-    },
+  },
+  {
+    "folke/twilight.nvim",
+    cmd = "Twilight",
   },
 }

@@ -9,7 +9,9 @@ return {
   {
     "mrcjkb/rustaceanvim",
     -- version = "^5",
-    lazy = false,
+    -- lazy = false,
+    event = "BufEnter *Cargo.toml",
+    ft = "rust",
     config = function()
       local lspconfig = require "configs.lsp"
       vim.g.rustaceanvim = {

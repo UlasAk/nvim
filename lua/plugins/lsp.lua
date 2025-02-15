@@ -18,6 +18,7 @@ return {
       for key, _ in pairs(filetype_map) do
         table.insert(filetypes, key)
       end
+      print(#filetypes)
       return filetypes
     end,
     keys = {
@@ -220,20 +221,23 @@ return {
 
       -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.ensure_installed_mason_names and opts.ensure_installed_mason_names > 0 then
-          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed_mason_names, " "))
+        if opts.options.ensure_installed_mason_names and opts.options.ensure_installed_mason_names > 0 then
+          vim.cmd("MasonInstall " .. table.concat(opts.options.ensure_installed_mason_names, " "))
         end
       end, {})
 
-      vim.g.mason_binaries_list = opts.ensure_installed
+      vim.g.mason_binaries_list = opts.options.ensure_installed
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    ft = function()
+      return require("configs.mason").get_filetypes()
+    end,
     opts = function()
       local mason_opts = require "configs.mason"
       return {
-        ensure_installed = mason_opts.ensure_installed,
+        ensure_installed = mason_opts.options.ensure_installed,
         automatic_installation = true,
       }
     end,

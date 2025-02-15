@@ -1,4 +1,54 @@
-local options = {
+local M = {}
+
+local filetype_map = {
+  angularls = "htmlangular",
+  bashls = "sh",
+  cssls = "css",
+  docker_compose_language_service = "yaml.docker-compose",
+  dockerls = "docker",
+  emmet_language_server = {
+    "htmlangular",
+    "htcss",
+    "eruby",
+    "html",
+    "htmldjango",
+    "javascriptreact",
+    "less",
+    "pug",
+    "sass",
+    "scss",
+    "typescriptreactml",
+  },
+  jsonls = "json",
+  rust_analyzer = "rust",
+  terraformls = "tf",
+  ts_ls = "typescript",
+  yamlls = "yaml",
+}
+
+M.get_language_server_names = function()
+  local names = {}
+  for k, _ in pairs(filetype_map) do
+    table.insert(names, k)
+  end
+  return names
+end
+
+M.get_filetypes = function()
+  local filetypes = {}
+  for _, entry in pairs(filetype_map) do
+    if type(entry) == "table" then
+      for _, filetype in pairs(entry) do
+        table.insert(filetypes, filetype)
+      end
+    else
+      table.insert(filetypes, entry)
+    end
+  end
+  return filetypes
+end
+
+M.options = {
   ensure_installed_mason_names = {
     "angular-language-server",
     "bash-language-server",
@@ -21,20 +71,7 @@ local options = {
     "yaml-language-server",
     "yamlfmt",
   },
-  ensure_installed = {
-    "angularls",
-    "bashls",
-    "cssls",
-    "docker_compose_language_service",
-    "dockerls",
-    "emmet_language_server",
-    "jsonls",
-    "lua_ls",
-    "rust_analyzer",
-    "terraformls",
-    "ts_ls",
-    "yamlls",
-  },
+  ensure_installed = M.get_language_server_names(),
 
   PATH = "skip",
 
@@ -64,4 +101,4 @@ local options = {
   },
 }
 
-return options
+return M
