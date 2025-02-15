@@ -11,6 +11,8 @@ return {
       "nvim-neotest/neotest-jest",
       "weilbith/neotest-gradle",
     },
+    cmd = "Neotest summary",
+    event = { "BufEnter *spec*", "BufEnter *test*" },
     config = function()
       local opts = require "configs.neotest"
       require("neotest").setup(opts)
