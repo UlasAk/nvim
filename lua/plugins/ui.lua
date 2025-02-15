@@ -51,6 +51,9 @@ return {
       vim.cmd [[
         hi SnacksDashboardFooter guifg=#fdfd96
       ]]
+      vim.cmd [[
+        hi SnacksDashboardDir guifg=#8886a6
+      ]]
 
       -- Setup LSP Progress autocmd
       ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
@@ -330,6 +333,7 @@ return {
     },
     {
       "folke/twilight.nvim",
+      cmd = "Twilight",
     },
   },
 }
