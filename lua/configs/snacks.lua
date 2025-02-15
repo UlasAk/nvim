@@ -54,6 +54,14 @@ M.notifier = {
     debug = " ",
     trace = " ",
   },
+  filter = function(notification)
+    local msg = notification.msg
+    -- Hide Dart file close error notifications
+    if string.match(msg, "LspDetach") ~= nil then
+      return false
+    end
+    return true
+  end,
   keep = function(notif)
     if string.match(notif.msg, "Fetching latest versions") ~= nil then
       return false
