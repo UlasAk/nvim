@@ -24,7 +24,6 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-
       {
         "<leader>dn",
         function()
