@@ -24,7 +24,7 @@ return {
     },
     keys = {
       {
-        "<leader>cc",
+        "<leader>jic",
         function()
           local config = { scope = {} }
           config.scope.exclude = { language = {}, node_type = {} }
@@ -39,7 +39,7 @@ return {
             end
           end
         end,
-        desc = "Blankline Jump to current context",
+        desc = "Jump Inner Context",
       },
     },
     config = function(_, opts)
