@@ -13,4 +13,11 @@ return {
       { "<c-S>", mode = { "c" }, function() require("flash").toggle() end, desc = "Flash Toggle Flash Search" },
     },
   },
+  {
+    "voxelprismatic/rabbit.nvim",
+    keys = {
+      { "<leader>r", "<cmd>Rabbit<CR>", desc = "Jump Rabbit" },
+    },
+    opts = {},
+  },
 }

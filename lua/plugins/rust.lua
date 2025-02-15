@@ -40,7 +40,7 @@ return {
     event = { "BufRead Cargo.toml" },
     keys = {
       {
-        "<leader>rcu",
+        "<leader>cu",
         function()
           require("crates").upgrade_all_crates()
         end,

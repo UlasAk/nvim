@@ -37,8 +37,8 @@ map("n", "<C-M-Down>", "<cmd> resize -5<CR>", { desc = "Window Decrease height" 
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
-map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
+map("n", "<leader>nt", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
+map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Diagnostics
 map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
