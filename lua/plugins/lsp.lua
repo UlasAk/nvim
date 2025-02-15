@@ -81,6 +81,7 @@ return {
         textobjects = {
           select = {
             enable = true,
+            disable = { "dart" },
 
             -- Automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
@@ -121,6 +122,7 @@ return {
           },
           swap = {
             enable = true,
+            disable = { "dart" },
             swap_next = {
               ["<leader>a"] = "@parameter.inner",
             },
@@ -130,6 +132,7 @@ return {
           },
           move = {
             enable = true,
+            disable = { "dart" },
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
