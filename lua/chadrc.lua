@@ -1,5 +1,5 @@
--- This file  needs to have same structure as nvconfig.lua
--- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
+-- re-init colors after config reload
+require("colors").init_colors()
 
 ---@type ChadrcConfig
 local options = {
@@ -165,5 +165,4 @@ options.ui.statusline.order = {
   "cursor",
 }
 
--- return vim.tbl_deep_extend("force", options, require "chadrc")
 return options
