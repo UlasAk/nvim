@@ -2,6 +2,12 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
+    keys = {
+      { "<leader>ghr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Git Reset Hunk" },
+      { "<leader>ghp", "<cmd>Gitsigns preview_hunk<CR>", desc = "Git Preview Hunk" },
+      { "<leader>gbl", "<cmd>Gitsigns blame_line<CR>", desc = "Git Blame Line" },
+      { "<leader>gbc", "<cmd>Gitsigns blame<CR>", desc = "Git Blame Current Buffer" },
+    },
     opts = function()
       return require "configs.gitsigns"
     end,
