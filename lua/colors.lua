@@ -20,6 +20,10 @@ M.init_colors = function()
     vim.cmd [[
   hi @comment guifg=#8886a6
 ]]
+    -- Line number color
+    vim.cmd [[
+  hi LineNr guifg=#666484
+]]
   end)
 end
 
