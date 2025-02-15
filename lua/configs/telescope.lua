@@ -4,6 +4,7 @@ local options = {
   pickers = {
     live_grep = {
       additional_args = { "--no-ignore", "--hidden" },
+      file_ignore_patterns = {},
     },
     find_file = {
       hidden = false,
