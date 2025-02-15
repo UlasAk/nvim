@@ -20,7 +20,7 @@ M.close_buffer = function(bufnr)
     local bufhidden = vim.bo.bufhidden
 
     -- force close floating wins or nonbuflisted
-    if (not vim.bo[bufnr].buflisted) or api.nvim_win_get_config(0).zindex then
+    if api.nvim_win_get_config(0).zindex then
       vim.cmd "bw"
       return
 
@@ -32,12 +32,9 @@ M.close_buffer = function(bufnr)
       -- handle unlisted
     elseif not vim.bo.buflisted then
       local tmpbufnr = vim.t.bufs[1]
-
-      if vim.g.nv_previous_buf and api.nvim_buf_is_valid(vim.g.nv_previous_buf) then
-        tmpbufnr = vim.g.nv_previous_buf
-      end
-
-      vim.cmd("b" .. tmpbufnr .. " | bw" .. bufnr)
+      api.nvim_set_current_win(vim.fn.bufwinid(bufnr))
+      api.nvim_set_current_buf(tmpbufnr)
+      vim.cmd("bw" .. bufnr)
       return
     else
       vim.cmd "enew"
