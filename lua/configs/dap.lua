@@ -30,4 +30,10 @@ M.setup_adapters = function()
   flutter()
 end
 
+M.setup_colors = function()
+  vim.schedule(function()
+    vim.cmd "hi SignColumn guifg=#bbbbbb"
+  end)
+end
+
 return M
