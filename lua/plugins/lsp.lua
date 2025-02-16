@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -32,6 +30,27 @@ return {
     },
     opts = function()
       return require("configs.conform").options
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    ft = function()
+      return require("configs.mason").get_linter_filetypes()
+    end,
+    config = function()
+      local lint = require "lint"
+      local mason_config = require "configs.mason"
+      lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
+
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          if vim.opt_local.modifiable:get() then
+            lint.try_lint()
+          end
+        end,
+      })
     end,
   },
   {
@@ -232,7 +251,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     ft = function()
-      return require("configs.mason").get_filetypes()
+      return require("configs.mason").get_lsp_filetypes()
     end,
     opts = function()
       local mason_opts = require "configs.mason"

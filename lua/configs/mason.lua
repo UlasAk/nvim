@@ -1,6 +1,6 @@
 local M = {}
 
-local filetype_map = {
+M.filetype_lsp_map = {
   angularls = "htmlangular",
   bashls = "sh",
   cssls = "css",
@@ -26,17 +26,43 @@ local filetype_map = {
   yamlls = "yaml",
 }
 
+M.filetype_linter_map = {
+  markdown = "markdownlint",
+}
+
 M.get_language_server_names = function()
   local names = {}
-  for k, _ in pairs(filetype_map) do
-    table.insert(names, k)
+  for lsp, _ in pairs(M.filetype_lsp_map) do
+    table.insert(names, lsp)
   end
   return names
 end
 
-M.get_filetypes = function()
+M.get_linter_names = function()
+  local names = {}
+  for _, entry in pairs(M.filetype_linter_map) do
+    if type(entry) == "table" then
+      for _, linter_name in pairs(entry) do
+        table.insert(names, linter_name)
+      end
+    else
+      table.insert(names, entry)
+    end
+  end
+  return names
+end
+
+M.get_all_ensure_installed = function()
+  local all = M.get_language_server_names()
+  for _, linter in pairs(M.get_linter_names()) do
+    table.insert(all, linter)
+  end
+  return all
+end
+
+M.get_lsp_filetypes = function()
   local filetypes = {}
-  for _, entry in pairs(filetype_map) do
+  for _, entry in pairs(M.filetype_lsp_map) do
     if type(entry) == "table" then
       for _, filetype in pairs(entry) do
         table.insert(filetypes, filetype)
@@ -46,6 +72,30 @@ M.get_filetypes = function()
     end
   end
   return filetypes
+end
+
+M.get_linter_filetypes = function()
+  local filetypes = {}
+  for filetype, _ in pairs(M.filetype_linter_map) do
+    table.insert(filetypes, filetype)
+  end
+  return filetypes
+end
+
+M.get_filetype_linter_nvim_lint_map = function()
+  local result = {}
+  for filetype, linter_name_or_table in pairs(M.filetype_linter_map) do
+    if type(linter_name_or_table) == "table" then
+      local linters = {}
+      for _, linter in pairs(linter_name_or_table) do
+        table.insert(linters, linter)
+      end
+      result[filetype] = linters
+    else
+      result[filetype] = { linter_name_or_table }
+    end
+  end
+  return result
 end
 
 M.options = {
@@ -60,6 +110,7 @@ M.options = {
     -- "latexindent",
     -- "ltex-ls",
     "lua-language-server",
+    "markdownlint",
     "prettier",
     "rust-analyzer",
     "shellcheck",
@@ -71,7 +122,7 @@ M.options = {
     "yaml-language-server",
     "yamlfmt",
   },
-  ensure_installed = M.get_language_server_names(),
+  ensure_installed = M.get_all_ensure_installed(),
 
   PATH = "skip",
 
