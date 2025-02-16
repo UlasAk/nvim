@@ -13,7 +13,7 @@ return {
       { "<leader>dd", "<cmd>DapDisconnect<CR>", desc = "Debug Disconnect" },
       { "<leader>dt", "<cmd>DapTerminate<CR>", desc = "Debug Terminate" },
       {
-        "<leader>ds",
+        "<leader>dus",
         function()
           local widgets = require "dap.ui.widgets"
           local sidebar = widgets.sidebar(widgets.scopes)
