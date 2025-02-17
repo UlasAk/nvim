@@ -122,7 +122,7 @@ M.options = {
     "yaml-language-server",
     "yamlfmt",
   },
-  ensure_installed = M.get_all_ensure_installed(),
+  ensure_installed = M.get_language_server_names(),
 
   PATH = "skip",
 
