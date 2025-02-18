@@ -65,6 +65,9 @@ return {
         return false
       end
     end,
+    keys = {
+      { "<leader>ns", "<cmd>ShowScriptsInTelescope<CR>", desc = "Telescope NPM Scripts" },
+    },
     opts = {},
   },
 }
