@@ -16,7 +16,6 @@ return {
       for key, _ in pairs(filetype_map) do
         table.insert(filetypes, key)
       end
-      print(#filetypes)
       return filetypes
     end,
     keys = {
