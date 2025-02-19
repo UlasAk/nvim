@@ -1,4 +1,27 @@
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
+
+local numberToggleGroup = augroup("numberToggles", {})
+
+autocmd({ "WinLeave", "FocusLost" }, {
+  callback = function()
+    if vim.wo.number == true then
+      vim.wo.relativenumber = false
+    end
+  end,
+  group = numberToggleGroup,
+  pattern = "*",
+})
+
+autocmd({ "WinEnter", "FocusGained" }, {
+  callback = function()
+    if vim.wo.number == true then
+      vim.wo.relativenumber = true
+    end
+  end,
+  group = numberToggleGroup,
+  pattern = "*",
+})
 
 -- user event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
