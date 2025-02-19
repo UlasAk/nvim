@@ -22,6 +22,7 @@ return {
         desc = "Telescope Flutter commands",
       },
       { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
+      { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
     },
     opts = function()
       local lspconfig = require "configs.lsp"
