@@ -60,6 +60,11 @@ M.notifier = {
     if string.match(msg, "LspDetach") ~= nil then
       return false
     end
+
+    -- Hide package.json Fetching Packages message
+    if string.match(msg, "| 󰇚 Fetching latest versions") ~= nil then
+      return false
+    end
     return true
   end,
   keep = function(notif)
