@@ -40,7 +40,7 @@ return {
         function()
           require("neotest").run.run { vim.fn.expand "%", strategy = "dap" }
         end,
-        desc = "Test Run file",
+        desc = "Test Debug file",
       },
       {
         "<leader>Ts",
