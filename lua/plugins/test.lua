@@ -56,6 +56,27 @@ return {
         end,
         desc = "Test Toggle output",
       },
+      {
+        "<leader>Tl",
+        function()
+          require("neotest").run.run_last()
+        end,
+        desc = "Test Run last",
+      },
+      {
+        "<leader>TL",
+        function()
+          require("neotest").run.run_last { strategy = "dap" }
+        end,
+        desc = "Test Debug last",
+      },
+      {
+        "<leader>Ts",
+        function()
+          require("neotest").run.stop()
+        end,
+        desc = "Test Stop",
+      },
     },
     opts = function()
       return require "configs.neotest"
