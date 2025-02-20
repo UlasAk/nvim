@@ -13,9 +13,9 @@ return {
       "v",
       "g",
       "\\",
-      { "<leader>wK", "<cmd>WhichKey<CR>", desc = "Whichkey All keymaps" },
+      { "<leader>WK", "<cmd>WhichKey<CR>", desc = "Whichkey All keymaps" },
       {
-        "<leader>wk",
+        "<leader>Wk",
         function()
           vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
         end,

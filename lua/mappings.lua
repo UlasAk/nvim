@@ -10,7 +10,7 @@ map("i", "<C-k>", "<Up>", { desc = "Jump Up" })
 map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
 
---Move lines
+-- Move lines
 map({ "n", "i" }, "<M-Up>", "<cmd> m-2<CR>", { desc = "Editing Move line up" })
 map({ "n", "i" }, "<M-Down>", "<cmd> m+1<CR>", { desc = "Editing Move line down" })
 map("v", "<M-Up>", ":m '<-2<CR>gv=gv", { desc = "Editing Move lines up", noremap = true, silent = true })
@@ -39,6 +39,17 @@ map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 -- Line numbers
 map("n", "<leader>nt", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
 map("n", "<leader>nr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
+
+-- Wrap
+local wrap = true
+map("n", "<leader>w", function()
+  wrap = not wrap
+  if wrap then
+    vim.cmd "set wrap"
+  else
+    vim.cmd "set nowrap"
+  end
+end, { desc = "Toggle Wrap" })
 
 -- Diagnostics
 map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
