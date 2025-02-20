@@ -20,7 +20,6 @@ return {
         desc = "Diagnostics Diagnostics Current Buf",
       },
       -- Other
-      { "<leader>fw", "<cmd>Telescope live_grep<CR>", desc = "Telescope Live grep" },
       { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Telescope Buffers" },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Telescope Oldfiles" },
@@ -98,6 +97,40 @@ return {
       -- Change Noice Mini Background Color (where LSP Progress is shown)
       vim.cmd "hi TelescopeMatching guifg=#89b4fa guibg=#76758a"
       vim.cmd "hi TelescopeSelection guifg=#d9e0ee guibg=#5c5a82"
+    end,
+  },
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    keys = {
+      { "<leader>fw", "<cmd>Telescope live_grep_args<CR>", desc = "Telescope Live grep" },
+    },
+    opts = function()
+      local lga_actions = require "telescope-live-grep-args.actions"
+      return {
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = { -- extend mappings
+              i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+                -- freeze the current list and start a fuzzy search in the frozen list
+                ["<C-space>"] = lga_actions.to_fuzzy_refine,
+              },
+            },
+            -- ... also accepts theme settings, for example:
+            -- theme = "dropdown", -- use dropdown theme
+            -- theme = { }, -- use own theme spec
+            -- layout_config = { mirror=true }, -- mirror preview pane
+          },
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension "live_grep_args"
     end,
   },
   {
@@ -250,7 +283,6 @@ return {
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
     keys = {
-
       {
         "<leader>ff",
         function()
