@@ -43,5 +43,6 @@ local options = {
 
 -- Change Noice Mini Background Color (where LSP Progress is shown)
 vim.cmd "hi NoiceMini guifg=#282737 guibg=#1E1E2E"
+vim.cmd "hi NoiceVirtualText guifg=#fdfd96"
 
 return options
