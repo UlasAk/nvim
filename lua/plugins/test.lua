@@ -43,7 +43,7 @@ return {
         desc = "Test Debug file",
       },
       {
-        "<leader>Ts",
+        "<leader>TS",
         function()
           require("neotest").summary.toggle()
         end,
