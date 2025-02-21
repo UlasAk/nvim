@@ -44,6 +44,10 @@ return {
             require("cmp-npm").setup {}
           end,
         },
+        {
+          "petertriho/cmp-git",
+          opts = {},
+        },
       },
     },
     opts = function()

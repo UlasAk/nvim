@@ -65,6 +65,11 @@ M.notifier = {
     if string.match(msg, "| 󰇚 Fetching latest versions") ~= nil then
       return false
     end
+
+    -- Hide OctoEditable related messages
+    if string.match(msg, "OctoEditable") ~= nil then
+      return false
+    end
     return true
   end,
   keep = function(notif)
