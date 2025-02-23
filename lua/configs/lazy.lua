@@ -46,6 +46,10 @@ local options = {
       },
     },
   },
+  rocks = {
+    enabled = true,
+    hererocks = true,
+  },
 }
 
 local map = vim.keymap.set
