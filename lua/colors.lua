@@ -27,6 +27,9 @@ M.init_colors = function()
     vim.cmd [[
   hi CursorLineNr guifg=#fdfd96
 ]]
+    vim.cmd [[
+    hi gitCommitComment guifg=#8886a6
+]]
   end)
 end
 
