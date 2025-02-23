@@ -23,6 +23,7 @@ return {
       },
       { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
       { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
+      { "<leader>flt", "<cmd>FlutterDevTools<CR>", desc = "Flutter Dev Tools" },
     },
     opts = function()
       local lspconfig = require "configs.lsp"
