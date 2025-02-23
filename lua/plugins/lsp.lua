@@ -360,4 +360,8 @@ return {
       zindex = 1, -- Starting zindex for the stack of floating windows
     },
   },
+  {
+    "boltlessengineer/sense.nvim",
+    event = "LspAttach",
+  },
 }
