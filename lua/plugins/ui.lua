@@ -18,6 +18,39 @@ return {
       -- { "<leader>dm", "<cmd>Noice dismiss<CR>", desc = "Noice Dismiss messages" },
     },
     opts = require "configs.noice",
+    config = function(_, opts)
+      local noice = require "noice"
+      noice.setup(opts)
+
+      -- Statusline Recording
+      local statusline = require("chadrc").ui.statusline
+      local separator_style = statusline.separator_style
+      local separators = require("utils").statusline_separators[separator_style]
+      statusline.modules.recording = function()
+        if noice.api.statusline.mode.has() then
+          local status = noice.api.statusline.mode.get()
+          return "%#RecordSepl#"
+            .. separators["right"]
+            .. "%#Record# "
+            .. status
+            .. " %#RecordSepr#"
+            .. separators["right"]
+        end
+        return ""
+      end
+      local function indexOf(table, value)
+        for i, v in ipairs(table) do
+          if v == value then
+            return i
+          end
+        end
+        return nil
+      end
+      local pos = indexOf(statusline.order, "mode")
+      if pos then
+        table.insert(statusline.order, pos + 1, "recording")
+      end
+    end,
   },
   {
     "folke/snacks.nvim",

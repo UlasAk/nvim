@@ -121,12 +121,8 @@ local sep_style = options.ui.statusline.separator_style
 
 sep_style = (sep_style ~= "round" and sep_style ~= "block") and "block" or sep_style
 
-local default_sep_icons = {
-  round = { left = "", right = "" },
-  block = { left = "█", right = "█" },
-}
-
-local separators = (type(sep_style) == "table" and sep_style) or default_sep_icons[sep_style]
+local default_separators = require("utils").statusline_separators
+local separators = default_separators[sep_style]
 
 local sep_l = separators["left"]
 

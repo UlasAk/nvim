@@ -60,4 +60,11 @@ M.closeAllBufs = function(include_cur_buf)
   end
 end
 
+M.statusline_separators = {
+  default = { left = "", right = "" },
+  round = { left = "", right = "" },
+  block = { left = "█", right = "█" },
+  arrow = { left = "", right = "" },
+}
+
 return M
