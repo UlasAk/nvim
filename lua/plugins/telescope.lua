@@ -94,7 +94,6 @@ return {
         telescope.load_extension(ext)
       end
 
-      -- Change Noice Mini Background Color (where LSP Progress is shown)
       vim.cmd "hi TelescopeMatching guifg=#89b4fa guibg=#76758a"
       vim.cmd "hi TelescopeSelection guifg=#d9e0ee guibg=#5c5a82"
     end,
@@ -110,6 +109,8 @@ return {
       return {
         extensions = {
           live_grep_args = {
+            additional_args = { "--no-ignore", "--hidden" },
+            file_ignore_patterns = {},
             auto_quoting = true, -- enable/disable auto-quoting
             -- define mappings, e.g.
             mappings = { -- extend mappings
