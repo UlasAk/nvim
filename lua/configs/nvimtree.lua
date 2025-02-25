@@ -3,11 +3,9 @@ local M = {}
 dofile(vim.g.base46_cache .. "nvimtree")
 
 M.setup_colors = function()
-  vim.schedule(function()
-    vim.cmd [[
-  hi NvimTreeCursorLine guibg=#474656
-]]
-  end)
+  vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
+    bg = "#474656",
+  })
 end
 
 M.options = {

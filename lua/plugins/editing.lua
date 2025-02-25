@@ -43,9 +43,15 @@ return {
       },
     },
     config = function(_, opts)
-      vim.cmd "hi IblScopeChar guifg=#fdfd96"
-      vim.cmd "hi IblScope guifg=#fdfd96"
-      vim.cmd "hi IblChar guifg=#383747"
+      vim.api.nvim_set_hl(0, "IblScopeChar", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "IblScope", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "IblChar", {
+        fg = "#383747",
+      })
       -- dofile(vim.g.base46_cache .. "blankline")
       require("ibl").setup(opts)
       local hooks = require "ibl.hooks"

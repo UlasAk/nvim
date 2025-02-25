@@ -75,18 +75,18 @@ return {
     opts = require "configs.snacks",
     init = function()
       -- Setup colors
-      vim.cmd [[
-        hi SnacksDashboardHeader guifg=#fdfd96
-      ]]
-      vim.cmd [[
-        hi SnacksDashboardTitle guifg=#fdfd96
-      ]]
-      vim.cmd [[
-        hi SnacksDashboardFooter guifg=#fdfd96
-      ]]
-      vim.cmd [[
-        hi SnacksDashboardDir guifg=#8886a6
-      ]]
+      vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "SnacksDashboardTitle", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "SnacksDashboardFooter", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "SnacksDashboardDir", {
+        fg = "#8886a6",
+      })
 
       -- Setup LSP Progress autocmd
       ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
@@ -149,7 +149,9 @@ return {
   --         footer = {},
   --       },
   --     }
-  --     vim.cmd "hi DashboardHeader guifg=#FDFD9A"
+  -- vim.api.nvim_set_hl(0, "DashboardHeader", {
+  --   fg = "#fdfd96",
+  -- })
   --   end,
   --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
   -- },

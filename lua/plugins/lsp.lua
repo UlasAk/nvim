@@ -224,7 +224,9 @@ return {
     },
     config = function(_, opts)
       require("treesitter-context").setup(opts)
-      vim.cmd "hi TreesitterContext guibg=#444151"
+      vim.api.nvim_set_hl(0, "TreesitterContext", {
+        bg = "#444151",
+      })
     end,
   },
   {

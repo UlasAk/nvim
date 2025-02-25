@@ -94,8 +94,14 @@ return {
         telescope.load_extension(ext)
       end
 
-      vim.cmd "hi TelescopeMatching guifg=#89b4fa guibg=#76758a"
-      vim.cmd "hi TelescopeSelection guifg=#d9e0ee guibg=#5c5a82"
+      vim.api.nvim_set_hl(0, "TelescopeMatching", {
+        fg = "#89b4fa",
+        bg = "#76758a",
+      })
+      vim.api.nvim_set_hl(0, "TelescopeSelection", {
+        fg = "#d9e0ee",
+        bg = "#5c5a82",
+      })
     end,
   },
   {

@@ -172,57 +172,139 @@ M.options = {
 }
 
 M.setup_custom_colors = function()
-  vim.cmd [[
-  hi BufferLineErrorVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8
-]]
-  vim.cmd [[
-  hi BufferLineErrorSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#f38ba8 guisp=#f38ba8
-]]
-  vim.cmd [[
-  hi BufferLineErrorDiagnostic cterm=bold,italic gui=bold,italic guifg=#f38ba8
-]]
-  vim.cmd [[
-  hi BufferLineErrorDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#f38ba8
-]]
-  vim.cmd [[
-  hi BufferLineWarningVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 
-]]
-  vim.cmd [[
-  hi BufferLineWarningSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#fae3b0 guisp=#fae3b0
-]]
-  vim.cmd [[
-  hi BufferLineWarningDiagnostic cterm=bold,italic gui=bold,italic guifg=#fae3b0 
-]]
-  vim.cmd [[
-  hi BufferLineWarningDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#fae3b0 
-]]
-  vim.cmd [[
-  hi BufferLineHintVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5 
-]]
-  vim.cmd [[
-  hi BufferLineHintSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#d0a9e5 guisp=#d0a9e5
-]]
-  vim.cmd [[
-  hi BufferLineHintDiagnostic cterm=bold,italic gui=bold,italic guifg=#d0a9e5 
-]]
-  vim.cmd [[
-  hi BufferLineHintDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#d0a9e5
-]]
-  vim.cmd [[
-  hi BufferLineInfoVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3
-]]
-  vim.cmd [[
-  hi BufferLineInfoSelected cterm=bold,underline,italic gui=bold,underline,italic guifg=#abe9b3 guisp=#abe9b3
-]]
-  vim.cmd [[
-  hi BufferLineInfoDiagnostic cterm=bold,italic gui=bold,italic guifg=#abe9b3
-]]
-  vim.cmd [[
-  hi BufferLineInfoDiagnosticVisible cterm=bold,italic gui=bold,italic guifg=#abe9b3
-]]
-  vim.cmd [[
-  hi BufferLineSeparator guifg=#ffffff
-]]
+  vim.schedule(function()
+    vim.api.nvim_set_hl(0, "BufferLineErrorVisible", {
+      fg = "#f38ba8",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineErrorSelected", {
+      fg = "#f38ba8",
+      sp = "#f38ba8",
+      cterm = { bold = true, underline = true, italic = true },
+      bold = true,
+      underline = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineErrorDiagnostic", {
+      fg = "#f38ba8",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineErrorDiagnosticSelected", {
+      fg = "#f38ba8",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineErrorDiagnosticVisible", {
+      fg = "#f38ba8",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineWarningVisible", {
+      fg = "#fae3b0",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineWarningSelected", {
+      fg = "#fae3b0",
+      sp = "#fae3b0",
+      cterm = { bold = true, underline = true, italic = true },
+      bold = true,
+      underline = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineWarningDiagnostic", {
+      fg = "#fae3b0",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineWarningDiagnosticSelected", {
+      fg = "#fae3b0",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineWarningDiagnosticVisible", {
+      fg = "#fae3b0",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineHintVisible", {
+      fg = "#d0a9e5",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineHintSelected", {
+      fg = "#d0a9e5",
+      sp = "#d0a9e5",
+      cterm = { bold = true, underline = true, italic = true },
+      bold = true,
+      underline = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineHintDiagnostic", {
+      fg = "#d0a9e5",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineHintDiagnosticSelected", {
+      fg = "#d0a9e5",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineHintDiagnosticVisible", {
+      fg = "#d0a9e5",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineInfoVisible", {
+      fg = "#abe9b3",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineInfoSelected", {
+      fg = "#abe9b3",
+      sp = "#abe9b3",
+      cterm = { bold = true, underline = true, italic = true },
+      bold = true,
+      underline = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineInfoDiagnostic", {
+      fg = "#abe9b3",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineInfoDiagnosticSelected", {
+      fg = "#abe9b3",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineInfoDiagnosticVisible", {
+      fg = "#abe9b3",
+      cterm = { bold = true, italic = true },
+      bold = true,
+      italic = true,
+    })
+    vim.api.nvim_set_hl(0, "BufferLineSeparator", {
+      fg = "#ffffff",
+    })
+  end)
 end
 
 local constants = require "bufferline.constants"
