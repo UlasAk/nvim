@@ -12,6 +12,7 @@ o.showmode = false
 o.clipboard = "unnamedplus"
 o.cursorline = true
 o.cursorlineopt = "number"
+o.relativenumber = true
 
 -- Indenting
 o.expandtab = true
