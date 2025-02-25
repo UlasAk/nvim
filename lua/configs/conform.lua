@@ -4,6 +4,7 @@ M.filetypes = {
   bash = { "shfmt" },
   bib = { "texlab" },
   cs = { "csharpier" },
+  dart = {},
   html = { "prettier" },
   htmlangular = { "prettier" },
   javascript = { "prettier" },
