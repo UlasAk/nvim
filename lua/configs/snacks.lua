@@ -1,11 +1,28 @@
-local M = {
+local M = {}
+
+M.setup_colors = function()
+  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
+    fg = "#fdfd96",
+  })
+  vim.api.nvim_set_hl(0, "SnacksDashboardTitle", {
+    fg = "#fdfd96",
+  })
+  vim.api.nvim_set_hl(0, "SnacksDashboardFooter", {
+    fg = "#fdfd96",
+  })
+  vim.api.nvim_set_hl(0, "SnacksDashboardDir", {
+    fg = "#8886a6",
+  })
+end
+
+M.options = {
   bigfile = { enabled = false },
   quickfile = { enabled = false },
   statuscolumn = { enabled = false },
   words = { enabled = false },
 }
 
-M.styles = {
+M.options.styles = {
   notification = {
     border = "rounded",
     zindex = 100,
@@ -33,9 +50,7 @@ M.styles = {
   },
 }
 
----@class snacks.notifier.Config
----@field keep? fun(notif: snacks.notifier.Notif): boolean # global keep function
-M.notifier = {
+M.options.notifier = {
   enabled = true,
   timeout = 3000, -- default timeout in ms
   width = { min = 40, max = 0.4 },
@@ -78,17 +93,42 @@ M.notifier = {
     end
     return vim.fn.getcmdpos() > 0
   end,
-  ---@type snacks.notifier.style
   style = "compact",
   top_down = true, -- place notifications from top to bottom
   date_format = "%R", -- time format for notifications
   refresh = 50, -- refresh at most every 50ms
 }
 
----@class snacks.dashboard.Config
----@field sections snacks.dashboard.Section
----@field formats table<string, snacks.dashboard.Text|fun(item:snacks.dashboard.Item, ctx:snacks.dashboard.Format.ctx):snacks.dashboard.Text>
-M.dashboard = {
+M.options.image = {}
+
+M.options.scroll = {
+  animate = {
+    duration = { step = 15, total = 200 },
+    easing = "linear",
+  },
+  -- faster animation when repeating scroll after delay
+  animate_repeat = {
+    delay = 100, -- delay in ms before using the repeat animation
+    duration = { step = 5, total = 50 },
+    easing = "linear",
+  },
+}
+
+M.options.toggle = {}
+
+M.options.words = {
+  debounce = 100, -- time in ms to wait before updating
+  notify_jump = false, -- show a notification when jumping
+  notify_end = true, -- show a notification when reaching the end
+  foldopen = true, -- open folds after jumping
+  jumplist = true, -- set jump point before jumping
+  modes = { "n", "i", "c" }, -- modes to show references
+  filter = function(buf) -- what buffers to enable `snacks.words`
+    return vim.g.snacks_words ~= false and vim.b[buf].snacks_words ~= false
+  end,
+}
+
+M.options.dashboard = {
   sections = {
     { section = "header" },
     { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
