@@ -59,11 +59,27 @@ return {
           local is_enabled = Snacks.words.is_enabled()
           if is_enabled then
             Snacks.words.disable()
+            Snacks.notify.info "  Snacks.words disabled"
           else
             Snacks.words.enable()
+            Snacks.notify.info "  Snacks.words enabled"
           end
         end,
         desc = "Toggle Words (LSP reference highlighting)",
+      },
+      {
+        "<leader>ts",
+        function()
+          local is_enabled = Snacks.scroll.enabled
+          if is_enabled then
+            Snacks.scroll.disable()
+            Snacks.notify.info "  Scroll animations disabled"
+          else
+            Snacks.scroll.enable()
+            Snacks.notify.info "  Scroll animations enabled"
+          end
+        end,
+        desc = "Toggle Scroll Animations",
       },
     },
     opts = function()
