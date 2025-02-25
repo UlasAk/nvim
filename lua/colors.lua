@@ -51,6 +51,17 @@ M.init_colors = function()
       ctermfg = 0,
       ctermbg = 11,
     })
+
+    -- Lsp Colors
+    vim.api.nvim_set_hl(0, "LspReferenceRead", {
+      bg = "#666666",
+    })
+    vim.api.nvim_set_hl(0, "LspReferenceWrite", {
+      bg = "#666666",
+    })
+    vim.api.nvim_set_hl(0, "LspReferenceText", {
+      bg = "#666666",
+    })
   end)
 end
 

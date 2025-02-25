@@ -53,6 +53,18 @@ return {
         end,
         desc = "Toggle Animations",
       },
+      {
+        "<leader>tw",
+        function()
+          local is_enabled = Snacks.words.is_enabled()
+          if is_enabled then
+            Snacks.words.disable()
+          else
+            Snacks.words.enable()
+          end
+        end,
+        desc = "Toggle Words (LSP reference highlighting)",
+      },
     },
     opts = function()
       return require("configs.snacks").options
