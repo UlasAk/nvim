@@ -71,31 +71,6 @@ return {
     },
   },
   {
-    "echasnovski/mini.jump",
-    version = false,
-    event = "BufReadPost",
-    opts = {
-      -- Module mappings. Use `''` (empty string) to disable one.
-      mappings = {
-        forward = "f",
-        backward = "F",
-        forward_till = "t",
-        backward_till = "T",
-        repeat_jump = ";",
-      },
-
-      -- Delay values (in ms) for different functionalities. Set any of them to
-      -- a very big number (like 10^7) to virtually disable.
-      delay = {
-        -- Delay between jump and highlighting all possible jumps
-        highlight = 250,
-
-        -- Delay between jump and automatic stop if idle (no jump is done)
-        idle_stop = 10000000,
-      },
-    },
-  },
-  {
     "echasnovski/mini.misc",
     version = false,
     opts = {
@@ -111,16 +86,16 @@ return {
       -- Module mappings. Use `''` (empty string) to disable one.
       mappings = {
         -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-        left = "<M-h>",
-        right = "<M-l>",
-        down = "<M-j>",
-        up = "<M-k>",
+        left = "<M-Left>",
+        right = "<M-Right>",
+        down = "<M-Down>",
+        up = "<M-Up>",
 
         -- Move current line in Normal mode
-        line_left = "<M-h>",
-        line_right = "<M-l>",
-        line_down = "<M-j>",
-        line_up = "<M-k>",
+        line_left = "<M-Left>",
+        line_right = "<M-Right>",
+        line_down = "<M-Down>",
+        line_up = "<M-Up>",
       },
 
       -- Options which control moving behavior
