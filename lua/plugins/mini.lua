@@ -1,11 +1,5 @@
 return {
   {
-    "echasnovski/mini.cursorword",
-    version = false,
-    event = "BufEnter",
-    opts = { delay = 100 },
-  },
-  {
     "echasnovski/mini.animate",
     version = false,
     opts = {
