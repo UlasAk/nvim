@@ -70,7 +70,7 @@ return {
       -- },
       -- Code runner
       {
-        "<leader>tr",
+        "<leader>tR",
         function()
           require("nvchad.term").runner {
             pos = "sp",

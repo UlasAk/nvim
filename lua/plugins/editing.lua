@@ -255,7 +255,7 @@ return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
     keys = {
-      { "<leader>tn", "<cmd>TSJToggle<CR>", desc = "TreeSJ Toggle node unser cursor" },
+      { "<leader>tN", "<cmd>TSJToggle<CR>", desc = "TreeSJ Toggle node unser cursor" },
     },
     event = "BufReadPost",
     opts = {
