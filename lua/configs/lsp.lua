@@ -225,6 +225,11 @@ M.setup_keymaps = function()
   map("n", "<leader>lgd", function()
     require("telescope.builtin").lsp_definitions {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Go to definition")
   map("n", "<leader>lgvd", function()
@@ -234,16 +239,31 @@ M.setup_keymaps = function()
   map("n", "<leader>lgi", function()
     require("telescope.builtin").lsp_implementations {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Go to implementation")
   map("n", "<leader>lgci", function()
     require("telescope.builtin").lsp_incoming_calls {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Go to incoming calls")
   map("n", "<leader>lgco", function()
     require("telescope.builtin").lsp_outgoing_calls {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Go to outgoing calls")
   map("n", "<leader>lsh", vim.lsp.buf.signature_help, opts "Lsp Show signature help")
@@ -257,6 +277,11 @@ M.setup_keymaps = function()
   map("n", "<leader>lD", function()
     require("telescope.builtin").lsp_type_definitions {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Go to type definition")
 
@@ -267,6 +292,11 @@ M.setup_keymaps = function()
   map("n", "<leader>lsr", function()
     require("telescope.builtin").lsp_references {
       initial_mode = "normal",
+      layout_config = {
+        horizontal = {
+          preview_width = 0.55,
+        },
+      },
     }
   end, opts "Lsp Show references")
 end
