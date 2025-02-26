@@ -44,10 +44,16 @@ return {
         end,
         desc = "Yazi Open CWD",
       },
+      {
+        "<c-Up>",
+        "<cmd>Yazi toggle<cr>",
+        desc = "Yazi Resume last session",
+      },
     },
     ---@type YaziConfig
     opts = {
       open_for_directories = false,
+      open_multiple_tabs = true,
     },
   },
   {
