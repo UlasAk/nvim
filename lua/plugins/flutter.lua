@@ -85,7 +85,7 @@ return {
           enabled = true, -- set to false to disable
         },
         dev_log = {
-          enabled = true,
+          enabled = false,
           filter = nil, -- optional callback to filter the log
           -- takes a log_line as string argument; returns a boolean or nil;
           -- the log_line is only added to the output if the function returns true
