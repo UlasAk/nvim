@@ -117,6 +117,8 @@ M.options.scroll = {
 
 M.options.toggle = {}
 
+M.options.input = {}
+
 M.options.words = {
   debounce = 100, -- time in ms to wait before updating
   notify_jump = false, -- show a notification when jumping
