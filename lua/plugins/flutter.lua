@@ -188,7 +188,15 @@ return {
   },
   {
     "wa11breaker/flutter-bloc.nvim",
-    cmd = { "FlutterCreateBloc", "FlutterCreateCubit" },
+    dependencies = {
+      "nvimtools/none-ls.nvim", -- Required for code actions
+    },
+    ft = "dart",
+    opts = {
+      bloc_type = "default", -- Choose from: 'default', 'equatable', 'freezed'
+      use_sealed_classes = false,
+      enable_code_actions = true,
+    },
   },
   {
     "akinsho/pubspec-assist.nvim",
