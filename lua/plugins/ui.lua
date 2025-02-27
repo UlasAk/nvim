@@ -223,24 +223,21 @@ return {
     opts = {
       chunk = {
         enable = true,
-        style = "#fdfd96",
+        -- style = "#fdfd96",
+        duration = 0,
+        delay = 0,
       },
       indent = {
         enable = false,
       },
       line_num = {
-        enable = true,
+        enable = false,
         style = "#fdfd96",
       },
       blank = {
         enable = false,
       },
     },
-    config = function(_, opts)
-      require("hlchunk").setup(opts)
-      vim.cmd "DisableHLChunk"
-      vim.cmd "DisableHLLineNum"
-    end,
   },
   {
     "tzachar/highlight-undo.nvim",

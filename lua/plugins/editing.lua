@@ -20,7 +20,7 @@ return {
     event = "User FilePost",
     opts = {
       indent = { char = "│", highlight = "IblChar" },
-      scope = { char = "│", highlight = "IblScopeChar" },
+      scope = { enabled = false, char = "│", highlight = "IblScopeChar" },
     },
     keys = {
       {
