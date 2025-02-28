@@ -66,12 +66,20 @@ return {
             --   --put here config that you would find in .vscode/launch.json
             -- }
             -- If you want to load .vscode launch.json automatically run the following:
-            require("dap.ext.vscode").load_launchjs()
+            local api = vim.api
+            local fs = vim.fs
+            local buf = api.nvim_get_current_buf()
+            local buffer_path = api.nvim_buf_get_name(buf)
+            local path = fs.dirname(fs.find({ ".git" }, {
+              path = buffer_path,
+              upward = true,
+            })[1]) .. "/.vscode/launch.json"
+            require("dap.ext.vscode").load_launchjs(path)
           end,
         },
         flutter_path = nil, -- <-- this takes priority over the lookup
         flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
-        root_patterns = { ".git", "pubspec.yaml" }, -- patterns to find the root of your flutter project
+        root_patterns = { ".git" }, -- patterns to find the root of your flutter project
         fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
         widget_guides = {
           enabled = true,
