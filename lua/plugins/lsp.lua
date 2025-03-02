@@ -10,6 +10,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
+    cmd = { "FormatDisable", "FormatEnable" },
     ft = function()
       local filetype_map = require("configs.conform").filetypes
       local filetypes = {}
