@@ -242,7 +242,7 @@ return {
 
       -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.options.ensure_installed_mason_names and opts.options.ensure_installed_mason_names > 0 then
+        if opts.options.ensure_installed_mason_names and #opts.options.ensure_installed_mason_names > 0 then
           vim.cmd("MasonInstall " .. table.concat(opts.options.ensure_installed_mason_names, " "))
         end
       end, {})
