@@ -130,9 +130,9 @@ M.options = {
   --   local modified_b = vim.fn.getftime(buffer_b.path)
   --   return modified_a > modified_b
   -- end,
-  pick = {
-    alphabet = "abcdefghijklmopqrstuvwxyz",
-  },
+  -- pick = {
+  --   alphabet = "abcdefghijklmopqrstuvwxyz",
+  -- },
   -- groups = {
   --   options = {
   --     toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
