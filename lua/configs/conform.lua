@@ -1,5 +1,7 @@
 local M = {}
 
+vim.g.disable_autoformat = true
+
 M.filetypes = {
   bash = { "shfmt" },
   bib = { "texlab" },
@@ -35,14 +37,14 @@ vim.api.nvim_create_user_command("FormatDisable", function(args)
     vim.g.disable_autoformat = true
   end
 end, {
-  desc = "Disable autoformat-on-save",
+  desc = "General Format disable on save",
   bang = true,
 })
 vim.api.nvim_create_user_command("FormatEnable", function()
   vim.b.disable_autoformat = false
   vim.g.disable_autoformat = false
 end, {
-  desc = "Re-enable autoformat-on-save",
+  desc = "General Format enable on save",
 })
 
 return M
