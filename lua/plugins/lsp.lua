@@ -366,5 +366,28 @@ return {
   {
     "boltlessengineer/sense.nvim",
     event = "LspAttach",
+    keys = function()
+      local enabled = true
+      return {
+        {
+          "<leader>se",
+          function()
+            enabled = not enabled
+            vim.g.sense_nvim = {
+              presets = {
+                virtualtext = {
+                  enabled = enabled,
+                },
+                statuscolumn = {
+                  enabled = enabled,
+                },
+              },
+            }
+            require("sense.api").redraw {}
+          end,
+          desc = "Toggle Sense",
+        },
+      }
+    end,
   },
 }
