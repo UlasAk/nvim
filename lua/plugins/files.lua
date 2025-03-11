@@ -102,4 +102,20 @@ return {
       },
     },
   },
+  {
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
+    keys = {
+      {
+        "<leader>G",
+        "<cmd>GrugFar<CR>",
+        desc = "Open GrugFar",
+      },
+    },
+    opts = {
+      keymaps = {
+        close = { n = "q" },
+      },
+    },
+  },
 }
