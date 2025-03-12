@@ -126,6 +126,10 @@ local separators = default_separators[sep_style]
 
 local sep_l = separators["left"]
 
+local stbufnr = function()
+  return vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+end
+
 options.ui.statusline.modules = {
   cursor = function()
     return "%#St_pos_sep#" .. sep_l .. "%#St_pos_icon# %#St_pos_text# %l/%c %p%% "
@@ -144,6 +148,18 @@ options.ui.statusline.modules = {
       end
     end
     return "%#" .. icon_highlight_group .. "#" .. icon .. " " .. vim.bo.filetype .. " "
+  end,
+  lsp = function()
+    local prefix = "%#St_Lsp#"
+    if rawget(vim, "lsp") then
+      for _, client in ipairs(vim.lsp.get_clients()) do
+        if client.attached_buffers[stbufnr()] then
+          return prefix .. ((vim.o.columns > 100 and "  " .. client.name .. " ") or "  ")
+        end
+      end
+    end
+
+    return ""
   end,
 }
 
