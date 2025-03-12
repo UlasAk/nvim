@@ -26,6 +26,7 @@ return {
       { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
       { "<leader>flh", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
       { "<leader>flt", "<cmd>FlutterDevTools<CR>", desc = "Flutter Dev Tools" },
+      { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
       local lspconfig = require "configs.lsp"
