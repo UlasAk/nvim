@@ -300,15 +300,38 @@ return {
     keys = function()
       --tiny-inline-diagnostic and lsp_lines toggle through
       local show_lsp_lines = vim.diagnostic.config().virtual_text
+      local show_diagnostics = true
       return {
         {
           "<leader>ldt",
           function()
-            show_lsp_lines = require("lsp_lines").toggle()
+            if (not show_diagnostics and show_lsp_lines) or show_diagnostics then
+              show_lsp_lines = require("lsp_lines").toggle()
+            end
+            show_diagnostics = true
             if show_lsp_lines then
               require("tiny-inline-diagnostic").disable()
             else
               require("tiny-inline-diagnostic").enable()
+            end
+          end,
+          desc = "Diagnostics Toggle virtual text type",
+        },
+        {
+          "<leader>ldT",
+          function()
+            show_diagnostics = not show_diagnostics
+            if show_diagnostics then
+              if show_lsp_lines then
+                require("lsp_lines").toggle()
+              else
+                require("tiny-inline-diagnostic").enable()
+              end
+            else
+              if show_lsp_lines then
+                require("lsp_lines").toggle()
+              end
+              require("tiny-inline-diagnostic").disable()
             end
           end,
           desc = "Diagnostics Toggle virtual text",
@@ -327,6 +350,7 @@ return {
     },
     config = function(_, opts)
       require("tiny-inline-diagnostic").setup(opts)
+      vim.diagnostic.config { virtual_text = false }
     end,
   },
   {
