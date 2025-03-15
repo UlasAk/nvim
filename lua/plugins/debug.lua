@@ -3,6 +3,7 @@ return {
     "mfussenegger/nvim-dap",
     event = "LspAttach",
     keys = {
+      { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
       { "<leader>dba", "<cmd>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
       { "<leader>dc", "<cmd>DapContinue<CR>", desc = "Debug Continue" },
