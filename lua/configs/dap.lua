@@ -111,6 +111,16 @@ local typescriptConfigurations = function()
       console = "integratedTerminal",
     },
     {
+      name = "Launch Nodemon",
+      type = "pwa-node",
+      request = "launch",
+      runtimeExecutable = "nodemon",
+      args = { "--watch", "src/**/*.ts", "--exec", "npx", "ts-node", "${file}" },
+      skipFiles = { "node_modules/**" },
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+    },
+    {
       name = "Attach to Node",
       type = "pwa-node",
       request = "attach",
