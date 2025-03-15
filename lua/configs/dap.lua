@@ -38,15 +38,62 @@ local javascriptAdapter = function()
   }
 end
 
+local chromeAdapter = function()
+  dap.adapters["pwa-chrome"] = {
+    type = "executable",
+    command = "node",
+    args = { os.getenv "HOME" .. "/Developer/debuggers/js-debug/src/dapDebugServer.js" },
+  }
+end
+
 -- Configurations
 local javascriptConfigurations = function()
   dap.configurations.javascript = {
     {
+      name = "Launch file",
       type = "pwa-node",
       request = "launch",
-      name = "Launch file",
       program = "${file}",
       cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+    },
+    {
+      name = "Attach to Node",
+      type = "pwa-node",
+      request = "attach",
+      processId = require("dap.utils").pick_process,
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+    },
+    {
+      type = "pwa-chrome",
+      request = "launch",
+      name = "Launch & Debug Chrome",
+      url = function()
+        local co = coroutine.running()
+        return coroutine.create(function()
+          vim.ui.input({
+            prompt = "Enter URL: ",
+            default = "http://localhost:3000",
+          }, function(url)
+            if url == nil or url == "" then
+              return
+            else
+              coroutine.resume(co, url)
+            end
+          end)
+        end)
+      end,
+      webRoot = vim.fn.getcwd(),
+      protocol = "inspector",
+      sourceMaps = true,
+      userDataDir = false,
+    },
+    -- Divider for the launch.json derived configs
+    {
+      name = "----- ↓ launch.json configs ↓ -----",
+      type = "",
+      request = "launch",
     },
   }
 end
@@ -60,18 +107,46 @@ local typescriptConfigurations = function()
       runtimeExecutable = "tsx",
       args = { "--inspect", "${file}" },
       skipFiles = { "node_modules/**" },
-      console = "integratedTerminal",
       cwd = "${workspaceFolder}",
-      sourceMap = true,
+      console = "integratedTerminal",
     },
     {
       name = "Attach to Node",
       type = "pwa-node",
       request = "attach",
       processId = require("dap.utils").pick_process,
-      sourceMap = true,
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
+    },
+    {
+      type = "pwa-chrome",
+      request = "launch",
+      name = "Launch & Debug Chrome",
+      url = function()
+        local co = coroutine.running()
+        return coroutine.create(function()
+          vim.ui.input({
+            prompt = "Enter URL: ",
+            default = "http://localhost:3000",
+          }, function(url)
+            if url == nil or url == "" then
+              return
+            else
+              coroutine.resume(co, url)
+            end
+          end)
+        end)
+      end,
+      webRoot = vim.fn.getcwd(),
+      protocol = "inspector",
+      sourceMaps = true,
+      userDataDir = false,
+    },
+    -- Divider for the launch.json derived configs
+    {
+      name = "----- ↓ launch.json configs ↓ -----",
+      type = "",
+      request = "launch",
     },
   }
 end
@@ -80,6 +155,7 @@ M.setup_adapters = function()
   dartAdapter()
   flutterAdapter()
   javascriptAdapter()
+  chromeAdapter()
 end
 
 M.setup_configurations = function()
