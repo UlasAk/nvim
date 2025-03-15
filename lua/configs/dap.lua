@@ -56,6 +56,7 @@ local javascriptConfigurations = function()
       program = "${file}",
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
+      sourceMaps = true,
     },
     {
       name = "Attach to Node",
@@ -109,6 +110,7 @@ local typescriptConfigurations = function()
       skipFiles = { "node_modules/**" },
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
+      sourceMaps = true,
     },
     {
       name = "Launch Nodemon",
@@ -119,6 +121,7 @@ local typescriptConfigurations = function()
       skipFiles = { "node_modules/**" },
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
+      sourceMaps = true,
     },
     {
       name = "Attach to Node",
