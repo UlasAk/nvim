@@ -25,6 +25,7 @@ return {
     config = function()
       local dap_config = require "configs.dap"
       dap_config.setup_adapters()
+      dap_config.setup_configurations()
       dap_config.setup_colors()
     end,
   },
