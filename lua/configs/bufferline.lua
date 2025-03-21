@@ -304,6 +304,13 @@ M.setup_custom_colors = function()
     vim.api.nvim_set_hl(0, "BufferLineSeparator", {
       fg = "#ffffff",
     })
+    vim.api.nvim_set_hl(0, "BufferLineBufferSelected", {
+      fg = "#e0e2ea",
+      sp = "#e0e2ea",
+      bold = true,
+      italic = true,
+      underline = true,
+    })
   end)
 end
 
