@@ -5,11 +5,60 @@ return {
     keys = {
       { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
+      {
+        "<leader>dbc",
+        function()
+          require("dap").set_breakpoint(vim.fn.input "Breakpoint condition")
+        end,
+        desc = "Debug Breakpoint with condition",
+      },
       { "<leader>dba", "<cmd>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
       { "<leader>dc", "<cmd>DapContinue<CR>", desc = "Debug Continue" },
+      {
+        "<leader>dC",
+        function()
+          require("dap").run_to_cursor()
+        end,
+        desc = "Debug Continue to cursor",
+      },
+      {
+        "<leader>dp",
+        function()
+          require("dap").pause()
+        end,
+        desc = "Debug Pause",
+      },
+      {
+        "<leader>dC",
+        function()
+          require("dap").run_to_cursor()
+        end,
+        desc = "Debug Continue to cursor",
+      },
+      {
+        "<leader>dk",
+        function()
+          require("dap").up()
+        end,
+        desc = "Debug Up",
+      },
+      {
+        "<leader>dj",
+        function()
+          require("dap").down()
+        end,
+        desc = "Debug Down",
+      },
       { "<leader>dsov", "<cmd>DapStepOver<CR>", desc = "Debug Step Over" },
       { "<leader>dsou", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
       { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
+      {
+        "<leader>dh",
+        function()
+          require("dap.ui.widgets").hover()
+        end,
+        desc = "Debug Widgets hover",
+      },
       { "<leader>dr", "<cmd>DapToggleRepl<CR>", desc = "Debug Toggle Repl" },
       { "<leader>dd", "<cmd>DapDisconnect<CR>", desc = "Debug Disconnect" },
       { "<leader>dt", "<cmd>DapTerminate<CR>", desc = "Debug Terminate" },
