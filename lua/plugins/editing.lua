@@ -301,4 +301,21 @@ return {
     keys = {},
     opts = {},
   },
+  {
+    "gbprod/yanky.nvim",
+    event = { "BufEnter", "BufNew" },
+    keys = {
+      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Yanky Put After" },
+      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Yanky Put Before" },
+      { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Yanky G Put After" },
+      { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Yanky G Put Before" },
+      { "<c-p>", "<Plug>(YankyPreviousEntry)", desc = "Yanky Previous Entry" },
+      { "<c-n>", "<Plug>(YankyNextEntry)", desc = "Yanky Next Entry" },
+    },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
 }
