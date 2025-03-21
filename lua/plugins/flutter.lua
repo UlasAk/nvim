@@ -25,7 +25,13 @@ return {
       { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
       { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
       { "<leader>flh", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
-      { "<leader>flt", "<cmd>FlutterDevTools<CR>", desc = "Flutter Dev Tools" },
+      {
+        "<leader>flt",
+        function()
+          require("flutter-tools.commands").open_dev_tools()
+        end,
+        desc = "Flutter Open Dev Tools",
+      },
       { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
