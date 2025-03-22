@@ -356,4 +356,30 @@ return {
       require("telescope").load_extension "i23"
     end,
   },
+  {
+    "allaman/emoji.nvim",
+    keys = {
+      {
+        "<leader>fe",
+        function()
+          require("telescope").extensions.emoji.emoji()
+        end,
+        desc = "Telescope Emoji",
+      },
+    },
+    dependencies = {
+      -- util for handling paths
+      "nvim-lua/plenary.nvim",
+      -- optional for nvim-cmp integration
+      -- "hrsh7th/nvim-cmp",
+      -- optional for telescope integration
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {},
+    config = function(_, opts)
+      require("emoji").setup(opts)
+      -- optional for telescope integration
+      require("telescope").load_extension "emoji"
+    end,
+  },
 }
