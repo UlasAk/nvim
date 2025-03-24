@@ -27,6 +27,18 @@ return {
         end,
         desc = "General Format file",
       },
+      {
+        "<leader>tf",
+        function()
+          if vim.g.disable_autoformat then
+            vim.g.disable_autoformat = false
+          else
+            vim.g.disable_autoformat = true
+          end
+          vim.notify((vim.g.disable_autoformat and "Disabled" or "Enabled") .. " format on save")
+        end,
+        desc = "Toggle Format on save",
+      },
     },
     opts = function()
       return require("configs.conform").options

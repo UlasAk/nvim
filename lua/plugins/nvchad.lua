@@ -131,21 +131,21 @@ return {
     dependencies = { "nvchad/ui" },
     keys = {
       {
-        "<leader>th",
+        "<leader>Th",
         function()
           require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
         end,
         desc = "Terminal Toggle horizontal term",
       },
       {
-        "<leader>tv",
+        "<leader>Tv",
         function()
           require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm" }
         end,
         desc = "Terminal Toggle vertical term",
       },
       {
-        "<leader>tf",
+        "<leader>Tf",
         function()
           require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
         end,
