@@ -62,7 +62,7 @@ local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
 -- vim window options
-vim.opt.colorcolumn = "160"
+-- vim.opt.colorcolumn = "160"
 vim.g.nvim_terminal_default_window_settings = {
   window = {
     width = 60,
