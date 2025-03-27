@@ -64,3 +64,8 @@ map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnos
 
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
+
+-- Deleted Keymaps
+local del = vim.keymap.del
+del("n", "gcc")
+del("n", "gcu")

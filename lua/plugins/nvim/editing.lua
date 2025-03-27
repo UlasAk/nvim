@@ -24,7 +24,7 @@ return {
     },
     keys = {
       {
-        "<leader>jic",
+        "<leader>gc",
         function()
           local config = { scope = {} }
           config.scope.exclude = { language = {}, node_type = {} }
@@ -39,7 +39,7 @@ return {
             end
           end
         end,
-        desc = "Jump Inner Context",
+        desc = "Goto Inner Context",
       },
     },
     config = function(_, opts)
@@ -63,23 +63,28 @@ return {
     end,
   },
   {
-    "numToStr/Comment.nvim",
+    "numtostr/comment.nvim",
     keys = {
       {
         "<leader>/",
         function()
-          require("Comment.api").toggle.linewise.current()
+          require("comment.api").toggle.linewise.current()
         end,
-        desc = "Comment Toggle",
+        desc = "Toggle Comment",
       },
       {
         "<leader>/",
-        "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-        desc = "Comment Toggle",
+        "<esc><cmd>lua require('comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+        desc = "Toggle Comment",
         mode = "v",
       },
     },
-    opts = {},
+    opts = {
+      mappings = {
+        basic = false,
+        extra = false,
+      },
+    },
   },
   {
     "windwp/nvim-ts-autotag",
