@@ -3,55 +3,19 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     config = function()
-      local lspconfig = require "configs.lsp"
+      local lspconfig = require "lsp-opts"
       lspconfig.defaults()
       lspconfig.setup_keymaps()
     end,
   },
   {
-    "stevearc/conform.nvim",
-    cmd = { "ConformInfo" },
-    ft = function()
-      local filetype_map = require("configs.conform").filetypes
-      local filetypes = {}
-      for key, _ in pairs(filetype_map) do
-        table.insert(filetypes, key)
-      end
-      return filetypes
-    end,
-    keys = {
-      {
-        "<leader>bf",
-        function()
-          require("conform").format { lsp_fallback = true }
-        end,
-        desc = "General Format file",
-      },
-      {
-        "<leader>tf",
-        function()
-          if vim.g.disable_autoformat then
-            vim.g.disable_autoformat = false
-          else
-            vim.g.disable_autoformat = true
-          end
-          vim.notify((vim.g.disable_autoformat and "Disabled" or "Enabled") .. " format on save")
-        end,
-        desc = "Toggle Format on save",
-      },
-    },
-    opts = function()
-      return require("configs.conform").options
-    end,
-  },
-  {
     "mfussenegger/nvim-lint",
     ft = function()
-      return require("configs.mason").get_linter_filetypes()
+      return require("mason-opts").get_linter_filetypes()
     end,
     config = function()
       local lint = require "lint"
-      local mason_config = require "configs.mason"
+      local mason_config = require "mason-opts"
       lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -79,7 +43,7 @@ return {
 
       -- Set global defaults for all servers
       local lspconfig = require "lspconfig"
-      local custom_lspconfig = require "configs.lsp"
+      local custom_lspconfig = require "lsp-opts"
       lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
         capabilities = vim.tbl_deep_extend(
           "force",
@@ -95,13 +59,107 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
-    opts = function()
-      return require "configs.treesitter"
-    end,
+    opts = {
+      ensure_installed = {
+        "angular",
+        "bash",
+        "css",
+        "dart",
+        "dap_repl",
+        "dockerfile",
+        "javascript",
+        "html",
+        "hyprlang",
+        "ini",
+        "json",
+        "json5",
+        "kotlin",
+        -- "latex",
+        "lua",
+        "luadoc",
+        "markdown",
+        "markdown_inline",
+        "printf",
+        "python",
+        "regex",
+        "rust",
+        "ssh_config",
+        "swift",
+        "terraform",
+        "tmux",
+        "toml",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
+
+      highlight = {
+        enable = true,
+        use_languagetree = true,
+      },
+
+      indent = { enable = true },
+    },
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
       dofile(vim.g.base46_cache .. "treesitter")
       require("nvim-treesitter.configs").setup(opts)
+      -- Add Custom Filetypes
+      local function is_hypr_conf(path)
+        return path:match "/hypr/" and path:match "%.conf$"
+      end
+
+      local function is_tmux_conf(path)
+        return path:match "%tmux.conf$"
+      end
+
+      local function check_yaml_file(path)
+        if path:match ".*docker.*compose.*$" and (path:match "%.yaml$" or path:match "%.yml$") then
+          return "yaml.docker-compose"
+        end
+        return "yaml"
+      end
+
+      vim.filetype.add {
+        pattern = {
+          -- [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `angular` if it matches the pattern
+          [".*%.yaml"] = function(path, _)
+            return check_yaml_file(path)
+          end,
+          [".*%.yml"] = function(path, _)
+            return check_yaml_file(path)
+          end,
+          [".*%.conf"] = function(path, _)
+            if is_hypr_conf(path) then
+              return "hyprlang"
+            elseif is_tmux_conf(path) then
+              return "tmux"
+            else
+              return "dosini"
+            end
+          end,
+        },
+      }
+
+      -- Angular
+      local function is_angular_template(path)
+        return path:match "%.component%.html$"
+      end
+      vim.api.nvim_create_augroup("AngularTemplates", {})
+      vim.api.nvim_create_autocmd({ "BufRead", "BufEnter", "BufNewFile" }, {
+        pattern = "*.component.html",
+        callback = function()
+          -- Setze den Dateityp auf HTML, damit HTML-Plugins funktionieren
+          vim.bo.filetype = "html"
+
+          -- Speziell für Treesitter auf Angular setzen
+          if is_angular_template(vim.fn.expand "<afile>:p") then
+            vim.cmd "set filetype=htmlangular"
+          end
+        end,
+        group = "AngularTemplates",
+      })
     end,
   },
   {
@@ -246,11 +304,11 @@ return {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
-      return require "configs.mason"
+      return require "mason-opts"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "mason")
-      require("mason").setup(opts)
+      require("mason").setup(opts.options)
 
       -- custom nvchad cmd to install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -265,10 +323,10 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     ft = function()
-      return require("configs.mason").get_lsp_filetypes()
+      return require("mason-opts").get_lsp_filetypes()
     end,
     opts = function()
-      local mason_opts = require "configs.mason"
+      local mason_opts = require "mason-opts"
       return {
         ensure_installed = mason_opts.options.ensure_installed,
         automatic_installation = true,

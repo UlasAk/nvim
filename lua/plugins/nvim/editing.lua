@@ -117,12 +117,6 @@ return {
     },
   },
   {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "BufEnter",
-    opts = {},
-  },
-  {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",

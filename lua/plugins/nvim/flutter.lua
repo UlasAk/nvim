@@ -35,7 +35,7 @@ return {
       { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
-      local lspconfig = require "configs.lsp"
+      local lspconfig = require "lsp-opts"
       return {
         ui = {
           -- the border type to use for all floating windows, the same options/formats

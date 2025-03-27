@@ -13,7 +13,7 @@ return {
     event = "BufEnter *Cargo.toml",
     ft = "rust",
     config = function()
-      local lspconfig = require "configs.lsp"
+      local lspconfig = require "lsp-opts"
       vim.g.rustaceanvim = {
         server = {
           autostart = true,
@@ -50,7 +50,7 @@ return {
       },
     },
     opts = function()
-      local on_attach = require("configs.lsp").on_attach
+      local on_attach = require("lsp-opts").on_attach
       return {
         lsp = {
           enabled = true,

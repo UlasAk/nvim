@@ -84,7 +84,115 @@ return {
       { "<leader>fhi", "<cmd>Telescope highlights<CR>", desc = "Telescope Highlights" },
     },
     opts = function()
-      return require "configs.telescope"
+      local function flash(prompt_bufnr)
+        require("flash").jump {
+          pattern = "^",
+          label = { after = { 0, 0 } },
+          search = {
+            mode = "search",
+            exclude = {
+              function(win)
+                return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+              end,
+            },
+          },
+          action = function(match)
+            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+            picker:set_selection(match.pos[1] - 1)
+          end,
+        }
+      end
+
+      return {
+        pickers = {
+          live_grep = {
+            additional_args = { "--no-ignore", "--hidden" },
+            file_ignore_patterns = {},
+          },
+          find_file = {
+            hidden = false,
+          },
+        },
+        defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "-L",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
+          prompt_prefix = "   ",
+          selection_caret = "  ",
+          entry_prefix = "  ",
+          initial_mode = "insert",
+          selection_strategy = "reset",
+          sorting_strategy = "ascending",
+          layout_strategy = "horizontal",
+          layout_config = {
+            horizontal = {
+              prompt_position = "top",
+              preview_width = 0.4,
+            },
+            vertical = {
+              mirror = false,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
+          },
+          file_sorter = require("telescope.sorters").get_fuzzy_file,
+          file_ignore_patterns = { ".git", ".angular" },
+          path_display = { "truncate", "filename_first" },
+          winblend = 0,
+          border = {},
+          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+          color_devicons = true,
+          set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+          file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+          grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+          qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+          -- Developer configurations: Not meant for general override
+          buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+          mappings = {
+            i = {
+              ["<C-Down>"] = require("telescope.actions").preview_scrolling_down,
+              ["<C-Up>"] = require("telescope.actions").preview_scrolling_up,
+              ["<C-Left>"] = require("telescope.actions").preview_scrolling_left,
+              ["<C-Right>"] = require("telescope.actions").preview_scrolling_right,
+              ["<C-q>"] = require("telescope.actions").close,
+              ["<C-f>"] = flash,
+            },
+            n = {
+              ["q"] = require("telescope.actions").close,
+              m = flash,
+              ["<C-Down>"] = require("telescope.actions").preview_scrolling_down,
+              ["<C-Up>"] = require("telescope.actions").preview_scrolling_up,
+              ["<C-Left>"] = require("telescope.actions").preview_scrolling_left,
+              ["<C-Right>"] = require("telescope.actions").preview_scrolling_right,
+            },
+          },
+        },
+
+        extensions_list = { "themes", "terms" },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+          media_files = {
+            filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "webm", "mp4" },
+            find_cmd = "rg",
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {},
+          },
+        },
+      }
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "telescope")
@@ -160,7 +268,76 @@ return {
         desc = "Lsp Code action",
       },
     },
-    opts = require "configs.actions-preview",
+    opts = {
+      -- options for vim.diff(): https://neovim.io/doc/user/lua.html#vim.diff()
+      diff = {
+        ctxlen = 3,
+      },
+
+      -- priority list of external command to highlight diff
+      -- disabled by defalt, must be set by yourself
+      highlight_command = {
+        -- require("actions-preview.highlight").delta(),
+        -- require("actions-preview.highlight").diff_so_fancy(),
+        -- require("actions-preview.highlight").diff_highlight(),
+      },
+
+      -- priority list of preferred backend
+      backend = { "telescope", "nui" },
+
+      -- options related to telescope.nvim
+      telescope = vim.tbl_extend(
+        "force",
+        -- telescope theme: https://github.com/nvim-telescope/telescope.nvim#themes
+        require("telescope.themes").get_dropdown(),
+        -- a table for customizing content
+        {
+          -- a function to make a table containing the values to be displayed.
+          -- fun(action: Action): { title: string, client_name: string|nil }
+          make_value = nil,
+
+          -- a function to make a function to be used in `display` of a entry.
+          -- see also `:h telescope.make_entry` and `:h telescope.pickers.entry_display`.
+          -- fun(values: { index: integer, action: Action, title: string, client_name: string }[]): function
+          make_make_display = nil,
+        }
+      ),
+
+      -- options for nui.nvim components
+      nui = {
+        -- component direction. "col" or "row"
+        dir = "col",
+        -- keymap for selection component: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/menu#keymap
+        keymap = nil,
+        -- options for nui Layout component: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/layout
+        layout = {
+          position = "50%",
+          size = {
+            width = "60%",
+            height = "90%",
+          },
+          min_width = 40,
+          min_height = 10,
+          relative = "editor",
+        },
+        -- options for preview area: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/popup
+        preview = {
+          size = "60%",
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
+        -- options for selection area: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/menu
+        select = {
+          size = "40%",
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
+      },
+    },
   },
   {
     "nvim-telescope/telescope-media-files.nvim",

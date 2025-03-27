@@ -1,5 +1,8 @@
 local map = vim.keymap.set
 
+-- Lazy
+map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
+
 -- Buffer
 map("n", "<leader>w", "<cmd>w<CR>", { desc = "Buffer Save" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })

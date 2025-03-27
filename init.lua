@@ -22,14 +22,79 @@ vim.opt.rtp:prepend(lazypath)
 -- load options
 require "options"
 
+local lazy_spec = {
+  {
+    import = "plugins.globals",
+  },
+  {
+    import = "plugins.firenvim",
+  },
+}
+
+local opened_by_firenvim = vim.g.started_by_firenvim == true
+
+if not opened_by_firenvim then
+  table.insert(lazy_spec, {
+    import = "plugins.nvim",
+  })
+end
+
 -- load plugins
 require("lazy").setup({
-  spec = {
-    {
-      import = "plugins",
+  spec = lazy_spec,
+}, {
+  defaults = { lazy = true },
+  install = { colorscheme = { "nvchad" } },
+
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
     },
   },
-}, require "configs.lazy")
+
+  checker = { enabled = true },
+
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+        "tutor",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
+      },
+    },
+  },
+  rocks = {
+    enabled = true,
+    hererocks = true,
+  },
+})
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
