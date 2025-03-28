@@ -88,7 +88,7 @@ return {
         },
         flutter_path = nil, -- <-- this takes priority over the lookup
         flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
-        root_patterns = { ".git" }, -- patterns to find the root of your flutter project
+        root_patterns = { ".git", "android", "ios", "macos", "linux" }, -- patterns to find the root of your flutter project
         fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
         widget_guides = {
           enabled = true,
