@@ -15,6 +15,7 @@ return {
   },
   {
     "voxelprismatic/rabbit.nvim",
+    event = { "BufEnter", "BufNew" },
     keys = {
       { "<leader>r", "<cmd>Rabbit<CR>", desc = "Jump Rabbit" },
     },
