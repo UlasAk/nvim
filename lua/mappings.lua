@@ -4,7 +4,7 @@ local map = vim.keymap.set
 map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
 
 -- Buffer
-map("n", "<leader>w", "<cmd>w<CR>", { desc = "Buffer Save" })
+-- map("n", "<leader>w", "<cmd>w<CR>", { desc = "Buffer Save" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 -- map("n", "<C-K>", "<C-y>", { desc = "Buffer Scroll up one line", noremap = true })
 -- map("n", "<C-J>", "<C-e>", { desc = "Buffer Scroll down one line", noremap = true })
@@ -36,6 +36,8 @@ map("n", "<C-M-Right>", "<cmd> vertical resize +10<CR>", { desc = "Window Increa
 map("n", "<C-M-Left>", "<cmd> vertical resize -10<CR>", { desc = "Window Decrease width" })
 map("n", "<C-M-Up>", "<cmd> resize +5<CR>", { desc = "Window Increase height" })
 map("n", "<C-M-Down>", "<cmd> resize -5<CR>", { desc = "Window Decrease height" })
+map("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
+map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 
 -- File operations
 -- map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
