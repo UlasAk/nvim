@@ -305,24 +305,13 @@ M.defaults = function()
   dofile(vim.g.base46_cache .. "lsp")
   local lspconfig = require "lspconfig"
   -- Diagnostic Signs
-  local function lspSymbol(name, icon)
-    local hl = "DiagnosticSign" .. name
-    vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
-  end
-  lspSymbol("Error", "󰅙")
-  lspSymbol("Info", "󰋼")
-  lspSymbol("Hint", "󰌵")
-  lspSymbol("Warn", "")
+  local x = vim.diagnostic.severity
+
   vim.diagnostic.config {
-    virtual_text = {
-      prefix = "",
-    },
-    signs = true,
+    virtual_text = { prefix = "" },
+    signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
     underline = true,
-    -- update_in_insert = false,
-    float = {
-      border = "single",
-    },
+    float = { border = "single" },
   }
 
   --  LspInfo window borders
