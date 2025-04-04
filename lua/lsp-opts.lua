@@ -325,7 +325,8 @@ M.defaults = function()
   end
 
   -- LSPs without specific config
-  local lsp_servers = { "cssls", "docker_compose_language_service", "jsonls", "kotlin_language_server", "terraformls" }
+  local lsp_servers =
+    { "cssls", "docker_compose_language_service", "hyprls", "jsonls", "kotlin_language_server", "terraformls" }
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
