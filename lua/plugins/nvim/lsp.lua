@@ -63,6 +63,7 @@ return {
       ensure_installed = {
         "angular",
         "bash",
+        "c_sharp",
         "css",
         "dart",
         "dap_repl",
