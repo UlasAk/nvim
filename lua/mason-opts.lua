@@ -20,7 +20,6 @@ M.filetype_lsp_map = {
     "typescriptreactml",
   },
   jsonls = "json",
-  roslyn = "cs",
   rust_analyzer = "rust",
   terraformls = "tf",
   ts_ls = "typescript",
