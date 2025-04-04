@@ -67,6 +67,11 @@ map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnos
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 
+-- Transparency
+map("n", "<leader>tt", function()
+  require("colors").toggle_transparency()
+end, { desc = "Toggle Transparency" })
+
 -- Deleted Keymaps
 local del = vim.keymap.del
 del("n", "gcc")

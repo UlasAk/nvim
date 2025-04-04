@@ -67,7 +67,8 @@ end
 
 M.toggle_transparency = function()
   M.transparent = not M.transparent
-  require("chadrc").base46.transparency = M.transparent
+  require("base46").toggle_transparency()
+  require("transparent").toggle(M.transparent)
 end
 
 return M
