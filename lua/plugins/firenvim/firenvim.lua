@@ -12,6 +12,10 @@ if opened_by_firenvim then
     nested = true,
     command = "silent write",
   })
+  vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = "github.com_*.txt",
+    command = "set filetype=markdown",
+  })
   -- for large buffers
   -- vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
   --   callback = function(_)
@@ -27,18 +31,18 @@ if opened_by_firenvim then
   -- })
 
   -- mappings
+  local map = vim.keymap.set
+  map("n", "<CR>", "ZZ", { desc = "Save and Exit" })
 end
 
 return {
   {
     "glacambre/firenvim",
-    cond = opened_by_firenvim,
-    build = ":call firenvim#install(0)",
-    config = function()
-      vim.api.nvim_create_autocmd({ "BufEnter" }, {
-        pattern = "github.com_*.txt",
-        command = "set filetype=markdown",
-      })
+    cond = function()
+      local status, _ = pcall(require, "firenvim")
+      return opened_by_firenvim or not status
     end,
+    build = ":call firenvim#install(0)",
+    config = function() end,
   },
 }
