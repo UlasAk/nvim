@@ -108,7 +108,10 @@ return {
           port = "${port}",
           executable = {
             command = "node",
-            args = { os.getenv "HOME" .. "/Developer/debuggers/js-debug/src/dapDebugServer.js", "${port}" },
+            args = {
+              os.getenv "HOME" .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+              "${port}",
+            },
           },
         }
       end
@@ -117,7 +120,9 @@ return {
         dap.adapters["pwa-chrome"] = {
           type = "executable",
           command = "node",
-          args = { os.getenv "HOME" .. "/Developer/debuggers/js-debug/src/dapDebugServer.js" },
+          args = {
+            os.getenv "HOME" .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+          },
         }
       end
 

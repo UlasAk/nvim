@@ -108,6 +108,7 @@ M.options = {
     "dockerfile-language-server",
     "emmet-language-server",
     "hyprls",
+    "js-debug-adapter",
     "json-lsp",
     -- "latexindent",
     -- "ltex-ls",
