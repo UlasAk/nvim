@@ -41,7 +41,7 @@ return {
           else
             vim.g.disable_autoformat = true
           end
-          vim.notify((vim.g.disable_autoformat and "Disabled" or "Enabled") .. " format on save")
+          Snacks.notify((vim.g.disable_autoformat and "Disabled" or "Enabled"), { title = "Format on save" })
         end,
         desc = "Toggle Format on save",
       },
