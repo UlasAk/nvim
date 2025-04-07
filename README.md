@@ -2,6 +2,7 @@
 
 ## Needed Packages
 - fzf
+- go
 - node/npm
 - ripgrep
 - yazi
