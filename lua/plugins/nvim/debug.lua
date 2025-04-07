@@ -107,9 +107,8 @@ return {
           host = "localhost",
           port = "${port}",
           executable = {
-            command = "node",
+            command = "js-debug-adapter",
             args = {
-              os.getenv "HOME" .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
               "${port}",
             },
           },
@@ -119,10 +118,7 @@ return {
       local chromeAdapter = function()
         dap.adapters["pwa-chrome"] = {
           type = "executable",
-          command = "node",
-          args = {
-            os.getenv "HOME" .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
-          },
+          command = "js-debug-adapter",
         }
       end
 
@@ -193,7 +189,18 @@ return {
             sourceMaps = true,
           },
           {
-            name = "Launch Nodemon",
+            name = "Launch Nodemon (npx)",
+            type = "pwa-node",
+            request = "launch",
+            runtimeExecutable = "npx",
+            args = { "nodemon", "--watch", "src/**/*.ts", "--exec", "npx", "ts-node", "${file}" },
+            skipFiles = { "node_modules/**" },
+            cwd = "${workspaceFolder}",
+            console = "integratedTerminal",
+            sourceMaps = true,
+          },
+          {
+            name = "Launch Nodemon (global)",
             type = "pwa-node",
             request = "launch",
             runtimeExecutable = "nodemon",
