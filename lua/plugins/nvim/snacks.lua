@@ -87,7 +87,7 @@ local options = {
       end
       return vim.fn.getcmdpos() > 0
     end,
-    style = "compact",
+    style = "fancy",
     top_down = true, -- place notifications from top to bottom
     date_format = "%R", -- time format for notifications
     refresh = 50, -- refresh at most every 50ms
