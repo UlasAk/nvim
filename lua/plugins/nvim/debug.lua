@@ -112,14 +112,33 @@ return {
               "${port}",
             },
           },
+          enrich_config = function(config, on_config)
+            config.type = "pwa-node"
+            on_config(config)
+          end,
         }
+
+        dap.adapters["node"] = dap.adapters["pwa-node"]
       end
 
       local chromeAdapter = function()
         dap.adapters["pwa-chrome"] = {
           type = "executable",
-          command = "js-debug-adapter",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "js-debug-adapter",
+            args = {
+              "${port}",
+            },
+          },
+          enrich_config = function(config, on_config)
+            config.type = "pwa-chrome"
+            on_config(config)
+          end,
         }
+
+        dap.adapters["chrome"] = dap.adapters["pwa-chrome"]
       end
 
       -- Configurations
@@ -263,25 +282,44 @@ return {
         typescriptConfigurations()
         -- VSCode configurations
         local vscode = require "dap.ext.vscode"
-        local json = require "plenary.json"
         vscode.json_decode = function(str)
-          return vim.json.decode(json.json_strip_comments(str))
+          return require("json5").parse(str)
         end
+        require("dap.ext.vscode").load_launchjs()
       end
 
       M.setup_colors = function()
         vim.api.nvim_set_hl(0, "SignColumn", {
           fg = "#bbbbbb",
         })
+        vim.api.nvim_set_hl(0, "DapBreakpoint", {
+          fg = "#abe9b3",
+        })
+        vim.api.nvim_set_hl(0, "DapLogPoint", {
+          fg = "#89dceb",
+        })
+        vim.api.nvim_set_hl(0, "DapStopped", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "DapBreakpointRejected", {
+          fg = "#fdfd96",
+        })
       end
 
       return M
     end,
     config = function(_, opts)
+      vim.fn.sign_define("DapBreakpoint", { text = "󰙧", numhl = "DapBreakpoint", texthl = "DapBreakpoint" })
+      vim.fn.sign_define("DagLogPoint", { text = "", numhl = "DapLogPoint", texthl = "DapLogPoint" })
+      vim.fn.sign_define("DapStopped", { text = "", numhl = "DapStopped", texthl = "DapStopped" })
+      vim.fn.sign_define(
+        "DapBreakpointRejected",
+        { text = "", numhl = "DapBreakpointRejected", texthl = "DapBreakpointRejected" }
+      )
       local dap_config = opts
+      dap_config.setup_colors()
       dap_config.setup_adapters()
       dap_config.setup_configurations()
-      dap_config.setup_colors()
     end,
   },
   {
