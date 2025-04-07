@@ -289,7 +289,7 @@ M.setup_keymaps = function()
     rename()
   end, opts "Lsp Rename")
 
-  map("n", "<leader>lsr", function()
+  map("n", "<leader>lgr", function()
     require("telescope.builtin").lsp_references {
       initial_mode = "normal",
       layout_config = {
