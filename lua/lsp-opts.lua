@@ -299,6 +299,11 @@ M.setup_keymaps = function()
       },
     }
   end, opts "Lsp Show references")
+
+  map("n", "<leader>li", function()
+    local enabled = vim.lsp.inlay_hint.is_enabled()
+    vim.lsp.inlay_hint.enable(not enabled)
+  end, opts "Lsp Toggle inlay hints")
 end
 
 M.defaults = function()
