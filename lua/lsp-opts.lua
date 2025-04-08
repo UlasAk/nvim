@@ -3,44 +3,46 @@ local map = vim.keymap.set
 local conf = require("nvconfig").lsp
 
 -- Signature help
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "single",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "single",
-  focusable = false,
-  relative = "cursor",
-  silent = true,
-})
-
 local signature_help = {}
+vim.opt.winborder = "rounded"
 
 signature_help.check_triggeredChars = function(triggerChars)
-  local cur_line = vim.api.nvim_get_current_line()
-  local pos = vim.api.nvim_win_get_cursor(0)[2]
-
-  cur_line = cur_line:gsub("%s+$", "") -- rm trailing spaces
+  local api = vim.api
+  local cur_line = api.nvim_get_current_line()
+  local pos = api.nvim_win_get_cursor(0)[2]
+  local prev_char = cur_line:sub(pos - 1, pos - 1)
+  local cur_char = cur_line:sub(pos, pos)
 
   for _, char in ipairs(triggerChars) do
-    if cur_line:sub(pos, pos) == char then
+    if cur_char == char or prev_char == char then
       return true
     end
   end
 end
 
 signature_help.setup = function(client, bufnr)
-  local group = vim.api.nvim_create_augroup("LspSignature", { clear = false })
-  vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
+  local api = vim.api
+  local group = api.nvim_create_augroup("LspSignature", { clear = false })
+  api.nvim_clear_autocmds { group = group, buffer = bufnr }
 
   local triggerChars = client.server_capabilities.signatureHelpProvider.triggerCharacters
 
-  vim.api.nvim_create_autocmd("TextChangedI", {
+  vim.api.nvim_set_hl(0, "FloatBorder", {
+    fg = "#fdfd96",
+  })
+
+  api.nvim_create_autocmd("TextChangedI", {
     group = group,
     buffer = bufnr,
     callback = function()
       if signature_help.check_triggeredChars(triggerChars) then
-        vim.lsp.buf.signature_help()
+        vim.lsp.buf.signature_help {
+          focus = false,
+          border = "rounded",
+          focusable = true,
+          silent = true,
+          max_height = 7,
+        }
       end
     end,
   })
