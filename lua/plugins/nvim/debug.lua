@@ -1,7 +1,10 @@
 return {
   {
     "mfussenegger/nvim-dap",
-    event = "LspAttach",
+    dependencies = {
+      "Joakker/lua-json5",
+      "stevearc/overseer.nvim",
+    },
     keys = {
       { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
@@ -397,6 +400,22 @@ return {
       vim.api.nvim_create_user_command("DapReplHighlightsSetup", function()
         require("nvim-dap-repl-highlights").setup_highlights()
       end, {})
+    end,
+  },
+  {
+    "stevearc/overseer.nvim",
+    opts = { templates = { "builtin" } },
+    config = function(_, opts)
+      local overseer = require "overseer"
+      overseer.setup(opts)
+      overseer.register_template {
+        name = "tsc: build - tsconfig.build.json",
+        builder = function()
+          return {
+            cmd = { "npx", "tsc", "-p", "tsconfig.build.json" },
+          }
+        end,
+      }
     end,
   },
 }
