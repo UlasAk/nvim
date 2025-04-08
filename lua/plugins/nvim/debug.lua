@@ -117,6 +117,11 @@ return {
           },
           enrich_config = function(config, on_config)
             config.type = "pwa-node"
+            -- TODO: fix for launching vscode launch.js configurations
+            -- if config.program ~= nil and string.match(config.program, "%.ts$") then
+            --   config.runtimeExecutable = "nodemon"
+            --   config.args = { "--watch", "src/**/*.ts", "--exec", "npx", "ts-node", "${file}" }
+            -- end
             on_config(config)
           end,
         }
