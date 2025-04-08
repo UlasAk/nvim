@@ -22,6 +22,7 @@ return {
         desc = "Telescope Flutter commands",
       },
       { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
+      { "<leader>fle", "<cmd>FlutterEmulators<CR>", desc = "Flutter Emulators" },
       { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
       { "<leader>flh", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
       {
