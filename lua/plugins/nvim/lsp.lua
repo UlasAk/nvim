@@ -4,6 +4,7 @@ return {
     event = "BufReadPost",
     config = function()
       local lspconfig = require "lsp-opts"
+      lspconfig.setup_colors()
       lspconfig.defaults()
       lspconfig.setup_keymaps()
     end,

@@ -4,7 +4,6 @@ local conf = require("nvconfig").lsp
 
 -- Signature help
 local signature_help = {}
-vim.opt.winborder = "rounded"
 
 signature_help.check_triggeredChars = function(triggerChars)
   local api = vim.api
@@ -27,21 +26,13 @@ signature_help.setup = function(client, bufnr)
 
   local triggerChars = client.server_capabilities.signatureHelpProvider.triggerCharacters
 
-  vim.api.nvim_set_hl(0, "FloatBorder", {
-    fg = "#fdfd96",
-  })
-
   api.nvim_create_autocmd("TextChangedI", {
     group = group,
     buffer = bufnr,
     callback = function()
       if signature_help.check_triggeredChars(triggerChars) then
         vim.lsp.buf.signature_help {
-          focus = false,
           border = "rounded",
-          focusable = true,
-          silent = true,
-          max_height = 7,
         }
       end
     end,
@@ -237,7 +228,11 @@ M.setup_keymaps = function()
   map("n", "<leader>lgvd", function()
     gotoDefinitionInSplit()
   end, opts "Lsp Go to definition")
-  map("n", "<leader>lh", vim.lsp.buf.hover, opts "Lsp hover information")
+  map("n", "<leader>lh", function()
+    vim.lsp.buf.hover {
+      border = "rounded",
+    }
+  end, opts "Lsp hover information")
   map("n", "<leader>lgi", function()
     require("telescope.builtin").lsp_implementations {
       initial_mode = "normal",
@@ -268,7 +263,11 @@ M.setup_keymaps = function()
       },
     }
   end, opts "Lsp Go to outgoing calls")
-  map("n", "<leader>lsh", vim.lsp.buf.signature_help, opts "Lsp Show signature help")
+  map("n", "<leader>lsh", function()
+    vim.lsp.buf.signature_help {
+      border = "rounded",
+    }
+  end, opts "Lsp Show signature help")
   map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts "Lsp Add workspace folder")
   map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts "Lsp Remove workspace folder")
 
@@ -306,6 +305,12 @@ M.setup_keymaps = function()
     local enabled = vim.lsp.inlay_hint.is_enabled()
     vim.lsp.inlay_hint.enable(not enabled)
   end, opts "Lsp Toggle inlay hints")
+end
+
+M.setup_colors = function()
+  vim.api.nvim_set_hl(0, "FloatBorder", {
+    fg = "#fdfd96",
+  })
 end
 
 M.defaults = function()
