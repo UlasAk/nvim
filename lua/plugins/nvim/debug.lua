@@ -227,6 +227,17 @@ return {
             sourceMaps = true,
           },
           {
+            name = "Launch Nodemon (npx): src/main.ts",
+            type = "pwa-node",
+            request = "launch",
+            runtimeExecutable = "npx",
+            args = { "nodemon", "--watch", "src/**/*.ts", "--exec", "npx", "ts-node", "${workspaceFolder}/src/main.ts" },
+            skipFiles = { "node_modules/**" },
+            cwd = "${workspaceFolder}",
+            console = "integratedTerminal",
+            sourceMaps = true,
+          },
+          {
             name = "Launch Nodemon (global)",
             type = "pwa-node",
             request = "launch",
