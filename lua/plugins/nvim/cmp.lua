@@ -167,6 +167,7 @@ return {
           },
           { name = "npm" },
           { name = "git" },
+          { name = "html-css" },
         },
       }
 
