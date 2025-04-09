@@ -52,8 +52,8 @@ return {
         end,
         desc = "Debug Down",
       },
-      { "<leader>dsov", "<cmd>DapStepOver<CR>", desc = "Debug Step Over" },
-      { "<leader>dsou", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
+      { "<leader>dso", "<cmd>DapStepOver<CR>", desc = "Debug Step Over" },
+      { "<leader>dsO", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
       { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
       {
         "<leader>dh",
