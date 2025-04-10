@@ -412,6 +412,8 @@ return {
     opts = {
       options = {
         use_icons_from_diagnostic = false,
+        show_source = true,
+        add_messages = true,
         multilines = {
           enabled = true,
           always_show = true,
