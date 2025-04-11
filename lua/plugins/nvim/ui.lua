@@ -159,14 +159,14 @@ return {
         desc = "Buffer Close buffers to the right",
       },
       {
-        "<leader>bl",
+        "<leader>bh",
         function()
           require("bufferline").move(-1)
         end,
         desc = "Buffer Move buffer to left",
       },
       {
-        "<leader>br",
+        "<leader>bl",
         function()
           require("bufferline").move(1)
         end,
