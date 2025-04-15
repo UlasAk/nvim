@@ -1,31 +1,36 @@
 local M = {}
 
-M.filetype_lsp_map = {
-  angularls = "htmlangular",
-  bashls = "sh",
-  cssls = "css",
-  docker_compose_language_service = "yaml.docker-compose",
-  dockerls = "docker",
-  emmet_language_server = {
-    "htmlangular",
-    "htcss",
-    "eruby",
-    "html",
-    "htmldjango",
-    "javascriptreact",
-    "less",
-    "pug",
-    "sass",
-    "scss",
-    "typescriptreactml",
-  },
-  hyprls = "hyprlang",
-  jsonls = "json",
-  rust_analyzer = "rust",
-  terraformls = "tf",
-  ts_ls = "typescript",
-  yamlls = "yaml",
-}
+M.filetype_lsp_map = function()
+  local filetype_table = {
+    angularls = "htmlangular",
+    bashls = "sh",
+    cssls = "css",
+    docker_compose_language_service = "yaml.docker-compose",
+    dockerls = "docker",
+    emmet_language_server = {
+      "htmlangular",
+      "htcss",
+      "eruby",
+      "html",
+      "htmldjango",
+      "javascriptreact",
+      "less",
+      "pug",
+      "sass",
+      "scss",
+      "typescriptreactml",
+    },
+    jsonls = "json",
+    rust_analyzer = "rust",
+    terraformls = "tf",
+    ts_ls = "typescript",
+    yamlls = "yaml",
+  }
+  if vim.fn.executable "go" == 1 then
+    filetype_table.hyprls = "hyprlang"
+  end
+  return filetype_table
+end
 
 M.filetype_linter_map = {
   markdown = "markdownlint",
@@ -33,7 +38,7 @@ M.filetype_linter_map = {
 
 M.get_language_server_names = function()
   local names = {}
-  for lsp, _ in pairs(M.filetype_lsp_map) do
+  for lsp, _ in pairs(M.filetype_lsp_map()) do
     table.insert(names, lsp)
   end
   return names
@@ -63,7 +68,7 @@ end
 
 M.get_lsp_filetypes = function()
   local filetypes = {}
-  for _, entry in pairs(M.filetype_lsp_map) do
+  for _, entry in pairs(M.filetype_lsp_map()) do
     if type(entry) == "table" then
       for _, filetype in pairs(entry) do
         table.insert(filetypes, filetype)
@@ -99,15 +104,14 @@ M.get_filetype_linter_nvim_lint_map = function()
   return result
 end
 
-M.options = {
-  ensure_installed_mason_names = {
+M.get_all_ensure_installed_mason_names = function()
+  local name_table = {
     "angular-language-server",
     "bash-language-server",
     "css-lsp",
     "docker-compose-language-service",
     "dockerfile-language-server",
     "emmet-language-server",
-    "hyprls",
     "js-debug-adapter",
     "json-lsp",
     -- "latexindent",
@@ -125,7 +129,15 @@ M.options = {
     "typescript-language-server",
     "yaml-language-server",
     "yamlfmt",
-  },
+  }
+  if vim.fn.executable "go" == 1 then
+    table.insert(name_table, "hyprls")
+  end
+  return name_table
+end
+
+M.options = {
+  ensure_installed_mason_names = M.get_all_ensure_installed_mason_names(),
   ensure_installed = M.get_language_server_names(),
 
   PATH = "skip",

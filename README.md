@@ -3,10 +3,12 @@
 ## Needed Packages
 - cargo
 - fzf
-- go
 - node/npm
 - ripgrep
 - yazi
+
+## Optional Packages
+- go (for installing hyprls)
 
 ## NPM Packages
 - nodemon
