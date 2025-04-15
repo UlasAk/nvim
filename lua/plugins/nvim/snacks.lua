@@ -13,6 +13,8 @@ local setup_colors = function()
   })
 end
 
+local pause_notifications = false
+
 local options = {
   bigfile = { enabled = false },
   quickfile = { enabled = false },
@@ -64,6 +66,10 @@ local options = {
       trace = " ",
     },
     filter = function(notification)
+      if pause_notifications then
+        return false
+      end
+
       local msg = notification.msg
       -- Hide Dart file close error notifications
       if string.match(msg, "LspDetach") ~= nil then
@@ -79,13 +85,8 @@ local options = {
       if string.match(msg, "OctoEditable") ~= nil then
         return false
       end
+
       return true
-    end,
-    keep = function(notif)
-      if string.match(notif.msg, "Fetching latest versions") ~= nil then
-        return false
-      end
-      return vim.fn.getcmdpos() > 0
     end,
     style = "fancy",
     top_down = false, -- place notifications from top to bottom
@@ -214,6 +215,13 @@ return {
           end
         end,
         desc = "Toggle Scroll Animations",
+      },
+      {
+        "<leader>tn",
+        function()
+          pause_notifications = not pause_notifications
+        end,
+        desc = "Toggle Notifications",
       },
     },
     opts = function()
