@@ -1,10 +1,17 @@
+local dap_dependencies = function()
+  local deps = {
+    "stevearc/overseer.nvim",
+  }
+  if vim.fn.executable "cargo" == 1 then
+    table.insert(deps, "Joakker/lua-json5")
+  end
+  return deps
+end
+
 return {
   {
     "mfussenegger/nvim-dap",
-    dependencies = {
-      "Joakker/lua-json5",
-      "stevearc/overseer.nvim",
-    },
+    dependencies = dap_dependencies(),
     keys = {
       { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
@@ -300,11 +307,14 @@ return {
         javascriptConfigurations()
         typescriptConfigurations()
         -- VSCode configurations
-        local vscode = require "dap.ext.vscode"
-        vscode.json_decode = function(str)
-          return require("json5").parse(str)
+        local ok, parser = pcall(require, "json5")
+        if ok then
+          local vscode = require "dap.ext.vscode"
+          vscode.json_decode = function(str)
+            return parser.parse(str)
+          end
+          require("dap.ext.vscode").load_launchjs()
         end
-        require("dap.ext.vscode").load_launchjs()
       end
 
       M.setup_colors = function()
