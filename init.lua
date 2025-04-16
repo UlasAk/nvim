@@ -40,9 +40,8 @@ if not opened_by_firenvim then
 end
 
 -- load plugins
-require("lazy").setup({
+require("lazy").setup {
   spec = lazy_spec,
-}, {
   defaults = { lazy = true },
   install = { colorscheme = { "nvchad" } },
 
@@ -79,7 +78,6 @@ require("lazy").setup({
         "vimballPlugin",
         "zip",
         "zipPlugin",
-        "tutor",
         "rplugin",
         "syntax",
         "synmenu",
@@ -92,9 +90,8 @@ require("lazy").setup({
   },
   rocks = {
     enabled = true,
-    hererocks = true,
   },
-})
+}
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
