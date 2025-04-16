@@ -32,9 +32,11 @@ M.filetype_lsp_map = function()
   return filetype_table
 end
 
-M.filetype_linter_map = {
-  markdown = "markdownlint",
-}
+M.filetype_linter_map = function()
+  return {
+    markdown = "markdownlint",
+  }
+end
 
 M.get_language_server_names = function()
   local names = {}
@@ -46,7 +48,7 @@ end
 
 M.get_linter_names = function()
   local names = {}
-  for _, entry in pairs(M.filetype_linter_map) do
+  for _, entry in pairs(M.filetype_linter_map()) do
     if type(entry) == "table" then
       for _, linter_name in pairs(entry) do
         table.insert(names, linter_name)
@@ -82,7 +84,7 @@ end
 
 M.get_linter_filetypes = function()
   local filetypes = {}
-  for filetype, _ in pairs(M.filetype_linter_map) do
+  for filetype, _ in pairs(M.filetype_linter_map()) do
     table.insert(filetypes, filetype)
   end
   return filetypes
@@ -90,7 +92,7 @@ end
 
 M.get_filetype_linter_nvim_lint_map = function()
   local result = {}
-  for filetype, linter_name_or_table in pairs(M.filetype_linter_map) do
+  for filetype, linter_name_or_table in pairs(M.filetype_linter_map()) do
     if type(linter_name_or_table) == "table" then
       local linters = {}
       for _, linter in pairs(linter_name_or_table) do
