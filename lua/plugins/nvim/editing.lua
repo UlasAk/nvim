@@ -79,12 +79,7 @@ return {
         mode = "v",
       },
     },
-    opts = {
-      mappings = {
-        basic = false,
-        extra = false,
-      },
-    },
+    opts = {},
   },
   {
     "windwp/nvim-ts-autotag",
@@ -276,10 +271,6 @@ return {
   },
   {
     "sunnytamang/select-undo.nvim",
-    keys = {
-      { "gu" },
-      { "gcu" },
-    },
     cmd = { "SelectUndoLine", "SelectUndoPartial" },
     opts = {
       persistent_undo = true, -- Enables persistent undo history

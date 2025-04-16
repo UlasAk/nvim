@@ -19,8 +19,8 @@ return {
       filters = {
         dotfiles = false,
       },
-      disable_netrw = true,
-      hijack_netrw = true,
+      disable_netrw = false,
+      hijack_netrw = false,
       hijack_cursor = true,
       hijack_unnamed_buffer_when_opening = false,
       sync_root_with_cwd = true,
@@ -138,6 +138,7 @@ return {
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
     cmd = "Oil",
     keys = {
       { "-", "<cmd>Oil<CR>", desc = "Oil Open parent directory" },

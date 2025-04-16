@@ -71,8 +71,3 @@ map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
 map("n", "<leader>tt", function()
   require("colors").toggle_transparency()
 end, { desc = "Toggle Transparency" })
-
--- Deleted Keymaps
-local del = vim.keymap.del
-del("n", "gcc")
-del("n", "gcu")

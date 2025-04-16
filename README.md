@@ -1,13 +1,13 @@
 # Neovim Config
 
 ## Needed Packages
-- cargo
 - fzf
 - node/npm
 - ripgrep
 - yazi
 
 ## Optional Packages
+- cargo (for installing json5 parser to load vscode launch.json)
 - go (for installing hyprls)
 
 ## NPM Packages
