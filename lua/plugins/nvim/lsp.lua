@@ -4,9 +4,9 @@ return {
     event = "BufReadPost",
     config = function()
       local lspconfig = require "lsp-opts"
-      lspconfig.setup_colors()
       lspconfig.defaults()
       lspconfig.setup_keymaps()
+      lspconfig.setup_colors()
     end,
   },
   {
@@ -486,5 +486,16 @@ return {
         },
       }
     end,
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+      hint_prefix = "",
+    },
   },
 }

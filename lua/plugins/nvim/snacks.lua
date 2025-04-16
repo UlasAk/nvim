@@ -86,6 +86,11 @@ local options = {
         return false
       end
 
+      -- Hide lsp_signature related messages
+      if string.match(msg, "lsp_signatur") ~= nil then
+        return false
+      end
+
       return true
     end,
     style = "fancy",
