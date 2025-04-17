@@ -60,8 +60,12 @@ end, { desc = "Toggle Wrap" })
 
 -- Diagnostics
 map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
-map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics Prev diagnostic" })
-map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics Next diagnostic" })
+map("n", "<leader>ldp", function()
+  vim.diagnostic.jump { count = -1 }
+end, { desc = "Diagnostics Prev diagnostic" })
+map("n", "<leader>ldn", function()
+  vim.diagnostic.jump { count = 1 }
+end, { desc = "Diagnostics Next diagnostic" })
 map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnostic loclist" })
 
 -- Terminal
