@@ -4,11 +4,11 @@
 - fzf
 - node/npm
 - ripgrep
-- yazi
 
 ## Optional Packages
 - cargo (for installing json5 parser to load vscode launch.json)
 - go (for installing hyprls)
+- yazi
 
 ## NPM Packages
 - nodemon

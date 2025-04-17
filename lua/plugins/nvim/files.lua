@@ -108,6 +108,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    cond = function()
+      return vim.fn.executable "yazi" == 1
+    end,
     keys = {
       {
         "<leader>o",
