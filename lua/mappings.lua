@@ -44,8 +44,8 @@ map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
-map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
-map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
+map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
+map("n", "<leader>tlr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Wrap
 local wrap = true
@@ -60,8 +60,12 @@ end, { desc = "Toggle Wrap" })
 
 -- Diagnostics
 map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
-map("n", "<leader>ldp", vim.diagnostic.goto_prev, { desc = "Diagnostics Prev diagnostic" })
-map("n", "<leader>ldn", vim.diagnostic.goto_next, { desc = "Diagnostics Next diagnostic" })
+map("n", "<leader>ldp", function()
+  vim.diagnostic.jump { count = -1 }
+end, { desc = "Diagnostics Prev diagnostic" })
+map("n", "<leader>ldn", function()
+  vim.diagnostic.jump { count = 1 }
+end, { desc = "Diagnostics Next diagnostic" })
 map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnostic loclist" })
 
 -- Terminal
