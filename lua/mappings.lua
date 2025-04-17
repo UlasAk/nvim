@@ -44,8 +44,8 @@ map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
-map("n", "<leader>tl", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
-map("n", "<leader>tr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
+map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
+map("n", "<leader>tlr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Wrap
 local wrap = true
