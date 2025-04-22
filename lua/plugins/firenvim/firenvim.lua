@@ -43,6 +43,13 @@ return {
       return opened_by_firenvim or not status
     end,
     build = ":call firenvim#install(0)",
-    config = function() end,
+    config = function()
+      vim.g.firenvim_config = {
+        globalSettings = { alt = "all" },
+        localSettings = {
+          [".*"] = { selector = 'textarea, div[role="textbox"]', priority = 0, takeover = "never" },
+        },
+      }
+    end,
   },
 }
