@@ -13,9 +13,16 @@ return {
       "v",
       "g",
       "\\",
-      { "<leader>WK", "<cmd>WhichKey<CR>", desc = "Whichkey All keymaps" },
+      { "<leader>wka", "<cmd>WhichKey<CR>", desc = "Whichkey Keymaps (all)" },
       {
-        "<leader>Wk",
+        "<leader>wkc",
+        function()
+          require("which-key").show { global = false }
+        end,
+        desc = "Whichkey Keymaps (current buffer)",
+      },
+      {
+        "<leader>wkq",
         function()
           vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
         end,
