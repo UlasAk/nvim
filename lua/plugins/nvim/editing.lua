@@ -299,7 +299,7 @@ return {
         function()
           require("rainbow-delimiters").toggle()
         end,
-        desc = "TreeSJ Toggle node unser cursor",
+        desc = "Toggle Rainbow delimiters",
       },
     },
     config = function()
