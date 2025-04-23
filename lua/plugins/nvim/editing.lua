@@ -137,7 +137,6 @@ return {
     },
     event = "BufReadPost",
     keys = {
-
       {
         "zR",
         function()
@@ -167,6 +166,13 @@ return {
           --   -- vim.lsp.buf.hover()
           --   vim.cmd [[ Lspsaga hover_doc ]]
           -- end
+        end,
+        desc = "Folds Peek into fold",
+      },
+      {
+        "zI",
+        function()
+          require("ufo").inspect()
         end,
         desc = "Folds Peek into fold",
       },
