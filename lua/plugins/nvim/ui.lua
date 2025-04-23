@@ -698,9 +698,11 @@ return {
       },
       on_open = function()
         require("gitsigns").detach()
+        vim.o.foldcolumn = "0" -- '0' is not bad
       end,
       on_close = function()
         require("gitsigns").attach()
+        vim.o.foldcolumn = "1" -- '0' is not bad
       end,
     },
   },
