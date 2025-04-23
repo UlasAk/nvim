@@ -342,6 +342,25 @@ return {
     end,
   },
   -- {
+  --   "shrynx/line-numbers.nvim",
+  --   keys = {
+  --     {
+  --       "<leader>tlr",
+  --       function()
+  --         require("line-numbers").set_mode()
+  --       end,
+  --       desc = "Toggle Relative line number",
+  --     },
+  --   },
+  --   opts = {
+  --     mode = "both", -- "relative", "absolute", "both", "none"
+  --     format = "abs_rel", -- or "rel_abs"
+  --     separator = " ",
+  --     rel_highlight = { link = "LineNr" },
+  --     abs_highlight = { link = "LineNr" },
+  --   },
+  -- },
+  -- {
   --   "gbprod/yanky.nvim",
   --   event = { "BufEnter", "BufNew" },
   --   keys = {
