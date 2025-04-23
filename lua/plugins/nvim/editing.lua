@@ -41,6 +41,11 @@ return {
         end,
         desc = "Goto Inner Context",
       },
+      {
+        "<leader>ti",
+        "<cmd>IBLToggle<CR>",
+        desc = "Toggle Indentation lines",
+      },
     },
     config = function(_, opts)
       vim.api.nvim_set_hl(0, "IblScopeChar", {
