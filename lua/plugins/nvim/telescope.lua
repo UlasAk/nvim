@@ -559,4 +559,19 @@ return {
       require("telescope").load_extension "emoji"
     end,
   },
+  {
+    "nvim-telescope/telescope-project.nvim",
+    keys = {
+      {
+        "<leader>fp",
+        function()
+          require("telescope").extensions.project.project {}
+        end,
+        desc = "Telescope Projects",
+      },
+    },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 }
