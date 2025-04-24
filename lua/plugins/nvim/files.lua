@@ -144,7 +144,13 @@ return {
     lazy = false,
     cmd = "Oil",
     keys = {
-      { "-", "<cmd>Oil<CR>", desc = "Oil Open parent directory" },
+      {
+        "-",
+        function()
+          require("oil").open_float()
+        end,
+        desc = "Oil Open parent directory",
+      },
     },
     opts = {
       -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
