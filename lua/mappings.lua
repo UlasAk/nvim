@@ -17,6 +17,7 @@ map("i", "<M-Left>", "<cmd><<CR>", { desc = "Move Move line left" })
 map("i", "<M-Right>", "<cmd>><CR>", { desc = "Move Move line left" })
 
 -- Highlights
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear all highlights" })
 map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
