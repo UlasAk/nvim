@@ -572,6 +572,32 @@ return {
     },
     dependencies = {
       "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-tree.lua",
+      "nvim-lua/plenary.nvim",
     },
+    config = function()
+      require("telescope").setup {
+        extensions = {
+          project = {
+            cd_scope = { "global" },
+            on_project_selected = function(prompt_bufnr)
+              local actions_state = require "telescope.actions.state"
+              local project_path = actions_state.get_selected_entry(prompt_bufnr).value
+              local actions = require "telescope.actions"
+              actions._close(prompt_bufnr, true)
+              local Path = require "plenary.path"
+              local projects_utils = require "telescope._extensions.project.utils"
+              if Path:new(project_path):exists() then
+                projects_utils.update_last_accessed_project_time(project_path)
+                vim.fn.execute("cd " .. project_path, "silent")
+                projects_utils.open_in_nvim_tree(project_path)
+              else
+                Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
+              end
+            end,
+          },
+        },
+      }
+    end,
   },
 }
