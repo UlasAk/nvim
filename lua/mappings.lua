@@ -4,18 +4,9 @@ local map = vim.keymap.set
 map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
 
 -- Buffer
--- map("n", "<leader>w", "<cmd>w<CR>", { desc = "Buffer Save" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
--- map("n", "<C-K>", "<C-y>", { desc = "Buffer Scroll up one line", noremap = true })
--- map("n", "<C-J>", "<C-e>", { desc = "Buffer Scroll down one line", noremap = true })
 
 -- Jump
-map("i", "<C-b>", "<ESC>^i", { desc = "Jump Beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "Jump End of line" })
-map("i", "<C-h>", "<Left>", { desc = "Jump Left" })
-map("i", "<C-l>", "<Right>", { desc = "Jump Right" })
-map("i", "<C-j>", "<Down>", { desc = "Jump Down" })
-map("i", "<C-k>", "<Up>", { desc = "Jump Up" })
 map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
 
@@ -26,7 +17,6 @@ map("i", "<M-Left>", "<cmd><<CR>", { desc = "Move Move line left" })
 map("i", "<M-Right>", "<cmd>><CR>", { desc = "Move Move line left" })
 
 -- Highlights
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
@@ -40,7 +30,6 @@ map("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
 map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 
 -- File operations
--- map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
