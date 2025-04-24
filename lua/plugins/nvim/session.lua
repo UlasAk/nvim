@@ -43,7 +43,7 @@ return {
         previewer = true,
       },
       pre_save_cmds = {
-        "bw __FLUTTER_DEV_LOG__",
+        -- "bw __FLUTTER_DEV_LOG__",
       },
       -- log_level = 'debug',
     },
