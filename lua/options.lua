@@ -14,6 +14,8 @@ o.cursorline = true
 o.cursorlineopt = "number"
 o.relativenumber = true
 
+opt.spell = false
+
 -- Indenting
 o.expandtab = true
 o.shiftwidth = 2

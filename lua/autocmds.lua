@@ -127,3 +127,18 @@ autocmd("FileType", {
     vim.opt_local.buflisted = false
   end,
 })
+
+-- Spellcheck for specific files
+local spell_types = { "text", "plaintex", "plaintext", "typst", "gitcommit", "markdown" }
+
+-- Create an augroup for spellcheck to group related autocommands
+vim.api.nvim_create_augroup("Spellcheck", { clear = true })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = "Spellcheck",
+  pattern = spell_types,
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+  desc = "Enable spellcheck for defined filetypes",
+})
