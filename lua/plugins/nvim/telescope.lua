@@ -586,11 +586,15 @@ return {
               local actions = require "telescope.actions"
               actions._close(prompt_bufnr, true)
               local Path = require "plenary.path"
-              local projects_utils = require "telescope._extensions.project.utils"
               if Path:new(project_path):exists() then
+                local projects_utils = require "telescope._extensions.project.utils"
                 projects_utils.update_last_accessed_project_time(project_path)
                 vim.fn.execute("cd " .. project_path, "silent")
-                projects_utils.open_in_nvim_tree(project_path)
+                local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
+                if status_ok then
+                  local tree = nvim_tree_api.tree
+                  tree.change_root(project_path)
+                end
               else
                 Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
               end
