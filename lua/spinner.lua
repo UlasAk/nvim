@@ -34,7 +34,7 @@ function M.show(msg, title)
     width = #msg + 7,
     height = 1,
     col = vim.o.columns - 1,
-    row = 0,
+    row = vim.o.lines - 5,
     style = "minimal",
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     title = title,
