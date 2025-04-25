@@ -20,28 +20,29 @@ local config = {
   },
 }
 
-local default_position = {
-  relative = "editor",
-  width = 1,
-  height = 1,
-  col = vim.o.columns - 1,
-  row = 0,
-}
 local spinner_index = 1
 local spinner_timer = nil
 local spinner_buf = nil
 local spinner_win = nil
 
---- Show a spinner at the specified position. Containing position table and msg string
----@param opts? table
-function M.show(opts)
+--- Show a spinner at the specified position.
+function M.show(msg, title)
+  msg = msg ~= nil and msg or ""
   -- Default position: the top right corner
-  local options = opts ~= nil and opts.position ~= nil and opts.position or default_position
-  options.style = "minimal"
+  local win_options = {
+    relative = "editor",
+    width = #msg + 7,
+    height = 1,
+    col = vim.o.columns - 1,
+    row = 0,
+    style = "minimal",
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    title = title,
+  }
 
   -- Create buffer and window for the spinner
   spinner_buf = vim.api.nvim_create_buf(false, true)
-  spinner_win = vim.api.nvim_open_win(spinner_buf, false, options)
+  spinner_win = vim.api.nvim_open_win(spinner_buf, false, win_options)
 
   -- Set up timer and update spinner
   spinner_timer = vim.loop.new_timer()
@@ -50,13 +51,9 @@ function M.show(opts)
     100,
     vim.schedule_wrap(function()
       if vim.api.nvim_buf_is_valid(spinner_buf) then
-        vim.api.nvim_buf_set_lines(
-          spinner_buf,
-          0,
-          -1,
-          false,
-          { opts ~= nil and opts.msg and opts.msg or "" .. " " .. config.spinner_frames[spinner_index] }
-        )
+        vim.api.nvim_buf_set_lines(spinner_buf, 0, -1, false, {
+          (#msg > 0 and " " .. msg .. "    " or "") .. config.spinner_frames[spinner_index] .. (#msg > 0 and " " or ""),
+        })
       end
       spinner_index = spinner_index % #config.spinner_frames + 1
     end)

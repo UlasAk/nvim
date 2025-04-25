@@ -2,14 +2,15 @@ local M = {}
 local map = vim.keymap.set
 local spinner = require "spinner"
 
-local function apply_rename(curr, win)
+local function apply_rename(currName, win)
   local newName = vim.trim(vim.fn.getline ".")
   vim.api.nvim_win_close(win, true)
 
-  if string.len(newName) > 0 and newName ~= curr then
-    local params = vim.lsp.util.make_position_params()
-    params.newName = newName
+  if string.len(newName) > 0 and newName ~= currName then
+    local params = vim.lsp.util.make_position_params(0, "utf-8")
+    params = vim.tbl_extend("force", params, { newName = newName })
 
+    spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'")
     -- Angular specific check to prevent double renaming
     if
       vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
@@ -171,11 +172,39 @@ local function send_lsp_notification(message)
   -- only send notifications, if the folder path includes "projects"
   if string.match(vim.fn.expand "%:p", "projects") then
     local current_word = vim.call("expand", "<cword>")
-    spinner.show { position = nil, msg = message .. current_word }
+    spinner.show(message .. current_word)
     Snacks.notify(message .. current_word, { title = "LSP" })
   end
 end
 
+-- Stop spinner, if request is completed or canceled
+vim.api.nvim_create_autocmd("LspRequest", {
+  callback = function(args)
+    local request = args.data.request
+    local relevant_methods = {
+      "textDocument/declaration",
+      "textDocument/definition",
+      "textDocument/implementation",
+      "callHierarchy/incomingCalls",
+      "callHierarchy/outgoingCalls",
+      "textDocument/typeDefinition",
+      "textDocument/documentSymbol",
+      "textDocument/references",
+      "workspace/symbol",
+      "textDocument/rename",
+    }
+    local is_relevant = false
+    for i = 1, #relevant_methods do
+      if relevant_methods[i] == request.method then
+        is_relevant = true
+        break
+      end
+    end
+    if is_relevant and (request.type == "cancel" or request.type == "complete") then
+      spinner.hide()
+    end
+  end,
+})
 M.setup_keymaps = function()
   local function opts(desc)
     return { desc = desc }
@@ -184,7 +213,6 @@ M.setup_keymaps = function()
   map("n", "<leader>lgD", function()
     send_lsp_notification "Go to declaration: "
     vim.lsp.buf.declaration()
-    spinner.hide()
   end, opts "Lsp Go to declaration")
   map("n", "<leader>lgd", function()
     send_lsp_notification "Go to definition: "
@@ -196,12 +224,10 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Go to definition")
   map("n", "<leader>lgvd", function()
     send_lsp_notification "Go to definition in split: "
     gotoDefinitionInSplit()
-    spinner.hide()
   end, opts "Lsp Go to definition in split view")
   map("n", "<leader>lh", function()
     vim.lsp.buf.hover {
@@ -218,7 +244,6 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Go to implementation")
   map("n", "<leader>lgci", function()
     send_lsp_notification "Go to incoming callers: "
@@ -230,7 +255,6 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Go to incoming calls")
   map("n", "<leader>lgco", function()
     send_lsp_notification "Go to outgoing callers: "
@@ -242,7 +266,6 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Go to outgoing calls")
   map("n", "<leader>lsh", function()
     require("lsp_signature").toggle_float_win()
@@ -264,7 +287,6 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Go to type definition")
 
   map("n", "<leader>lr", function()
@@ -281,7 +303,6 @@ M.setup_keymaps = function()
         },
       },
     }
-    spinner.hide()
   end, opts "Lsp Show references")
 
   map("n", "<leader>li", function()
