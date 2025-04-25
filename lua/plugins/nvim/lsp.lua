@@ -216,10 +216,10 @@ return {
             enable = true,
             disable = { "dart" },
             swap_next = {
-              ["<leader>a"] = "@parameter.inner",
+              ["<leader>ps"] = "@parameter.inner",
             },
             swap_previous = {
-              ["<leader>A"] = "@parameter.inner",
+              ["<leader>pS"] = "@parameter.inner",
             },
           },
           move = {

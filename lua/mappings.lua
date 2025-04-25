@@ -18,7 +18,7 @@ map("i", "<M-Right>", "<cmd>><CR>", { desc = "Move Move line left" })
 
 -- Highlights
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear all highlights" })
-map("n", "<C-a>", "ggVG<CR>", { desc = "Highlight Highlight all" })
+map("n", "<leader>a", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
 map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
@@ -31,7 +31,7 @@ map("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
 map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 
 -- File operations
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
+map("n", "<leader>C", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
 
 -- Line numbers
 map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
