@@ -10,7 +10,7 @@ local function apply_rename(currName, win)
     local params = vim.lsp.util.make_position_params(0, "utf-8")
     params = vim.tbl_extend("force", params, { newName = newName })
 
-    spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'")
+    spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
     -- Angular specific check to prevent double renaming
     if
       vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
@@ -172,8 +172,8 @@ local function send_lsp_notification(message)
   -- only send notifications, if the folder path includes "projects"
   if string.match(vim.fn.expand "%:p", "projects") then
     local current_word = vim.call("expand", "<cword>")
-    spinner.show(message .. current_word)
-    Snacks.notify(message .. current_word, { title = "LSP" })
+    spinner.show(message .. current_word, "LSP")
+    -- Snacks.notify(message .. current_word, { title = "LSP" })
   end
 end
 
