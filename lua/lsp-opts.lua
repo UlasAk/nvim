@@ -1,6 +1,6 @@
 local M = {}
 local map = vim.keymap.set
-local conf = require("nvconfig").lsp
+local spinner = require "spinner"
 
 local function apply_rename(curr, win)
   local newName = vim.trim(vim.fn.getline ".")
@@ -171,6 +171,7 @@ local function send_lsp_notification(message)
   -- only send notifications, if the folder path includes "projects"
   if string.match(vim.fn.expand "%:p", "projects") then
     local current_word = vim.call("expand", "<cword>")
+    spinner.show { position = nil, msg = message .. current_word }
     Snacks.notify(message .. current_word, { title = "LSP" })
   end
 end
@@ -183,6 +184,7 @@ M.setup_keymaps = function()
   map("n", "<leader>lgD", function()
     send_lsp_notification "Go to declaration: "
     vim.lsp.buf.declaration()
+    spinner.hide()
   end, opts "Lsp Go to declaration")
   map("n", "<leader>lgd", function()
     send_lsp_notification "Go to definition: "
@@ -194,10 +196,12 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Go to definition")
   map("n", "<leader>lgvd", function()
     send_lsp_notification "Go to definition in split: "
     gotoDefinitionInSplit()
+    spinner.hide()
   end, opts "Lsp Go to definition in split view")
   map("n", "<leader>lh", function()
     vim.lsp.buf.hover {
@@ -214,6 +218,7 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Go to implementation")
   map("n", "<leader>lgci", function()
     send_lsp_notification "Go to incoming callers: "
@@ -225,6 +230,7 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Go to incoming calls")
   map("n", "<leader>lgco", function()
     send_lsp_notification "Go to outgoing callers: "
@@ -236,6 +242,7 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Go to outgoing calls")
   map("n", "<leader>lsh", function()
     require("lsp_signature").toggle_float_win()
@@ -257,6 +264,7 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Go to type definition")
 
   map("n", "<leader>lr", function()
@@ -273,6 +281,7 @@ M.setup_keymaps = function()
         },
       },
     }
+    spinner.hide()
   end, opts "Lsp Show references")
 
   map("n", "<leader>li", function()
