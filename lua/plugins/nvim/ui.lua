@@ -742,10 +742,11 @@ return {
     },
     keys = {
       {
-        "<leader>bL",
+        "<leader>tb",
         function()
           require("buvvers").toggle()
         end,
+        desc = "Toggle Vertical buffer list",
       },
     },
     opts = {
