@@ -13,8 +13,8 @@ local function apply_rename(currName, win)
     spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
     -- Angular specific check to prevent double renaming
     if
-      vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
-      and vim.lsp.get_clients { bufnr = 0, name = "ts_ls" } == 1
+      #vim.lsp.get_clients { bufnr = 0, name = "angularls" } > 0
+      and (vim.bo.filetype == "typescript" or vim.bo.filetype == "htmlangular" or vim.bo.filetype == "html")
     then
       vim.lsp.buf.rename(newName, { name = "angularls" })
     else
@@ -350,11 +350,12 @@ M.defaults = function()
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
     if lspconfig[lsp] ~= nil then
-      lspconfig[lsp].setup {
+      vim.lsp.config(lsp, {
         on_attach = M.on_attach,
         on_init = M.on_init,
         capabilities = M.capabilities,
-      }
+      })
+      vim.lsp.enable(lsp)
     end
   end
 
@@ -392,7 +393,7 @@ M.defaults = function()
     }, ","),
   }
 
-  lspconfig.angularls.setup {
+  vim.lsp.config("angularls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -402,18 +403,20 @@ M.defaults = function()
       new_config.cmd = cmd
     end,
     filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
-  }
+  })
+  vim.lsp.enable "angularls"
 
   -- Bash
-  lspconfig.bashls.setup {
+  vim.lsp.config("bashls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
     filetypes = { "sh", "bash" },
-  }
+  })
+  vim.lsp.enable "bashls"
 
   -- Dockerfile Language Server
-  lspconfig.dockerls.setup {
+  vim.lsp.config("dockerls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -426,10 +429,11 @@ M.defaults = function()
         },
       },
     },
-  }
+  })
+  vim.lsp.enable "dockerls"
 
   -- Emmet Language Server
-  lspconfig.emmet_language_server.setup {
+  vim.lsp.config("emmet_language_server", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -446,10 +450,11 @@ M.defaults = function()
       "scss",
       "typescriptreactml",
     },
-  }
+  })
+  vim.lsp.enable "emmet_language_server"
 
   -- HTML
-  lspconfig.html.setup {
+  vim.lsp.config("html", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -458,10 +463,11 @@ M.defaults = function()
       "html",
       "templ",
     },
-  }
+  })
+  vim.lsp.enable "html"
 
   -- lua
-  lspconfig.lua_ls.setup {
+  vim.lsp.config("lua_ls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -482,10 +488,11 @@ M.defaults = function()
         },
       },
     },
-  }
+  })
+  vim.lsp.enable "lua_ls"
 
   -- TypeScript
-  lspconfig.ts_ls.setup {
+  vim.lsp.config("ts_ls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
@@ -502,17 +509,19 @@ M.defaults = function()
         disableSuggestions = true,
       },
     },
-  }
+  })
+  vim.lsp.enable "ts_ls"
 
-  lspconfig.yamlls.setup {
+  vim.lsp.config("yamlls", {
     on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
     filetypes = { "yaml", "yaml.gitlab" },
-  }
+  })
+  vim.lsp.enable "yamlls"
 
   -- Latex
-  -- lspconfig.ltex.setup {
+  -- vim.lps.config("ltex", {
   --   on_attach = M.on_attach,
   --   on_init = M.on_init,
   --   capabilities = M.capabilities,
@@ -537,12 +546,14 @@ M.defaults = function()
   --       checkFrequency = "save",
   --     },
   --   },
-  -- }
-  -- lspconfig.texlab.setup {
+  -- })
+  -- vim.lsp.enable("ltex")
+  -- vim.lsp.config("texlab", {
   --   on_attach = M.on_attach,
   --   on_init = M.on_init,
   --   capabilities = M.capabilities,
-  -- }
+  -- })
+  -- vim.lsp.enable("texlab")
 end
 
 return M
