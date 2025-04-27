@@ -2,6 +2,10 @@ local M = {}
 local map = vim.keymap.set
 local spinner = require "spinner"
 
+local should_show_spinner = function()
+  return string.match(vim.fn.expand "%:p", "projects") ~= nil
+end
+
 local function apply_rename(currName, win)
   local newName = vim.trim(vim.fn.getline ".")
   vim.api.nvim_win_close(win, true)
@@ -10,7 +14,9 @@ local function apply_rename(currName, win)
     local params = vim.lsp.util.make_position_params(0, "utf-8")
     params = vim.tbl_extend("force", params, { newName = newName })
 
-    spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
+    if should_show_spinner() then
+      spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
+    end
     -- Angular specific check to prevent double renaming
     if
       vim.lsp.get_clients { bufnr = 0, name = "angularls" } == 1
@@ -24,7 +30,7 @@ local function apply_rename(currName, win)
 end
 
 local function rename()
-  local currName = vim.fn.expand "<cword>" .. " "
+  local currName = vim.fn.expand "<cword>"
 
   local win = require("plenary.popup").create(currName, {
     title = "Rename",
@@ -170,7 +176,7 @@ end
 
 local function send_lsp_notification(message)
   -- only send notifications, if the folder path includes "projects"
-  if string.match(vim.fn.expand "%:p", "projects") then
+  if should_show_spinner() then
     local current_word = vim.call("expand", "<cword>")
     spinner.show(message .. current_word, "LSP")
     -- Snacks.notify(message .. current_word, { title = "LSP" })
@@ -309,6 +315,10 @@ M.setup_keymaps = function()
     local enabled = vim.lsp.inlay_hint.is_enabled()
     vim.lsp.inlay_hint.enable(not enabled)
   end, opts "Lsp Toggle inlay hints")
+
+  map("n", "<leader>lls", function()
+    spinner.hide()
+  end, opts "Lsp Hide lsp loading spinner")
 end
 
 M.setup_colors = function()
