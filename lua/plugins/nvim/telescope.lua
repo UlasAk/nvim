@@ -361,94 +361,6 @@ return {
     end,
   },
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-
-      {
-        "<leader>ha",
-        function()
-          require("harpoon"):list():add()
-        end,
-        desc = "Harpoon Add",
-      },
-      {
-        "<leader>hp",
-        function()
-          require("harpoon"):list():prev()
-        end,
-        desc = "Harpoon Previous",
-      },
-      {
-        "<leader>hn",
-        function()
-          require("harpoon"):list():next()
-        end,
-        desc = "Harpoon Next",
-      },
-      {
-        "<leader>hl",
-        function()
-          local harpoon = require "harpoon"
-          harpoon.ui:toggle_quick_menu(harpoon:list())
-        end,
-        desc = "Harpoon List",
-      },
-      {
-        "<leader>fha",
-        function()
-          local conf = require("telescope.config").values
-          local function toggle_telescope(harpoon_files)
-            local file_paths = {}
-            for _, item in ipairs(harpoon_files.items) do
-              table.insert(file_paths, item.value)
-            end
-
-            local make_finder = function()
-              local paths = {}
-
-              for _, item in ipairs(harpoon_files.items) do
-                table.insert(paths, item.value)
-              end
-
-              return require("telescope.finders").new_table {
-                results = paths,
-              }
-            end
-
-            require("telescope.pickers")
-              .new({}, {
-                prompt_title = "Harpoon",
-                finder = require("telescope.finders").new_table {
-                  results = file_paths,
-                },
-                previewer = conf.file_previewer {},
-                sorter = conf.generic_sorter {},
-                attach_mappings = function(prompt_buffer_number, local_map)
-                  -- The keymap you need
-                  local_map("i", "<c-d>", function()
-                    local state = require "telescope.actions.state"
-                    local selected_entry = state.get_selected_entry()
-                    local current_picker = state.get_current_picker(prompt_buffer_number)
-
-                    -- This is the line you need to remove the entry
-                    require("harpoon"):list():remove(selected_entry)
-                    current_picker:refresh(make_finder())
-                  end)
-
-                  return true
-                end,
-              })
-              :find()
-          end
-          toggle_telescope(require("harpoon"):list())
-        end,
-        desc = "Telescope Harpoon",
-      },
-    },
-  },
-  {
     "isak102/telescope-git-file-history.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     cmd = "Telescope git_file_history",
@@ -558,6 +470,51 @@ return {
       require("emoji").setup(opts)
       -- optional for telescope integration
       require("telescope").load_extension "emoji"
+    end,
+  },
+  {
+    "nvim-telescope/telescope-project.nvim",
+    keys = {
+      {
+        "<leader>fp",
+        function()
+          require("telescope").extensions.project.project {}
+        end,
+        desc = "Telescope Projects",
+      },
+    },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-tree.lua",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").setup {
+        extensions = {
+          project = {
+            cd_scope = { "global" },
+            on_project_selected = function(prompt_bufnr)
+              local actions_state = require "telescope.actions.state"
+              local project_path = actions_state.get_selected_entry(prompt_bufnr).value
+              local actions = require "telescope.actions"
+              actions._close(prompt_bufnr, true)
+              local Path = require "plenary.path"
+              if Path:new(project_path):exists() then
+                local projects_utils = require "telescope._extensions.project.utils"
+                projects_utils.update_last_accessed_project_time(project_path)
+                vim.fn.execute("cd " .. project_path, "silent")
+                local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
+                if status_ok then
+                  local tree = nvim_tree_api.tree
+                  tree.change_root(project_path)
+                end
+              else
+                Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
+              end
+            end,
+          },
+        },
+      }
     end,
   },
 }

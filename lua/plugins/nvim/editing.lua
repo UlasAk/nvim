@@ -41,6 +41,11 @@ return {
         end,
         desc = "Goto Inner Context",
       },
+      {
+        "<leader>ti",
+        "<cmd>IBLToggle<CR>",
+        desc = "Toggle Indentation lines",
+      },
     },
     config = function(_, opts)
       vim.api.nvim_set_hl(0, "IblScopeChar", {
@@ -137,7 +142,6 @@ return {
     },
     event = "BufReadPost",
     keys = {
-
       {
         "zR",
         function()
@@ -167,6 +171,13 @@ return {
           --   -- vim.lsp.buf.hover()
           --   vim.cmd [[ Lspsaga hover_doc ]]
           -- end
+        end,
+        desc = "Folds Peek into fold",
+      },
+      {
+        "zI",
+        function()
+          require("ufo").inspect()
         end,
         desc = "Folds Peek into fold",
       },
@@ -293,7 +304,7 @@ return {
         function()
           require("rainbow-delimiters").toggle()
         end,
-        desc = "TreeSJ Toggle node unser cursor",
+        desc = "Toggle Rainbow delimiters",
       },
     },
     config = function()
@@ -341,6 +352,25 @@ return {
       -- end)
     end,
   },
+  -- {
+  --   "shrynx/line-numbers.nvim",
+  --   keys = {
+  --     {
+  --       "<leader>tlr",
+  --       function()
+  --         require("line-numbers").set_mode()
+  --       end,
+  --       desc = "Toggle Relative line number",
+  --     },
+  --   },
+  --   opts = {
+  --     mode = "both", -- "relative", "absolute", "both", "none"
+  --     format = "abs_rel", -- or "rel_abs"
+  --     separator = " ",
+  --     rel_highlight = { link = "LineNr" },
+  --     abs_highlight = { link = "LineNr" },
+  --   },
+  -- },
   -- {
   --   "gbprod/yanky.nvim",
   --   event = { "BufEnter", "BufNew" },

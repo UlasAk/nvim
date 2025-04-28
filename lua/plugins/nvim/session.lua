@@ -37,11 +37,13 @@ return {
     ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { "~/", "~/Downloads", "/" },
+      cwd_change_handling = true,
+      auto_restore_last_session = false,
       session_lens = {
         previewer = true,
       },
       pre_save_cmds = {
-        "bw __FLUTTER_DEV_LOG__",
+        -- "bw __FLUTTER_DEV_LOG__",
       },
       -- log_level = 'debug',
     },
