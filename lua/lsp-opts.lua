@@ -169,7 +169,7 @@ end
 
 local function send_lsp_notification(message)
   -- only send notifications, if the folder path includes "projects"
-  if string.match(vim.fn.expand "%:p", "projects") then
+  if string.match(vim.fn.expand "%:p", "BMW") then
     local current_word = vim.call("expand", "<cword>")
     Snacks.notify(message .. current_word, { title = "LSP" })
   end

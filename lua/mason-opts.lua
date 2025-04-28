@@ -163,7 +163,7 @@ M.options = {
     },
   },
 
-  max_concurrent_installers = 10,
+  max_concurrent_installers = 1000,
   registries = {
     "github:mason-org/mason-registry",
     "github:Crashdummyy/mason-registry",

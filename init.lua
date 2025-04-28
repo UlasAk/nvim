@@ -55,6 +55,7 @@ require("lazy").setup {
   },
 
   checker = { enabled = true },
+  concurrency = 69,
 
   performance = {
     rtp = {
