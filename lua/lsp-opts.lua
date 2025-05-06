@@ -15,7 +15,8 @@ local function apply_rename(currName, win)
     params = vim.tbl_extend("force", params, { newName = newName })
 
     if should_show_spinner() then
-      spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
+      local stripped_current_name = string.sub(currName, 1, #currName - 1)
+      spinner.show("Renaming " .. "'" .. stripped_current_name .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
     end
     -- Angular specific check to prevent double renaming
     if
@@ -30,7 +31,7 @@ local function apply_rename(currName, win)
 end
 
 local function rename()
-  local currName = vim.fn.expand "<cword>"
+  local currName = vim.fn.expand "<cword>" .. " "
 
   local win = require("plenary.popup").create(currName, {
     title = "Rename",
@@ -49,7 +50,7 @@ local function rename()
   vim.cmd "normal A"
   vim.cmd "startinsert"
 
-  map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
+  map({ "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
 
   map({ "i", "n" }, "<CR>", function()
     apply_rename(currName, win)
