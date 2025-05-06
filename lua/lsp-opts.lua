@@ -419,16 +419,16 @@ M.defaults = function()
   local package_json_file_path = vim.fs.dirname(vim.fs.find({ "package.json" }, {
     path = vim.loop.cwd(),
     upward = true,
-  })[1]) .. "/package.json"
-  vim.schedule(function()
-    print(package_json_file_path)
-  end)
-  local readable = vim.fn.filereadable(package_json_file_path)
-  if readable then
-    local file = io.open(package_json_file_path, "r")
-    local contents = file:read "*a"
-    if string.find(contents, "@angular/common", 1, true) ~= nil then
-      vim.lsp.enable "angularls"
+  })[1])
+  if package_json_file_path ~= nil then
+    package_json_file_path = package_json_file_path .. "/package.json"
+    local readable = vim.fn.filereadable(package_json_file_path)
+    if readable then
+      local file = io.open(package_json_file_path, "r")
+      local contents = file:read "*a"
+      if string.find(contents, "@angular/common", 1, true) ~= nil then
+        vim.lsp.enable "angularls"
+      end
     end
   end
 
