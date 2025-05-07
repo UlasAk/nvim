@@ -332,6 +332,7 @@ return {
       return {
         ensure_installed = mason_opts.options.ensure_installed,
         automatic_installation = true,
+        automatic_enable = false,
       }
     end,
   },
