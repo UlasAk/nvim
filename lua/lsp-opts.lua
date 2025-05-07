@@ -380,7 +380,7 @@ M.defaults = function()
     return
   end
 
-  local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
+  local angularls_path = vim.fn.expand "$MASON/packages/angular-language-server"
   local handle_angular_exit = function(code, signal, client_id)
     if code > 0 then
       vim.schedule(function()
