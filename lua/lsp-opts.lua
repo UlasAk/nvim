@@ -217,6 +217,12 @@ M.setup_keymaps = function()
     return { desc = desc }
   end
 
+  map("n", "<leader>lR", function()
+    M.defaults()
+    M.setup_keymaps()
+    M.setup_colors()
+  end, opts "Lsp Reload Lsp config")
+
   map("n", "<leader>lgD", function()
     send_lsp_notification "Go to declaration: "
     vim.lsp.buf.declaration()
