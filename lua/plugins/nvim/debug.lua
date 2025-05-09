@@ -63,6 +63,13 @@ return {
       { "<leader>dsO", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
       { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
       {
+        "<leader>de",
+        function()
+          require("dap").set_exception_breakpoints()
+        end,
+        desc = "Debug Set exception breakpoints",
+      },
+      {
         "<leader>dh",
         function()
           require("dap.ui.widgets").hover()
