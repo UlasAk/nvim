@@ -22,6 +22,11 @@ return {
           changedelete = { text = "~" },
           untracked = { text = "│" },
         },
+        preview_config = {
+          style = "minimal",
+          relative = "cursor",
+          border = "rounded",
+        },
 
         on_attach = function(_)
           if
