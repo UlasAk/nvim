@@ -363,7 +363,9 @@ return {
   {
     "isak102/telescope-git-file-history.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    cmd = "Telescope git_file_history",
+    keys = {
+      { "<leader>fgi", "<cmd>Telescope git_file_history<CR>", desc = "Telescope Git file history" },
+    },
     config = function()
       require("telescope").load_extension "git_file_history"
     end,
