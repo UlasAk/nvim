@@ -12,63 +12,6 @@ return {
     keys = {
 
       { "<leader>ch", "<cmd>NvCheatsheet<CR>", desc = "Cheatsheet Toggle" },
-      -- {
-      --   "<leader>ba",
-      --   function()
-      --     require("nvchad.tabufline").closeAllBufs(false)
-      --   end,
-      --   desc = "Buffer Close all except for current",
-      -- },
-      -- {
-      --   "<leader>bcl",
-      --   function()
-      --     require("nvchad.tabufline").closeBufs_at_direction "left"
-      --   end,
-      --   desc = "Buffer Close buffers to the left",
-      -- },
-      -- {
-      --   "<leader>bcr",
-      --   function()
-      --     require("nvchad.tabufline").closeBufs_at_direction "right"
-      --   end,
-      --   desc = "Buffer Close buffers to the right",
-      -- },
-      -- {
-      --   "<leader>bl",
-      --   function()
-      --     require("nvchad.tabufline").move_buf(-1)
-      --   end,
-      --   desc = "Buffer Move buffer to left",
-      -- },
-      -- {
-      --   "<leader>br",
-      --   function()
-      --     require("nvchad.tabufline").move_buf(1)
-      --   end,
-      --   desc = "Buffer Move buffer to right",
-      -- },
-      -- {
-      --   "<tab>",
-      --   function()
-      --     require("nvchad.tabufline").next()
-      --   end,
-      --   desc = "Buffer Goto next",
-      -- },
-      -- {
-      --   "<S-tab>",
-      --   function()
-      --     require("nvchad.tabufline").prev()
-      --   end,
-      --   desc = "Buffer Goto prev",
-      -- },
-      -- {
-      --   "<leader>x",
-      --   function()
-      --     require("nvchad.tabufline").close_buffer()
-      --   end,
-      --   desc = "Buffer Close",
-      -- },
-      -- Code runner
       {
         "<leader>tR",
         function()
@@ -97,7 +40,6 @@ return {
       require "nvchad"
     end,
   },
-
   {
     "NvChad/nvim-colorizer.lua",
     event = "User FilePost",
@@ -126,14 +68,6 @@ return {
         always_update = false,
       },
     },
-    -- config = function(_, opts)
-    --   -- -- require("colorizer").setup(opts)
-    --   --
-    --   -- -- execute colorizer as soon as possible
-    --   -- -- vim.defer_fn(function()
-    --   -- --   require("colorizer").attach_to_buffer(0)
-    --   -- -- end, 0)
-    -- end,
   },
   {
     "NvChad/nvterm",
@@ -200,21 +134,6 @@ return {
           require("minty.shades").open()
         end,
         desc = "Colors Show Shades picker",
-      },
-    },
-  },
-  {
-    "nvchad/menu",
-    keys = {
-      {
-        "<RightMouse>",
-        function()
-          vim.cmd.exec '"normal! \\<RightMouse>"'
-
-          local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
-          require("menu").open(options, { mouse = true })
-        end,
-        desc = "Menu Open Context menu",
       },
     },
   },
