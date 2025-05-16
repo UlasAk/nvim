@@ -438,17 +438,6 @@ return {
     end,
   },
   {
-    "HUAHUAI23/telescope-dapzzzz",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-    event = "LspAttach",
-    config = function()
-      -- :Telescope i23 dap23
-      -- input your configuration file directory, /path/of/project/.vscode is default
-      -- note: the adapter type corresponds to the configuration type, and filetype is which the configuration will attach to
-      require("telescope").load_extension "i23"
-    end,
-  },
-  {
     "allaman/emoji.nvim",
     keys = {
       {
