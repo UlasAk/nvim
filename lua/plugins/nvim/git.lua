@@ -104,14 +104,6 @@ return {
     },
   },
   {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
-    dependencies = {
-      "tpope/vim-fugitive",
-    },
-  },
-  {
     "afonsofrancof/worktrees.nvim",
     cmd = { "WorktreeCreate", "WorktreeDelete", "WorktreeSwitch" },
     opts = {
