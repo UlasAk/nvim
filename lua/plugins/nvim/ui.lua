@@ -114,10 +114,6 @@ return {
     opts = {},
   },
   {
-    "eandrju/cellular-automaton.nvim",
-    cmd = "CellularAutomaton",
-  },
-  {
     "akinsho/bufferline.nvim",
     lazy = false,
     version = "*",
