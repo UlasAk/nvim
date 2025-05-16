@@ -115,13 +115,6 @@ return {
     end,
   },
   {
-    "mbbill/undotree",
-    cmd = { "UndotreeToggle" },
-    keys = {
-      { "<leader>u", "<cmd> UndotreeToggle<CR>", desc = "Undotree Toggle" },
-    },
-  },
-  {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",
