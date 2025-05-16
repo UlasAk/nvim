@@ -102,27 +102,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "nvimdev/dashboard-nvim",
-  --   event = "VimEnter",
-  --   config = function()
-  --     require("dashboard").setup {
-  --       theme = "hyper",
-  --       shortcut_type = "number",
-  --       config = {
-  --         week_header = {
-  --           enable = true,
-  --         },
-  --         shortcut = {},
-  --         footer = {},
-  --       },
-  --     }
-  -- vim.api.nvim_set_hl(0, "DashboardHeader", {
-  --   fg = "#fdfd96",
-  -- })
-  --   end,
-  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
-  -- },
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
