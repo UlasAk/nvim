@@ -682,10 +682,6 @@ return {
     },
   },
   {
-    "folke/twilight.nvim",
-    cmd = "Twilight",
-  },
-  {
     "arnamak/stay-centered.nvim",
     keys = function()
       local enabled = false
