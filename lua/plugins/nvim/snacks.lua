@@ -201,7 +201,7 @@ return {
         desc = "Toggle Words (LSP reference highlighting)",
       },
       {
-        "<leader>ts",
+        "<leader>tS",
         function()
           local is_enabled = Snacks.scroll.enabled
           if is_enabled then
