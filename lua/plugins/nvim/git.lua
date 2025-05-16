@@ -52,16 +52,6 @@ return {
   },
   { "akinsho/git-conflict.nvim", version = "*", event = "BufReadPost", opts = {} },
   {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-    cmd = { "Neogit", "NeogitCommit", "NeogitLogCurrent", "NeogitResetState" },
-    opts = {},
-  },
-  {
     "kdheepak/lazygit.nvim",
     cmd = {
       "LazyGit",
