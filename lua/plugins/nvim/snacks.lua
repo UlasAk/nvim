@@ -187,13 +187,6 @@ return {
         desc = "Image Show Image (Hover)",
       },
       {
-        "<leader>ta",
-        function()
-          Snacks.toggle.animate()
-        end,
-        desc = "Toggle Animations",
-      },
-      {
         "<leader>tw",
         function()
           local is_enabled = Snacks.words.is_enabled()
