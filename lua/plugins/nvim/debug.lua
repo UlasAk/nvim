@@ -424,7 +424,6 @@ return {
     },
     opts = {},
   },
-  { "Bilal2453/luvit-meta", ft = "lua" },
   {
     "LiadOz/nvim-dap-repl-highlights",
     event = "LspAttach",
