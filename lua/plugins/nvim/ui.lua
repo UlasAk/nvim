@@ -820,4 +820,66 @@ return {
     },
     opts = {},
   },
+  {
+    "mrjones2014/smart-splits.nvim",
+    keys = {
+      {
+        "<C-M-Right>",
+        function()
+          require("smart-splits").resize_right()
+        end,
+        desc = "Window Resize right",
+      },
+      {
+        "<C-M-Left>",
+        function()
+          require("smart-splits").resize_left()
+        end,
+        desc = "Window Resize left",
+      },
+      {
+        "<C-M-Up>",
+        function()
+          require("smart-splits").resize_up()
+        end,
+        desc = "Window Resize up",
+      },
+      {
+        "<C-M-Down>",
+        function()
+          require("smart-splits").resize_down()
+        end,
+        desc = "Window Resize down",
+      },
+      {
+        "<C-M-S-Right>",
+        function()
+          require("smart-splits").swap_buf_right()
+        end,
+        desc = "Window Resize right",
+      },
+      {
+        "<C-M-S-Left>",
+        function()
+          require("smart-splits").swap_buf_left()
+        end,
+        desc = "Window Resize left",
+      },
+      {
+        "<C-M-S-Up>",
+        function()
+          require("smart-splits").swap_buf_up()
+        end,
+        desc = "Window Resize up",
+      },
+      {
+        "<C-M-S-Down>",
+        function()
+          require("smart-splits").swap_buf_down()
+        end,
+        desc = "Window Resize down",
+      },
+    },
+    opts = {},
+  },
 }
