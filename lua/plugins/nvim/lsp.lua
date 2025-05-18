@@ -514,11 +514,6 @@ return {
   },
   {
     "Bekaboo/dropbar.nvim",
-    -- optional, but required for fuzzy finder support
-    -- dependencies = {
-    --   "nvim-telescope/telescope-fzf-native.nvim",
-    --   build = "make",
-    -- },
     event = { "BufReadPost", "BufNewFile" },
     keys = {
       {
@@ -529,6 +524,11 @@ return {
         desc = "Pick Symbol from top bar",
       },
     },
+    opts = {},
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
     opts = {},
   },
 }
