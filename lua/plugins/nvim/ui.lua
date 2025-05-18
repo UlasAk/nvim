@@ -103,17 +103,6 @@ return {
     end,
   },
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    event = { "BufReadPost", "BufNewFile" },
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {},
-  },
-  {
     "akinsho/bufferline.nvim",
     lazy = false,
     version = "*",

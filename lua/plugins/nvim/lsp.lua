@@ -512,4 +512,23 @@ return {
     },
     opts = {},
   },
+  {
+    "Bekaboo/dropbar.nvim",
+    -- optional, but required for fuzzy finder support
+    -- dependencies = {
+    --   "nvim-telescope/telescope-fzf-native.nvim",
+    --   build = "make",
+    -- },
+    event = { "BufReadPost", "BufNewFile" },
+    keys = {
+      {
+        "<leader>;",
+        function()
+          require("dropbar.api").pick()
+        end,
+        desc = "Pick Symbol from top bar",
+      },
+    },
+    opts = {},
+  },
 }
