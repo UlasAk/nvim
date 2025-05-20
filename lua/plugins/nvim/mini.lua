@@ -1,15 +1,5 @@
 return {
   {
-    "echasnovski/mini.misc",
-    version = false,
-    priority = 1000,
-    lazy = false,
-    opts = {
-      -- Array of fields to make global (to be used as independent variables)
-      make_global = { "put", "put_text" },
-    },
-  },
-  {
     "echasnovski/mini.files",
     version = false,
     keys = {
