@@ -362,6 +362,9 @@ return {
     event = "LspAttach",
     config = function()
       require("lsp_lines").setup()
+      vim.schedule(function()
+        vim.diagnostic.config { virtual_text = false }
+      end)
     end,
   },
   {
