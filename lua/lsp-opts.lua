@@ -31,6 +31,11 @@ local function apply_rename(currName, win)
 end
 
 local function rename()
+  if #vim.lsp.get_clients { bufnr = 0 } then
+    Snacks.notify.warn("No LSP attached to this buffer", { title = "LSP" })
+    return
+  end
+
   local currName = vim.fn.expand "<cword>" .. " "
 
   local win = require("plenary.popup").create(currName, {
