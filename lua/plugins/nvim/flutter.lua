@@ -32,6 +32,7 @@ return {
         end,
         desc = "Flutter Open Dev Tools",
       },
+      { "<leader>flo", "<cmd>FlutterOutlineToggle<CR>", desc = "Flutter Toggle Outline" },
       { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
