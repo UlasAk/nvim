@@ -31,7 +31,7 @@ local function apply_rename(currName, win)
 end
 
 local function rename()
-  if #vim.lsp.get_clients { bufnr = 0 } then
+  if #vim.lsp.get_clients { bufnr = 0 } < 1 then
     Snacks.notify.warn("No LSP attached to this buffer", { title = "LSP" })
     return
   end
