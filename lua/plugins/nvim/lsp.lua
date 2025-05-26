@@ -64,7 +64,13 @@ return {
     build = ":TSUpdate",
     opts = {
       install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
-      ensure_installed = {
+    },
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "syntax")
+      dofile(vim.g.base46_cache .. "treesitter")
+      require("nvim-treesitter").setup(opts)
+
+      local ensure_installed = {
         "angular",
         "bash",
         "c_sharp",
@@ -97,24 +103,11 @@ return {
         "vim",
         "vimdoc",
         "yaml",
-      },
-
-      highlight = {
-        enable = true,
-        use_languagetree = true,
-      },
-
-      indent = { enable = true },
-    },
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
-      require("nvim-treesitter").setup(opts)
-
+      }
       -- User command for installing all parsers at once
       vim.api.nvim_create_user_command("TSInstallAll", function()
-        if opts.ensure_installed and #opts.ensure_installed > 0 then
-          vim.cmd("TSInstall " .. table.concat(opts.ensure_installed, " "))
+        if ensure_installed and #ensure_installed > 0 then
+          vim.cmd("TSInstall " .. table.concat(ensure_installed, " "))
         end
       end, {})
 
@@ -172,6 +165,22 @@ return {
           end
         end,
         group = "AngularTemplates",
+      })
+
+      -- Enable highlighting
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "*" },
+        callback = function(details)
+          local bufnr = details.buf
+          if not pcall(vim.treesitter.start, bufnr) then
+            return
+          end
+          vim.bo[bufnr].syntax = "on"
+          vim.wo.foldlevel = 99
+          vim.wo.foldmethod = "expr"
+          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
       })
     end,
   },
