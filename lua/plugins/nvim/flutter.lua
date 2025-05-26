@@ -138,7 +138,7 @@ return {
           -- see the link below for details on each option:
           -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
           settings = {
-            showTodos = true,
+            showTodos = false,
             completeFunctionCalls = true,
             -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
             renameFilesWithClasses = "prompt", -- "always"
