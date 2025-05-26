@@ -54,23 +54,144 @@ return {
       })
     end,
   },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   dependencies = { "LiadOz/nvim-dap-repl-highlights" },
+  --   lazy = false,
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   branch = "main",
+  --   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  --   build = ":TSUpdate",
+  --   opts = {
+  --     install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
+  --   },
+  --   config = function(_, opts)
+  --     dofile(vim.g.base46_cache .. "syntax")
+  --     dofile(vim.g.base46_cache .. "treesitter")
+  --     require("nvim-treesitter").setup(opts)
+  --
+  --     local ensure_installed = {
+  --       "angular",
+  --       "bash",
+  --       "c_sharp",
+  --       "css",
+  --       "dart",
+  --       "dap_repl",
+  --       "dockerfile",
+  --       "javascript",
+  --       "html",
+  --       "hyprlang",
+  --       "ini",
+  --       "json",
+  --       "json5",
+  --       "kotlin",
+  --       -- "latex",
+  --       "lua",
+  --       "luadoc",
+  --       "markdown",
+  --       "markdown_inline",
+  --       "printf",
+  --       "python",
+  --       "regex",
+  --       "rust",
+  --       "ssh_config",
+  --       "swift",
+  --       "terraform",
+  --       "tmux",
+  --       "toml",
+  --       "typescript",
+  --       "vim",
+  --       "vimdoc",
+  --       "yaml",
+  --     }
+  --     -- User command for installing all parsers at once
+  --     vim.api.nvim_create_user_command("TSInstallAll", function()
+  --       if ensure_installed and #ensure_installed > 0 then
+  --         vim.cmd("TSInstall " .. table.concat(ensure_installed, " "))
+  --       end
+  --     end, {})
+  --
+  --     -- Add Custom Filetypes
+  --     local function is_hypr_conf(path)
+  --       return path:match "/hypr/" and path:match "%.conf$"
+  --     end
+  --
+  --     local function is_tmux_conf(path)
+  --       return path:match "%tmux.conf$"
+  --     end
+  --
+  --     local function check_yaml_file(path)
+  --       if path:match ".*docker.*compose.*$" and (path:match "%.yaml$" or path:match "%.yml$") then
+  --         return "yaml.docker-compose"
+  --       end
+  --       return "yaml"
+  --     end
+  --
+  --     vim.filetype.add {
+  --       pattern = {
+  --         -- [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `angular` if it matches the pattern
+  --         [".*%.yaml"] = function(path, _)
+  --           return check_yaml_file(path)
+  --         end,
+  --         [".*%.yml"] = function(path, _)
+  --           return check_yaml_file(path)
+  --         end,
+  --         [".*%.conf"] = function(path, _)
+  --           if is_hypr_conf(path) then
+  --             return "hyprlang"
+  --           elseif is_tmux_conf(path) then
+  --             return "tmux"
+  --           else
+  --             return "dosini"
+  --           end
+  --         end,
+  --       },
+  --     }
+  --
+  --     -- Angular
+  --     local function is_angular_template(path)
+  --       return path:match "%.component%.html$"
+  --     end
+  --     vim.api.nvim_create_augroup("AngularTemplates", {})
+  --     vim.api.nvim_create_autocmd({ "BufRead", "BufEnter", "BufNewFile" }, {
+  --       pattern = "*.component.html",
+  --       callback = function()
+  --         -- Setze den Dateityp auf HTML, damit HTML-Plugins funktionieren
+  --         vim.bo.filetype = "html"
+  --
+  --         -- Speziell für Treesitter auf Angular setzen
+  --         if is_angular_template(vim.fn.expand "<afile>:p") then
+  --           vim.cmd "set filetype=htmlangular"
+  --         end
+  --       end,
+  --       group = "AngularTemplates",
+  --     })
+  --
+  --     -- Enable highlighting
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       pattern = { "*" },
+  --       callback = function(details)
+  --         local bufnr = details.buf
+  --         if not pcall(vim.treesitter.start, bufnr) then
+  --           return
+  --         end
+  --         vim.bo[bufnr].syntax = "on"
+  --         vim.wo.foldlevel = 99
+  --         vim.wo.foldmethod = "expr"
+  --         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  --         vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  --       end,
+  --     })
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "LiadOz/nvim-dap-repl-highlights" },
-    lazy = false,
     event = { "BufReadPost", "BufNewFile" },
-    branch = "main",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = {
-      install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
-    },
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
-      require("nvim-treesitter").setup(opts)
-
-      local ensure_installed = {
+      ensure_installed = {
         "angular",
         "bash",
         "c_sharp",
@@ -103,14 +224,19 @@ return {
         "vim",
         "vimdoc",
         "yaml",
-      }
-      -- User command for installing all parsers at once
-      vim.api.nvim_create_user_command("TSInstallAll", function()
-        if ensure_installed and #ensure_installed > 0 then
-          vim.cmd("TSInstall " .. table.concat(ensure_installed, " "))
-        end
-      end, {})
+      },
 
+      highlight = {
+        enable = true,
+        use_languagetree = true,
+      },
+
+      indent = { enable = true },
+    },
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "syntax")
+      dofile(vim.g.base46_cache .. "treesitter")
+      require("nvim-treesitter.configs").setup(opts)
       -- Add Custom Filetypes
       local function is_hypr_conf(path)
         return path:match "/hypr/" and path:match "%.conf$"
@@ -165,22 +291,6 @@ return {
           end
         end,
         group = "AngularTemplates",
-      })
-
-      -- Enable highlighting
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "*" },
-        callback = function(details)
-          local bufnr = details.buf
-          if not pcall(vim.treesitter.start, bufnr) then
-            return
-          end
-          vim.bo[bufnr].syntax = "on"
-          vim.wo.foldlevel = 99
-          vim.wo.foldmethod = "expr"
-          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
       })
     end,
   },

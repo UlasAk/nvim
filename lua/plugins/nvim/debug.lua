@@ -424,16 +424,16 @@ return {
     },
     opts = {},
   },
-  -- {
-  --   "LiadOz/nvim-dap-repl-highlights",
-  --   event = "LspAttach",
-  --   config = function()
-  --     require("nvim-dap-repl-highlights").setup()
-  --     vim.api.nvim_create_user_command("DapReplHighlightsSetup", function()
-  --       require("nvim-dap-repl-highlights").setup_highlights()
-  --     end, {})
-  --   end,
-  -- },
+  {
+    "LiadOz/nvim-dap-repl-highlights",
+    event = "LspAttach",
+    config = function()
+      require("nvim-dap-repl-highlights").setup()
+      vim.api.nvim_create_user_command("DapReplHighlightsSetup", function()
+        require("nvim-dap-repl-highlights").setup_highlights()
+      end, {})
+    end,
+  },
   {
     "stevearc/overseer.nvim",
     opts = { templates = { "builtin" } },
