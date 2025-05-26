@@ -57,11 +57,13 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "LiadOz/nvim-dap-repl-highlights" },
+    lazy = false,
     event = { "BufReadPost", "BufNewFile" },
     branch = "main",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = {
+      install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
       ensure_installed = {
         "angular",
         "bash",
@@ -108,6 +110,14 @@ return {
       dofile(vim.g.base46_cache .. "syntax")
       dofile(vim.g.base46_cache .. "treesitter")
       require("nvim-treesitter").setup(opts)
+
+      -- User command for installing all parsers at once
+      vim.api.nvim_create_user_command("TSInstallAll", function()
+        if opts.ensure_installed and #opts.ensure_installed > 0 then
+          vim.cmd("TSInstall " .. table.concat(opts.ensure_installed, " "))
+        end
+      end, {})
+
       -- Add Custom Filetypes
       local function is_hypr_conf(path)
         return path:match "/hypr/" and path:match "%.conf$"
