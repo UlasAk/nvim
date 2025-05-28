@@ -11,10 +11,10 @@ map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
 
 -- Move lines
-map("i", "<M-Up>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
-map("i", "<M-Down>", "<cmd> m+1<CR>", { desc = "Move Move line down" })
-map("i", "<M-Left>", "<cmd><<CR>", { desc = "Move Move line left" })
-map("i", "<M-Right>", "<cmd>><CR>", { desc = "Move Move line left" })
+map("i", "<M-k>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
+map("i", "<M-j>", "<cmd> m+1<CR>", { desc = "Move Move line down" })
+map("i", "<M-h>", "<cmd><<CR>", { desc = "Move Move line left" })
+map("i", "<M-l>", "<cmd>><CR>", { desc = "Move Move line right" })
 
 -- Highlights
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear all highlights" })
