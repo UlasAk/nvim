@@ -813,56 +813,56 @@ return {
     "mrjones2014/smart-splits.nvim",
     keys = {
       {
-        "<C-M-Right>",
+        "<M-Right>",
         function()
           require("smart-splits").resize_right()
         end,
         desc = "Window Resize right",
       },
       {
-        "<C-M-Left>",
+        "<M-Left>",
         function()
           require("smart-splits").resize_left()
         end,
         desc = "Window Resize left",
       },
       {
-        "<C-M-Up>",
+        "<M-Up>",
         function()
           require("smart-splits").resize_up()
         end,
         desc = "Window Resize up",
       },
       {
-        "<C-M-Down>",
+        "<M-Down>",
         function()
           require("smart-splits").resize_down()
         end,
         desc = "Window Resize down",
       },
       {
-        "<C-M-S-Right>",
+        "<C-Right>",
         function()
           require("smart-splits").swap_buf_right()
         end,
         desc = "Window Resize right",
       },
       {
-        "<C-M-S-Left>",
+        "<C-Left>",
         function()
           require("smart-splits").swap_buf_left()
         end,
         desc = "Window Resize left",
       },
       {
-        "<C-M-S-Up>",
+        "<C-Up>",
         function()
           require("smart-splits").swap_buf_up()
         end,
         desc = "Window Resize up",
       },
       {
-        "<C-M-S-Down>",
+        "<C-Down>",
         function()
           require("smart-splits").swap_buf_down()
         end,
