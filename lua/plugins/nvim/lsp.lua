@@ -540,6 +540,13 @@ return {
           end,
           desc = "Diagnostics Toggle virtual text",
         },
+        {
+          "<leader>ldd",
+          function()
+            vim.diagnostic.config { virtual_text = false }
+          end,
+          desc = "Diagnostics Force disable virtual text diagnostics",
+        },
       }
     end,
     opts = {
