@@ -68,6 +68,23 @@ return {
 
       return {
         formatters_by_ft = filetype_map,
+        formatters = {
+          dart_format = {
+            args = function()
+              local args_table = { "format", "$FILENAME" }
+
+              if string.match(vim.fn.expand "%:p", "projects") then
+                local additional_args = { "-l", "120" }
+
+                for _, arg in pairs(additional_args) do
+                  table.insert(args_table, arg)
+                end
+              end
+
+              return args_table
+            end,
+          },
+        },
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
