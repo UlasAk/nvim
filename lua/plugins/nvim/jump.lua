@@ -91,9 +91,14 @@ return {
     "voxelprismatic/rabbit.nvim",
     event = { "BufEnter", "BufNew" },
     keys = {
-      { "<leader>r", "<cmd>Rabbit<CR>", desc = "Jump Rabbit" },
+      { "<leader>r", "<cmd>Rabbit trail<CR>", desc = "Rabbit trail" },
+      { "<leader>R", "<cmd>Rabbit<CR>", desc = "Rabbit menu" },
     },
-    opts = {},
+    opts = {
+      keys = {
+        switch = {},
+      },
+    },
   },
   {
     "chentoast/marks.nvim",
