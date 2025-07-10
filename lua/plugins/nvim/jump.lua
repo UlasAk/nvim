@@ -105,12 +105,12 @@ return {
     event = "VeryLazy",
     opts = {},
   },
-  {
-    "NStefan002/wormhole.nvim",
-    keys = {
-      { "<leader>wp", "<Plug>(WormholeLabels)", desc = "Window Pick window to jump" },
-      { "<leader>wP", "<Plug>(WormholeCloseLabels)", desc = "Window Close window picker" },
-    },
-    version = "*",
-  },
+  -- {
+  --   "NStefan002/wormhole.nvim",
+  --   keys = {
+  --     { "<leader>wp", "<Plug>(WormholeLabels)", desc = "Window Pick window to jump" },
+  --     { "<leader>wP", "<Plug>(WormholeCloseLabels)", desc = "Window Close window picker" },
+  --   },
+  --   version = "*",
+  -- },
 }
