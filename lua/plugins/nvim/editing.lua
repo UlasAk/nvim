@@ -274,16 +274,6 @@ return {
     },
   },
   {
-    "sunnytamang/select-undo.nvim",
-    cmd = { "SelectUndoLine", "SelectUndoPartial" },
-    opts = {
-      persistent_undo = true, -- Enables persistent undo history
-      mapping = true, -- Enables default keybindings
-      line_mapping = "gu", -- Undo for entire lines
-      partial_mapping = "gcu", -- Undo for selected characters -- Note: dont use this line as gu can also handle partial undo
-    },
-  },
-  {
     "monaqa/dial.nvim",
     keys = {},
     opts = {},
