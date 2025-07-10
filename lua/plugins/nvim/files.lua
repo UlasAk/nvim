@@ -344,9 +344,15 @@ return {
     cmd = "GrugFar",
     keys = {
       {
-        "<leader>G",
+        "<leader>S",
         "<cmd>GrugFar<CR>",
-        desc = "Open GrugFar",
+        desc = "Search Open",
+      },
+      {
+        "<leader>S",
+        "<cmd>'<,'>GrugFar<CR>",
+        mode = { "v" },
+        desc = "Search Selection",
       },
     },
     opts = {
