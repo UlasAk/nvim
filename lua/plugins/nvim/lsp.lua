@@ -640,17 +640,17 @@ return {
       hint_prefix = "",
     },
   },
-  {
-    "stevearc/aerial.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    keys = {
-      { "<leader>ts", "<cmd>AerialToggle!<CR>", desc = "Toggle Symbols outline" },
-    },
-    opts = {},
-  },
+  -- {
+  --   "stevearc/aerial.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   keys = {
+  --     { "<leader>ts", "<cmd>AerialToggle!<CR>", desc = "Toggle Symbols outline" },
+  --   },
+  --   opts = {},
+  -- },
   {
     "Bekaboo/dropbar.nvim",
     event = { "BufReadPost", "BufNewFile" },
