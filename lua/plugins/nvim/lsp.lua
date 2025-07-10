@@ -651,20 +651,20 @@ return {
   --   },
   --   opts = {},
   -- },
-  {
-    "Bekaboo/dropbar.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    keys = {
-      {
-        "<leader>;",
-        function()
-          require("dropbar.api").pick()
-        end,
-        desc = "Pick Symbol from top bar",
-      },
-    },
-    opts = {},
-  },
+  -- {
+  --   "Bekaboo/dropbar.nvim",
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   keys = {
+  --     {
+  --       "<leader>;",
+  --       function()
+  --         require("dropbar.api").pick()
+  --       end,
+  --       desc = "Pick Symbol from top bar",
+  --     },
+  --   },
+  --   opts = {},
+  -- },
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
