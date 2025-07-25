@@ -197,11 +197,11 @@ return {
             elseif error_level:match "warning" then
               icon = " "
             elseif error_level:match "hint" then
-              icon = ""
+              icon = " "
             elseif error_level:match "info" then
-              icon = "󰋼"
+              icon = "󰋼 "
             else
-              icon = ""
+              icon = " "
             end
             s = s .. error_count .. icon
           end
