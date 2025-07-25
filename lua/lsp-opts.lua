@@ -540,6 +540,7 @@ M.defaults = function()
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
         disableSuggestions = true,
+        importModuleSpecifierPreference = "relative",
       },
     },
   })
