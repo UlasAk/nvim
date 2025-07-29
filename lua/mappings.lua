@@ -6,6 +6,10 @@ map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
 -- Buffer
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 
+-- Tabs
+map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
+map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
+
 -- Jump
 map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
