@@ -2,6 +2,7 @@ return {
   {
     "nvim-flutter/flutter-tools.nvim",
     ft = "dart",
+    event = { "BufRead *.dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
