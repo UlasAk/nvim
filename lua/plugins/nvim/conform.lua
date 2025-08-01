@@ -71,13 +71,16 @@ return {
         formatters = {
           dart_format = {
             args = function()
-              local args_table = { "format" }
+              local args_table = { "format", "$FILENAME" }
+
               if string.match(vim.fn.expand "%:p", "projects") then
                 local additional_args = { "-l", "120" }
+
                 for _, arg in pairs(additional_args) do
                   table.insert(args_table, arg)
                 end
               end
+
               return args_table
             end,
           },
@@ -87,7 +90,7 @@ return {
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
-          return { lsp_fallback = true }
+          return { lsp_format = "fallback" }
         end,
       }
     end,

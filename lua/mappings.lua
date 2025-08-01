@@ -6,15 +6,19 @@ map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
 -- Buffer
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 
+-- Tabs
+map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
+map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
+
 -- Jump
 map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
 map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
 
 -- Move lines
-map("i", "<M-Up>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
-map("i", "<M-Down>", "<cmd> m+1<CR>", { desc = "Move Move line down" })
-map("i", "<M-Left>", "<cmd><<CR>", { desc = "Move Move line left" })
-map("i", "<M-Right>", "<cmd>><CR>", { desc = "Move Move line left" })
+map("i", "<M-k>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
+map("i", "<M-j>", "<cmd> m+1<CR>", { desc = "Move Move line down" })
+map("i", "<M-h>", "<cmd><<CR>", { desc = "Move Move line left" })
+map("i", "<M-l>", "<cmd>><CR>", { desc = "Move Move line right" })
 
 -- Highlights
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear all highlights" })
@@ -23,10 +27,6 @@ map("n", "<leader>a", "ggVG<CR>", { desc = "Highlight Highlight all" })
 -- Window operations
 map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
 map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
-map("n", "<C-M-Right>", "<cmd> vertical resize +10<CR>", { desc = "Window Increase width" })
-map("n", "<C-M-Left>", "<cmd> vertical resize -10<CR>", { desc = "Window Decrease width" })
-map("n", "<C-M-Up>", "<cmd> resize +5<CR>", { desc = "Window Increase height" })
-map("n", "<C-M-Down>", "<cmd> resize -5<CR>", { desc = "Window Decrease height" })
 map("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
 map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
 

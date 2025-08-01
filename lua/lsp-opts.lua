@@ -15,7 +15,8 @@ local function apply_rename(currName, win)
     params = vim.tbl_extend("force", params, { newName = newName })
 
     if should_show_spinner() then
-      spinner.show("Renaming " .. "'" .. currName .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
+      local stripped_current_name = string.sub(currName, 1, #currName - 1)
+      spinner.show("Renaming " .. "'" .. stripped_current_name .. "'" .. " to " .. "'" .. newName .. "'", "LSP")
     end
     -- Angular specific check to prevent double renaming
     if
@@ -30,7 +31,12 @@ local function apply_rename(currName, win)
 end
 
 local function rename()
-  local currName = vim.fn.expand "<cword>"
+  if #vim.lsp.get_clients { bufnr = 0 } < 1 then
+    Snacks.notify.warn("No LSP attached to this buffer", { title = "LSP" })
+    return
+  end
+
+  local currName = vim.fn.expand "<cword>" .. " "
 
   local win = require("plenary.popup").create(currName, {
     title = "Rename",
@@ -49,7 +55,7 @@ local function rename()
   vim.cmd "normal A"
   vim.cmd "startinsert"
 
-  map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
+  map({ "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
 
   map({ "i", "n" }, "<CR>", function()
     apply_rename(currName, win)
@@ -217,6 +223,12 @@ M.setup_keymaps = function()
     return { desc = desc }
   end
 
+  map("n", "<leader>lR", function()
+    M.defaults()
+    M.setup_keymaps()
+    M.setup_colors()
+  end, opts "Lsp Reload Lsp config")
+
   map("n", "<leader>lgD", function()
     send_lsp_notification "Go to declaration: "
     vim.lsp.buf.declaration()
@@ -312,6 +324,10 @@ M.setup_keymaps = function()
     }
   end, opts "Lsp Show references")
 
+  map("n", "<leader>lcl", function()
+    vim.lsp.codelens.run()
+  end, opts "Lsp Codelens")
+
   map("n", "<leader>li", function()
     local enabled = vim.lsp.inlay_hint.is_enabled()
     vim.lsp.inlay_hint.enable(not enabled)
@@ -374,49 +390,55 @@ M.defaults = function()
   -- LSPs with specific config
 
   -- Angular
-  local ok, mason_registry = pcall(require, "mason-registry")
-  if not ok then
-    vim.notify "mason-registry could not be loaded"
-    return
-  end
-
-  local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
-  local handle_angular_exit = function(code, signal, client_id)
-    if code > 0 then
-      vim.schedule(function()
-        -- print "Restarting failed Angular LS.."
-        vim.cmd "LspStart angularls"
-      end)
+  local angular_json_path = vim.fs.dirname(vim.fs.find({ "angular.json" }, {
+    path = vim.loop.cwd(),
+    upward = true,
+  })[1])
+  if angular_json_path ~= nil then
+    local ok, mason_registry = pcall(require, "mason-registry")
+    if not ok then
+      vim.notify "mason-registry could not be loaded"
+      return
     end
+
+    local angularls_path = vim.fn.expand "$MASON/packages/angular-language-server"
+    local handle_angular_exit = function(code, signal, client_id)
+      if code > 0 then
+        vim.schedule(function()
+          -- print "Restarting failed Angular LS.."
+          vim.cmd "LspStart angularls"
+        end)
+      end
+    end
+
+    local cmd = {
+      "ngserver",
+      "--stdio",
+      "--tsProbeLocations",
+      table.concat({
+        angularls_path,
+        vim.uv.cwd(),
+      }, ","),
+      "--ngProbeLocations",
+      table.concat({
+        angularls_path .. "/node_modules/@angular/language-server",
+        vim.uv.cwd(),
+      }, ","),
+    }
+
+    vim.lsp.config("angularls", {
+      on_attach = M.on_attach,
+      on_init = M.on_init,
+      capabilities = M.capabilities,
+      cmd = cmd,
+      on_exit = handle_angular_exit,
+      on_new_config = function(new_config, _)
+        new_config.cmd = cmd
+      end,
+      filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
+    })
+    vim.lsp.enable "angularls"
   end
-
-  local cmd = {
-    "ngserver",
-    "--stdio",
-    "--tsProbeLocations",
-    table.concat({
-      angularls_path,
-      vim.uv.cwd(),
-    }, ","),
-    "--ngProbeLocations",
-    table.concat({
-      angularls_path .. "/node_modules/@angular/language-server",
-      vim.uv.cwd(),
-    }, ","),
-  }
-
-  vim.lsp.config("angularls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
-    cmd = cmd,
-    on_exit = handle_angular_exit,
-    on_new_config = function(new_config, _)
-      new_config.cmd = cmd
-    end,
-    filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
-  })
-  vim.lsp.enable "angularls"
 
   -- Bash
   vim.lsp.config("bashls", {
@@ -519,6 +541,7 @@ M.defaults = function()
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
         disableSuggestions = true,
+        importModuleSpecifierPreference = "relative",
       },
     },
   })

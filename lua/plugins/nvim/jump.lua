@@ -91,21 +91,26 @@ return {
     "voxelprismatic/rabbit.nvim",
     event = { "BufEnter", "BufNew" },
     keys = {
-      { "<leader>r", "<cmd>Rabbit<CR>", desc = "Jump Rabbit" },
+      { "<leader>r", "<cmd>Rabbit trail<CR>", desc = "Rabbit trail" },
+      { "<leader>R", "<cmd>Rabbit<CR>", desc = "Rabbit menu" },
     },
-    opts = {},
+    opts = {
+      keys = {
+        switch = {},
+      },
+    },
   },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
     opts = {},
   },
-  {
-    "NStefan002/wormhole.nvim",
-    keys = {
-      { "<leader>wp", "<Plug>(WormholeLabels)", desc = "Window Pick window to jump" },
-      { "<leader>wP", "<Plug>(WormholeCloseLabels)", desc = "Window Close window picker" },
-    },
-    version = "*",
-  },
+  -- {
+  --   "NStefan002/wormhole.nvim",
+  --   keys = {
+  --     { "<leader>wp", "<Plug>(WormholeLabels)", desc = "Window Pick window to jump" },
+  --     { "<leader>wP", "<Plug>(WormholeCloseLabels)", desc = "Window Close window picker" },
+  --   },
+  --   version = "*",
+  -- },
 }

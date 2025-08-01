@@ -2,6 +2,7 @@ return {
   {
     "nvim-flutter/flutter-tools.nvim",
     ft = "dart",
+    event = { "BufRead *.dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
@@ -32,6 +33,7 @@ return {
         end,
         desc = "Flutter Open Dev Tools",
       },
+      { "<leader>flo", "<cmd>FlutterOutlineToggle<CR>", desc = "Flutter Toggle Outline" },
       { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
@@ -137,7 +139,7 @@ return {
           -- see the link below for details on each option:
           -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
           settings = {
-            showTodos = true,
+            showTodos = false,
             completeFunctionCalls = true,
             -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
             renameFilesWithClasses = "prompt", -- "always"

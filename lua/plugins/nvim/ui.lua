@@ -102,42 +102,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "nvimdev/dashboard-nvim",
-  --   event = "VimEnter",
-  --   config = function()
-  --     require("dashboard").setup {
-  --       theme = "hyper",
-  --       shortcut_type = "number",
-  --       config = {
-  --         week_header = {
-  --           enable = true,
-  --         },
-  --         shortcut = {},
-  --         footer = {},
-  --       },
-  --     }
-  -- vim.api.nvim_set_hl(0, "DashboardHeader", {
-  --   fg = "#fdfd96",
-  -- })
-  --   end,
-  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
-  -- },
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    event = { "BufReadPost", "BufNewFile" },
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {},
-  },
-  {
-    "eandrju/cellular-automaton.nvim",
-    cmd = "CellularAutomaton",
-  },
   {
     "akinsho/bufferline.nvim",
     lazy = false,
@@ -145,14 +109,14 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
     keys = {
       {
-        "<leader>bcl",
+        "<leader>bch",
         function()
           require("bufferline").close_in_direction "left"
         end,
         desc = "Buffer Close buffers to the left",
       },
       {
-        "<leader>bcr",
+        "<leader>bcl",
         function()
           require("bufferline").close_in_direction "right"
         end,
@@ -233,11 +197,11 @@ return {
             elseif error_level:match "warning" then
               icon = " "
             elseif error_level:match "hint" then
-              icon = ""
+              icon = " "
             elseif error_level:match "info" then
-              icon = "󰋼"
+              icon = "󰋼 "
             else
-              icon = ""
+              icon = " "
             end
             s = s .. error_count .. icon
           end
@@ -707,21 +671,22 @@ return {
     },
   },
   {
-    "folke/twilight.nvim",
-    cmd = "Twilight",
-  },
-  {
     "arnamak/stay-centered.nvim",
-    keys = {
-      {
-        "<leader>tc",
-        function()
-          require("stay-centered").toggle()
-        end,
-        mode = { "n", "v" },
-        desc = "Toggle stay-centered.nvim",
-      },
-    },
+    keys = function()
+      local enabled = false
+      return {
+        {
+          "<leader>tc",
+          function()
+            enabled = not enabled
+            require("stay-centered").toggle()
+            Snacks.notify(enabled and "Enabled" or "Disabled", { title = "Stay Centered" })
+          end,
+          mode = { "n", "v" },
+          desc = "Toggle stay-centered.nvim",
+        },
+      }
+    end,
     opts = {
       -- The filetype is determined by the vim filetype, not the file extension. In order to get the filetype, open a file and run the command:
       -- :lua print(vim.bo.filetype)
@@ -821,5 +786,121 @@ return {
       { "<leader>ccc", "<cmd>CccPick<CR>", desc = "Colors Change color under cursor" },
     },
     opts = {},
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    keys = {
+      {
+        "<leader>Th",
+        "<cmd>ToggleTerm direction=horizontal<CR>",
+        desc = "Terminal Toggle horizontal term",
+      },
+      {
+        "<leader>Tv",
+        "<cmd>ToggleTerm direction=vertical size=60<CR>",
+        desc = "Terminal Toggle vertical term",
+      },
+      {
+        "<leader>Tf",
+        "<cmd>ToggleTerm direction=float<CR>",
+        desc = "Terminal Toggle floating term",
+      },
+    },
+    opts = {},
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    keys = {
+      {
+        "<Right>",
+        function()
+          require("smart-splits").resize_right()
+        end,
+        desc = "Window Resize right",
+      },
+      {
+        "<Left>",
+        function()
+          require("smart-splits").resize_left()
+        end,
+        desc = "Window Resize left",
+      },
+      {
+        "<Up>",
+        function()
+          require("smart-splits").resize_up()
+        end,
+        desc = "Window Resize up",
+      },
+      {
+        "<Down>",
+        function()
+          require("smart-splits").resize_down()
+        end,
+        desc = "Window Resize down",
+      },
+      {
+        "<M-Right>",
+        function()
+          require("smart-splits").swap_buf_right()
+        end,
+        desc = "Window Resize right",
+      },
+      {
+        "<M-Left>",
+        function()
+          require("smart-splits").swap_buf_left()
+        end,
+        desc = "Window Resize left",
+      },
+      {
+        "<M-Up>",
+        function()
+          require("smart-splits").swap_buf_up()
+        end,
+        desc = "Window Resize up",
+      },
+      {
+        "<M-Down>",
+        function()
+          require("smart-splits").swap_buf_down()
+        end,
+        desc = "Window Resize down",
+      },
+    },
+    opts = {},
+  },
+  {
+    "b0o/incline.nvim",
+    event = { "BufReadPost", "BufEnter" },
+    opts = {
+      render = function(props)
+        local helpers = require "incline.helpers"
+        local devicons = require "nvim-web-devicons"
+        local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+        if filename == "" then
+          filename = "[No Name]"
+        end
+        local ft_icon, ft_color = devicons.get_icon_color(filename)
+        local modified = vim.bo[props.buf].modified
+        return {
+          ft_icon and { " ", ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
+          " ",
+          { filename, gui = modified and "bold,italic" or "bold" },
+          " ",
+          guibg = "#44406e",
+        }
+      end,
+      hide = {
+        cursorline = true,
+        focused_win = true,
+      },
+      window = {
+        margin = {
+          vertical = 2,
+        },
+      },
+    },
   },
 }

@@ -187,13 +187,6 @@ return {
         desc = "Image Show Image (Hover)",
       },
       {
-        "<leader>ta",
-        function()
-          Snacks.toggle.animate()
-        end,
-        desc = "Toggle Animations",
-      },
-      {
         "<leader>tw",
         function()
           local is_enabled = Snacks.words.is_enabled()
@@ -208,7 +201,7 @@ return {
         desc = "Toggle Words (LSP reference highlighting)",
       },
       {
-        "<leader>ts",
+        "<leader>tS",
         function()
           local is_enabled = Snacks.scroll.enabled
           if is_enabled then

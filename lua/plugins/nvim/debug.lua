@@ -63,6 +63,13 @@ return {
       { "<leader>dsO", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
       { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
       {
+        "<leader>de",
+        function()
+          require("dap").set_exception_breakpoints()
+        end,
+        desc = "Debug Set exception breakpoints",
+      },
+      {
         "<leader>dh",
         function()
           require("dap.ui.widgets").hover()
@@ -417,7 +424,6 @@ return {
     },
     opts = {},
   },
-  { "Bilal2453/luvit-meta", ft = "lua" },
   {
     "LiadOz/nvim-dap-repl-highlights",
     event = "LspAttach",

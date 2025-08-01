@@ -115,13 +115,6 @@ return {
     end,
   },
   {
-    "mbbill/undotree",
-    cmd = { "UndotreeToggle" },
-    keys = {
-      { "<leader>u", "<cmd> UndotreeToggle<CR>", desc = "Undotree Toggle" },
-    },
-  },
-  {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",
@@ -278,16 +271,6 @@ return {
       on_error = nil,
       ---@type table Presets for languages
       -- langs = {}, -- See the default presets in lua/treesj/langs
-    },
-  },
-  {
-    "sunnytamang/select-undo.nvim",
-    cmd = { "SelectUndoLine", "SelectUndoPartial" },
-    opts = {
-      persistent_undo = true, -- Enables persistent undo history
-      mapping = true, -- Enables default keybindings
-      line_mapping = "gu", -- Undo for entire lines
-      partial_mapping = "gcu", -- Undo for selected characters -- Note: dont use this line as gu can also handle partial undo
     },
   },
   {

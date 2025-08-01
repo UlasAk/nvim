@@ -22,6 +22,11 @@ return {
           changedelete = { text = "~" },
           untracked = { text = "│" },
         },
+        preview_config = {
+          style = "minimal",
+          relative = "cursor",
+          border = "rounded",
+        },
 
         on_attach = function(_)
           if
@@ -45,16 +50,28 @@ return {
       vim.opt.fillchars:append { diff = "╱" }
     end,
   },
-  { "akinsho/git-conflict.nvim", version = "*", event = "BufReadPost", opts = {} },
   {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
-      "nvim-telescope/telescope.nvim", -- optional
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    event = "BufReadPost",
+    keys = {
+      { "<leader>cn", "<cmd>GitConflictNextConflict<CR>", desc = "Git Conflict Next" },
+      { "<leader>cp", "<cmd>GitConflictPrevConflict<CR>", desc = "Git Conflict Prev" },
+      { "<leader>co", "<cmd>GitConflictChooseOurs<CR>", desc = "Git Conflict Choose Ours" },
+      { "<leader>ct", "<cmd>GitConflictChooseTheirs<CR>", desc = "Git Conflict Choose Theirs" },
+      { "<leader>cb", "<cmd>GitConflictChooseBoth<CR>", desc = "Git Conflict Choose Both" },
+      { "<leader>cl", "<cmd>GitConflictListQf<CR>", desc = "Git Conflict List" },
     },
-    cmd = { "Neogit", "NeogitCommit", "NeogitLogCurrent", "NeogitResetState" },
-    opts = {},
+    opts = {
+      default_mappings = false, -- disable buffer local mapping created by this plugin
+      default_commands = true, -- disable commands created by this plugin
+      disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+      list_opener = "copen", -- command or function to open the conflicts list
+      highlights = { -- They must have background color, otherwise the default color will be used
+        incoming = "DiffAdd",
+        current = "DiffText",
+      },
+    },
   },
   {
     "kdheepak/lazygit.nvim",
@@ -75,72 +92,37 @@ return {
       { "<leader>lzg", "<cmd>LazyGit<cr>", desc = "Git LazyGit" },
     },
   },
-  {
-    "isakbm/gitgraph.nvim",
-    dependencies = { "sindrets/diffview.nvim" },
-    keys = {
-      {
-        "<leader>gg",
-        function()
-          require("gitgraph").draw({}, { all = true, max_count = 5000 })
-        end,
-        desc = "Git Graph",
-      },
-    },
-    opts = {
-      symbols = {
-        merge_commit = "M",
-        commit = "*",
-      },
-      format = {
-        timestamp = "%H:%M:%S %d-%m-%Y",
-        fields = { "hash", "timestamp", "author", "branch_name", "tag" },
-      },
-      hooks = {
-        on_select_commit = function(commit)
-          vim.notify("DiffviewOpen " .. commit.hash .. "^!")
-          vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-        end,
-        on_select_range_commit = function(from, to)
-          vim.notify("DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-          vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-        end,
-      },
-    },
-  },
-  {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
-    dependencies = {
-      "tpope/vim-fugitive",
-    },
-  },
-  {
-    "afonsofrancof/worktrees.nvim",
-    cmd = { "WorktreeCreate", "WorktreeDelete", "WorktreeSwitch" },
-    opts = {
-      -- Specify where to create worktrees relative to git common dir
-      -- The common dir is the .git dir in a normal repo or the root dir of a bare repo
-      base_path = "..", -- Parent directory of common dir
-
-      -- Template for worktree folder names
-      -- This is only used if you don't specify the folder name when creating the worktree
-      path_template = "{branch}", -- Default: use branch name
-
-      -- Command names (optional)
-      commands = {
-        create = "WorktreeCreate",
-        delete = "WorktreeDelete",
-        switch = "WorktreeSwitch",
-      },
-
-      -- Key mappings (optional)
-      mappings = {
-        create = "<leader>wtc",
-        delete = "<leader>wtd",
-        switch = "<leader>wts",
-      },
-    },
-  },
+  -- {
+  --   "isakbm/gitgraph.nvim",
+  --   dependencies = { "sindrets/diffview.nvim" },
+  --   keys = {
+  --     {
+  --       "<leader>gg",
+  --       function()
+  --         require("gitgraph").draw({}, { all = true, max_count = 5000 })
+  --       end,
+  --       desc = "Git Graph",
+  --     },
+  --   },
+  --   opts = {
+  --     symbols = {
+  --       merge_commit = "M",
+  --       commit = "*",
+  --     },
+  --     format = {
+  --       timestamp = "%H:%M:%S %d-%m-%Y",
+  --       fields = { "hash", "timestamp", "author", "branch_name", "tag" },
+  --     },
+  --     hooks = {
+  --       on_select_commit = function(commit)
+  --         vim.notify("DiffviewOpen " .. commit.hash .. "^!")
+  --         vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
+  --       end,
+  --       on_select_range_commit = function(from, to)
+  --         vim.notify("DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+  --         vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+  --       end,
+  --     },
+  --   },
+  -- },
 }

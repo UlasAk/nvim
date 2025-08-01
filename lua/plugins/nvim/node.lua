@@ -49,25 +49,25 @@ return {
       })
     end,
   },
-  {
-    "sajjathossain/nvim-npm",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "akinsho/toggleterm.nvim",
-      "rcarriga/nvim-notify",
-    },
-    cond = function()
-      local cwd = vim.fn.getcwd()
-      local package_json_path = cwd .. "/package.json"
-      if vim.fn.filereadable(package_json_path) == 1 then
-        return true
-      else
-        return false
-      end
-    end,
-    keys = {
-      { "<leader>ns", "<cmd>ShowScriptsInTelescope<CR>", desc = "Telescope NPM Scripts" },
-    },
-    opts = {},
-  },
+  -- {
+  --   "sajjathossain/nvim-npm",
+  --   dependencies = {
+  --     "nvim-telescope/telescope.nvim",
+  --     "akinsho/toggleterm.nvim",
+  --     "rcarriga/nvim-notify",
+  --   },
+  --   cond = function()
+  --     local cwd = vim.fn.getcwd()
+  --     local package_json_path = cwd .. "/package.json"
+  --     if vim.fn.filereadable(package_json_path) == 1 then
+  --       return true
+  --     else
+  --       return false
+  --     end
+  --   end,
+  --   keys = {
+  --     { "<leader>ns", "<cmd>ShowScriptsInTelescope<CR>", desc = "Telescope NPM Scripts" },
+  --   },
+  --   opts = {},
+  -- },
 }

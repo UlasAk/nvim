@@ -1,7 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
     cmd = "Telescope",
     keys = {
       -- Diagnostics
@@ -231,6 +231,7 @@ return {
             mappings = { -- extend mappings
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-f>"] = lga_actions.quote_prompt { postfix = " -SF " },
                 ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
                 -- freeze the current list and start a fuzzy search in the frozen list
                 ["<C-space>"] = lga_actions.to_fuzzy_refine,
@@ -363,7 +364,9 @@ return {
   {
     "isak102/telescope-git-file-history.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    cmd = "Telescope git_file_history",
+    keys = {
+      { "<leader>fgi", "<cmd>Telescope git_file_history<CR>", desc = "Telescope Git file history" },
+    },
     config = function()
       require("telescope").load_extension "git_file_history"
     end,
@@ -433,17 +436,6 @@ return {
     event = "LspAttach",
     config = function()
       require("telescope").load_extension "dap"
-    end,
-  },
-  {
-    "HUAHUAI23/telescope-dapzzzz",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-    event = "LspAttach",
-    config = function()
-      -- :Telescope i23 dap23
-      -- input your configuration file directory, /path/of/project/.vscode is default
-      -- note: the adapter type corresponds to the configuration type, and filetype is which the configuration will attach to
-      require("telescope").load_extension "i23"
     end,
   },
   {

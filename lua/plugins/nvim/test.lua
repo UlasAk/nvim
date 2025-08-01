@@ -88,7 +88,7 @@ return {
             -- When set Flutter outline information is used when constructing test name.
             use_lsp = true,
             -- Useful when using custom test names with @isTest annotation
-            custom_test_method_names = {},
+            custom_test_method_names = { "blocTest" },
           },
           require "neotest-gradle",
           require "neotest-jest" {

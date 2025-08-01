@@ -54,6 +54,136 @@ return {
       })
     end,
   },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   dependencies = { "LiadOz/nvim-dap-repl-highlights" },
+  --   lazy = false,
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   branch = "main",
+  --   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  --   build = ":TSUpdate",
+  --   opts = {
+  --     install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
+  --   },
+  --   config = function(_, opts)
+  --     dofile(vim.g.base46_cache .. "syntax")
+  --     dofile(vim.g.base46_cache .. "treesitter")
+  --     require("nvim-treesitter").setup(opts)
+  --
+  --     local ensure_installed = {
+  --       "angular",
+  --       "bash",
+  --       "c_sharp",
+  --       "css",
+  --       "dart",
+  --       "dap_repl",
+  --       "dockerfile",
+  --       "javascript",
+  --       "html",
+  --       "hyprlang",
+  --       "ini",
+  --       "json",
+  --       "json5",
+  --       "kotlin",
+  --       -- "latex",
+  --       "lua",
+  --       "luadoc",
+  --       "markdown",
+  --       "markdown_inline",
+  --       "printf",
+  --       "python",
+  --       "regex",
+  --       "rust",
+  --       "ssh_config",
+  --       "swift",
+  --       "terraform",
+  --       "tmux",
+  --       "toml",
+  --       "typescript",
+  --       "vim",
+  --       "vimdoc",
+  --       "yaml",
+  --     }
+  --     -- User command for installing all parsers at once
+  --     vim.api.nvim_create_user_command("TSInstallAll", function()
+  --       if ensure_installed and #ensure_installed > 0 then
+  --         vim.cmd("TSInstall " .. table.concat(ensure_installed, " "))
+  --       end
+  --     end, {})
+  --
+  --     -- Add Custom Filetypes
+  --     local function is_hypr_conf(path)
+  --       return path:match "/hypr/" and path:match "%.conf$"
+  --     end
+  --
+  --     local function is_tmux_conf(path)
+  --       return path:match "%tmux.conf$"
+  --     end
+  --
+  --     local function check_yaml_file(path)
+  --       if path:match ".*docker.*compose.*$" and (path:match "%.yaml$" or path:match "%.yml$") then
+  --         return "yaml.docker-compose"
+  --       end
+  --       return "yaml"
+  --     end
+  --
+  --     vim.filetype.add {
+  --       pattern = {
+  --         -- [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `angular` if it matches the pattern
+  --         [".*%.yaml"] = function(path, _)
+  --           return check_yaml_file(path)
+  --         end,
+  --         [".*%.yml"] = function(path, _)
+  --           return check_yaml_file(path)
+  --         end,
+  --         [".*%.conf"] = function(path, _)
+  --           if is_hypr_conf(path) then
+  --             return "hyprlang"
+  --           elseif is_tmux_conf(path) then
+  --             return "tmux"
+  --           else
+  --             return "dosini"
+  --           end
+  --         end,
+  --       },
+  --     }
+  --
+  --     -- Angular
+  --     local function is_angular_template(path)
+  --       return path:match "%.component%.html$"
+  --     end
+  --     vim.api.nvim_create_augroup("AngularTemplates", {})
+  --     vim.api.nvim_create_autocmd({ "BufRead", "BufEnter", "BufNewFile" }, {
+  --       pattern = "*.component.html",
+  --       callback = function()
+  --         -- Setze den Dateityp auf HTML, damit HTML-Plugins funktionieren
+  --         vim.bo.filetype = "html"
+  --
+  --         -- Speziell für Treesitter auf Angular setzen
+  --         if is_angular_template(vim.fn.expand "<afile>:p") then
+  --           vim.cmd "set filetype=htmlangular"
+  --         end
+  --       end,
+  --       group = "AngularTemplates",
+  --     })
+  --
+  --     -- Enable highlighting
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       pattern = { "*" },
+  --       callback = function(details)
+  --         local bufnr = details.buf
+  --         if not pcall(vim.treesitter.start, bufnr) then
+  --           return
+  --         end
+  --         vim.bo[bufnr].syntax = "on"
+  --         vim.wo.foldlevel = 99
+  --         vim.wo.foldmethod = "expr"
+  --         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  --         vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  --       end,
+  --     })
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "LiadOz/nvim-dap-repl-highlights" },
@@ -167,99 +297,98 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    branch = "main",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("nvim-treesitter.configs").setup {
-        textobjects = {
-          select = {
-            enable = true,
-            disable = { "dart" },
+      require("nvim-treesitter-textobjects").setup {
+        select = {
+          enable = true,
+          disable = { "dart" },
 
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
+          -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true,
 
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              -- You can optionally set descriptions to the mappings (used in the desc parameter of
-              -- nvim_buf_set_keymap) which plugins like which-key display
-              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-              -- You can also use captures from other query groups like `locals.scm`
-              ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-            },
-            -- You can choose the select mode (default is charwise 'v')
-            --
-            -- Can also be a function which gets passed a table with the keys
-            -- * query_string: eg '@function.inner'
-            -- * method: eg 'v' or 'o'
-            -- and should return the mode ('v', 'V', or '<c-v>') or a table
-            -- mapping query_strings to modes.
-            selection_modes = {
-              ["@parameter.outer"] = "v", -- charwise
-              ["@function.outer"] = "V", -- linewise
-              ["@class.outer"] = "<c-v>", -- blockwise
-            },
-            -- If you set this to `true` (default is `false`) then any textobject is
-            -- extended to include preceding or succeeding whitespace. Succeeding
-            -- whitespace has priority in order to act similarly to eg the built-in
-            -- `ap`.
-            --
-            -- Can also be a function which gets passed a table with the keys
-            -- * query_string: eg '@function.inner'
-            -- * selection_mode: eg 'v'
-            -- and should return true or false
-            include_surrounding_whitespace = true,
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            -- You can optionally set descriptions to the mappings (used in the desc parameter of
+            -- nvim_buf_set_keymap) which plugins like which-key display
+            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+            -- You can also use captures from other query groups like `locals.scm`
+            ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
           },
-          swap = {
-            enable = true,
-            disable = { "dart" },
-            swap_next = {
-              ["<leader>ps"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>pS"] = "@parameter.inner",
-            },
+          -- You can choose the select mode (default is charwise 'v')
+          --
+          -- Can also be a function which gets passed a table with the keys
+          -- * query_string: eg '@function.inner'
+          -- * method: eg 'v' or 'o'
+          -- and should return the mode ('v', 'V', or '<c-v>') or a table
+          -- mapping query_strings to modes.
+          selection_modes = {
+            ["@parameter.outer"] = "v", -- charwise
+            ["@function.outer"] = "V", -- linewise
+            ["@class.outer"] = "<c-v>", -- blockwise
           },
-          move = {
-            enable = true,
-            disable = { "dart" },
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              ["]m"] = "@function.outer",
-              ["]]"] = { query = "@class.outer", desc = "Next class start" },
-              --
-              -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
-              ["]o"] = "@loop.*",
-              -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-              --
-              -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-              -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-              ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
-              ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-            },
-            goto_next_end = {
-              ["]M"] = "@function.outer",
-              ["]["] = "@class.outer",
-            },
-            goto_previous_start = {
-              ["[m"] = "@function.outer",
-              ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-              ["[M"] = "@function.outer",
-              ["[]"] = "@class.outer",
-            },
-            -- Below will go to either the start or the end, whichever is closer.
-            -- Use if you want more granular movements
-            -- Make it even more gradual by adding multiple queries and regex.
-            goto_next = {
-              ["]d"] = "@conditional.outer",
-            },
-            goto_previous = {
-              ["[d"] = "@conditional.outer",
-            },
+          -- If you set this to `true` (default is `false`) then any textobject is
+          -- extended to include preceding or succeeding whitespace. Succeeding
+          -- whitespace has priority in order to act similarly to eg the built-in
+          -- `ap`.
+          --
+          -- Can also be a function which gets passed a table with the keys
+          -- * query_string: eg '@function.inner'
+          -- * selection_mode: eg 'v'
+          -- and should return true or false
+          include_surrounding_whitespace = true,
+        },
+        swap = {
+          enable = true,
+          disable = { "dart" },
+          swap_next = {
+            ["<leader>ps"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<leader>pS"] = "@parameter.inner",
+          },
+        },
+        move = {
+          enable = true,
+          disable = { "dart" },
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]]"] = { query = "@class.outer", desc = "Next class start" },
+            --
+            -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
+            ["]o"] = "@loop.*",
+            -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
+            --
+            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+            ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
+            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+          },
+          goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+          },
+          -- Below will go to either the start or the end, whichever is closer.
+          -- Use if you want more granular movements
+          -- Make it even more gradual by adding multiple queries and regex.
+          goto_next = {
+            ["]d"] = "@conditional.outer",
+          },
+          goto_previous = {
+            ["[d"] = "@conditional.outer",
           },
         },
       }
@@ -303,7 +432,7 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
       return require "mason-opts"
@@ -323,7 +452,7 @@ return {
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     ft = function()
       return require("mason-opts").get_lsp_filetypes()
     end,
@@ -332,6 +461,7 @@ return {
       return {
         ensure_installed = mason_opts.options.ensure_installed,
         automatic_installation = true,
+        automatic_enable = false,
       }
     end,
   },
@@ -361,6 +491,9 @@ return {
     event = "LspAttach",
     config = function()
       require("lsp_lines").setup()
+      vim.schedule(function()
+        vim.diagnostic.config { virtual_text = false }
+      end)
     end,
   },
   {
@@ -406,6 +539,13 @@ return {
             end
           end,
           desc = "Diagnostics Toggle virtual text",
+        },
+        {
+          "<leader>ldd",
+          function()
+            vim.diagnostic.config { virtual_text = false }
+          end,
+          desc = "Diagnostics Force disable virtual text diagnostics",
         },
       }
     end,
@@ -499,5 +639,35 @@ return {
       },
       hint_prefix = "",
     },
+  },
+  -- {
+  --   "stevearc/aerial.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   keys = {
+  --     { "<leader>ts", "<cmd>AerialToggle!<CR>", desc = "Toggle Symbols outline" },
+  --   },
+  --   opts = {},
+  -- },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    keys = {
+      {
+        "<leader>;",
+        function()
+          require("dropbar.api").pick()
+        end,
+        desc = "Pick Symbol from top bar",
+      },
+    },
+    opts = {},
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
+    opts = {},
   },
 }
