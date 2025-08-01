@@ -109,14 +109,14 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
     keys = {
       {
-        "<leader>bcl",
+        "<leader>bch",
         function()
           require("bufferline").close_in_direction "left"
         end,
         desc = "Buffer Close buffers to the left",
       },
       {
-        "<leader>bcr",
+        "<leader>bcl",
         function()
           require("bufferline").close_in_direction "right"
         end,
