@@ -14,6 +14,8 @@ o.cursorline = true
 o.cursorlineopt = "number"
 o.relativenumber = true
 
+o.textwidth = 1000
+
 opt.spell = false
 
 -- Indenting
