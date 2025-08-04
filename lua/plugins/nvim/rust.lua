@@ -52,15 +52,6 @@ return {
           completion = true,
           hover = true,
         },
-        completion = {
-          insert_closing_quote = true,
-          cmp = {
-            enabled = true,
-          },
-          crates = {
-            enabled = true,
-          },
-        },
       }
     end,
   },
