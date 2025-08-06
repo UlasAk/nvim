@@ -13,6 +13,7 @@ o.clipboard = "unnamedplus"
 o.cursorline = true
 o.cursorlineopt = "number"
 o.relativenumber = true
+o.wrap = false
 
 o.textwidth = 1000
 

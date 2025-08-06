@@ -38,7 +38,7 @@ map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
 map("n", "<leader>tlr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Wrap
-local wrap = true
+local wrap = vim.o.wrap
 map("n", "<leader>W", function()
   wrap = not wrap
   if wrap then
