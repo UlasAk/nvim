@@ -172,7 +172,7 @@ return {
       -- Window-local options to use for oil buffers
       win_options = {
         wrap = true,
-        signcolumn = "no",
+        signcolumn = "yes:2",
         cursorcolumn = false,
         foldcolumn = "0",
         spell = false,
@@ -279,6 +279,7 @@ return {
         border = "rounded",
         win_options = {
           winblend = 0,
+          signcolumn = "yes:2",
         },
         -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
         get_win_title = nil,

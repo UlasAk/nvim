@@ -92,6 +92,14 @@ return {
       { "<leader>lzg", "<cmd>LazyGit<cr>", desc = "Git LazyGit" },
     },
   },
+  {
+    "refractalize/oil-git-status.nvim",
+    dependencies = {
+      "stevearc/oil.nvim",
+    },
+    ft = { "oil" },
+    opts = {},
+  },
   -- {
   --   "isakbm/gitgraph.nvim",
   --   dependencies = { "sindrets/diffview.nvim" },
