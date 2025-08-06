@@ -11,8 +11,8 @@ map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
 map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
 
 -- Jump
-map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
-map("n", "<C-m>", "<C-o>", { desc = "Jump Backwards in Jumplist" })
+-- map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
+map("n", "<C-m>", "<C-i>", { desc = "Jump Backwards in Jumplist" })
 
 -- Move lines
 map("i", "<M-k>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
