@@ -602,33 +602,33 @@ return {
       zindex = 1, -- Starting zindex for the stack of floating windows
     },
   },
-  {
-    "boltlessengineer/sense.nvim",
-    event = "LspAttach",
-    keys = function()
-      local enabled = true
-      return {
-        {
-          "<leader>se",
-          function()
-            enabled = not enabled
-            vim.g.sense_nvim = {
-              presets = {
-                virtualtext = {
-                  enabled = enabled,
-                },
-                statuscolumn = {
-                  enabled = enabled,
-                },
-              },
-            }
-            require("sense.api").redraw {}
-          end,
-          desc = "Toggle Sense",
-        },
-      }
-    end,
-  },
+  -- {
+  --   "boltlessengineer/sense.nvim",
+  --   event = "LspAttach",
+  --   keys = function()
+  --     local enabled = true
+  --     return {
+  --       {
+  --         "<leader>se",
+  --         function()
+  --           enabled = not enabled
+  --           vim.g.sense_nvim = {
+  --             presets = {
+  --               virtualtext = {
+  --                 enabled = enabled,
+  --               },
+  --               statuscolumn = {
+  --                 enabled = enabled,
+  --               },
+  --             },
+  --           }
+  --           require("sense.api").redraw {}
+  --         end,
+  --         desc = "Toggle Sense",
+  --       },
+  --     }
+  --   end,
+  -- },
   {
     "ray-x/lsp_signature.nvim",
     event = "LspAttach",
