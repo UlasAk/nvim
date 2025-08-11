@@ -470,49 +470,49 @@ return {
       require("telescope").load_extension "emoji"
     end,
   },
-  {
-    "nvim-telescope/telescope-project.nvim",
-    keys = {
-      {
-        "<leader>fp",
-        function()
-          require("telescope").extensions.project.project {}
-        end,
-        desc = "Telescope Projects",
-      },
-    },
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-tree.lua",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("telescope").setup {
-        extensions = {
-          project = {
-            cd_scope = { "global" },
-            on_project_selected = function(prompt_bufnr)
-              local actions_state = require "telescope.actions.state"
-              local project_path = actions_state.get_selected_entry(prompt_bufnr).value
-              local actions = require "telescope.actions"
-              actions._close(prompt_bufnr, true)
-              local Path = require "plenary.path"
-              if Path:new(project_path):exists() then
-                local projects_utils = require "telescope._extensions.project.utils"
-                projects_utils.update_last_accessed_project_time(project_path)
-                vim.fn.execute("cd " .. project_path, "silent")
-                local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
-                if status_ok then
-                  local tree = nvim_tree_api.tree
-                  tree.change_root(project_path)
-                end
-              else
-                Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
-              end
-            end,
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope-project.nvim",
+  --   keys = {
+  --     {
+  --       "<leader>fpr",
+  --       function()
+  --         require("telescope").extensions.project.project {}
+  --       end,
+  --       desc = "Telescope Projects",
+  --     },
+  --   },
+  --   dependencies = {
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-tree/nvim-tree.lua",
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     require("telescope").setup {
+  --       extensions = {
+  --         project = {
+  --           cd_scope = { "global" },
+  --           on_project_selected = function(prompt_bufnr)
+  --             local actions_state = require "telescope.actions.state"
+  --             local project_path = actions_state.get_selected_entry(prompt_bufnr).value
+  --             local actions = require "telescope.actions"
+  --             actions._close(prompt_bufnr, true)
+  --             local Path = require "plenary.path"
+  --             if Path:new(project_path):exists() then
+  --               local projects_utils = require "telescope._extensions.project.utils"
+  --               projects_utils.update_last_accessed_project_time(project_path)
+  --               vim.fn.execute("cd " .. project_path, "silent")
+  --               local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
+  --               if status_ok then
+  --                 local tree = nvim_tree_api.tree
+  --                 tree.change_root(project_path)
+  --               end
+  --             else
+  --               Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
+  --             end
+  --           end,
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 }
