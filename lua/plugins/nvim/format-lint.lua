@@ -97,6 +97,9 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
+    dependencies = {
+      "rachartier/tiny-inline-diagnostic.nvim",
+    },
     ft = function()
       return require("mason-opts").get_linter_filetypes()
     end,
@@ -105,13 +108,18 @@ return {
       local mason_config = require "mason-opts"
       lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
 
-      vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "ConformFormatPre",
-        callback = function()
-          if vim.opt_local.modifiable:get() then
-            lint.try_lint()
-          end
-        end,
+      local callback = function()
+        if vim.opt_local.modifiable:get() then
+          lint.try_lint()
+        end
+      end
+
+      vim.schedule(function()
+        vim.diagnostic.config { virtual_text = false }
+      end)
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = callback,
       })
     end,
   },
