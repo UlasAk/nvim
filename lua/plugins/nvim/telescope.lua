@@ -64,6 +64,8 @@ return {
       { "<leader>fma", "<cmd>Telescope marks<CR>", desc = "Telescope Marks" },
       { "<leader>fgs", "<cmd>Telescope grep_string<CR>", mode = { "n", "v" }, desc = "Telescope Grep String" },
       { "<leader>fme", "<cmd>Telescope media_files<CR>", desc = "Telescope Media" },
+      { "<leader>fsp", "<cmd>Telescope spell_suggest<CR>", desc = "Telescope Spell suggest" },
+      { "<leader>fp", "<cmd>Telescope pickers<CR>", desc = "Telescope Pickers" },
       {
         "<leader>fz",
         function()
@@ -123,6 +125,11 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
+          },
+          cache_picker = {
+            num_pickers = 10,
+            limit_entries = 1000,
+            ignore_empty_prompt = false,
           },
           prompt_prefix = "   ",
           selection_caret = "  ",
