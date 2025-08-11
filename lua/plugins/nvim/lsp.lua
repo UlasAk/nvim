@@ -10,27 +10,6 @@ return {
     end,
   },
   {
-    "mfussenegger/nvim-lint",
-    ft = function()
-      return require("mason-opts").get_linter_filetypes()
-    end,
-    config = function()
-      local lint = require "lint"
-      local mason_config = require "mason-opts"
-      lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
-
-      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-        group = lint_augroup,
-        callback = function()
-          if vim.opt_local.modifiable:get() then
-            lint.try_lint()
-          end
-        end,
-      })
-    end,
-  },
-  {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {
       "nvim-lua/plenary.nvim",

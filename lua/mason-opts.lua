@@ -36,6 +36,8 @@ end
 M.filetype_linter_map = function()
   return {
     markdown = "markdownlint",
+    sh = "shellcheck",
+    lua = "luacheck",
   }
 end
 
@@ -120,6 +122,7 @@ M.get_all_ensure_installed_mason_names = function()
     -- "latexindent",
     -- "ltex-ls",
     "lua-language-server",
+    "luacheck",
     "markdownlint",
     "prettier",
     "pyright",
