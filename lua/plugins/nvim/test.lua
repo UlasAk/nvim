@@ -110,7 +110,7 @@ return {
 
               return vim.fn.getcwd() .. "/jest.config.ts"
             end,
-            -- env = { CI = true },
+            env = { CI = true },
             cwd = function(path)
               return vim.fn.getcwd()
             end,
