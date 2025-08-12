@@ -11,6 +11,7 @@ return {
       "nvim-neotest/neotest-jest",
       "weilbith/neotest-gradle",
     },
+    commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     cmd = "Neotest summary",
     event = { "BufEnter *spec*", "BufEnter *test*" },
     keys = {
@@ -92,9 +93,15 @@ return {
           },
           require "neotest-gradle",
           require "neotest-jest" {
-            jestCommand = "npm test --",
-            jestConfigFile = "custom.jest.config.ts",
-            env = { CI = true },
+            jestCommand = require("neotest-jest.jest-util").getJestCommand(vim.fn.expand "%:p:h"),
+            jestConfigFile = function(file)
+              if string.find(file, "/packages/") then
+                return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
+              end
+
+              return vim.fn.getcwd() .. "/jest.config.ts"
+            end,
+            -- env = { CI = true },
             cwd = function(path)
               return vim.fn.getcwd()
             end,
