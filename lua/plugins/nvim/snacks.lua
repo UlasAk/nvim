@@ -98,7 +98,6 @@ local options = {
     date_format = "%R", -- time format for notifications
     refresh = 50, -- refresh at most every 50ms
   },
-  image = {},
   scroll = {
     enabled = false,
     animate = {
