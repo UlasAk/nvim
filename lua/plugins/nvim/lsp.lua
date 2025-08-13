@@ -1,6 +1,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
     event = "BufReadPost",
     config = function()
       local lspconfig = require "lsp-opts"
