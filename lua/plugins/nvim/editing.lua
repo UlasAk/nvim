@@ -273,11 +273,11 @@ return {
       -- langs = {}, -- See the default presets in lua/treesj/langs
     },
   },
-  {
-    "monaqa/dial.nvim",
-    keys = {},
-    opts = {},
-  },
+  -- {
+  --   "monaqa/dial.nvim",
+  --   keys = {},
+  --   opts = {},
+  -- },
   {
     "HiPhish/rainbow-delimiters.nvim",
     event = { "BufEnter", "BufNew" },
