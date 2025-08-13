@@ -30,7 +30,7 @@ local options = {
         conceallevel = 2,
         colorcolumn = "",
       },
-      bo = { filetype = "snacks_notif" },
+      bo = { filetype = "markdown" },
       history = {
         border = "rounded",
         zindex = 100,
