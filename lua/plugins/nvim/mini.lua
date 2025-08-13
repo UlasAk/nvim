@@ -1,17 +1,17 @@
 return {
-  {
-    "echasnovski/mini.files",
-    version = false,
-    keys = {
-      {
-        "<leader>-",
-        function()
-          require("mini.files").open()
-        end,
-        desc = "Mini Files",
-      },
-    },
-  },
+  -- {
+  --   "echasnovski/mini.files",
+  --   version = false,
+  --   keys = {
+  --     {
+  --       "<leader>-",
+  --       function()
+  --         require("mini.files").open()
+  --       end,
+  --       desc = "Mini Files",
+  --     },
+  --   },
+  -- },
   {
     "echasnovski/mini.ai",
     version = false,
