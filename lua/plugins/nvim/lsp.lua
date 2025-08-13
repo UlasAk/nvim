@@ -471,6 +471,7 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = "Trouble",
+    opts = {},
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
