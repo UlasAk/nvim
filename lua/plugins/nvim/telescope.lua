@@ -302,9 +302,9 @@ return {
       "kkharji/sqlite.lua",
       "nvim-telescope/telescope.nvim",
       -- Only required if using match_algorithm fzf
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-      { "nvim-telescope/telescope-fzy-native.nvim" },
+      -- { "nvim-telescope/telescope-fzy-native.nvim" },
     },
     keys = {
       {
