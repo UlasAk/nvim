@@ -407,20 +407,9 @@ return {
       }
     end,
   },
-  -- {
-  --   "folke/lazydev.nvim",
-  --   dependencies = { "Bilal2453/luvit-meta" },
-  --   ft = "lua", -- only load on lua files
-  --   opts = {
-  --     library = {
-  --       { path = "luvit-meta/library", words = { "vim%.uv" } },
-  --       { path = "nvim-dap-ui" },
-  --     },
-  --   },
-  -- },
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", "folke/lazydev.nvim" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     keys = {
       {
         "<leader>dut",

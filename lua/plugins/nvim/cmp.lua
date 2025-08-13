@@ -22,10 +22,6 @@ return {
         "rcarriga/cmp-dap",
       },
       {
-        "folke/lazydev.nvim",
-      },
-
-      {
         "L3MON4D3/LuaSnip",
       },
       -- cmp sources plugins
@@ -160,10 +156,6 @@ return {
           { name = "buffer" },
           { name = "nvim_lua" },
           { name = "path" },
-          {
-            name = "lazydev",
-            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-          },
           { name = "npm" },
           { name = "git" },
           { name = "html-css" },
@@ -250,7 +242,7 @@ return {
   --     -- default list of enabled providers defined so that you can extend it
   --     -- elsewhere in your config, without redefining it, via `opts_extend`
   --     sources = {
-  --       default = { "lsp", "path", "luasnip", "buffer", "crates", "lazydev", "nvim_lua" },
+  --       default = { "lsp", "path", "luasnip", "buffer", "crates", "nvim_lua" },
   --       -- optionally disable cmdline completions
   --       cmdline = {},
   --     },
