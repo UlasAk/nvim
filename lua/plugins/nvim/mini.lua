@@ -34,8 +34,8 @@ return {
         inside_last = "il",
 
         -- Move cursor to corresponding edge of `a` textobject
-        goto_left = "g[",
-        goto_right = "g]",
+        goto_left = "gh",
+        goto_right = "gl",
       },
 
       -- Number of lines within which textobject is searched
