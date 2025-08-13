@@ -69,37 +69,4 @@ return {
       },
     },
   },
-  -- {
-  --   "nvchad/volt",
-  --   keys = {
-  --     {
-  --       "<leader>q",
-  --       function()
-  --         require("volt").close()
-  --       end,
-  --       desc = "Window Close all Volt windows",
-  --     },
-  --   },
-  -- },
-  -- {
-  --   "nvchad/minty",
-  --   keys = {
-  --     {
-  --       "<leader>cph",
-  --       function()
-  --         require("volt").close()
-  --         require("minty.huefy").open()
-  --       end,
-  --       desc = "Colors Show Hue picker",
-  --     },
-  --     {
-  --       "<leader>cps",
-  --       function()
-  --         require("volt").close()
-  --         require("minty.shades").open()
-  --       end,
-  --       desc = "Colors Show Shades picker",
-  --     },
-  --   },
-  -- },
 }
