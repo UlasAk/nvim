@@ -1,17 +1,24 @@
-local dap_dependencies = function()
-  local deps = {
-    "stevearc/overseer.nvim",
-  }
-  if vim.fn.executable "cargo" == 1 then
-    table.insert(deps, "Joakker/lua-json5")
-  end
-  return deps
-end
+-- local dap_dependencies = function()
+--   local deps = {
+--     "stevearc/overseer.nvim",
+--   }
+--   if vim.fn.executable "cargo" == 1 then
+--     table.insert(deps, {
+--       "Joakker/lua-json5",
+--       build = "./install.sh",
+--       cond = function()
+--         return vim.fn.executable "cargo" == 1
+--       end,
+--       lazy = true,
+--     })
+--   end
+--   return deps
+-- end
 
 return {
   {
     "mfussenegger/nvim-dap",
-    dependencies = dap_dependencies(),
+    -- dependencies = dap_dependencies(),
     keys = {
       { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
@@ -314,14 +321,15 @@ return {
         javascriptConfigurations()
         typescriptConfigurations()
         -- VSCode configurations
-        local ok, parser = pcall(require, "json5")
-        if ok then
-          local vscode = require "dap.ext.vscode"
-          vscode.json_decode = function(str)
-            return parser.parse(str)
-          end
-          require("dap.ext.vscode").load_launchjs()
-        end
+        -- local ok, parser = pcall(require, "json5")
+        -- if ok then
+        --   local vscode = require "dap.ext.vscode"
+        --   vscode.json_decode = function(str)
+        --     return parser.parse(str)
+        --   end
+        --   require("dap.ext.vscode").load_launchjs()
+        -- end
+        require("dap.ext.vscode").load_launchjs()
       end
 
       M.setup_colors = function()
@@ -434,20 +442,20 @@ return {
       end, {})
     end,
   },
-  {
-    "stevearc/overseer.nvim",
-    opts = { templates = { "builtin" } },
-    config = function(_, opts)
-      local overseer = require "overseer"
-      overseer.setup(opts)
-      overseer.register_template {
-        name = "tsc: build - tsconfig.build.json",
-        builder = function()
-          return {
-            cmd = { "npx", "tsc", "-p", "tsconfig.build.json" },
-          }
-        end,
-      }
-    end,
-  },
+  -- {
+  --   "stevearc/overseer.nvim",
+  --   opts = { templates = { "builtin" } },
+  --   config = function(_, opts)
+  --     local overseer = require "overseer"
+  --     overseer.setup(opts)
+  --     overseer.register_template {
+  --       name = "tsc: build - tsconfig.build.json",
+  --       builder = function()
+  --         return {
+  --           cmd = { "npx", "tsc", "-p", "tsconfig.build.json" },
+  --         }
+  --       end,
+  --     }
+  --   end,
+  -- },
 }
