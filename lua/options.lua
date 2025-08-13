@@ -26,7 +26,7 @@ o.smartindent = true
 o.tabstop = 2
 o.softtabstop = 2
 
--- opt.fillchars = { eob = " " }
+opt.fillchars = { eob = " " }
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
