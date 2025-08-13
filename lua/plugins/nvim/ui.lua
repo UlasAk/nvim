@@ -558,6 +558,7 @@ return {
   },
   {
     "petertriho/nvim-scrollbar",
+    event = { "BufEnter", "BufNewFile" },
     opts = {},
   },
   {
