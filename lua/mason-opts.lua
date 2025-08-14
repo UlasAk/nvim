@@ -39,9 +39,9 @@ end
 
 M.filetype_linter_map = function()
   return {
+    lua = "luacheck",
     markdown = "markdownlint",
     sh = "shellcheck",
-    lua = "luacheck",
   }
 end
 
