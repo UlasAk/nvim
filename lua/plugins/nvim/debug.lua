@@ -329,7 +329,7 @@ return {
         --   end
         --   require("dap.ext.vscode").load_launchjs()
         -- end
-        require("dap.ext.vscode").load_launchjs()
+        -- require("dap.ext.vscode").load_launchjs()
       end
 
       M.setup_colors = function()
