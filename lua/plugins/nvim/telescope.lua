@@ -306,7 +306,15 @@ return {
       },
     },
     config = function()
-      require("telescope").load_extension "smart_open"
+      local telescope = require "telescope"
+      telescope.setup {
+        extensions = {
+          smart_open = {
+            result_limit = 40,
+          },
+        },
+      }
+      telescope.load_extension "smart_open"
     end,
   },
   {
