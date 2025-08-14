@@ -64,7 +64,6 @@ return {
       { "<leader>fk", "<cmd>Telescope keymaps<CR>", desc = "Telescope Keybindings" },
       { "<leader>fma", "<cmd>Telescope marks<CR>", desc = "Telescope Marks" },
       { "<leader>fgs", "<cmd>Telescope grep_string<CR>", mode = { "n", "v" }, desc = "Telescope Grep String" },
-      { "<leader>fme", "<cmd>Telescope media_files<CR>", desc = "Telescope Media" },
       { "<leader>fsp", "<cmd>Telescope spell_suggest<CR>", desc = "Telescope Spell suggest" },
       { "<leader>fp", "<cmd>Telescope pickers<CR>", desc = "Telescope Pickers" },
       {
@@ -192,10 +191,6 @@ return {
             override_file_sorter = true,
             case_mode = "smart_case",
           },
-          media_files = {
-            filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "webm", "mp4" },
-            find_cmd = "rg",
-          },
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {},
           },
@@ -263,14 +258,6 @@ return {
     event = "LspAttach",
     config = function()
       require("telescope").load_extension "ui-select"
-    end,
-  },
-  {
-    "nvim-telescope/telescope-media-files.nvim",
-    dependencies = { "nvim-lua/popup.nvim", "nvim-telescope/telescope.nvim" },
-    cmd = "Telescope media_files",
-    config = function()
-      require("telescope").load_extension "media_files"
     end,
   },
   {
