@@ -20,6 +20,10 @@ M.filetype_lsp_map = function()
       "scss",
       "typescriptreactml",
     },
+    eslint = {
+      "javascript",
+      "typescript",
+    },
     jsonls = "json",
     pyright = "python",
     rust_analyzer = "rust",
@@ -117,6 +121,7 @@ M.get_all_ensure_installed_mason_names = function()
     "docker-compose-language-service",
     "dockerfile-language-server",
     "emmet-language-server",
+    "eslint-lsp",
     "js-debug-adapter",
     "json-lsp",
     -- "latexindent",

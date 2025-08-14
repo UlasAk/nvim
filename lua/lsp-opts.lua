@@ -367,8 +367,14 @@ M.defaults = function()
   end
 
   -- LSPs without specific config
-  local lsp_servers =
-    { "cssls", "docker_compose_language_service", "jsonls", "kotlin_language_server", "pyright", "terraformls" }
+  local lsp_servers = {
+    "cssls",
+    "docker_compose_language_service",
+    "jsonls",
+    "kotlin_language_server",
+    "pyright",
+    "terraformls",
+  }
 
   if vim.fn.executable "hyprls" == 1 then
     table.insert(lsp_servers, "hyprls")
@@ -485,6 +491,22 @@ M.defaults = function()
     },
   })
   vim.lsp.enable "emmet_language_server"
+
+  local base_on_attach = vim.lsp.config.eslint.on_attach
+  vim.lsp.config("eslint", {
+    on_attach = function(client, bufnr)
+      if not base_on_attach then
+        return
+      end
+
+      base_on_attach(client, bufnr)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        command = "LspEslintFixAll",
+      })
+    end,
+  })
+  vim.lsp.enable "eslint"
 
   -- HTML
   vim.lsp.config("html", {
