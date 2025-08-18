@@ -438,20 +438,6 @@ return {
     end,
   },
   {
-    "mason-org/mason-lspconfig.nvim",
-    ft = function()
-      return require("mason-opts").get_lsp_filetypes()
-    end,
-    opts = function()
-      local mason_opts = require "mason-opts"
-      return {
-        ensure_installed = mason_opts.options.ensure_installed,
-        automatic_installation = true,
-        automatic_enable = false,
-      }
-    end,
-  },
-  {
     "dmmulroy/tsc.nvim",
     cmd = { "TSC" },
     opts = {},

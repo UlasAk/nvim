@@ -150,7 +150,6 @@ end
 
 M.options = {
   ensure_installed_mason_names = M.get_all_ensure_installed_mason_names(),
-  ensure_installed = M.get_language_server_names(),
 
   PATH = "skip",
 
