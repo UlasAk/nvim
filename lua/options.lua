@@ -11,6 +11,7 @@ g.maplocalleader = " "
 -------------------------------------- options ------------------------------------------
 o.laststatus = 3
 o.showmode = false
+o.confirm = true
 
 vim.schedule(function()
   o.clipboard = "unnamedplus"
