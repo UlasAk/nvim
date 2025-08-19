@@ -12,7 +12,9 @@ g.maplocalleader = " "
 o.laststatus = 3
 o.showmode = false
 
-o.clipboard = "unnamedplus"
+vim.schedule(function()
+  o.clipboard = "unnamedplus"
+end)
 o.cursorline = true
 o.cursorlineopt = "number"
 o.relativenumber = true
