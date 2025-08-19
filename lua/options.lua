@@ -19,6 +19,7 @@ o.cursorline = true
 o.cursorlineopt = "number"
 o.relativenumber = true
 o.wrap = false
+o.scrolloff = 5
 
 o.textwidth = 1000
 
