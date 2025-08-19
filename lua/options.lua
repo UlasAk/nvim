@@ -47,6 +47,7 @@ opt.shortmess:append "sI"
 o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
+o.inccommand = "split"
 o.timeoutlen = 400
 o.undofile = true
 
