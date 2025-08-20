@@ -222,7 +222,7 @@ M.setup_keymaps = function()
     return { desc = desc }
   end
 
-  map("n", "<leader>lR", function()
+  map("n", "<leader>lcr", function()
     M.defaults()
     M.setup_keymaps()
     M.setup_colors()

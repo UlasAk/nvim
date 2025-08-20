@@ -712,7 +712,7 @@ return {
     cmd = "IncRename",
     keys = {
       {
-        "<leader>lI",
+        "<leader>lR",
         ":IncRename ",
         desc = "LSP IncRename",
       },
