@@ -1,15 +1,9 @@
 return {
   {
-    "nvim-tree/nvim-web-devicons",
-    opts = function()
-      return { override = require "nvchad.icons.devicons" }
-    end,
-    init = function()
-      dofile(vim.g.base46_cache .. "devicons")
-    end,
-  },
-  {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     keys = {
       { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle window" },

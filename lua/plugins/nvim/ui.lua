@@ -1,5 +1,14 @@
 return {
   {
+    "nvim-tree/nvim-web-devicons",
+    opts = function()
+      return { override = require "nvchad.icons.devicons" }
+    end,
+    init = function()
+      dofile(vim.g.base46_cache .. "devicons")
+    end,
+  },
+  {
     "folke/noice.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
