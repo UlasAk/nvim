@@ -183,6 +183,18 @@ return {
       { "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Goto prev" },
       { "<leader>bp", "<cmd>BufferLinePick<CR>", desc = "Buffer Pick" },
       { "<leader>bP", "<cmd>BufferLineTogglePin<CR>", desc = "Buffer Toggle Pin" },
+      {
+        "<leader>tb",
+        function()
+          local current_status = vim.o.showtabline
+          if current_status == 0 then
+            vim.o.showtabline = 2
+          else
+            vim.o.showtabline = 0
+          end
+        end,
+        desc = "Toggle Bufferline",
+      },
     },
     opts = function()
       local M = {}
