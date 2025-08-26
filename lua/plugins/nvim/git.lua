@@ -126,6 +126,7 @@ return {
     cmd = { "Octo" },
     keys = {
       { "<leader>Oa", "<cmd>Octo actions<CR>", desc = "Octo Actions" },
+      { "<leader>Op", "<cmd>Octo pr list<CR>", desc = "Octo PR list" },
     },
     opts = {
       mappings_disable_default = false,
