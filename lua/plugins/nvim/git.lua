@@ -128,7 +128,13 @@ return {
       { "<leader>Oa", "<cmd>Octo actions<CR>", desc = "Octo Actions" },
     },
     opts = {
-      mappings_disable_default = true,
+      mappings_disable_default = false,
+      mappings = {
+        review_diff = {
+          next_thread = { lhs = "]T", desc = "Octo Review move to next thread" },
+          prev_thread = { lhs = "[T", desc = "Octo Review move to previous thread" },
+        },
+      },
     },
   },
 }
