@@ -127,8 +127,8 @@ return {
     keys = {
       { "<leader>Oa", "<cmd>Octo actions<CR>", desc = "Octo Actions" },
     },
-    config = function()
-      require("octo").setup()
-    end,
+    opts = {
+      mappings_disable_default = true,
+    },
   },
 }
