@@ -163,6 +163,16 @@ return {
         end,
         desc = "Buffer Move buffer to right",
       },
+      {
+        "<leader>bH",
+        "<cmd>BufferLineGoToBuffer 1<CR>",
+        desc = "Buffer Go to most left buffer",
+      },
+      {
+        "<leader>bL",
+        "<cmd>BufferLineGoToBuffer -1<CR>",
+        desc = "Buffer Move buffer to right",
+      },
       -- {"<tab>", function()
       --   require("bufferline").cycle(1)
       -- end, desc = "Buffer Goto next" },
@@ -172,6 +182,7 @@ return {
       { "<tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Goto next", noremap = true },
       { "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Goto prev" },
       { "<leader>bp", "<cmd>BufferLinePick<CR>", desc = "Buffer Pick" },
+      { "<leader>bP", "<cmd>BufferLineTogglePin<CR>", desc = "Buffer Toggle Pin" },
     },
     opts = function()
       local M = {}
