@@ -3,8 +3,8 @@ return {
     "rmagatti/auto-session",
     lazy = false,
     keys = {
-      { "<leader>fse", "<cmd>SessionSearch<CR>", desc = "Telescope Sessions" },
-      { "<leader>sd", "<cmd>SessionDelete<CR>", desc = "Session Delete current session" },
+      { "<leader>fse", "<cmd>AutoSession search<CR>", desc = "Telescope Sessions" },
+      { "<leader>sd", "<cmd>AutoSession delete<CR>", desc = "Session Delete current session" },
     },
     ---enables autocomplete for opts
     ---@module "auto-session"
