@@ -1173,7 +1173,7 @@ return {
             vim.o.winbar = ""
           end
         end,
-        desc = "Pick Symbol from top bar",
+        desc = "Toggle Dropbar (breadcrumbs)",
       },
     },
     opts = {},
