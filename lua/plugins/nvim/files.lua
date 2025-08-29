@@ -281,7 +281,12 @@ return {
         -- This is the config that will be passed to nvim_open_win.
         -- Change values here to customize the layout
         override = function(conf)
-          return conf
+          local new_conf = vim.tbl_deep_extend(
+            "force",
+            conf,
+            { relative = "editor", anchor = "SW", row = 1000, col = 2, width = 100, height = 50 }
+          )
+          return new_conf
         end,
       },
       -- Configuration for the actions floating preview window
