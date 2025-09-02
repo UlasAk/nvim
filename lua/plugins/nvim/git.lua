@@ -129,6 +129,7 @@ return {
       { "<leader>Op", "<cmd>Octo pr list<CR>", desc = "Octo PR list" },
       { "<leader>Ors", "<cmd>Octo review start<CR>", desc = "Octo Review start" },
       { "<leader>Orr", "<cmd>Octo review resume<CR>", desc = "Octo Review resume" },
+      { "<leader>Orc", "<cmd>Octo review close<CR>", desc = "Octo Review close" },
     },
     opts = {
       mappings_disable_default = false,
