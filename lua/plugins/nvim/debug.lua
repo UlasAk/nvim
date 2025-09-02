@@ -427,7 +427,7 @@ return {
     ---@type dapview.Config
     keys = {
       {
-        "<leader>dut",
+        "<leader>dv",
         "<cmd>DapViewToggle<CR>",
         desc = "Debug Toggle UI",
       },
