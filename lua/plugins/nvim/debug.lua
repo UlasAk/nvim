@@ -432,7 +432,11 @@ return {
         desc = "Debug Toggle UI",
       },
     },
-    opts = {},
+    opts = {
+      winbar = {
+        default_section = "repl",
+      },
+    },
   },
   {
     "LiadOz/nvim-dap-repl-highlights",
