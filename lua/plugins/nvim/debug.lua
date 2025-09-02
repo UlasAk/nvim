@@ -407,15 +407,28 @@ return {
       }
     end,
   },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  --   keys = {
+  --     {
+  --       "<leader>dut",
+  --       function()
+  --         require("dapui").toggle()
+  --       end,
+  --       desc = "Debug Toggle UI",
+  --     },
+  --   },
+  --   opts = {},
+  -- },
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    "igorlfs/nvim-dap-view",
+    ---@module 'dap-view'
+    ---@type dapview.Config
     keys = {
       {
         "<leader>dut",
-        function()
-          require("dapui").toggle()
-        end,
+        "<cmd>DapViewToggle<CR>",
         desc = "Debug Toggle UI",
       },
     },
