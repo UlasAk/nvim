@@ -145,7 +145,7 @@ return {
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
             updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
-            onlyAnalyzeProjectsWithOpenFiles = true,
+            onlyAnalyzeProjectsWithOpenFiles = false,
           },
         },
       }
