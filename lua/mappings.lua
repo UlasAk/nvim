@@ -9,8 +9,6 @@ map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 -- Tabs
 map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
 map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
-map("n", "]t", "<cmd>tabnext<CR>", { desc = "Tab Next" })
-map("n", "[t", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
 
 -- Jump
 -- map("n", "<C-o>", "<C-i>", { desc = "Jump Forward in Jumplist" })
