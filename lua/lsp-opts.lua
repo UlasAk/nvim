@@ -367,6 +367,13 @@ M.defaults = function()
     return opts
   end
 
+  -- General LSP config
+  vim.lsp.config("*", {
+    on_attach = M.on_attach,
+    on_init = M.on_init,
+    capabilities = M.capabilities,
+  })
+
   -- LSPs without specific config
   local lsp_servers = {
     "cssls",
@@ -384,11 +391,6 @@ M.defaults = function()
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
     if lspconfig[lsp] ~= nil then
-      vim.lsp.config(lsp, {
-        on_attach = M.on_attach,
-        on_init = M.on_init,
-        capabilities = M.capabilities,
-      })
       vim.lsp.enable(lsp)
     end
   end
@@ -433,9 +435,6 @@ M.defaults = function()
     }
 
     vim.lsp.config("angularls", {
-      on_attach = M.on_attach,
-      on_init = M.on_init,
-      capabilities = M.capabilities,
       cmd = cmd,
       on_exit = handle_angular_exit,
       on_new_config = function(new_config, _)
@@ -448,18 +447,12 @@ M.defaults = function()
 
   -- Bash
   vim.lsp.config("bashls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     filetypes = { "sh", "bash" },
   })
   vim.lsp.enable "bashls"
 
   -- Dockerfile Language Server
   vim.lsp.config("dockerls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     settings = {
       docker = {
         languageserver = {
@@ -474,9 +467,6 @@ M.defaults = function()
 
   -- Emmet Language Server
   vim.lsp.config("emmet_language_server", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     filetypes = {
       "htmlangular",
       "htcss",
@@ -511,9 +501,6 @@ M.defaults = function()
 
   -- HTML
   vim.lsp.config("html", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     filetypes = {
       "htmlangular",
       "html",
@@ -524,9 +511,6 @@ M.defaults = function()
 
   -- lua
   vim.lsp.config("lua_ls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     settings = {
       Lua = {
         diagnostics = {
@@ -551,9 +535,6 @@ M.defaults = function()
 
   -- TypeScript
   vim.lsp.config("ts_ls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     init_options = {
       preferences = {
         includeInlayParameterNameHints = "literal", -- 'none' | 'literals' | 'all'
@@ -572,18 +553,12 @@ M.defaults = function()
   vim.lsp.enable "ts_ls"
 
   vim.lsp.config("yamlls", {
-    on_attach = M.on_attach,
-    on_init = M.on_init,
-    capabilities = M.capabilities,
     filetypes = { "yaml", "yaml.gitlab" },
   })
   vim.lsp.enable "yamlls"
 
   -- Latex
   -- vim.lps.config("ltex", {
-  --   on_attach = M.on_attach,
-  --   on_init = M.on_init,
-  --   capabilities = M.capabilities,
   --   filetypes = {
   --     "bib",
   --     "gitcommit",
