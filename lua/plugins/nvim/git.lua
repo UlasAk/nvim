@@ -126,13 +126,14 @@ return {
     cmd = { "Octo" },
     keys = {
       { "<leader>Oa", "<cmd>Octo actions<CR>", desc = "Octo Actions" },
-      { "<leader>Op", "<cmd>Octo pr list<CR>", desc = "Octo PR list" },
+      { "<leader>Opl", "<cmd>Octo pr list<CR>", desc = "Octo PR list" },
+      { "<leader>Opc", "<cmd>Octo pr checkout<CR>", desc = "Octo PR checkout" },
+      { "<leader>Opo", "<cmd>Octo pr browse<CR>", desc = "Octo PR open for current branch" },
       { "<leader>Ors", "<cmd>Octo review start<CR>", desc = "Octo Review start" },
       { "<leader>Orr", "<cmd>Octo review resume<CR>", desc = "Octo Review resume" },
       { "<leader>Orq", "<cmd>Octo review close<CR>", desc = "Octo Review quit/close" },
       { "<leader>Orc", "<cmd>Octo review commit<CR>", desc = "Octo Review commit" },
       { "<leader>Ord", "<cmd>Octo review discard<CR>", desc = "Octo Review discard" },
-      { "<leader>Oo", "<cmd>Octo pr browse<CR>", desc = "Octo PR open for current branch" },
     },
     opts = {
       mappings_disable_default = false,
