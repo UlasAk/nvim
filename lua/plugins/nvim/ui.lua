@@ -619,69 +619,69 @@ return {
       },
     },
   },
-  {
-    "shellRaining/hlchunk.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    keys = function()
-      local indent_chunk_enabled = false
-      local indent_line_num_enabled = false
-      return {
-        {
-          "<leader>its",
-          function()
-            vim.cmd "IBLToggleScope"
-          end,
-          { desc = "Indent Toggle Line Number" },
-          { "<leader>itc", desc = "Indent Toggle Chunks" },
-          { "<leader>itl", desc = "Indent Toggle Line Number" },
-        },
-        {
-          "<leader>itl",
-          function()
-            if indent_line_num_enabled then
-              vim.cmd "DisableHLChunk"
-              vim.cmd "DisableHLLineNum"
-            else
-              vim.cmd "EnableHLChunk"
-              vim.cmd "EnableHLLineNum"
-            end
-            indent_line_num_enabled = not indent_line_num_enabled
-          end,
-          desc = "Indent Toggle Line Number",
-        },
-        {
-          "<leader>itc",
-          function()
-            if indent_chunk_enabled then
-              vim.cmd "DisableHLChunk"
-            else
-              vim.cmd "EnableHLChunk"
-            end
-            indent_chunk_enabled = not indent_chunk_enabled
-          end,
-          desc = "Indent Toggle Chunks",
-        },
-      }
-    end,
-    opts = {
-      chunk = {
-        enable = true,
-        -- style = "#fdfd96",
-        duration = 0,
-        delay = 0,
-      },
-      indent = {
-        enable = false,
-      },
-      line_num = {
-        enable = false,
-        style = "#fdfd96",
-      },
-      blank = {
-        enable = false,
-      },
-    },
-  },
+  -- {
+  --   "shellRaining/hlchunk.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   keys = function()
+  --     local indent_chunk_enabled = false
+  --     local indent_line_num_enabled = false
+  --     return {
+  --       {
+  --         "<leader>its",
+  --         function()
+  --           vim.cmd "IBLToggleScope"
+  --         end,
+  --         { desc = "Indent Toggle Line Number" },
+  --         { "<leader>itc", desc = "Indent Toggle Chunks" },
+  --         { "<leader>itl", desc = "Indent Toggle Line Number" },
+  --       },
+  --       {
+  --         "<leader>itl",
+  --         function()
+  --           if indent_line_num_enabled then
+  --             vim.cmd "DisableHLChunk"
+  --             vim.cmd "DisableHLLineNum"
+  --           else
+  --             vim.cmd "EnableHLChunk"
+  --             vim.cmd "EnableHLLineNum"
+  --           end
+  --           indent_line_num_enabled = not indent_line_num_enabled
+  --         end,
+  --         desc = "Indent Toggle Line Number",
+  --       },
+  --       {
+  --         "<leader>itc",
+  --         function()
+  --           if indent_chunk_enabled then
+  --             vim.cmd "DisableHLChunk"
+  --           else
+  --             vim.cmd "EnableHLChunk"
+  --           end
+  --           indent_chunk_enabled = not indent_chunk_enabled
+  --         end,
+  --         desc = "Indent Toggle Chunks",
+  --       },
+  --     }
+  --   end,
+  --   opts = {
+  --     chunk = {
+  --       enable = true,
+  --       -- style = "#fdfd96",
+  --       duration = 0,
+  --       delay = 0,
+  --     },
+  --     indent = {
+  --       enable = false,
+  --     },
+  --     line_num = {
+  --       enable = false,
+  --       style = "#fdfd96",
+  --     },
+  --     blank = {
+  --       enable = false,
+  --     },
+  --   },
+  -- },
   {
     "y3owk1n/undo-glow.nvim",
     event = { "VeryLazy" },
