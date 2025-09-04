@@ -28,13 +28,13 @@ return {
           border = "rounded",
         },
 
-        on_attach = function(_)
-          if
-            require("lazy.core.config").plugins["zen-mode.nvim"]._.loaded ~= nil and require("zen-mode.view").is_open()
-          then
-            return false
-          end
-        end,
+        -- on_attach = function(_)
+        --   if
+        --     require("lazy.core.config").plugins["zen-mode.nvim"]._.loaded ~= nil and require("zen-mode.view").is_open()
+        --   then
+        --     return false
+        --   end
+        -- end,
       }
 
       return options

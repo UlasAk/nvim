@@ -899,27 +899,27 @@ return {
       })
     end,
   },
-  {
-    "folke/zen-mode.nvim",
-    cmd = { "ZenMode" },
-    keys = {
-      { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
-    },
-    opts = {
-      plugins = {
-        gitsigns = { enabled = false },
-        twilight = { enabled = false },
-      },
-      on_open = function()
-        require("gitsigns").detach()
-        vim.o.foldcolumn = "0" -- '0' is not bad
-      end,
-      on_close = function()
-        require("gitsigns").attach()
-        vim.o.foldcolumn = "1" -- '0' is not bad
-      end,
-    },
-  },
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   cmd = { "ZenMode" },
+  --   keys = {
+  --     { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
+  --   },
+  --   opts = {
+  --     plugins = {
+  --       gitsigns = { enabled = false },
+  --       twilight = { enabled = false },
+  --     },
+  --     on_open = function()
+  --       require("gitsigns").detach()
+  --       vim.o.foldcolumn = "0" -- '0' is not bad
+  --     end,
+  --     on_close = function()
+  --       require("gitsigns").attach()
+  --       vim.o.foldcolumn = "1" -- '0' is not bad
+  --     end,
+  --   },
+  -- },
   {
     "arnamak/stay-centered.nvim",
     keys = function()
