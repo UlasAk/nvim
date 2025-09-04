@@ -1029,14 +1029,14 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "uga-rosa/ccc.nvim",
-    cmd = { "CccPick" },
-    keys = {
-      { "<leader>ccc", "<cmd>CccPick<CR>", desc = "Colors Change color under cursor" },
-    },
-    opts = {},
-  },
+  -- {
+  --   "uga-rosa/ccc.nvim",
+  --   cmd = { "CccPick" },
+  --   keys = {
+  --     { "<leader>ccc", "<cmd>CccPick<CR>", desc = "Colors Change color under cursor" },
+  --   },
+  --   opts = {},
+  -- },
   {
     "akinsho/toggleterm.nvim",
     version = "*",
