@@ -593,32 +593,32 @@ return {
     event = { "BufEnter", "BufNewFile" },
     opts = {},
   },
-  {
-    "tamton-aquib/duck.nvim",
-    keys = {
-      {
-        "<leader>dun",
-        function()
-          require("duck").hatch()
-        end,
-        desc = "Duck Hatch duck",
-      },
-      {
-        "<leader>duk",
-        function()
-          require("duck").cook()
-        end,
-        desc = "Duck Kill duck",
-      },
-      {
-        "<leader>dua",
-        function()
-          require("duck").cook_all()
-        end,
-        desc = "Duck Kill all ducks",
-      },
-    },
-  },
+  -- {
+  --   "tamton-aquib/duck.nvim",
+  --   keys = {
+  --     {
+  --       "<leader>dun",
+  --       function()
+  --         require("duck").hatch()
+  --       end,
+  --       desc = "Duck Hatch duck",
+  --     },
+  --     {
+  --       "<leader>duk",
+  --       function()
+  --         require("duck").cook()
+  --       end,
+  --       desc = "Duck Kill duck",
+  --     },
+  --     {
+  --       "<leader>dua",
+  --       function()
+  --         require("duck").cook_all()
+  --       end,
+  --       desc = "Duck Kill all ducks",
+  --     },
+  --   },
+  -- },
   -- {
   --   "shellRaining/hlchunk.nvim",
   --   event = { "BufReadPre", "BufNewFile" },
