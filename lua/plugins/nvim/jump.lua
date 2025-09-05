@@ -87,19 +87,19 @@ return {
   --     },
   --   },
   -- },
-  {
-    "voxelprismatic/rabbit.nvim",
-    event = { "BufEnter", "BufNew" },
-    keys = {
-      { "<leader>r", "<cmd>Rabbit trail<CR>", desc = "Rabbit trail" },
-      { "<leader>R", "<cmd>Rabbit<CR>", desc = "Rabbit menu" },
-    },
-    opts = {
-      keys = {
-        switch = {},
-      },
-    },
-  },
+  -- {
+  --   "voxelprismatic/rabbit.nvim",
+  --   event = { "BufEnter", "BufNew" },
+  --   keys = {
+  --     { "<leader>r", "<cmd>Rabbit trail<CR>", desc = "Rabbit trail" },
+  --     { "<leader>R", "<cmd>Rabbit<CR>", desc = "Rabbit menu" },
+  --   },
+  --   opts = {
+  --     keys = {
+  --       switch = {},
+  --     },
+  --   },
+  -- },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
