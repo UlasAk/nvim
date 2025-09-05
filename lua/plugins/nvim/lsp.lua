@@ -442,17 +442,17 @@ return {
     cmd = { "TSC" },
     opts = {},
   },
-  {
-    "OlegGulevskyy/better-ts-errors.nvim",
-    ft = { "typescript" },
-    dependencies = { "MunifTanjim/nui.nvim" },
-    opts = {
-      keymaps = {
-        toggle = "<leader>lt", -- default '<leader>dd'
-        go_to_definition = "<leader>lgtd", -- default '<leader>dx'
-      },
-    },
-  },
+  -- {
+  --   "OlegGulevskyy/better-ts-errors.nvim",
+  --   ft = { "typescript" },
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   opts = {
+  --     keymaps = {
+  --       toggle = "<leader>lt", -- default '<leader>dd'
+  --       go_to_definition = "<leader>lgtd", -- default '<leader>dx'
+  --     },
+  --   },
+  -- },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
