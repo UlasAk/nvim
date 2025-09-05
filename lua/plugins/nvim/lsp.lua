@@ -459,60 +459,60 @@ return {
     cmd = "Trouble",
     opts = {},
   },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lsp_lines").setup()
-      vim.schedule(function()
-        vim.diagnostic.config { virtual_text = false }
-      end)
-    end,
-  },
+  -- {
+  --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  --   event = "LspAttach",
+  --   config = function()
+  --     require("lsp_lines").setup()
+  --     vim.schedule(function()
+  --       vim.diagnostic.config { virtual_text = false }
+  --     end)
+  --   end,
+  -- },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
-    dependencies = { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+    -- dependencies = { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
     priority = 1000, -- needs to be loaded in first
     event = "VeryLazy", -- Or `LspAttach`
     keys = function()
       --tiny-inline-diagnostic and lsp_lines toggle through
-      local show_lsp_lines = vim.diagnostic.config().virtual_text
+      -- local show_lsp_lines = vim.diagnostic.config().virtual_text
       local show_diagnostics = true
       return {
         {
           "<leader>ldt",
           function()
-            if (not show_diagnostics and show_lsp_lines) or show_diagnostics then
-              show_lsp_lines = require("lsp_lines").toggle()
-            end
-            show_diagnostics = true
-            if show_lsp_lines then
-              require("tiny-inline-diagnostic").disable()
-            else
-              require("tiny-inline-diagnostic").enable()
-            end
-          end,
-          desc = "Diagnostics Toggle virtual text type",
-        },
-        {
-          "<leader>ldT",
-          function()
+            -- if (not show_diagnostics and show_lsp_lines) or show_diagnostics then
+            --   show_lsp_lines = require("lsp_lines").toggle()
+            -- end
             show_diagnostics = not show_diagnostics
             if show_diagnostics then
-              if show_lsp_lines then
-                require("lsp_lines").toggle()
-              else
-                require("tiny-inline-diagnostic").enable()
-              end
+              require("tiny-inline-diagnostic").enable()
             else
-              if show_lsp_lines then
-                require("lsp_lines").toggle()
-              end
               require("tiny-inline-diagnostic").disable()
             end
           end,
           desc = "Diagnostics Toggle virtual text",
         },
+        -- {
+        --   "<leader>ldT",
+        --   function()
+        --     show_diagnostics = not show_diagnostics
+        --     if show_diagnostics then
+        --       if show_lsp_lines then
+        --         require("lsp_lines").toggle()
+        --       else
+        --         require("tiny-inline-diagnostic").enable()
+        --       end
+        --     else
+        --       if show_lsp_lines then
+        --         require("lsp_lines").toggle()
+        --       end
+        --       require("tiny-inline-diagnostic").disable()
+        --     end
+        --   end,
+        --   desc = "Diagnostics Toggle virtual text",
+        -- },
         {
           "<leader>ldd",
           function()
