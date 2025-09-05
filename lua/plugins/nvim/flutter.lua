@@ -206,18 +206,18 @@ return {
       require("flutter-tools").setup(opts)
     end,
   },
-  {
-    "wa11breaker/flutter-bloc.nvim",
-    dependencies = {
-      "nvimtools/none-ls.nvim", -- Required for code actions
-    },
-    ft = "dart",
-    opts = {
-      bloc_type = "default", -- Choose from: 'default', 'equatable', 'freezed'
-      use_sealed_classes = false,
-      enable_code_actions = true,
-    },
-  },
+  -- {
+  --   "wa11breaker/flutter-bloc.nvim",
+  --   dependencies = {
+  --     "nvimtools/none-ls.nvim", -- Required for code actions
+  --   },
+  --   ft = "dart",
+  --   opts = {
+  --     bloc_type = "default", -- Choose from: 'default', 'equatable', 'freezed'
+  --     use_sealed_classes = false,
+  --     enable_code_actions = true,
+  --   },
+  -- },
   -- {
   --   "akinsho/pubspec-assist.nvim",
   --   event = "BufEnter *pubspec.yaml",
