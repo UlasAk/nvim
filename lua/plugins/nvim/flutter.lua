@@ -218,13 +218,13 @@ return {
       enable_code_actions = true,
     },
   },
-  {
-    "akinsho/pubspec-assist.nvim",
-    event = "BufEnter *pubspec.yaml",
-    cmd = { "PubspecAssistAddPackage", "PubspecAssistPickVersion", "PubspecAssistAddDevPackage" },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("pubspec-assist").setup()
-    end,
-  },
+  -- {
+  --   "akinsho/pubspec-assist.nvim",
+  --   event = "BufEnter *pubspec.yaml",
+  --   cmd = { "PubspecAssistAddPackage", "PubspecAssistPickVersion", "PubspecAssistAddDevPackage" },
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require("pubspec-assist").setup()
+  --   end,
+  -- },
 }
