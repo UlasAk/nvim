@@ -381,6 +381,7 @@ M.defaults = function()
     "jsonls",
     "kotlin_language_server",
     "pyright",
+    "qmlls",
     "terraformls",
   }
 
