@@ -171,7 +171,7 @@ return {
       {
         "<leader>bL",
         "<cmd>BufferLineGoToBuffer -1<CR>",
-        desc = "Buffer Move buffer to right",
+        desc = "Buffer Go to most right buffer",
       },
       -- {"<tab>", function()
       --   require("bufferline").cycle(1)
