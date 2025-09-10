@@ -22,7 +22,7 @@ o.relativenumber = true
 o.wrap = false
 o.scrolloff = 5
 
-o.textwidth = 1000
+o.textwidth = 0
 
 opt.spell = false
 
