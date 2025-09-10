@@ -204,13 +204,13 @@ return {
         end,
         desc = "Notifications Dismiss notifications",
       },
-      -- {
-      --   "<leader>fn",
-      --   function()
-      --     Snacks.notifier.show_history()
-      --   end,
-      --   desc = "Notifications Show history",
-      -- },
+      {
+        "<leader>fms",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notifications Show history",
+      },
       {
         "<leader>x",
         function()
