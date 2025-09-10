@@ -129,6 +129,7 @@ return {
       { "<leader>Opl", "<cmd>Octo pr list<CR>", desc = "Octo PR list" },
       { "<leader>Opc", "<cmd>Octo pr checkout<CR>", desc = "Octo PR checkout" },
       { "<leader>Opo", "<cmd>Octo pr browse<CR>", desc = "Octo PR open for current branch" },
+      { "<leader>OpO", "<cmd>Octo pr browser<CR>", desc = "Octo PR open for current branch in browser" },
       { "<leader>Ors", "<cmd>Octo review start<CR>", desc = "Octo Review start" },
       { "<leader>Orr", "<cmd>Octo review resume<CR>", desc = "Octo Review resume" },
       { "<leader>Orq", "<cmd>Octo review close<CR>", desc = "Octo Review quit/close" },
