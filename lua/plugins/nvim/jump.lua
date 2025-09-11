@@ -1,4 +1,11 @@
 return {
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {
+      builtin_marks = { "'", "<", ">", ".", "^", '"', "[", "]" },
+    },
+  },
   -- {
   --   "ThePrimeagen/harpoon",
   --   branch = "harpoon2",
@@ -100,11 +107,6 @@ return {
   --     },
   --   },
   -- },
-  {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
   -- {
   --   "NStefan002/wormhole.nvim",
   --   keys = {

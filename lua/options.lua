@@ -46,7 +46,7 @@ o.ruler = false
 -- disable nvim intro
 opt.shortmess:append "sI"
 
-o.signcolumn = "yes"
+o.signcolumn = "auto"
 o.splitbelow = true
 o.splitright = true
 o.inccommand = "split"
