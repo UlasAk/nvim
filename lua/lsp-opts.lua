@@ -346,7 +346,6 @@ end
 
 M.defaults = function()
   dofile(vim.g.base46_cache .. "lsp")
-  local lspconfig = require "lspconfig"
   -- Diagnostic Signs
   local x = vim.diagnostic.severity
 
@@ -357,16 +356,6 @@ M.defaults = function()
     underline = true,
     float = { border = "single" },
   }
-
-  --  LspInfo window borders
-  local win = require "lspconfig.ui.windows"
-  local _default_opts = win.default_opts
-
-  win.default_opts = function(options)
-    local opts = _default_opts(options)
-    opts.border = "single"
-    return opts
-  end
 
   -- General LSP config
   vim.lsp.config("*", {
@@ -392,9 +381,7 @@ M.defaults = function()
 
   -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
-    if lspconfig[lsp] ~= nil then
-      vim.lsp.enable(lsp)
-    end
+    vim.lsp.enable(lsp)
   end
 
   -- LSPs with specific config

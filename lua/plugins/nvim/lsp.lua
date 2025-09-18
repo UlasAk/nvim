@@ -17,23 +17,12 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
-      "neovim/nvim-lspconfig",
+      "stevearc/oil.nvim",
     },
     event = { "User NvimTreeSetup" },
+    ft = { "oil" },
     config = function()
-      local lsp_file_operations = require "lsp-file-operations"
-      lsp_file_operations.setup()
-
-      -- Set global defaults for all servers
-      local lspconfig = require "lspconfig"
-      local custom_lspconfig = require "lsp-opts"
-      lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-        capabilities = vim.tbl_deep_extend(
-          "force",
-          custom_lspconfig.capabilities,
-          lsp_file_operations.default_capabilities()
-        ),
-      })
+      require("lsp-file-operations").setup()
     end,
   },
   {
