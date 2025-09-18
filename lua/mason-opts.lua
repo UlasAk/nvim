@@ -119,6 +119,7 @@ M.get_all_ensure_installed_mason_names = function()
     "angular-language-server",
     "bash-language-server",
     "css-lsp",
+    "dart-debug-adapter",
     "docker-compose-language-service",
     "dockerfile-language-server",
     "emmet-language-server",
