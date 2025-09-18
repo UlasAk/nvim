@@ -1,3 +1,41 @@
+local get_status_text = function(self, opts)
+  local multi_select_cnt = #(self:get_multi_selection())
+  local showing_cnt = (self.stats.processed or 0) - (self.stats.filtered or 0)
+  local total_cnt = self.stats.processed or 0
+
+  local status_icon = ""
+  local status_text
+  if opts and not opts.completed then
+    status_icon = "*"
+  end
+
+  if showing_cnt == 0 and total_cnt == 0 then
+    status_text = status_icon
+  elseif multi_select_cnt == 0 then
+    status_text = string.format("%s %s / %s", status_icon, showing_cnt, total_cnt)
+  else
+    status_text = string.format("%s %s / %s / %s", status_icon, multi_select_cnt, showing_cnt, total_cnt)
+  end
+
+  -- quick workaround for extmark right_align side-scrolling limitation
+  -- https://github.com/nvim-telescope/telescope.nvim/issues/2929
+  local prompt_width = vim.api.nvim_win_get_width(self.prompt_win)
+  local cursor_col = vim.api.nvim_win_get_cursor(self.prompt_win)[2]
+  local prefix_display_width = require("plenary.strings").strdisplaywidth(self.prompt_prefix) --[[@as integer]]
+  local prefix_width = #self.prompt_prefix
+  local prefix_shift = 0
+  if prefix_display_width ~= prefix_width then
+    prefix_shift = prefix_display_width
+  end
+
+  local cursor_occluded = (prompt_width - cursor_col - #status_text + prefix_shift) < 0
+  if cursor_occluded then
+    return ""
+  else
+    return status_text
+  end
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -213,6 +251,9 @@ return {
         fg = "#d9e0ee",
         bg = "#5c5a82",
       })
+      vim.api.nvim_set_hl(0, "TelescopePromptCounter", {
+        fg = "#d9e0ee",
+      })
     end,
   },
   {
@@ -230,6 +271,7 @@ return {
             file_ignore_patterns = {},
             auto_quoting = true, -- enable/disable auto-quoting
             -- define mappings, e.g.
+            get_status_text = get_status_text,
             mappings = { -- extend mappings
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
@@ -311,6 +353,7 @@ return {
         extensions = {
           smart_open = {
             result_limit = 40,
+            get_status_text = get_status_text,
           },
         },
       }
