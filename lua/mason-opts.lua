@@ -43,6 +43,7 @@ M.filetype_linter_map = function()
     lua = "luacheck",
     markdown = "markdownlint",
     sh = "shellcheck",
+    dart = "trivy",
   }
 end
 
@@ -141,6 +142,7 @@ M.get_all_ensure_installed_mason_names = function()
     "stylua",
     -- "texlab",
     "terraform-ls",
+    "trivy",
     "typescript-language-server",
     "yaml-language-server",
     "yamlfmt",
