@@ -129,7 +129,6 @@ return {
             virtual_text = false, -- show the highlight using virtual text
             virtual_text_str = "■", -- the virtual text character to highlight
           },
-          on_attach = lspconfig.on_attach,
           capabilities = lspconfig.capabilities, -- e.g. lsp_status capabilities
           --- OR you can specify a function to deactivate or change or control how the config is created
           -- capabilities = function(config)

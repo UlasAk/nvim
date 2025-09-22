@@ -10,7 +10,6 @@ return {
       vim.g.rustaceanvim = {
         server = {
           autostart = true,
-          on_attach = lspconfig.on_attach,
           capabilities = lspconfig.capabilities,
           on_init = lspconfig.on_init,
           default_settings = {
@@ -43,11 +42,9 @@ return {
       },
     },
     opts = function()
-      local on_attach = require("lsp-opts").on_attach
       return {
         lsp = {
           enabled = true,
-          on_attach = on_attach,
           actions = true,
           completion = true,
           hover = true,

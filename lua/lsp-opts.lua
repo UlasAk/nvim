@@ -64,10 +64,12 @@ local function rename()
 end
 
 -- basic lsp config
-M.on_attach = function(client, bufnr)
-  -- inlay hints
-  vim.lsp.inlay_hint.enable(true)
-end
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
+  callback = function()
+    -- inlay hints
+    vim.lsp.inlay_hint.enable(true)
+  end,
+})
 
 local make_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -279,7 +281,6 @@ M.defaults = function()
 
   -- General LSP config
   vim.lsp.config("*", {
-    on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.capabilities,
   })
@@ -492,7 +493,6 @@ M.defaults = function()
   -- })
   -- vim.lsp.enable("ltex")
   -- vim.lsp.config("texlab", {
-  --   on_attach = M.on_attach,
   --   on_init = M.on_init,
   --   capabilities = M.capabilities,
   -- })
