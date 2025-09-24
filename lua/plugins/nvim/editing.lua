@@ -57,13 +57,11 @@ return {
       vim.api.nvim_set_hl(0, "IblChar", {
         fg = "#383747",
       })
-      -- dofile(vim.g.base46_cache .. "blankline")
       require("ibl").setup(opts)
       local hooks = require "ibl.hooks"
 
       hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
 
-      -- dofile(vim.g.base46_cache .. "blankline")
       require("ibl").refresh()
     end,
   },

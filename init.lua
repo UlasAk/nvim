@@ -38,7 +38,6 @@ end
 require("lazy").setup {
   spec = lazy_spec,
   defaults = { lazy = true },
-  install = { colorscheme = { "nvchad" } },
 
   ui = {
     icons = {
@@ -85,10 +84,6 @@ require("lazy").setup {
     enabled = true,
   },
 }
-
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
 
 -- load autocmds
 require "autocmds"

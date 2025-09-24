@@ -11,8 +11,6 @@ return {
       { "<leader>gbc", "<cmd>Gitsigns blame<CR>", desc = "Git Blame Current Buffer" },
     },
     opts = function()
-      dofile(vim.g.base46_cache .. "git")
-
       local options = {
         signs = {
           add = { text = "│" },
@@ -38,9 +36,6 @@ return {
       }
 
       return options
-    end,
-    init = function()
-      dofile(vim.g.base46_cache .. "git")
     end,
   },
   {

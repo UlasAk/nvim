@@ -79,13 +79,6 @@ return {
         desc = "Telescope Files (all)",
       },
       {
-        "<leader>fth",
-        function()
-          require("nvchad.themes").open { style = "flat", border = false }
-        end,
-        desc = "Telescope Themes (NVChad)",
-      },
-      {
         '<leader>f"',
         function()
           require("telescope.builtin").registers()
@@ -221,7 +214,7 @@ return {
           },
         },
 
-        extensions_list = { "themes", "terms" },
+        extensions_list = {},
         extensions = {
           fzf = {
             fuzzy = true,
@@ -236,7 +229,6 @@ return {
       }
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "telescope")
       local telescope = require "telescope"
       telescope.setup(opts)
       for _, ext in ipairs(opts.extensions_list) do

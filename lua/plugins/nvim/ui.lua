@@ -1,11 +1,237 @@
 return {
   {
-    "nvim-tree/nvim-web-devicons",
-    opts = function()
-      return { override = require "nvchad.icons.devicons" }
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup {
+        flavour = "mocha",
+        transparent_background = true,
+        float = {
+          transparent = true,
+        },
+        custom_highlights = function(colors)
+          return {
+            SnacksDashboardHeader = { fg = colors.yellow },
+            NoiceCmdlinePrompt = { fg = colors.yellow },
+            NoiceCmdlinePopupBorder = { fg = colors.yellow },
+          }
+        end,
+        auto_integrations = true,
+        integrations = {
+          blink_cmp = {
+            style = "bordered",
+          },
+          cmp = true,
+          dap = true,
+          diffview = true,
+          dropbar = {
+            enabled = true,
+            color_mode = true,
+          },
+          fidget = true,
+          flash = true,
+          gitsigns = true,
+          grug_far = true,
+          indent_blankline = {
+            enabled = true,
+            scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+            colored_indent_levels = true,
+          },
+          lsp_trouble = true,
+          mason = true,
+          markview = true,
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+              ok = { "italic" },
+            },
+            underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+              ok = { "underline" },
+            },
+            inlay_hints = {
+              background = true,
+            },
+          },
+          neotest = true,
+          noice = true,
+          nvim_surround = true,
+          nvimtree = true,
+          octo = true,
+          rainbow_delimiters = true,
+          snacks = {
+            enabled = true,
+            indent_scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+          },
+          treesitter = true,
+          treesitter_context = true,
+          telescope = {
+            enabled = true,
+          },
+          which_key = true,
+        },
+      }
+
+      vim.cmd.colorscheme "catppuccin"
     end,
-    init = function()
-      dofile(vim.g.base46_cache .. "devicons")
+  },
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = {},
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = { "UIEnter" },
+    config = function()
+      local function workspace()
+        return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+      end
+      local function flutterStatusLine()
+        local decorations = vim.g.flutter_tools_decorations
+        if not decorations then
+          return ""
+        end
+
+        local information_table = {}
+
+        -- type: Device
+        local device = decorations.device
+        if device then
+          table.insert(information_table, device.name)
+        end
+
+        -- tpye: flutter.ProjectConfig
+        local project_config = decorations.project_config
+        if project_config and project_config.name then
+          table.insert(information_table, project_config.name)
+        end
+
+        -- type: string
+        local app_version = decorations.app_version
+        if app_version then
+          local comment_pos, _ = string.find(app_version, "#")
+          if comment_pos then
+            app_version = string.gsub(string.sub(app_version, 0, comment_pos - 1), "%s+", "")
+          end
+          table.insert(information_table, app_version)
+        end
+
+        return table.concat(information_table, " - ")
+      end
+      local function node_package_info()
+        local ok, package_info = pcall(require, "package-info")
+        if ok then
+          return package_info.get_status()
+        end
+        return ""
+      end
+      local function recording()
+        local ok, noice = pcall(require, "noice")
+        if ok then
+          if noice.api.statusline.mode.has() then
+            local status = noice.api.statusline.mode.get()
+            return status
+          end
+          return ""
+        end
+        return ""
+      end
+      local function custom_separator()
+        return "|"
+      end
+      local separators = {
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
+      }
+      local colors = require "catppuccin.palettes.mocha"
+      local sections = {
+        lualine_a = { "mode", recording },
+        lualine_b = {
+          {
+            "filename",
+            color = { fg = "lavender" },
+            file_status = true,
+            newfile_status = true,
+            symbols = {
+              modified = "[+]",
+              readonly = "[-]",
+              unnamed = "[No Name]",
+              newfile = "[New]",
+            },
+          },
+        },
+        lualine_c = { "branch", "diff" },
+        lualine_x = {
+          "searchcount",
+          "selectioncount",
+          node_package_info,
+          flutterStatusLine,
+          {
+            "lsp_status",
+            icon = "",
+            symbols = {
+              spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+              done = "✓",
+              separator = " ",
+            },
+            ignore_lsp = {},
+          },
+          {
+            "diagnostics",
+            sources = { "nvim_diagnostic", "nvim_lsp" },
+            sections = { "error", "warn", "info", "hint" },
+          },
+        },
+        lualine_y = {
+          {
+            "filetype",
+            color = { fg = colors.blue },
+            separator = { left = separators.section_separators.right, right = "" },
+          },
+          { custom_separator, color = { fg = colors.blue }, separator = { left = "", right = "" }, padding = 0 },
+          { workspace, color = { fg = colors.blue }, separator = { left = "", right = "" } },
+        },
+        lualine_z = {
+          {
+            "location",
+            color = { bg = colors.yellow },
+            separator = { left = separators.section_separators.right, right = "" },
+          },
+          {
+            custom_separator,
+            color = { fg = colors.crust, bg = colors.yellow },
+            separator = { left = "", right = "" },
+            padding = 0,
+          },
+          { "progress", color = { bg = colors.yellow }, separator = { left = "", right = "" } },
+        },
+      }
+      local opts = {
+        options = {
+          theme = "catppuccin",
+          section_separators = separators.section_separators,
+          component_separators = separators.component_separators,
+          globalstatus = true,
+          refresh = {
+            statusline = 32,
+          },
+        },
+        ignore_focus = {},
+        sections = sections,
+        inactive_sections = sections,
+        extensions = { "trouble", "mason", "lazy" },
+      }
+      require("lualine").setup(opts)
     end,
   },
   {
@@ -87,37 +313,7 @@ return {
       },
     },
     config = function(_, opts)
-      local noice = require "noice"
-      noice.setup(opts)
-
-      -- Statusline Recording
-      local statusline = require("chadrc").ui.statusline
-      local separator_style = statusline.separator_style
-      local separators = require("utils").statusline_separators[separator_style]
-      statusline.modules.recording = function()
-        if noice.api.statusline.mode.has() then
-          local status = noice.api.statusline.mode.get()
-          return "%#RecordSepl#"
-            .. separators["right"]
-            .. "%#Record# "
-            .. status
-            .. " %#RecordSepr#"
-            .. separators["right"]
-        end
-        return ""
-      end
-      local function indexOf(table, value)
-        for i, v in ipairs(table) do
-          if v == value then
-            return i
-          end
-        end
-        return nil
-      end
-      local pos = indexOf(statusline.order, "mode")
-      if pos then
-        table.insert(statusline.order, pos + 1, "recording")
-      end
+      require("noice").setup(opts)
 
       -- Change Noice Mini Background Color (where LSP Progress is shown)
       vim.api.nvim_set_hl(0, "NoiceMini", {
@@ -128,6 +324,16 @@ return {
         fg = "#fdfd96",
       })
     end,
+  },
+  {
+    "xiyaowong/transparent.nvim",
+    opts = {
+      exclude_groups = {
+        "IblIndent",
+        "IblChar",
+        "IblScope",
+      },
+    },
   },
   {
     "akinsho/bufferline.nvim",

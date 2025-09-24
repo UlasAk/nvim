@@ -193,9 +193,6 @@ return {
         debug = false, -- enable wk.log in the current directory
       }
     end,
-    init = function()
-      dofile(vim.g.base46_cache .. "whichkey")
-    end,
   },
   {
     "christoomey/vim-tmux-navigator",

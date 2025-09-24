@@ -267,7 +267,6 @@ M.setup_colors = function()
 end
 
 M.defaults = function()
-  dofile(vim.g.base46_cache .. "lsp")
   -- Diagnostic Signs
   local x = vim.diagnostic.severity
 
@@ -430,7 +429,6 @@ M.defaults = function()
           library = {
             [vim.fn.expand "$VIMRUNTIME/lua"] = true,
             [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-            [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
             [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
             -- [vim.fn.stdpath "data"] = true,
             [vim.fn.expand "~/.config/nvim"] = true,

@@ -43,15 +43,6 @@ return {
     },
     config = function(_, opts)
       require("package-info").setup(opts)
-      local statusline = require("chadrc").ui.statusline
-      statusline.modules.package_info = function()
-        return require("package-info").get_status()
-      end
-      local utils = require "utils"
-      local pos = utils.indexOf(statusline.order, "lsp_msg")
-      if pos then
-        table.insert(statusline.order, pos, "package_info")
-      end
       require("telescope").load_extension "package_info"
       vim.api.nvim_set_hl(0, "PackageInfoUpToDateVersion", {
         fg = "#abe9b3",
