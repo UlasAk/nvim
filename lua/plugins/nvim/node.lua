@@ -13,10 +13,16 @@ return {
       },
     },
     opts = {
-      colors = {
-        up_to_date = "#3C4048", -- Text color for up to date dependency virtual text
-        outdated = "#d19a66", -- Text color for outdated dependency virtual text
-        invalid = "#ee4b2b", -- Text color for invalid dependency virtual text
+      highlights = {
+        up_to_date = { -- highlight for up to date dependency virtual text
+          fg = "#3C4048",
+        },
+        outdated = { -- highlight for outdated dependency virtual text
+          fg = "#d19a66",
+        },
+        invalid = { -- highlight for invalid dependency virtual text
+          fg = "#ee4b2b",
+        },
       },
       icons = {
         enable = true, -- Whether to display icons
