@@ -188,15 +188,8 @@ return {
       statusline.modules.flutter = function()
         return flutterStatusLine()
       end
-      local function indexOf(table, value)
-        for i, v in ipairs(table) do
-          if v == value then
-            return i
-          end
-        end
-        return nil
-      end
-      local pos = indexOf(statusline.order, "diagnostics")
+      local utils = require "utils"
+      local pos = utils.indexOf(statusline.order, "diagnostics")
       if pos then
         table.insert(statusline.order, pos, "flutter")
       end
