@@ -209,6 +209,7 @@ return {
             "location",
             color = { bg = colors.yellow },
             separator = { left = separators.section_separators.right, right = "" },
+            padding = 1,
           },
           {
             custom_separator,
@@ -216,7 +217,7 @@ return {
             separator = { left = "", right = "" },
             padding = 0,
           },
-          { "progress", color = { bg = colors.yellow }, separator = { left = "", right = "" } },
+          { "progress", color = { bg = colors.yellow }, separator = { left = "", right = "" }, padding = 1 },
         },
       }
       local opts = {
