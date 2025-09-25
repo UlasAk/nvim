@@ -16,6 +16,7 @@ return {
             SnacksDashboardHeader = { fg = colors.yellow },
             NoiceCmdlinePrompt = { fg = colors.yellow },
             NoiceCmdlinePopupBorder = { fg = colors.yellow },
+            DevIconDart = { fg = "#5fc9f8" },
           }
         end,
         auto_integrations = true,
