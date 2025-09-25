@@ -36,9 +36,9 @@ return {
       completion = {
         accept = { auto_brackets = { enabled = false } },
         documentation = { auto_show = false },
+        list = { selection = { preselect = false, auto_insert = true } },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
-      list = { selection = { preselect = false, auto_insert = true } },
       snippets = {
         preset = "luasnip",
       },
