@@ -155,7 +155,10 @@ return {
       }
       local colors = require "catppuccin.palettes.mocha"
       local sections = {
-        lualine_a = { "mode", recording },
+        lualine_a = {
+          { "mode", separator = { right = separators.section_separators.left } },
+          { recording, color = { bg = colors.red }, separator = { right = separators.section_separators.left } },
+        },
         lualine_b = {
           {
             "filename",
