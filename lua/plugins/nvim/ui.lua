@@ -23,7 +23,6 @@ return {
           blink_cmp = {
             style = "bordered",
           },
-          cmp = true,
           dap = true,
           diffview = true,
           dropbar = {
