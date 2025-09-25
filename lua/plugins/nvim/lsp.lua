@@ -4,7 +4,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    event = "BufReadPost",
+    event = "BufEnter",
     config = function()
       local lspconfig = require "lsp-opts"
       lspconfig.defaults()
