@@ -278,6 +278,7 @@ return {
   {
     "HiPhish/rainbow-delimiters.nvim",
     event = { "BufEnter", "BufNew" },
+    submodules = false,
     keys = {
       {
         "<leader>tr",
