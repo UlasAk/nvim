@@ -13,7 +13,18 @@ return {
     -- lazy = false,
     ft = "markdown",
     priority = 49,
-    opts = {},
+    opts = {
+      markdown = {
+        headings = {
+          heading_1 = { icon_hl = "@markup.link", icon = "[%d] " },
+          heading_2 = { icon_hl = "@markup.link", icon = "[%d.%d] " },
+          heading_3 = { icon_hl = "@markup.link", icon = "[%d.%d.%d] " },
+          heading_4 = { icon_hl = "@markup.link", icon = "[%d.%d.%d.%d] " },
+          heading_5 = { icon_hl = "@markup.link", icon = "[%d.%d.%d.%d.%d] " },
+          heading_6 = { icon_hl = "@markup.link", icon = "[%d.%d.%d.%d.%d.%d] " },
+        },
+      },
+    },
     config = function(_, opts)
       require("markview").setup(opts)
       require("markview.extras.checkboxes").setup {
