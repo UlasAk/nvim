@@ -11,7 +11,6 @@ return {
       "nvim-neotest/neotest-jest",
       "weilbith/neotest-gradle",
     },
-    commit = "52fca6717ef972113ddd6ca223e30ad0abb2800c",
     cmd = "Neotest summary",
     event = { "BufEnter *spec*", "BufEnter *test*" },
     keys = {
