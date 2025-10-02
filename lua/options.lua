@@ -20,6 +20,7 @@ o.cursorlineopt = "number"
 o.relativenumber = true
 o.wrap = false
 o.scrolloff = 5
+o.diffopt = "vertical"
 
 o.textwidth = 0
 
