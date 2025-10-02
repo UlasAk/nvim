@@ -108,6 +108,25 @@ return {
       local mason_config = require "mason-opts"
       lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
 
+      -- Linter configs
+      lint.linters.luacheck = {
+        cmd = "luacheck",
+        stdin = true,
+        args = {
+          "--globals",
+          "vim",
+          "lvim",
+          "reload",
+          "Snacks",
+          "--",
+        },
+        stream = "stdout",
+        ignore_exitcode = true,
+        parser = require("lint.parser").from_errorformat("%f:%l:%c: %m", {
+          source = "luacheck",
+        }),
+      }
+
       vim.schedule(function()
         vim.diagnostic.config { virtual_text = false }
       end)
