@@ -1250,6 +1250,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    cmd = { "TermExec" },
     keys = {
       {
         "<leader>Th",
@@ -1267,7 +1268,9 @@ return {
         desc = "Terminal Toggle floating term",
       },
     },
-    opts = {},
+    opts = {
+      shell = "/bin/zsh --login",
+    },
   },
   {
     "mrjones2014/smart-splits.nvim",
