@@ -21,11 +21,11 @@ return {
             if cmp.is_visible() then
               cmp.cancel {
                 callback = function()
-                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, true, true), "i", true)
+                  vim.cmd "stopinsert"
                 end,
               }
             else
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, true, true), "n", true)
+              vim.cmd "stopinsert"
             end
           end,
         },
