@@ -903,6 +903,10 @@ return {
         animation_type = "fade",
         window_scoped = true,
       },
+      fallback_for_transparency = {
+        bg = "#000000", -- fallback color for when the highlight is transparent
+        fg = "#FFFFFF", -- fallback color for when the highlight is transparent
+      },
       highlights = {
         undo = {
           hl_color = { bg = "#693232" }, -- Dark muted red
