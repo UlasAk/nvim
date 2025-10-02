@@ -1308,28 +1308,28 @@ return {
         function()
           require("smart-splits").swap_buf_right()
         end,
-        desc = "Window Resize right",
+        desc = "Window Swap right",
       },
       {
         "<M-Left>",
         function()
           require("smart-splits").swap_buf_left()
         end,
-        desc = "Window Resize left",
+        desc = "Window Swap left",
       },
       {
         "<M-Up>",
         function()
           require("smart-splits").swap_buf_up()
         end,
-        desc = "Window Resize up",
+        desc = "Window Swap up",
       },
       {
         "<M-Down>",
         function()
           require("smart-splits").swap_buf_down()
         end,
-        desc = "Window Resize down",
+        desc = "Window Swap down",
       },
     },
     opts = {},
