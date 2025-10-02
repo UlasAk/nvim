@@ -298,26 +298,26 @@ return {
           -- ...
         },
         highlight = {
+          "RainbowDelimiterRed",
           "RainbowDelimiterYellow",
           "RainbowDelimiterViolet",
-          "RainbowDelimiterRed",
           "RainbowDelimiterBlue",
           "RainbowDelimiterGreen",
           "RainbowDelimiterOrange",
           "RainbowDelimiterCyan",
         },
       }
-      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", {
-        fg = "#fdfd96",
-      })
       vim.api.nvim_set_hl(0, "RainbowDelimiterRed", {
         fg = "#f38ba8",
       })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", {
+        fg = "#fdfd96",
+      })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", {
+        fg = "#b4befe",
+      })
       vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", {
         fg = "#89b4fa",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", {
-        fg = "#94e2d5",
       })
       vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", {
         fg = "#a6e3a1",
@@ -325,13 +325,9 @@ return {
       vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", {
         fg = "#fab387",
       })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", {
-        fg = "#b4befe",
+      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", {
+        fg = "#94e2d5",
       })
-      -- Toggle instantly on startup
-      -- vim.schedule(function()
-      --   require("rainbow-delimiters").toggle()
-      -- end)
     end,
   },
   -- {
