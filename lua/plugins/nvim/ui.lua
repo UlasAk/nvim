@@ -932,7 +932,8 @@ return {
       {
         "u",
         function()
-          require("undo-glow").undo()
+          local unde_glow = require "undo-glow"
+          pcall(unde_glow.undo)
         end,
         mode = "n",
         desc = "Undo with highlight",
@@ -941,7 +942,8 @@ return {
       {
         "<C-r>",
         function()
-          require("undo-glow").redo()
+          local unde_glow = require "undo-glow"
+          pcall(unde_glow.redo)
         end,
         mode = "n",
         desc = "Redo with highlight",
@@ -950,7 +952,8 @@ return {
       {
         "p",
         function()
-          require("undo-glow").paste_below()
+          local unde_glow = require "undo-glow"
+          pcall(unde_glow.paste_below)
         end,
         mode = "n",
         desc = "Paste below with highlight",
@@ -959,7 +962,8 @@ return {
       {
         "P",
         function()
-          require("undo-glow").paste_above()
+          local unde_glow = require "undo-glow"
+          pcall(unde_glow.paste_above)
         end,
         mode = "n",
         desc = "Paste above with highlight",
@@ -1056,7 +1060,8 @@ return {
       vim.api.nvim_create_autocmd("TextYankPost", {
         desc = "Highlight when yanking (copying) text",
         callback = function()
-          require("undo-glow").yank()
+          local undo_glow = require "undo-glow"
+          pcall(undo_glow.yank)
         end,
       })
 
