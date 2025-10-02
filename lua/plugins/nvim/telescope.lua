@@ -200,7 +200,6 @@ return {
               ["<C-Up>"] = require("telescope.actions").preview_scrolling_up,
               ["<C-Left>"] = require("telescope.actions").preview_scrolling_left,
               ["<C-Right>"] = require("telescope.actions").preview_scrolling_right,
-              ["<C-q>"] = require("telescope.actions").close,
               ["<C-f>"] = flash,
             },
             n = {
