@@ -8,7 +8,7 @@ M.init_colors = function()
     -- Highlight current search item with different color than other search items
     vim.api.nvim_set_hl(0, "CurSearch", {
       fg = "#282737",
-      bg = "#ff0000",
+      bg = "#f38ba8",
     })
     -- Change Visual Mode Background Color to see more on transparent background
     vim.api.nvim_set_hl(0, "Visual", {
