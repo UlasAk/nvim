@@ -1,24 +1,6 @@
--- local dap_dependencies = function()
---   local deps = {
---     "stevearc/overseer.nvim",
---   }
---   if vim.fn.executable "cargo" == 1 then
---     table.insert(deps, {
---       "Joakker/lua-json5",
---       build = "./install.sh",
---       cond = function()
---         return vim.fn.executable "cargo" == 1
---       end,
---       lazy = true,
---     })
---   end
---   return deps
--- end
-
 return {
   {
     "mfussenegger/nvim-dap",
-    -- dependencies = dap_dependencies(),
     keys = {
       { "<leader>D", "<cmd>DapNew<CR>", desc = "Debug New" },
       { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
@@ -97,9 +79,8 @@ return {
       local dartAdapter = function()
         dap.adapters.dart = {
           type = "executable",
-          command = "dart", -- if you're using fvm, you'll need to provide the full path to dart (dart.exe for windows users), or you could prepend the fvm command
+          command = "dart",
           args = { "debug_adapter" },
-          -- windows users will need to set 'detached' to false
           options = {
             detached = false,
           },
@@ -109,9 +90,8 @@ return {
       local flutterAdapter = function()
         dap.adapters.flutter = {
           type = "executable",
-          command = "flutter", -- if you're using fvm, you'll need to provide the full path to flutter (flutter.bat for windows users), or you could prepend the fvm command
+          command = "flutter",
           args = { "debug_adapter" },
-          -- windows users will need to set 'detached' to false
           options = {
             detached = false,
           },
@@ -313,16 +293,6 @@ return {
       M.setup_configurations = function()
         javascriptConfigurations()
         typescriptConfigurations()
-        -- VSCode configurations
-        -- local ok, parser = pcall(require, "json5")
-        -- if ok then
-        --   local vscode = require "dap.ext.vscode"
-        --   vscode.json_decode = function(str)
-        --     return parser.parse(str)
-        --   end
-        --   require("dap.ext.vscode").load_launchjs()
-        -- end
-        -- require("dap.ext.vscode").load_launchjs()
       end
 
       M.setup_colors = function()
@@ -388,20 +358,6 @@ return {
       }
     end,
   },
-  -- {
-  --   "rcarriga/nvim-dap-ui",
-  --   dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-  --   keys = {
-  --     {
-  --       "<leader>dut",
-  --       function()
-  --         require("dapui").toggle()
-  --       end,
-  --       desc = "Debug Toggle UI",
-  --     },
-  --   },
-  --   opts = {},
-  -- },
   {
     "igorlfs/nvim-dap-view",
     ---@module 'dap-view'
@@ -429,20 +385,4 @@ return {
       end, {})
     end,
   },
-  -- {
-  --   "stevearc/overseer.nvim",
-  --   opts = { templates = { "builtin" } },
-  --   config = function(_, opts)
-  --     local overseer = require "overseer"
-  --     overseer.setup(opts)
-  --     overseer.register_template {
-  --       name = "tsc: build - tsconfig.build.json",
-  --       builder = function()
-  --         return {
-  --           cmd = { "npx", "tsc", "-p", "tsconfig.build.json" },
-  --         }
-  --       end,
-  --     }
-  --   end,
-  -- },
 }
