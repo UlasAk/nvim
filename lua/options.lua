@@ -3,7 +3,6 @@ local o = vim.o
 local g = vim.g
 
 -------------------------------------- globals -----------------------------------------
-g.toggle_theme_icon = "   "
 g.mapleader = " "
 g.maplocalleader = " "
 
