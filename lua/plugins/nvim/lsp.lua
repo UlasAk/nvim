@@ -256,6 +256,9 @@ return {
       vim.api.nvim_set_hl(0, "TreesitterContext", {
         bg = "#444151",
       })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", {
+        bg = "#444151",
+      })
     end,
   },
   {
