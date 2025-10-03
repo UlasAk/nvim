@@ -7,7 +7,6 @@ return {
       { "<leader>sd", "<cmd>AutoSession delete<CR>", desc = "Session Delete current session" },
       { "<leader>sr", "<cmd>AutoSession restore<CR>", desc = "Session Restore last in cwd" },
     },
-    ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
@@ -24,9 +23,7 @@ return {
         },
         load_on_setup = false,
       },
-      pre_save_cmds = {
-        -- "bw __FLUTTER_DEV_LOG__",
-      },
+      pre_save_cmds = {},
     },
   },
 }
