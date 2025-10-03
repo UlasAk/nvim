@@ -17,8 +17,6 @@ local get_status_text = function(self, opts)
     status_text = string.format("%s %s / %s / %s", status_icon, multi_select_cnt, showing_cnt, total_cnt)
   end
 
-  -- quick workaround for extmark right_align side-scrolling limitation
-  -- https://github.com/nvim-telescope/telescope.nvim/issues/2929
   local prompt_width = vim.api.nvim_win_get_width(self.prompt_win)
   local cursor_col = vim.api.nvim_win_get_cursor(self.prompt_win)[2]
   local prefix_display_width = require("plenary.strings").strdisplaywidth(self.prompt_prefix) --[[@as integer]]
@@ -42,7 +40,6 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
     cmd = "Telescope",
     keys = {
-      -- Diagnostics
       {
         "<leader>lda",
         function()
@@ -57,7 +54,6 @@ return {
         end,
         desc = "Diagnostics Diagnostics Current Buf",
       },
-      -- Other
       { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Telescope Buffers" },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Telescope Oldfiles" },
@@ -89,7 +85,6 @@ return {
       { "<leader>fco", "<cmd>Telescope commands<CR>", desc = "Telescope Commands" },
       { "<leader>fch", "<cmd>Telescope command_history<CR>", desc = "Telescope Command history" },
       { "<leader>fv", "<cmd>Telescope vim_options<CR>", desc = "Telescope Vim Options" },
-      -- { "<leader>fsy", "<cmd>Telescope treesitter<CR>", desc = "Telescope Symbols" },
       { "<leader>fsy", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Telescope Symbols" },
       { "<leader>fr", "<cmd>Telescope resume<CR>", desc = "Telescope Resume last search" },
       { "<leader>fk", "<cmd>Telescope keymaps<CR>", desc = "Telescope Keybindings" },
@@ -192,7 +187,6 @@ return {
           file_previewer = require("telescope.previewers").vim_buffer_cat.new,
           grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
           qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-          -- Developer configurations: Not meant for general override
           buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
           mappings = {
             i = {
@@ -212,7 +206,6 @@ return {
             },
           },
         },
-
         extensions_list = {},
         extensions = {
           fzf = {
@@ -260,22 +253,16 @@ return {
           live_grep_args = {
             additional_args = { "--no-ignore", "--hidden" },
             file_ignore_patterns = {},
-            auto_quoting = true, -- enable/disable auto-quoting
-            -- define mappings, e.g.
+            auto_quoting = true,
             get_status_text = get_status_text,
-            mappings = { -- extend mappings
+            mappings = {
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
                 ["<C-f>"] = lga_actions.quote_prompt { postfix = " -SF " },
                 ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
-                -- freeze the current list and start a fuzzy search in the frozen list
                 ["<C-space>"] = lga_actions.to_fuzzy_refine,
               },
             },
-            -- ... also accepts theme settings, for example:
-            -- theme = "dropdown", -- use dropdown theme
-            -- theme = { }, -- use own theme spec
-            -- layout_config = { mirror=true }, -- mirror preview pane
           },
         },
       }
@@ -321,10 +308,6 @@ return {
     dependencies = {
       "kkharji/sqlite.lua",
       "nvim-telescope/telescope.nvim",
-      -- Only required if using match_algorithm fzf
-      -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-      -- { "nvim-telescope/telescope-fzy-native.nvim" },
     },
     keys = {
       {
@@ -351,37 +334,6 @@ return {
       telescope.load_extension "smart_open"
     end,
   },
-  -- {
-  --   "debugloop/telescope-undo.nvim",
-  --   dependencies = { -- note how they're inverted to above example
-  --     {
-  --       "nvim-telescope/telescope.nvim",
-  --     },
-  --   },
-  --   keys = {
-  --     {
-  --       "<leader>u",
-  --       "<cmd>Telescope undo<cr>",
-  --       desc = "Telescope Undo history",
-  --     },
-  --   },
-  --   opts = {
-  --     -- don't use `defaults = { }` here, do this in the main telescope spec
-  --     extensions = {
-  --       undo = {
-  --         -- telescope-undo.nvim config, see below
-  --       },
-  --       -- no other extensions here, they can have their own spec too
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
-  --     -- configs for us. We won't use data, as everything is in it's own namespace (telescope
-  --     -- defaults, as well as each extension).
-  --     require("telescope").setup(opts)
-  --     require("telescope").load_extension "undo"
-  --   end,
-  -- },
   {
     "nvim-telescope/telescope-dap.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
@@ -390,75 +342,4 @@ return {
       require("telescope").load_extension "dap"
     end,
   },
-  -- {
-  --   "allaman/emoji.nvim",
-  --   keys = {
-  --     {
-  --       "<leader>fe",
-  --       function()
-  --         require("telescope").extensions.emoji.emoji()
-  --       end,
-  --       desc = "Telescope Emoji",
-  --     },
-  --   },
-  --   dependencies = {
-  --     -- util for handling paths
-  --     "nvim-lua/plenary.nvim",
-  --     -- optional for nvim-cmp integration
-  --     -- "hrsh7th/nvim-cmp",
-  --     -- optional for telescope integration
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   opts = {},
-  --   config = function(_, opts)
-  --     require("emoji").setup(opts)
-  --     -- optional for telescope integration
-  --     require("telescope").load_extension "emoji"
-  --   end,
-  -- },
-  -- {
-  --   "nvim-telescope/telescope-project.nvim",
-  --   keys = {
-  --     {
-  --       "<leader>fpr",
-  --       function()
-  --         require("telescope").extensions.project.project {}
-  --       end,
-  --       desc = "Telescope Projects",
-  --     },
-  --   },
-  --   dependencies = {
-  --     "nvim-telescope/telescope.nvim",
-  --     "nvim-tree/nvim-tree.lua",
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   config = function()
-  --     require("telescope").setup {
-  --       extensions = {
-  --         project = {
-  --           cd_scope = { "global" },
-  --           on_project_selected = function(prompt_bufnr)
-  --             local actions_state = require "telescope.actions.state"
-  --             local project_path = actions_state.get_selected_entry(prompt_bufnr).value
-  --             local actions = require "telescope.actions"
-  --             actions._close(prompt_bufnr, true)
-  --             local Path = require "plenary.path"
-  --             if Path:new(project_path):exists() then
-  --               local projects_utils = require "telescope._extensions.project.utils"
-  --               projects_utils.update_last_accessed_project_time(project_path)
-  --               vim.fn.execute("cd " .. project_path, "silent")
-  --               local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
-  --               if status_ok then
-  --                 local tree = nvim_tree_api.tree
-  --                 tree.change_root(project_path)
-  --               end
-  --             else
-  --               Snacks.notify.warn("Path '" .. project_path .. "' does not exist", { title = "Switch folder" })
-  --             end
-  --           end,
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
 }
