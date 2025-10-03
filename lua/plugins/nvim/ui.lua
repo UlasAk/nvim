@@ -830,31 +830,6 @@ return {
     },
   },
   {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    cmd = { "TermExec" },
-    keys = {
-      {
-        "<leader>Th",
-        "<cmd>ToggleTerm direction=horizontal<CR>",
-        desc = "Terminal Toggle horizontal term",
-      },
-      {
-        "<leader>Tv",
-        "<cmd>ToggleTerm direction=vertical size=60<CR>",
-        desc = "Terminal Toggle vertical term",
-      },
-      {
-        "<leader>Tf",
-        "<cmd>ToggleTerm direction=float<CR>",
-        desc = "Terminal Toggle floating term",
-      },
-    },
-    opts = {
-      shell = "/bin/zsh --login",
-    },
-  },
-  {
     "mrjones2014/smart-splits.nvim",
     keys = {
       {
