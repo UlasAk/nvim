@@ -5,7 +5,7 @@ return {
     keys = {
       { "<leader>fse", "<cmd>AutoSession search<CR>", desc = "Telescope Sessions" },
       { "<leader>sd", "<cmd>AutoSession delete<CR>", desc = "Session Delete current session" },
-      { "<leader>sr", "<cmd>AutoSession restore<CR>", desc = "Session Restore last in cwd" },
+      { "<leader>sl", "<cmd>AutoSession restore<CR>", desc = "Session Restore last in cwd" },
     },
     ---@module "auto-session"
     ---@type AutoSession.Config
