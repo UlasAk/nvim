@@ -9,7 +9,6 @@ local filetype_map = {
   json = {},
   lua = { "stylua" },
   sh = { "shfmt" },
-  -- tex = { "latexindent" },
   typescript = { "prettier" },
   yaml = { "yamlfmt" },
 }
@@ -86,7 +85,6 @@ return {
           },
         },
         format_after_save = function(bufnr)
-          -- Disable with a global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
