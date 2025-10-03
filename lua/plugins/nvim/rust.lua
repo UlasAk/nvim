@@ -1,8 +1,6 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    -- version = "^5",
-    -- lazy = false,
     event = "BufEnter *Cargo.toml",
     ft = "rust",
     config = function()
