@@ -97,41 +97,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "mikavilpas/yazi.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   cond = function()
-  --     return vim.fn.executable "yazi" == 1
-  --   end,
-  --   keys = {
-  --     {
-  --       "<leader>o",
-  --       function()
-  --         require("yazi").yazi()
-  --       end,
-  --       desc = "Yazi Open",
-  --     },
-  --     {
-  --       "<leader>cw",
-  --       function()
-  --         require("yazi").yazi(nil, vim.fn.getcwd())
-  --       end,
-  --       desc = "Yazi Open CWD",
-  --     },
-  --     {
-  --       "<c-Up>",
-  --       "<cmd>Yazi toggle<cr>",
-  --       desc = "Yazi Resume last session",
-  --     },
-  --   },
-  --   ---@type YaziConfig
-  --   opts = {
-  --     open_for_directories = false,
-  --     open_multiple_tabs = true,
-  --   },
-  -- },
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
