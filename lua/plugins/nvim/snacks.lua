@@ -17,10 +17,9 @@ local pause_notifications = false
 
 local options = {
   bigfile = {
-    notify = true, -- show notification when big file detected
-    size = 1.5 * 1024 * 1024, -- 1.5MB
-    line_length = 1000, -- average line length (useful for minified files)
-    -- Enable or disable features when big file detected
+    notify = true,
+    size = 1.5 * 1024 * 1024,
+    line_length = 1000,
     ---@param ctx {buf: number, ft:string}
     setup = function(ctx)
       if vim.fn.exists ":NoMatchParen" ~= 0 then
@@ -48,9 +47,6 @@ local options = {
       relative = "editor",
       noautocmd = true,
       row = 2,
-      -- relative = "cursor",
-      -- row = -3,
-      -- col = 0,
       wo = {
         winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle",
         cursorline = false,
@@ -59,9 +55,8 @@ local options = {
         filetype = "snacks_input",
         buftype = "prompt",
       },
-      --- buffer local variables
       b = {
-        completion = false, -- disable blink completions in input
+        completion = false,
       },
       keys = {
         n_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n", expr = true },
@@ -102,15 +97,12 @@ local options = {
   },
   notifier = {
     enabled = true,
-    timeout = 3000, -- default timeout in ms
+    timeout = 3000,
     width = { min = 40, max = 0.4 },
     height = { min = 1, max = 0.6 },
-    -- editor margin to keep free. tabline and statusline are taken into account automatically
     margin = { top = 0, right = 1, bottom = 3 },
-    padding = true, -- add 1 cell of left/right padding to the notification window
-    sort = { "level", "added" }, -- sort by level and time
-    -- minimum log level to display. TRACE is the lowest
-    -- all notifications are stored in history
+    padding = true,
+    sort = { "level", "added" },
     level = vim.log.levels.TRACE,
     icons = {
       error = " ",
@@ -148,9 +140,9 @@ local options = {
       return true
     end,
     style = "fancy",
-    top_down = false, -- place notifications from top to bottom
-    date_format = "%R", -- time format for notifications
-    refresh = 50, -- refresh at most every 50ms
+    top_down = false,
+    date_format = "%R",
+    refresh = 50,
   },
   scroll = {
     enabled = false,
@@ -158,9 +150,8 @@ local options = {
       duration = { step = 15, total = 200 },
       easing = "linear",
     },
-    -- faster animation when repeating scroll after delay
     animate_repeat = {
-      delay = 10, -- delay in ms before using the repeat animation
+      delay = 10,
       duration = { step = 1, total = 10 },
       easing = "linear",
     },
@@ -170,13 +161,13 @@ local options = {
     enabled = false,
   },
   words = {
-    debounce = 100, -- time in ms to wait before updating
-    notify_jump = false, -- show a notification when jumping
-    notify_end = true, -- show a notification when reaching the end
-    foldopen = true, -- open folds after jumping
-    jumplist = true, -- set jump point before jumping
-    modes = { "n", "i", "c" }, -- modes to show references
-    filter = function(buf) -- what buffers to enable `snacks.words`
+    debounce = 100,
+    notify_jump = false,
+    notify_end = true,
+    foldopen = true,
+    jumplist = true,
+    modes = { "n", "i", "c" },
+    filter = function(buf)
       return vim.g.snacks_words ~= false and vim.b[buf].snacks_words ~= false
     end,
   },
@@ -184,9 +175,6 @@ local options = {
     sections = {
       { section = "header" },
       { section = "startup" },
-      -- { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-      -- { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-      -- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
     },
   },
 }
@@ -280,51 +268,6 @@ return {
     end,
     init = function()
       setup_colors()
-
-      -- Setup LSP Progress autocmd
-      -- -@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-      -- local progress = vim.defaulttable()
-      -- vim.api.nvim_create_autocmd("LspProgress", {
-      --   ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      --   callback = function(ev)
-      --     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      --     local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-      --     if not client or type(value) ~= "table" then
-      --       return
-      --     end
-      --     local p = progress[client.id]
-      --
-      --     for i = 1, #p + 1 do
-      --       if i == #p + 1 or p[i].token == ev.data.params.token then
-      --         p[i] = {
-      --           token = ev.data.params.token,
-      --           msg = ("[%3d%%] %s%s"):format(
-      --             value.kind == "end" and 100 or value.percentage or 100,
-      --             value.title or "",
-      --             value.message and (" **%s**"):format(value.message) or ""
-      --           ),
-      --           done = value.kind == "end",
-      --         }
-      --         break
-      --       end
-      --     end
-      --
-      --     local msg = {} ---@type string[]
-      --     progress[client.id] = vim.tbl_filter(function(v)
-      --       return table.insert(msg, v.msg) or not v.done
-      --     end, p)
-      --
-      --     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-      --     vim.notify(table.concat(msg, "\n"), "info", {
-      --       id = "lsp_progress",
-      --       title = client.name,
-      --       opts = function(notif)
-      --         notif.icon = #progress[client.id] == 0 and " "
-      --           or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      --       end,
-      --     })
-      --   end,
-      -- })
     end,
   },
 }
