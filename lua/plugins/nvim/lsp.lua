@@ -283,11 +283,6 @@ return {
     end,
   },
   {
-    "dmmulroy/tsc.nvim",
-    cmd = { "TSC" },
-    opts = {},
-  },
-  {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = "Trouble",

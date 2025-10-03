@@ -1,5 +1,10 @@
 return {
   {
+    "dmmulroy/tsc.nvim",
+    cmd = { "TSC" },
+    opts = {},
+  },
+  {
     "vuki656/package-info.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
     event = "BufEnter *package.json",
