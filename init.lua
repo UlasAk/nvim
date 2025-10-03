@@ -34,7 +34,6 @@ if not opened_by_firenvim then
   })
 end
 
--- load plugins
 require("lazy").setup {
   spec = lazy_spec,
   defaults = { lazy = true },
@@ -85,19 +84,14 @@ require("lazy").setup {
   },
 }
 
--- load autocmds
 require "autocmds"
 
--- load custom commands
 require "commands"
 
--- load colors
 require("colors").init_colors()
 
--- load key bindings
 vim.schedule(function()
   require "mappings"
 end)
 
--- apply fixes
 require "fixes"

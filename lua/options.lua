@@ -52,7 +52,7 @@ o.inccommand = "split"
 o.timeoutlen = 400
 o.undofile = true
 
--- interval for writing swap file to disk, also used by gitsigns
+-- interval for writing swap file to disk
 o.updatetime = 250
 
 o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
@@ -60,8 +60,6 @@ o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,term
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
-
--- g.mapleader = " "
 
 -- disable some default providers
 g["loaded_node_provider"] = 0
@@ -75,8 +73,6 @@ local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
--- vim window options
--- vim.opt.colorcolumn = "160"
 vim.g.nvim_terminal_default_window_settings = {
   window = {
     width = 60,

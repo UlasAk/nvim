@@ -5,23 +5,19 @@ local M = {
 M.init_colors = function()
   vim.opt.termguicolors = true
   vim.schedule(function()
-    -- Highlight current search item with different color than other search items
     vim.api.nvim_set_hl(0, "CurSearch", {
       fg = "#282737",
       bg = "#f38ba8",
     })
-    -- Change Visual Mode Background Color to see more on transparent background
     vim.api.nvim_set_hl(0, "Visual", {
       bg = "#76758a",
     })
-    -- Text color of commented out text
     vim.api.nvim_set_hl(0, "Comment", {
       fg = "#8886a6",
     })
     vim.api.nvim_set_hl(0, "@comment", {
       fg = "#8886a6",
     })
-    -- Line number color
     vim.api.nvim_set_hl(0, "LineNr", {
       fg = "#8886a6",
     })

@@ -63,10 +63,8 @@ local function rename()
   end, { buffer = 0 })
 end
 
--- basic lsp config
 vim.api.nvim_create_autocmd({ "LspAttach" }, {
   callback = function()
-    -- inlay hints
     vim.lsp.inlay_hint.enable(true)
   end,
 })
@@ -95,7 +93,6 @@ local make_capabilities = function()
     dynamicRegistration = false,
     lineFoldingOnly = true,
   }
-  -- capabilities = require("blink.cmp").get_lsp_capabilities(M.capabilities)
   return capabilities
 end
 
@@ -111,7 +108,6 @@ local function send_lsp_notification(message)
   if should_show_spinner() then
     local current_word = vim.call("expand", "<cword>")
     spinner.show(message .. current_word, "LSP")
-    -- Snacks.notify(message .. current_word, { title = "LSP" })
   end
 end
 
@@ -269,7 +265,6 @@ end
 M.defaults = function()
   -- Diagnostic Signs
   local x = vim.diagnostic.severity
-
   vim.diagnostic.config {
     severity_sort = true,
     virtual_text = { prefix = "" },
@@ -294,12 +289,9 @@ M.defaults = function()
     "qmlls",
     "terraformls",
   }
-
   if vim.fn.executable "hyprls" == 1 then
     table.insert(lsp_servers, "hyprls")
   end
-
-  -- LSPs with default config
   for _, lsp in ipairs(lsp_servers) do
     vim.lsp.enable(lsp)
   end
@@ -322,7 +314,6 @@ M.defaults = function()
     local handle_angular_exit = function(code, signal, client_id)
       if code > 0 then
         vim.schedule(function()
-          -- print "Restarting failed Angular LS.."
           vim.cmd "LspStart angularls"
         end)
       end
@@ -464,37 +455,6 @@ M.defaults = function()
     filetypes = { "yaml", "yaml.gitlab" },
   })
   vim.lsp.enable "yamlls"
-
-  -- Latex
-  -- vim.lps.config("ltex", {
-  --   filetypes = {
-  --     "bib",
-  --     "gitcommit",
-  --     "org",
-  --     "plaintex",
-  --     "rst",
-  --     "rnoweb",
-  --     "tex",
-  --     "pandoc",
-  --     "quarto",
-  --     "rmd",
-  --     "context",
-  --     "mail",
-  --     "text",
-  --   },
-  --   settings = {
-  --     ltex = {
-  --       language = "de-DE",
-  --       checkFrequency = "save",
-  --     },
-  --   },
-  -- })
-  -- vim.lsp.enable("ltex")
-  -- vim.lsp.config("texlab", {
-  --   on_init = M.on_init,
-  --   capabilities = M.capabilities,
-  -- })
-  -- vim.lsp.enable("texlab")
 end
 
 return M

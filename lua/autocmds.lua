@@ -1,5 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
+local augroup = vim.api.nvim_create_augroup
 
 local numberToggleGroup = augroup("numberToggles", {})
 
@@ -26,7 +26,6 @@ autocmd({ "WinEnter", "FocusGained" }, {
 -- Spellcheck for specific files
 local spell_types = { "text", "plaintex", "plaintext", "typst", "gitcommit", "markdown" }
 
--- Create an augroup for spellcheck to group related autocommands
 vim.api.nvim_create_augroup("Spellcheck", { clear = true })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {

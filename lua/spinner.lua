@@ -1,11 +1,7 @@
 local M = {}
 local config = {
-  -- Show notification when done.
-  -- Set to false to disable.
   show_notification = false,
-  -- Name of the plugin. Basically the title of the notification, when the spinner is hidden
   plugin = "spinner.nvim",
-  -- Spinner frames.
   spinner_frames = {
     "⠋",
     "⠙",
@@ -40,11 +36,9 @@ function M.show(msg, title)
     title = title,
   }
 
-  -- Create buffer and window for the spinner
   spinner_buf = vim.api.nvim_create_buf(false, true)
   spinner_win = vim.api.nvim_open_win(spinner_buf, false, win_options)
 
-  -- Set up timer and update spinner
   spinner_timer = vim.loop.new_timer()
   spinner_timer:start(
     0,
@@ -79,7 +73,5 @@ function M.hide(msg)
     end
   end
 end
-
--- }}}
 
 return M

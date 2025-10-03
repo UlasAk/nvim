@@ -14,7 +14,6 @@ M.normalize = function(path)
   return path:gsub("\\", "/")
 end
 
--- Current project root
 M.project_root = function()
   local cwd = vim.loop.fs_realpath(vim.loop.cwd())
   return cwd and M.normalize(cwd) or ""
