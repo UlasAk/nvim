@@ -36,7 +36,7 @@ return {
           grug_far = true,
           indent_blankline = {
             enabled = true,
-            scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+            scope_color = "lavender",
             colored_indent_levels = true,
           },
           lsp_trouble = true,
@@ -70,7 +70,7 @@ return {
           rainbow_delimiters = true,
           snacks = {
             enabled = true,
-            indent_scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+            indent_scope_color = "lavender",
           },
           treesitter = true,
           treesitter_context = true,
@@ -104,19 +104,16 @@ return {
 
         local information_table = {}
 
-        -- type: Device
         local device = decorations.device
         if device then
           table.insert(information_table, device.name)
         end
 
-        -- tpye: flutter.ProjectConfig
         local project_config = decorations.project_config
         if project_config and project_config.name then
           table.insert(information_table, project_config.name)
         end
 
-        -- type: string
         local app_version = decorations.app_version
         if app_version then
           local comment_pos, _ = string.find(app_version, "#")
@@ -383,12 +380,6 @@ return {
         "<cmd>BufferLineGoToBuffer -1<CR>",
         desc = "Buffer Go to most right buffer",
       },
-      -- {"<tab>", function()
-      --   require("bufferline").cycle(1)
-      -- end, desc = "Buffer Goto next" },
-      -- {"<S-tab>", function()
-      --   require("bufferline").cycle(-1)
-      -- end, desc = "Buffer Goto prev" },
       { "<tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Goto next", noremap = true },
       { "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Goto prev" },
       { "<leader>bp", "<cmd>BufferLinePick<CR>", desc = "Buffer Pick" },
@@ -412,42 +403,29 @@ return {
       local bufferline = require "bufferline"
 
       M.options = {
-        mode = "buffers", -- set to "tabs" to only show tabpages instead
-        style_preset = bufferline.style_preset.default, -- bufferline.style_preset.default or bufferline.style_preset.minimal,
-        themable = true, -- true | false, -- allows highlight groups to be overriden i.e. sets highlights as default
-        numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-        close_command = "confirm bd %d", -- can be a string | function, | false see "Mouse actions"
-        right_mouse_command = false, -- can be a string | function | false, see "Mouse actions"
-        left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
-        middle_mouse_command = "confirm bd %d", -- can be a string | function, | false see "Mouse actions"
+        mode = "buffers",
+        style_preset = bufferline.style_preset.default,
+        themable = true,
+        numbers = "ordinal",
+        close_command = "confirm bd %d",
+        right_mouse_command = false,
+        left_mouse_command = "buffer %d",
+        middle_mouse_command = "confirm bd %d",
         indicator = {
-          -- icon = "▎", -- this should be omitted if indicator style is not 'icon'
-          style = "underline", -- 'icon' | 'underline' | 'none',
+          style = "underline",
         },
         buffer_close_icon = "󰅖",
         modified_icon = "● ",
         close_icon = " ",
         left_trunc_marker = " ",
         right_trunc_marker = " ",
-        --- name_formatter can be used to change the buffer's label in the bufferline.
-        --- Please note some names can/will break the
-        --- bufferline so use this at your discretion knowing that it has
-        --- some limitations that will *NOT* be fixed.
-        -- name_formatter = function(buf) -- buf contains:
-        --   -- name                | str        | the basename of the active file
-        --   -- path                | str        | the full path of the active file
-        --   -- bufnr               | int        | the number of the active buffer
-        --   -- buffers (tabs only) | table(int) | the numbers of the buffers in the tab
-        --   -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: `vim.api.nvim_tabpage_get_number(buf.tabnr)`
-        -- end,
         max_name_length = 18,
-        max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-        truncate_names = true, -- whether or not tab names should be truncated
+        max_prefix_length = 15,
+        truncate_names = true,
         tab_size = 18,
-        diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
-        diagnostics_update_in_insert = false, -- only applies to coc
-        diagnostics_update_on_event = true, -- use nvim's diagnostic handler
-        -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
+        diagnostics = "nvim_lsp",
+        diagnostics_update_in_insert = false,
+        diagnostics_update_on_event = true,
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
           local s = " "
           for error_level, error_count in pairs(diagnostics_dict) do
@@ -467,117 +445,37 @@ return {
           end
           return s
         end,
-        -- this will be called a lot so don't do any heavy processing here
-        -- custom_filter = function(buf_number, buf_numbers)
-        --   -- -- filter out filetypes you don't want to see
-        --   -- if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
-        --   --     return true
-        --   -- end
-        --   -- -- filter out by buffer name
-        --   -- if vim.fn.bufname(buf_number) ~= "<buffer-name-I-dont-want>" then
-        --   --     return true
-        --   -- end
-        --   -- -- filter out based on arbitrary rules
-        --   -- -- e.g. filter out vim wiki buffer from tabline in your work repo
-        --   -- if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
-        --   --     return true
-        --   -- end
-        --   -- -- filter out by it's index number in list (don't show first buffer)
-        --   -- if buf_numbers[1] ~= buf_number then
-        --   --     return true
-        --   -- end
-        -- end,
         offsets = {
           {
             filetype = "NvimTree",
-            text = "File Explorer", -- "File Explorer" | function ,
-            text_align = "left", -- "left" | "center" | "right"
+            text = "File Explorer",
+            text_align = "left",
             separator = true,
           },
         },
-        color_icons = true, -- true | false, -- whether or not to add the filetype icon highlights
+        color_icons = true,
         get_element_icon = function(element)
-          -- element consists of {filetype: string, path: string, extension: string, directory: string}
-          -- This can be used to change how bufferline fetches the icon
-          -- for an element e.g. a buffer or a tab.
-          -- e.g.
           local icon, hl = require("nvim-web-devicons").get_icon_by_filetype(element.filetype, { default = false })
           return icon, hl
-          -- -- or
-          -- local custom_map = {my_thing_ft: {icon = "my_thing_icon", hl}}
-          -- return custom_map[element.filetype]
         end,
-        show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
-        show_buffer_close_icons = true, -- true | false,
-        show_close_icon = true, -- true | false,
-        show_tab_indicators = true, -- true | false,
-        show_duplicate_prefix = true, -- true | false, -- whether to show duplicate buffer prefix
-        duplicates_across_groups = true, -- whether to consider duplicate paths in different groups as duplicates
-        persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-        move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
-        -- can also be a table containing 2 custom separators
-        -- [focused and unfocused]. eg: { '|', '|' }
-        separator_style = "thick", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
-        enforce_regular_tabs = false, -- false | true,
-        always_show_bufferline = true, -- true | false,
-        auto_toggle_bufferline = true, -- true | false,
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_close_icon = true,
+        show_tab_indicators = true,
+        show_duplicate_prefix = true,
+        duplicates_across_groups = true,
+        persist_buffer_sort = true,
+        move_wraps_at_ends = false,
+        separator_style = "thick",
+        enforce_regular_tabs = false,
+        always_show_bufferline = true,
+        auto_toggle_bufferline = true,
         hover = {
           enabled = true,
           delay = 200,
           reveal = { "close" },
         },
-        sort_by = "insert_after_current", --"insert_after_current"
-        -- | "insert_at_end"
-        -- | "id"
-        -- | "extension"
-        -- | "relative_directory"
-        -- | "directory"
-        -- | "tabs"
-        -- | function(buffer_a, buffer_b)
-        --   -- add custom logic
-        --   local modified_a = vim.fn.getftime(buffer_a.path)
-        --   local modified_b = vim.fn.getftime(buffer_b.path)
-        --   return modified_a > modified_b
-        -- end,
-        -- pick = {
-        --   alphabet = "abcdefghijklmopqrstuvwxyz",
-        -- },
-        -- groups = {
-        --   options = {
-        --     toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
-        --   },
-        --   items = {
-        --     {
-        --       name = "Code",
-        --       highlight = { underline = true, undercurl = false, sp = "yellow" },
-        --       auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-        --       priority = 1, -- determines where it will appear relative to other groups (Optional)
-        --       icon = " ", -- Optional
-        --       matcher = function(_)
-        --         local path = vim.api.nvim_buf_get_name(0)
-        --         return path:match ".*src.*"
-        --       end,
-        --       -- separator = { -- Optional
-        --       --   style = require('bufferline.groups').separator.tab
-        --       -- },
-        --     },
-        --     bufferline.groups.builtin.ungrouped,
-        --     {
-        --       name = "Docs",
-        --       highlight = { underline = false, undercurl = true, sp = "blue" },
-        --       auto_close = false, -- whether or not close this group if it doesn't contain the current buffer
-        --       priority = 2, -- determines where it will appear relative to other groups (Optional)
-        --       icon = " ", -- Optional
-        --       matcher = function(_)
-        --         local path = vim.api.nvim_buf_get_name(0)
-        --         return path:match "%.md" or path:match "%.txt"
-        --       end,
-        --       -- separator = { -- Optional
-        --       --   style = require('bufferline.groups').separator.tab
-        --       -- },
-        --     },
-        --   },
-        -- },
+        sort_by = "insert_after_current",
       }
 
       M.setup_custom_colors = function()
@@ -803,95 +701,6 @@ return {
     event = { "BufEnter", "BufNewFile" },
     opts = {},
   },
-  -- {
-  --   "tamton-aquib/duck.nvim",
-  --   keys = {
-  --     {
-  --       "<leader>dun",
-  --       function()
-  --         require("duck").hatch()
-  --       end,
-  --       desc = "Duck Hatch duck",
-  --     },
-  --     {
-  --       "<leader>duk",
-  --       function()
-  --         require("duck").cook()
-  --       end,
-  --       desc = "Duck Kill duck",
-  --     },
-  --     {
-  --       "<leader>dua",
-  --       function()
-  --         require("duck").cook_all()
-  --       end,
-  --       desc = "Duck Kill all ducks",
-  --     },
-  --   },
-  -- },
-  -- {
-  --   "shellRaining/hlchunk.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   keys = function()
-  --     local indent_chunk_enabled = false
-  --     local indent_line_num_enabled = false
-  --     return {
-  --       {
-  --         "<leader>its",
-  --         function()
-  --           vim.cmd "IBLToggleScope"
-  --         end,
-  --         { desc = "Indent Toggle Line Number" },
-  --         { "<leader>itc", desc = "Indent Toggle Chunks" },
-  --         { "<leader>itl", desc = "Indent Toggle Line Number" },
-  --       },
-  --       {
-  --         "<leader>itl",
-  --         function()
-  --           if indent_line_num_enabled then
-  --             vim.cmd "DisableHLChunk"
-  --             vim.cmd "DisableHLLineNum"
-  --           else
-  --             vim.cmd "EnableHLChunk"
-  --             vim.cmd "EnableHLLineNum"
-  --           end
-  --           indent_line_num_enabled = not indent_line_num_enabled
-  --         end,
-  --         desc = "Indent Toggle Line Number",
-  --       },
-  --       {
-  --         "<leader>itc",
-  --         function()
-  --           if indent_chunk_enabled then
-  --             vim.cmd "DisableHLChunk"
-  --           else
-  --             vim.cmd "EnableHLChunk"
-  --           end
-  --           indent_chunk_enabled = not indent_chunk_enabled
-  --         end,
-  --         desc = "Indent Toggle Chunks",
-  --       },
-  --     }
-  --   end,
-  --   opts = {
-  --     chunk = {
-  --       enable = true,
-  --       -- style = "#fdfd96",
-  --       duration = 0,
-  --       delay = 0,
-  --     },
-  --     indent = {
-  --       enable = false,
-  --     },
-  --     line_num = {
-  --       enable = false,
-  --       style = "#fdfd96",
-  --     },
-  --     blank = {
-  --       enable = false,
-  --     },
-  --   },
-  -- },
   {
     "y3owk1n/undo-glow.nvim",
     event = { "VeryLazy" },
@@ -904,30 +713,30 @@ return {
         window_scoped = true,
       },
       fallback_for_transparency = {
-        bg = "#000000", -- fallback color for when the highlight is transparent
-        fg = "#FFFFFF", -- fallback color for when the highlight is transparent
+        bg = "#000000",
+        fg = "#FFFFFF",
       },
       highlights = {
         undo = {
-          hl_color = { bg = "#693232" }, -- Dark muted red
+          hl_color = { bg = "#693232" },
         },
         redo = {
-          hl_color = { bg = "#2F4640" }, -- Dark muted green
+          hl_color = { bg = "#2F4640" },
         },
         yank = {
-          hl_color = { bg = "#7A683A" }, -- Dark muted yellow
+          hl_color = { bg = "#7A683A" },
         },
         paste = {
-          hl_color = { bg = "#325B5B" }, -- Dark muted cyan
+          hl_color = { bg = "#325B5B" },
         },
         search = {
-          hl_color = { bg = "#5C475C" }, -- Dark muted purple
+          hl_color = { bg = "#5C475C" },
         },
         comment = {
-          hl_color = { bg = "#7A5A3D" }, -- Dark muted orange
+          hl_color = { bg = "#7A5A3D" },
         },
         cursor = {
-          hl_color = { bg = "#793D54" }, -- Dark muted pink
+          hl_color = { bg = "#793D54" },
         },
       },
       priority = 2048 * 3,
@@ -973,92 +782,6 @@ return {
         desc = "Paste above with highlight",
         noremap = true,
       },
-      -- {
-      --   "n",
-      --   function()
-      --     require("undo-glow").search_next {
-      --       animation = {
-      --         animation_type = "strobe",
-      --       },
-      --     }
-      --   end,
-      --   mode = "n",
-      --   desc = "Search next with highlight",
-      --   noremap = true,
-      -- },
-      -- {
-      --   "N",
-      --   function()
-      --     require("undo-glow").search_prev {
-      --       animation = {
-      --         animation_type = "strobe",
-      --       },
-      --     }
-      --   end,
-      --   mode = "n",
-      --   desc = "Search prev with highlight",
-      --   noremap = true,
-      -- },
-      -- {
-      --   "*",
-      --   function()
-      --     require("undo-glow").search_star {
-      --       animation = {
-      --         animation_type = "strobe",
-      --       },
-      --     }
-      --   end,
-      --   mode = "n",
-      --   desc = "Search star with highlight",
-      --   noremap = true,
-      -- },
-      -- {
-      --   "#",
-      --   function()
-      --     require("undo-glow").search_hash {
-      --       animation = {
-      --         animation_type = "strobe",
-      --       },
-      --     }
-      --   end,
-      --   mode = "n",
-      --   desc = "Search hash with highlight",
-      --   noremap = true,
-      -- },
-      -- {
-      --   "gc",
-      --   function()
-      --     -- This is an implementation to preserve the cursor position
-      --     local pos = vim.fn.getpos "."
-      --     vim.schedule(function()
-      --       vim.fn.setpos(".", pos)
-      --     end)
-      --     return require("undo-glow").comment()
-      --   end,
-      --   mode = { "n", "x" },
-      --   desc = "Toggle comment with highlight",
-      --   expr = true,
-      --   noremap = true,
-      -- },
-      -- {
-      --   "gc",
-      --   function()
-      --     require("undo-glow").comment_textobject()
-      --   end,
-      --   mode = "o",
-      --   desc = "Comment textobject with highlight",
-      --   noremap = true,
-      -- },
-      -- {
-      --   "gcc",
-      --   function()
-      --     return require("undo-glow").comment_line()
-      --   end,
-      --   mode = "n",
-      --   desc = "Toggle comment line with highlight",
-      --   expr = true,
-      --   noremap = true,
-      -- },
     },
     init = function()
       vim.api.nvim_create_autocmd("TextYankPost", {
@@ -1068,42 +791,6 @@ return {
           pcall(undo_glow.yank)
         end,
       })
-
-      -- This only handles neovim instance and do not highlight when switching panes in tmux
-      -- vim.api.nvim_create_autocmd("CursorMoved", {
-      --   desc = "Highlight when cursor moved significantly",
-      --   callback = function()
-      --     require("undo-glow").cursor_moved {
-      --       animation = {
-      --         animation_type = "slide",
-      --       },
-      --     }
-      --   end,
-      -- })
-
-      -- This will handle highlights when focus gained, including switching panes in tmux
-      -- vim.api.nvim_create_autocmd("FocusGained", {
-      --   desc = "Highlight when focus gained",
-      --   callback = function()
-      --     ---@type UndoGlow.CommandOpts
-      --     local opts = {
-      --       animation = {
-      --         animation_type = "fade",
-      --       },
-      --     }
-      --
-      --     opts = require("undo-glow.utils").merge_command_opts("UgCursor", opts)
-      --     local pos = require("undo-glow.utils").get_current_cursor_row()
-      --
-      --     require("undo-glow").highlight_region(vim.tbl_extend("force", opts, {
-      --       s_row = pos.s_row,
-      --       s_col = pos.s_col,
-      --       e_row = pos.e_row,
-      --       e_col = pos.e_col,
-      --       force_edge = opts.force_edge == nil and true or opts.force_edge,
-      --     }))
-      --   end,
-      -- })
 
       vim.api.nvim_create_autocmd("CmdLineLeave", {
         pattern = { "/", "?" },
@@ -1118,27 +805,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "folke/zen-mode.nvim",
-  --   cmd = { "ZenMode" },
-  --   keys = {
-  --     { "<leader>Z", "<cmd>ZenMode<CR>", mode = "n", desc = "Zen Toggle Zen Mode" },
-  --   },
-  --   opts = {
-  --     plugins = {
-  --       gitsigns = { enabled = false },
-  --       twilight = { enabled = false },
-  --     },
-  --     on_open = function()
-  --       require("gitsigns").detach()
-  --       vim.o.foldcolumn = "0" -- '0' is not bad
-  --     end,
-  --     on_close = function()
-  --       require("gitsigns").attach()
-  --       vim.o.foldcolumn = "1" -- '0' is not bad
-  --     end,
-  --   },
-  -- },
   {
     "arnamak/stay-centered.nvim",
     keys = function()
@@ -1157,105 +823,12 @@ return {
       }
     end,
     opts = {
-      -- The filetype is determined by the vim filetype, not the file extension. In order to get the filetype, open a file and run the command:
-      -- :lua print(vim.bo.filetype)
       skip_filetypes = {},
-      -- Set to false to disable by default
       enabled = false,
-      -- allows scrolling to move the cursor without centering, default recommended
       allow_scroll_move = true,
-      -- temporarily disables plugin on left-mouse down, allows natural mouse selection
-      -- try disabling if plugin causes lag, function uses vim.on_key
       disable_on_mouse = true,
     },
   },
-  -- {
-  --   "aidancz/buvvers.nvim",
-  --   dependencies = {
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  --   keys = {
-  --     {
-  --       "<leader>tb",
-  --       function()
-  --         require("buvvers").toggle()
-  --       end,
-  --       desc = "Toggle Vertical buffer list",
-  --     },
-  --   },
-  --   opts = {
-  --     buffer_handle_list_to_buffer_name_list = function(handle_l)
-  --       local name_l
-  --
-  --       local default_function = require "buvvers.buffer_handle_list_to_buffer_name_list"
-  --       name_l = default_function(handle_l)
-  --
-  --       for n, name in ipairs(name_l) do
-  --         -- modified prefix
-  --         local table_to_add = {}
-  --         local is_modified = vim.api.nvim_get_option_value("modified", { buf = handle_l[n] })
-  --         local prefix
-  --         if is_modified then
-  --           prefix = "  "
-  --         else
-  --           prefix = ""
-  --         end
-  --         table.insert(table_to_add, { prefix, "BuvversModifiedIcon" })
-  --         -- filetype icon
-  --         local ok, devicons = pcall(require, "nvim-web-devicons")
-  --         local icon = nil
-  --         local hl = nil
-  --         if ok then
-  --           local filetype = vim.filetype.match { filename = name }
-  --           local fetched_icon, fetched_hl = devicons.get_icon_by_filetype(filetype, { default = false })
-  --           icon = fetched_icon
-  --           hl = fetched_hl
-  --         end
-  --         if icon ~= nil then
-  --           local icon_table = { icon .. " " }
-  --           if hl ~= nil then
-  --             table.insert(icon_table, hl)
-  --           end
-  --           table.insert(table_to_add, icon_table)
-  --         end
-  --         -- filename
-  --         table.insert(table_to_add, name)
-  --
-  --         name_l[n] = table_to_add
-  --       end
-  --
-  --       return name_l
-  --     end,
-  --   },
-  --   config = function(_, opts)
-  --     vim.api.nvim_set_hl(0, "BuvversModifiedIcon", {
-  --       fg = "#50fed8",
-  --     })
-  --     require("buvvers").setup(opts)
-  --     local add_autocmds = function()
-  --       vim.api.nvim_create_autocmd({
-  --         "BufModifiedSet",
-  --       }, {
-  --         group = "buvvers",
-  --         callback = require("buvvers").buvvers_open,
-  --       })
-  --     end
-  --     vim.api.nvim_create_augroup("buvvers_config", { clear = true })
-  --     vim.api.nvim_create_autocmd("User", {
-  --       group = "buvvers_config",
-  --       pattern = "BuvversAutocmdEnabled",
-  --       callback = add_autocmds,
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   "uga-rosa/ccc.nvim",
-  --   cmd = { "CccPick" },
-  --   keys = {
-  --     { "<leader>ccc", "<cmd>CccPick<CR>", desc = "Colors Change color under cursor" },
-  --   },
-  --   opts = {},
-  -- },
   {
     "akinsho/toggleterm.nvim",
     version = "*",
