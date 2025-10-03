@@ -116,25 +116,4 @@ return {
       }
     end,
   },
-  -- {
-  --   "wa11breaker/flutter-bloc.nvim",
-  --   dependencies = {
-  --     "nvimtools/none-ls.nvim", -- Required for code actions
-  --   },
-  --   ft = "dart",
-  --   opts = {
-  --     bloc_type = "default", -- Choose from: 'default', 'equatable', 'freezed'
-  --     use_sealed_classes = false,
-  --     enable_code_actions = true,
-  --   },
-  -- },
-  -- {
-  --   "akinsho/pubspec-assist.nvim",
-  --   event = "BufEnter *pubspec.yaml",
-  --   cmd = { "PubspecAssistAddPackage", "PubspecAssistPickVersion", "PubspecAssistAddDevPackage" },
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   config = function()
-  --     require("pubspec-assist").setup()
-  --   end,
-  -- },
 }
