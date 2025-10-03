@@ -46,13 +46,6 @@ return {
         desc = "Debug Pause",
       },
       {
-        "<leader>dC",
-        function()
-          require("dap").run_to_cursor()
-        end,
-        desc = "Debug Continue to cursor",
-      },
-      {
         "<leader>dk",
         function()
           require("dap").up()
