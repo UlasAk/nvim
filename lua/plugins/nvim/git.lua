@@ -25,14 +25,6 @@ return {
           relative = "cursor",
           border = "rounded",
         },
-
-        -- on_attach = function(_)
-        --   if
-        --     require("lazy.core.config").plugins["zen-mode.nvim"]._.loaded ~= nil and require("zen-mode.view").is_open()
-        --   then
-        --     return false
-        --   end
-        -- end,
       }
 
       return options
@@ -58,11 +50,11 @@ return {
       { "<leader>cl", "<cmd>GitConflictListQf<CR>", desc = "Git Conflict List" },
     },
     opts = {
-      default_mappings = false, -- disable buffer local mapping created by this plugin
-      default_commands = true, -- disable commands created by this plugin
-      disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
-      list_opener = "copen", -- command or function to open the conflicts list
-      highlights = { -- They must have background color, otherwise the default color will be used
+      default_mappings = false,
+      default_commands = true,
+      disable_diagnostics = false,
+      list_opener = "copen",
+      highlights = {
         incoming = "DiffAdd",
         current = "DiffText",
       },
@@ -76,46 +68,11 @@ return {
     ft = { "oil" },
     opts = {},
   },
-  -- {
-  --   "isakbm/gitgraph.nvim",
-  --   dependencies = { "sindrets/diffview.nvim" },
-  --   keys = {
-  --     {
-  --       "<leader>gg",
-  --       function()
-  --         require("gitgraph").draw({}, { all = true, max_count = 5000 })
-  --       end,
-  --       desc = "Git Graph",
-  --     },
-  --   },
-  --   opts = {
-  --     symbols = {
-  --       merge_commit = "M",
-  --       commit = "*",
-  --     },
-  --     format = {
-  --       timestamp = "%H:%M:%S %d-%m-%Y",
-  --       fields = { "hash", "timestamp", "author", "branch_name", "tag" },
-  --     },
-  --     hooks = {
-  --       on_select_commit = function(commit)
-  --         vim.notify("DiffviewOpen " .. commit.hash .. "^!")
-  --         vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-  --       end,
-  --       on_select_range_commit = function(from, to)
-  --         vim.notify("DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-  --         vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-  --       end,
-  --     },
-  --   },
-  -- },
   {
     "pwntester/octo.nvim",
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      -- OR 'ibhagwan/fzf-lua',
-      -- OR 'folke/snacks.nvim',
       "nvim-tree/nvim-web-devicons",
     },
     cmd = { "Octo" },
