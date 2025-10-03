@@ -245,19 +245,28 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
     keys = {
       { "<leader>fw", "<cmd>Telescope live_grep_args<CR>", desc = "Telescope Live grep" },
+      {
+        "<leader>fW",
+        function()
+          require("telescope").extensions.live_grep_args.live_grep_args {
+            additional_args = { "--no-ignore", "--hidden" },
+          }
+        end,
+        desc = "Telescope Live grep (all)",
+      },
     },
     opts = function()
       local lga_actions = require "telescope-live-grep-args.actions"
       return {
         extensions = {
           live_grep_args = {
-            additional_args = { "--no-ignore", "--hidden" },
             file_ignore_patterns = {},
             auto_quoting = true,
             get_status_text = get_status_text,
             mappings = {
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-s>"] = lga_actions.quote_prompt { postfix = " -s " },
                 ["<C-f>"] = lga_actions.quote_prompt { postfix = " -SF " },
                 ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
                 ["<C-space>"] = lga_actions.to_fuzzy_refine,
