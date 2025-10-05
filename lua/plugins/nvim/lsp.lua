@@ -359,7 +359,7 @@ return {
       {
         "<leader>lR",
         ":IncRename ",
-        desc = "LSP IncRename",
+        desc = "Lsp IncRename",
       },
     },
     opts = {
