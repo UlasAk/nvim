@@ -418,9 +418,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("noice").setup(opts)
-    end,
   },
   {
     "xiyaowong/transparent.nvim",
