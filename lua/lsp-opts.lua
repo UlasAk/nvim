@@ -254,6 +254,16 @@ M.setup_keymaps = function()
   map("n", "<leader>lls", function()
     spinner.hide()
   end, opts "Lsp Hide lsp loading spinner")
+
+  -- Diagnostics
+  map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
+  map("n", "<leader>ldp", function()
+    vim.diagnostic.jump { count = -1 }
+  end, { desc = "Diagnostics Prev diagnostic" })
+  map("n", "<leader>ldn", function()
+    vim.diagnostic.jump { count = 1 }
+  end, { desc = "Diagnostics Next diagnostic" })
+  map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnostic loclist" })
 end
 
 M.setup_colors = function()

@@ -228,7 +228,7 @@ return {
         desc = "Image Show Image (Hover)",
       },
       {
-        "<leader>tw",
+        "<leader>tW",
         function()
           local is_enabled = Snacks.words.is_enabled()
           if is_enabled then

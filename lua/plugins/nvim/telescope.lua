@@ -58,7 +58,7 @@ return {
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Telescope Oldfiles" },
       {
-        "<leader><leader>",
+        "<leader>fo",
         function()
           require("telescope.builtin").oldfiles { only_cwd = true }
         end,

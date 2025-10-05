@@ -1,5 +1,9 @@
 local map = vim.keymap.set
 
+-- General
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "General Quit neovim" })
+map("n", "<leader>Q", "<cmd>wqa<CR>", { desc = "General Save all and quit neovim" })
+
 -- Lazy
 map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
 
@@ -11,7 +15,16 @@ map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
 map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
 
 -- Jump
-map("n", "<C-m>", "<C-i>", { desc = "Jump Backwards in Jumplist" })
+map("n", "<C-m>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
+map("n", "<C-o>", "<C-o>zz", { desc = "Jump Forwards in Jumplist and center" })
+map("n", "<leader><leader>", "<cmd>e #<CR>", { desc = "Jump Last file" })
+map("n", "<leader>S", "<cmd>vert sf #<CR>", { desc = "Jump Last file in split" })
+
+-- Centering after scroll and search commands
+map("n", "n", "nzz", { desc = "Search next and center" })
+map("n", "N", "Nzz", { desc = "Search previous and center" })
+map("n", "<c-d>", "<c-d>zz", { desc = "Scroll down and center" })
+map("n", "<c-u>", "<c-u>zz", { desc = "Scroll up and center" })
 
 -- Move lines
 map("i", "<M-k>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
@@ -26,18 +39,21 @@ map("n", "<leader>a", "ggVG<CR>", { desc = "Highlight Highlight all" })
 -- Window operations
 map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
 map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
-map("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
-map("n", "<leader>we", "<C-w>=", { desc = "Window Equalize windows" })
+map("n", "<leader>Wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
+map("n", "<leader>We", "<C-w>=", { desc = "Window Equalize windows" })
 
 -- File operations
+map("n", "<leader>w", "<cmd>update<CR>", { desc = "General Copy whole file" })
 map("n", "<leader>C", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
+map("n", "<leader>n", ":norm ", { desc = "General Start norm command" })
+map("n", "<leader>r", ":%s///g<left><left><left>", { desc = "General Start substitute command" })
 
 -- Line numbers
 map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
 map("n", "<leader>tlr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Wrap
-map("n", "<leader>W", function()
+map("n", "<leader>tw", function()
   local wrap = vim.o.wrap
   if wrap then
     vim.o.wrap = false
@@ -52,20 +68,5 @@ map("n", "<leader>W", function()
   end
 end, { desc = "Toggle Wrap" })
 
--- Diagnostics
-map("n", "<leader>ldf", vim.diagnostic.open_float, { desc = "Diagnostics Floating diagnostics" })
-map("n", "<leader>ldp", function()
-  vim.diagnostic.jump { count = -1 }
-end, { desc = "Diagnostics Prev diagnostic" })
-map("n", "<leader>ldn", function()
-  vim.diagnostic.jump { count = 1 }
-end, { desc = "Diagnostics Next diagnostic" })
-map("n", "<leader>ldl", vim.diagnostic.setloclist, { desc = "Diagnostics Diagnostic loclist" })
-
 -- Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "Terminal escape terminal mode" })
-
--- Transparency
-map("n", "<leader>tt", function()
-  require("colors").toggle_transparency()
-end, { desc = "Toggle Transparency" })
