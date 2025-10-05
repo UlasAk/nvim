@@ -1,16 +1,18 @@
 local setup_colors = function()
-  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
-    fg = "#fdfd96",
-  })
-  vim.api.nvim_set_hl(0, "SnacksDashboardTitle", {
-    fg = "#fdfd96",
-  })
-  vim.api.nvim_set_hl(0, "SnacksDashboardFooter", {
-    fg = "#fdfd96",
-  })
-  vim.api.nvim_set_hl(0, "SnacksDashboardDir", {
-    fg = "#8886a6",
-  })
+  require("colors").add_and_set_color_module("snacks", function()
+    vim.api.nvim_set_hl(0, "SnacksDashboardHeader", {
+      fg = "#fdfd96",
+    })
+    vim.api.nvim_set_hl(0, "SnacksDashboardTitle", {
+      fg = "#fdfd96",
+    })
+    vim.api.nvim_set_hl(0, "SnacksDashboardFooter", {
+      fg = "#fdfd96",
+    })
+    vim.api.nvim_set_hl(0, "SnacksDashboardDir", {
+      fg = "#8886a6",
+    })
+  end)
 end
 
 local pause_notifications = false

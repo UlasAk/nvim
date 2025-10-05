@@ -296,21 +296,23 @@ return {
       end
 
       M.setup_colors = function()
-        vim.api.nvim_set_hl(0, "SignColumn", {
-          fg = "#bbbbbb",
-        })
-        vim.api.nvim_set_hl(0, "DapBreakpoint", {
-          fg = "#abe9b3",
-        })
-        vim.api.nvim_set_hl(0, "DapLogPoint", {
-          fg = "#89dceb",
-        })
-        vim.api.nvim_set_hl(0, "DapStopped", {
-          fg = "#f38ba8",
-        })
-        vim.api.nvim_set_hl(0, "DapBreakpointRejected", {
-          fg = "#fdfd96",
-        })
+        require("colors").add_and_set_color_module("debug", function()
+          vim.api.nvim_set_hl(0, "SignColumn", {
+            fg = "#bbbbbb",
+          })
+          vim.api.nvim_set_hl(0, "DapBreakpoint", {
+            fg = "#abe9b3",
+          })
+          vim.api.nvim_set_hl(0, "DapLogPoint", {
+            fg = "#89dceb",
+          })
+          vim.api.nvim_set_hl(0, "DapStopped", {
+            fg = "#f38ba8",
+          })
+          vim.api.nvim_set_hl(0, "DapBreakpointRejected", {
+            fg = "#fdfd96",
+          })
+        end)
       end
 
       return M

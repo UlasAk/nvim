@@ -88,8 +88,6 @@ require "autocmds"
 
 require "commands"
 
-require("colors").init_colors()
-
 vim.schedule(function()
   require "mappings"
 end)

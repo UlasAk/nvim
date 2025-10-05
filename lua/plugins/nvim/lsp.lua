@@ -253,16 +253,18 @@ return {
     },
     config = function(_, opts)
       require("treesitter-context").setup(opts)
-      vim.api.nvim_set_hl(0, "TreesitterContext", {
-        bg = nil,
-      })
-      vim.api.nvim_set_hl(0, "TreesitterContextBottom", {
-        sp = "#f9e2af",
-        underline = true,
-      })
-      vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
-        bg = nil,
-      })
+      require("colors").add_and_set_color_module("treesitter-context", function()
+        vim.api.nvim_set_hl(0, "TreesitterContext", {
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TreesitterContextBottom", {
+          sp = "#f9e2af",
+          underline = true,
+        })
+        vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
+          bg = "NONE",
+        })
+      end)
     end,
   },
   {

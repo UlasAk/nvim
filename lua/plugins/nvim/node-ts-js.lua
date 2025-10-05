@@ -45,15 +45,17 @@ return {
     config = function(_, opts)
       require("package-info").setup(opts)
       require("telescope").load_extension "package_info"
-      vim.api.nvim_set_hl(0, "PackageInfoUpToDateVersion", {
-        fg = "#abe9b3",
-      })
-      vim.api.nvim_set_hl(0, "PackageInfoOutdatedVersion", {
-        fg = "#d19a66",
-      })
-      vim.api.nvim_set_hl(0, "PackageInfoInvalidVersion", {
-        fg = "#ee4b2b",
-      })
+      require("colors").add_and_set_color_module("package-info", function()
+        vim.api.nvim_set_hl(0, "PackageInfoUpToDateVersion", {
+          fg = "#abe9b3",
+        })
+        vim.api.nvim_set_hl(0, "PackageInfoOutdatedVersion", {
+          fg = "#d19a66",
+        })
+        vim.api.nvim_set_hl(0, "PackageInfoInvalidVersion", {
+          fg = "#ee4b2b",
+        })
+      end)
     end,
   },
 }

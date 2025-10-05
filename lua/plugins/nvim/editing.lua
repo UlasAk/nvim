@@ -11,10 +11,6 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
-    opts = {
-      indent = { char = "│", highlight = "IblChar" },
-      scope = { enabled = false, char = "│", highlight = "IblScopeChar" },
-    },
     keys = {
       {
         "<leader>gc",
@@ -40,22 +36,29 @@ return {
         desc = "Toggle Indentation lines",
       },
     },
+    opts = {
+      indent = { char = "│", highlight = "IblChar" },
+      scope = { enabled = false, char = "│", highlight = "IblScopeChar" },
+    },
     config = function(_, opts)
-      vim.api.nvim_set_hl(0, "IblScopeChar", {
-        fg = "#fdfd96",
-      })
-      vim.api.nvim_set_hl(0, "IblScope", {
-        fg = "#fdfd96",
-      })
-      vim.api.nvim_set_hl(0, "IblChar", {
-        fg = "#383747",
-      })
-      require("ibl").setup(opts)
-      local hooks = require "ibl.hooks"
+      require("colors").add_and_set_color_module("ibl", function()
+        vim.api.nvim_set_hl(0, "IblScopeChar", {
+          fg = "#fdfd96",
+        })
+        vim.api.nvim_set_hl(0, "IblScope", {
+          fg = "#fdfd96",
+        })
+        vim.api.nvim_set_hl(0, "IblChar", {
+          fg = "#383747",
+        })
+      end)
 
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-
-      require("ibl").refresh()
+      require("utils").add_and_run_global_function("ibl_setup", function()
+        require("ibl").setup(opts)
+        local hooks = require "ibl.hooks"
+        hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+        require("ibl").refresh()
+      end)
     end,
   },
   {
@@ -142,27 +145,29 @@ return {
           "RainbowDelimiterCyan",
         },
       }
-      vim.api.nvim_set_hl(0, "RainbowDelimiterRed", {
-        fg = "#f38ba8",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", {
-        fg = "#fdfd96",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", {
-        fg = "#b4befe",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", {
-        fg = "#89b4fa",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", {
-        fg = "#a6e3a1",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", {
-        fg = "#fab387",
-      })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", {
-        fg = "#94e2d5",
-      })
+      require("colors").add_and_set_color_module("rainbow-delimiters", function()
+        vim.api.nvim_set_hl(0, "RainbowDelimiterRed", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", {
+          fg = "#fdfd96",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", {
+          fg = "#b4befe",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", {
+          fg = "#89b4fa",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", {
+          fg = "#fab387",
+        })
+        vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", {
+          fg = "#94e2d5",
+        })
+      end)
     end,
   },
 }

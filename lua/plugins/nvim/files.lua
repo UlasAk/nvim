@@ -92,9 +92,11 @@ return {
     },
     config = function(_, opts)
       require("nvim-tree").setup(opts)
-      vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
-        bg = "#474656",
-      })
+      require("colors").add_and_set_color_module("nvim-tree", function()
+        vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
+          bg = "#474656",
+        })
+      end)
     end,
   },
   {

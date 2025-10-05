@@ -227,17 +227,22 @@ return {
         telescope.load_extension(ext)
       end
 
-      vim.api.nvim_set_hl(0, "TelescopeMatching", {
-        fg = "#89b4fa",
-        bg = "#76758a",
-      })
-      vim.api.nvim_set_hl(0, "TelescopeSelection", {
-        fg = "#d9e0ee",
-        bg = "#5c5a82",
-      })
-      vim.api.nvim_set_hl(0, "TelescopePromptCounter", {
-        fg = "#d9e0ee",
-      })
+      require("colors").add_and_set_color_module("telescope", function()
+        vim.api.nvim_set_hl(0, "TelescopeMatching", {
+          fg = "#89b4fa",
+          bg = "#76758a",
+        })
+        vim.api.nvim_set_hl(0, "TelescopeSelection", {
+          fg = "#d9e0ee",
+          bg = "#5c5a82",
+        })
+        vim.api.nvim_set_hl(0, "TelescopePromptCounter", {
+          fg = "#d9e0ee",
+        })
+        vim.api.nvim_set_hl(0, "TelescopeBorder", {
+          fg = "#f9e2af",
+        })
+      end)
     end,
   },
   {

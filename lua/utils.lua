@@ -1,5 +1,19 @@
 local M = {}
 
+M.global_functions = {}
+
+M.add_and_run_global_function = function(name, func)
+  M.global_functions[name] = func
+  func()
+end
+
+M.run_global_function = function(name)
+  local func = M.global_functions[name]
+  if func ~= nil then
+    func()
+  end
+end
+
 M.indexOf = function(table, value)
   for i, v in ipairs(table) do
     if v == value then

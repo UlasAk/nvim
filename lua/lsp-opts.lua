@@ -267,9 +267,11 @@ M.setup_keymaps = function()
 end
 
 M.setup_colors = function()
-  vim.api.nvim_set_hl(0, "FloatBorder", {
-    fg = "#fdfd96",
-  })
+  require("colors").add_and_set_color_module("lsp", function()
+    vim.api.nvim_set_hl(0, "FloatBorder", {
+      fg = "#f9e2af",
+    })
+  end)
 end
 
 M.defaults = function()

@@ -7,16 +7,43 @@ return {
     config = function()
       require("catppuccin").setup {
         flavour = "mocha",
-        transparent_background = true,
+        transparent_background = vim.g.transparent_enabled,
         float = {
           transparent = true,
         },
         custom_highlights = function(colors)
           return {
+            TabLineFill = { bg = "NONE" },
             SnacksDashboardHeader = { fg = colors.yellow },
+            NoiceVirtualText = { fg = colors.yellow, bg = "#45475a" },
             NoiceCmdlinePrompt = { fg = colors.yellow },
             NoiceCmdlinePopupBorder = { fg = colors.yellow },
+            NoiceFormatProgressDone = { fg = "#282737", bg = colors.yellow },
             DevIconDart = { fg = "#5fc9f8" },
+            LineNr = { fg = "#8886a6" },
+            CursorLineNr = { fg = colors.yellow },
+            gitCommitComment = { fg = "#8886a6" },
+            Record = {
+              fg = "#222222",
+              bg = "#f38ba8",
+              ctermfg = 0,
+              ctermbg = 11,
+            },
+            RecordSepL = {
+              fg = "#313244",
+              bg = "#f38ba8",
+              ctermfg = 0,
+              ctermbg = 11,
+            },
+            RecordSepR = {
+              fg = "#f38ba8",
+              bg = "#313244",
+              ctermfg = 0,
+              ctermbg = 11,
+            },
+            LspReferenceRead = { bg = "#666666" },
+            LspReferenceWrite = { bg = "#666666" },
+            LspReferenceText = { bg = "#666666" },
           }
         end,
         auto_integrations = true,
@@ -90,7 +117,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
     event = { "UIEnter" },
     config = function()
       local function workspace()
@@ -150,11 +177,15 @@ return {
         section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },
       }
-      local colors = require "catppuccin.palettes.mocha"
+      local catppuccin_colors = require "catppuccin.palettes.mocha"
       local sections = {
         lualine_a = {
           { "mode", separator = { right = separators.section_separators.left } },
-          { recording, color = { bg = colors.red }, separator = { right = separators.section_separators.left } },
+          {
+            recording,
+            color = { bg = catppuccin_colors.red },
+            separator = { right = separators.section_separators.left },
+          },
         },
         lualine_b = {
           {
@@ -195,26 +226,31 @@ return {
         lualine_y = {
           {
             "filetype",
-            color = { fg = colors.blue },
+            color = { fg = catppuccin_colors.blue },
             separator = { left = separators.section_separators.right, right = "" },
           },
-          { custom_separator, color = { fg = colors.blue }, separator = { left = "", right = "" }, padding = 0 },
-          { workspace, color = { fg = colors.blue }, separator = { left = "", right = "" } },
+          {
+            custom_separator,
+            color = { fg = catppuccin_colors.blue },
+            separator = { left = "", right = "" },
+            padding = 0,
+          },
+          { workspace, color = { fg = catppuccin_colors.blue }, separator = { left = "", right = "" } },
         },
         lualine_z = {
           {
             "location",
-            color = { bg = colors.yellow },
+            color = { bg = catppuccin_colors.yellow },
             separator = { left = separators.section_separators.right, right = "" },
             padding = 1,
           },
           {
             custom_separator,
-            color = { fg = colors.crust, bg = colors.yellow },
+            color = { fg = catppuccin_colors.crust, bg = catppuccin_colors.yellow },
             separator = { left = "", right = "" },
             padding = 0,
           },
-          { "progress", color = { bg = colors.yellow }, separator = { left = "", right = "" }, padding = 1 },
+          { "progress", color = { bg = catppuccin_colors.yellow }, separator = { left = "", right = "" }, padding = 1 },
         },
       }
       local opts = {
@@ -233,6 +269,75 @@ return {
         extensions = { "trouble", "mason", "lazy" },
       }
       require("lualine").setup(opts)
+      local colors = require "colors"
+      colors.add_color_module("lualine_transparent", function()
+        vim.api.nvim_set_hl(0, "lualine_c_normal", {
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_transparent", {
+          bg = "NONE",
+        })
+      end)
+      if vim.g.transparent_enabled then
+        colors.set_colors "lualine_transparent"
+        require("transparent").clear_prefix "lualine_x"
+      end
+      colors.add_and_set_color_module("lualine", function()
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_normal", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_normal", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_normal", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_insert", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_insert", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_insert", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_command", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_command", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_command", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_replace", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_replace", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_replace", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_terminal", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_terminal", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_terminal", {
+          fg = "#f38ba8",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_added_inactive", {
+          fg = "#a6e3a1",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_modified_inactive", {
+          fg = "#f9e2af",
+        })
+        vim.api.nvim_set_hl(0, "lualine_c_diff_removed_inactive", {
+          fg = "#f38ba8",
+        })
+      end)
     end,
   },
   {
@@ -315,26 +420,47 @@ return {
     },
     config = function(_, opts)
       require("noice").setup(opts)
-
-      -- Change Noice Mini Background Color (where LSP Progress is shown)
-      vim.api.nvim_set_hl(0, "NoiceMini", {
-        fg = "#282737",
-        bg = "#1E1E2E",
-      })
-      vim.api.nvim_set_hl(0, "NoiceVirtualText", {
-        fg = "#fdfd96",
-      })
     end,
   },
   {
     "xiyaowong/transparent.nvim",
+    lazy = false,
     opts = {
+      extra_groups = {
+        "NormalFloat",
+        "NvimTreeNormal",
+      },
       exclude_groups = {
+        "IndentBlanklineChar",
+        "IndentBlanklineContextChar",
+        "IndentBlanklineContextStart",
         "IblIndent",
         "IblChar",
         "IblScope",
       },
     },
+    keys = {
+      { "<leader>tt", "<CMD>ToggleTransparency<CR>", desc = "toggle transparency" },
+    },
+    config = function(_, opts)
+      local transparent = require "transparent"
+      transparent.setup(opts)
+      local toggle_transparency = function()
+        transparent.toggle()
+        local colors = require "colors"
+        colors.set_colors "lualine"
+        colors.set_colors "bufferline"
+        colors.set_colors "ibl"
+        require("utils").run_global_function "ibl_setup"
+        colors.set_colors "telescope"
+        if vim.g.transparent_enabled then
+          colors.set_colors "lualine_transparent"
+          transparent.clear_prefix "lualine_x"
+          transparent.clear_prefix "TabLineFill"
+        end
+      end
+      vim.api.nvim_create_user_command("ToggleTransparency", toggle_transparency, {})
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -479,7 +605,11 @@ return {
       }
 
       M.setup_custom_colors = function()
-        vim.schedule(function()
+        local colors = require "colors"
+        colors.add_color_module("bufferline", function()
+          vim.api.nvim_set_hl(0, "BufferLineSeparator", {
+            fg = "#ffffff",
+          })
           vim.api.nvim_set_hl(0, "BufferLineErrorVisible", {
             fg = "#f38ba8",
             cterm = { bold = true, italic = true },
@@ -619,10 +749,13 @@ return {
             underline = true,
           })
         end)
+        vim.schedule(function()
+          colors.set_colors "bufferline"
+        end)
       end
 
       local constants = require "bufferline.constants"
-      local colors = require "bufferline.colors"
+      local bufferline_colors = require "bufferline.colors"
       local highlights = require "bufferline.highlights"
       local visibility = constants.visibility
       local PREFIX = "BufferLine"
@@ -639,13 +772,13 @@ return {
 
         local transparent_inactive = {
           fg = hls.buffer_visible.fg,
-          bg = nil,
+          bg = "NONE",
           italic = is_minimal and italic,
           bold = is_minimal and bold,
         }
         local transparent_selected = {
           fg = hls.buffer_selected.fg,
-          bg = nil,
+          bg = "NONE",
           italic = italic,
           bold = bold,
           sp = hls.buffer_selected.sp,
@@ -653,7 +786,7 @@ return {
         }
         local transparent_background = {
           fg = hls.background.fg,
-          bg = nil,
+          bg = "NONE",
         }
         local state_props = ({
           [visibility.INACTIVE] = { "Inactive", transparent_inactive },
@@ -668,8 +801,8 @@ return {
         local color_icons = M.options.color_icons
         local color = not color_icons and "NONE"
         local hl_colors = vim.tbl_extend("force", parent, {
-          fg = color or colors.get_color { name = base_hl, attribute = "fg" },
-          ctermfg = color or colors.get_color { name = base_hl, attribute = "fg", cterm = true },
+          fg = color or bufferline_colors.get_color { name = base_hl, attribute = "fg" },
+          ctermfg = color or bufferline_colors.get_color { name = base_hl, attribute = "fg", cterm = true },
           italic = false,
           bold = false,
           hl_group = icon_hl,
@@ -687,13 +820,13 @@ return {
     end,
     config = function(_, opts)
       require("bufferline").setup { options = opts.options }
-      if require("colors").transparent then
+      opts.setup_custom_colors()
+      if vim.g.transparent_enabled then
         local bufferline_highlights = require "bufferline.highlights"
         bufferline_highlights.set_icon_highlight = opts.set_icon_highlight_func
         bufferline_highlights.reset_icon_hl_cache = opts.reset_icon_hl_cache_func
         require("transparent").clear_prefix "BufferLine"
       end
-      opts.setup_custom_colors()
     end,
   },
   {
