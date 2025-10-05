@@ -56,7 +56,6 @@ return {
       },
       { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Telescope Buffers" },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
-      { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Telescope Oldfiles" },
       {
         "<leader>fo",
         function()
