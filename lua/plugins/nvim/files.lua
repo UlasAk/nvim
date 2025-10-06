@@ -243,27 +243,4 @@ return {
       },
     },
   },
-  {
-    "MagicDuck/grug-far.nvim",
-    cmd = "GrugFar",
-    enabled = false,
-    keys = {
-      {
-        "<leader>S",
-        "<cmd>GrugFar<CR>",
-        desc = "Search Open",
-      },
-      {
-        "<leader>S",
-        "<cmd>'<,'>GrugFar<CR>",
-        mode = { "v" },
-        desc = "Search Selection",
-      },
-    },
-    opts = {
-      keymaps = {
-        close = { n = "q" },
-      },
-    },
-  },
 }
