@@ -4,6 +4,8 @@
 - fzf
 - node/npm
 - ripgrep
+- tree-sitter
+- tree-sitter-cli
 
 ## Optional Packages
 - cargo (for installing json5 parser to load vscode launch.json)
