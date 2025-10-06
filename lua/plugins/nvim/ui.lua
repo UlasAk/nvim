@@ -13,6 +13,7 @@ return {
         },
         custom_highlights = function(colors)
           return {
+            Pmenu = { bg = "NONE" },
             TabLineFill = { bg = "NONE" },
             SnacksDashboardHeader = { fg = colors.yellow },
             NoiceVirtualText = { fg = colors.yellow, bg = "#45475a" },
