@@ -449,6 +449,7 @@ return {
         colors.set_colors "lualine"
         colors.set_colors "bufferline"
         colors.set_colors "ibl"
+        colors.set_colors "treesitter-context"
         require("utils").run_global_function "ibl_setup"
         colors.set_colors "telescope"
         if vim.g.transparent_enabled then

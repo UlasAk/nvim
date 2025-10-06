@@ -262,6 +262,7 @@ return {
           underline = true,
         })
         vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", {
+          fg = "#8886a6",
           bg = "NONE",
         })
       end)
