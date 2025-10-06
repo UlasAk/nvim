@@ -157,7 +157,7 @@ return {
             ignore_empty_prompt = false,
           },
           prompt_prefix = "   ",
-          selection_caret = "  ",
+          selection_caret = "> ",
           entry_prefix = "  ",
           initial_mode = "insert",
           selection_strategy = "reset",
@@ -233,6 +233,10 @@ return {
         })
         vim.api.nvim_set_hl(0, "TelescopeSelection", {
           fg = "#d9e0ee",
+          bg = "#5c5a82",
+        })
+        vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", {
+          fg = "#f2cdce",
           bg = "#5c5a82",
         })
         vim.api.nvim_set_hl(0, "TelescopePromptCounter", {
