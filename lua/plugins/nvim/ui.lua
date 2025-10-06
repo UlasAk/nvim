@@ -463,6 +463,7 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
+    enabled = false,
     lazy = false,
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons", "xiyaowong/transparent.nvim" },
