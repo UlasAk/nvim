@@ -93,3 +93,5 @@ vim.schedule(function()
 end)
 
 require "fixes"
+
+require "tabline"
