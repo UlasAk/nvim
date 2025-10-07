@@ -59,7 +59,7 @@ o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,term
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+-- opt.whichwrap:append "<>[]hl"
 
 -- disable some default providers
 g["loaded_node_provider"] = 0
