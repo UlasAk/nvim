@@ -88,25 +88,7 @@ return {
           },
           require "neotest-gradle",
           require "neotest-jest" {
-            jestCommand = require("neotest-jest.jest-util").getJestCommand(vim.fn.expand "%:p:h"),
-            jestConfigFile = function(file)
-              if string.find(file, "/packages/") then
-                return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
-              end
-
-              if string.find(file, "e2e-spec", 1, true) then
-                local fs = vim.fs
-                local path = fs.dirname(fs.find({ "jest-e2e.json" }, {
-                  path = file,
-                  upward = true,
-                })[1]) .. "/jest-e2e.json"
-                return path
-              end
-
-              return vim.fn.getcwd() .. "/jest.config.ts"
-            end,
-            env = { CI = true },
-            cwd = function(path)
+            cwd = function()
               return vim.fn.getcwd()
             end,
           },
