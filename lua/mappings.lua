@@ -17,7 +17,6 @@ map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
 -- Jump
 map("n", "<C-m>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
 map("n", "<C-o>", "<C-o>zz", { desc = "Jump Forwards in Jumplist and center" })
-map("n", "<leader><leader>", "<cmd>e #<CR>", { desc = "Jump Last file" })
 map("n", "<leader>S", "<cmd>vert sf #<CR>", { desc = "Jump Last file in split" })
 
 -- Centering after scroll and search commands

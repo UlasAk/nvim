@@ -57,6 +57,18 @@ return {
       { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Telescope Buffers" },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       {
+        "<leader><leader>",
+        function()
+          local alt = vim.fn.expand "#"
+          if alt ~= "" and vim.fn.filereadable(alt) == 1 then
+            vim.cmd.edit(alt)
+          else
+            require("telescope.builtin").oldfiles { only_cwd = true }
+          end
+        end,
+        desc = "Jump Last file or Telescope Oldfiles in cwd",
+      },
+      {
         "<leader>fo",
         function()
           require("telescope.builtin").oldfiles { only_cwd = true }
