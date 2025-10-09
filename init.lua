@@ -94,4 +94,6 @@ end)
 
 require "fixes"
 
-require "tabline"
+if not opened_by_firenvim then
+  require "tabline"
+end
