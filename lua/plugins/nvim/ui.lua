@@ -195,8 +195,8 @@ return {
             file_status = true,
             newfile_status = true,
             symbols = {
-              modified = "[+]",
-              readonly = "[-]",
+              modified = "●",
+              readonly = "󰏯",
               unnamed = "[No Name]",
               newfile = "[New]",
             },
