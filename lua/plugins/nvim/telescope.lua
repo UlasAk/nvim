@@ -286,7 +286,7 @@ return {
             mappings = {
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
-                ["<C-s>"] = lga_actions.quote_prompt { postfix = " -s " },
+                ["<C-c>"] = lga_actions.quote_prompt { postfix = " -s " },
                 ["<C-f>"] = lga_actions.quote_prompt { postfix = " -SF " },
                 ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
                 ["<C-space>"] = lga_actions.to_fuzzy_refine,
