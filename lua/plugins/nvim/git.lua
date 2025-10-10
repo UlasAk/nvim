@@ -97,5 +97,14 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require("octo").setup(opts)
+      require("colors").add_and_set_color_module("octo", function()
+        vim.api.nvim_set_hl(0, "OctoFilePanelSelectedFile", {
+          fg = "#f9e2b0",
+          bg = "#45475b",
+        })
+      end)
+    end,
   },
 }
