@@ -69,6 +69,7 @@ return {
         end,
         desc = "Telescope Buffers",
       },
+      { "<leader>fty", "<cmd>Telescope filetypes<CR>", desc = "Telescope Filetypes" },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       {
         "<leader><leader>",
