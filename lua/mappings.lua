@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- General
-map("n", "<leader>q", "<cmd>q<CR>", { desc = "General Quit neovim" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "General Close window" })
 map("n", "<leader>Q", "<cmd>wqa<CR>", { desc = "General Save all and quit neovim" })
 
 -- Lazy
