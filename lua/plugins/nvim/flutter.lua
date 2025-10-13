@@ -25,7 +25,8 @@ return {
       { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
       { "<leader>fle", "<cmd>FlutterEmulators<CR>", desc = "Flutter Emulators" },
       { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
-      { "<leader>flh", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
+      { "<leader>flh", "<cmd>FlutterReload<CR>", desc = "Flutter Hot Reload" },
+      { "<leader>flH", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
       {
         "<leader>flt",
         function()
