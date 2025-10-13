@@ -54,7 +54,21 @@ return {
         end,
         desc = "Diagnostics Diagnostics Current Buf",
       },
-      { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Telescope Buffers" },
+      {
+        "<leader>fb",
+        function()
+          require("telescope.builtin").buffers {
+            attach_mappings = function(_, map)
+              map("n", "x", function(_prompt_bufnr)
+                require("telescope.actions").delete_buffer(_prompt_bufnr)
+              end, { desc = "Telescope Delete Buffer" })
+
+              return true
+            end,
+          }
+        end,
+        desc = "Telescope Buffers",
+      },
       { "<leader>fhe", "<cmd>Telescope help_tags<CR>", desc = "Telescope Help page" },
       {
         "<leader><leader>",
