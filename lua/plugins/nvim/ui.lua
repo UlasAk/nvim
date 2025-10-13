@@ -697,7 +697,7 @@ return {
         function()
           require("dropbar.api").pick()
         end,
-        desc = "Pick Symbol from top bar",
+        desc = "Dropbar Pick symbol",
       },
       {
         "<leader>td",
