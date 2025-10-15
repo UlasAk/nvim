@@ -154,4 +154,10 @@ return {
       end)
     end,
   },
+  {
+    "echasnovski/mini.ai",
+    version = false,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
+  },
 }
