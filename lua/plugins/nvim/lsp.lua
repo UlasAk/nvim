@@ -389,12 +389,10 @@ return {
       require("mason").setup(opts.options)
 
       vim.api.nvim_create_user_command("MasonInstallAll", function()
-        if opts.options.ensure_installed_mason_names and #opts.options.ensure_installed_mason_names > 0 then
-          vim.cmd("MasonInstall " .. table.concat(opts.options.ensure_installed_mason_names, " "))
+        if opts.ensure_installed_mason_names and #opts.ensure_installed_mason_names > 0 then
+          vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed_mason_names, " "))
         end
       end, {})
-
-      vim.g.mason_binaries_list = opts.options.ensure_installed
     end,
   },
   {

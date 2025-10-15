@@ -150,30 +150,17 @@ M.get_all_ensure_installed_mason_names = function()
   return name_table
 end
 
+M.ensure_installed_mason_names = M.get_all_ensure_installed_mason_names()
+
 M.options = {
-  ensure_installed_mason_names = M.get_all_ensure_installed_mason_names(),
-
   PATH = "skip",
-
   ui = {
     icons = {
       package_pending = " ",
       package_installed = "󰄳 ",
-      package_uninstalled = " 󰚌",
-    },
-
-    keymaps = {
-      toggle_server_expand = "<CR>",
-      install_server = "i",
-      update_server = "u",
-      check_server_version = "c",
-      update_all_servers = "U",
-      check_outdated_servers = "C",
-      uninstall_server = "X",
-      cancel_installation = "<C-c>",
+      package_uninstalled = " ",
     },
   },
-
   max_concurrent_installers = 10,
   registries = {
     "github:mason-org/mason-registry",
