@@ -36,18 +36,11 @@ return {
       },
     },
     opts = {
-      indent = { char = "│", highlight = "IblChar" },
-      scope = { enabled = false, char = "│", highlight = "IblScopeChar" },
+      scope = { enabled = false },
     },
     config = function(_, opts)
       require("colors").add_and_set_color_module("ibl", function()
-        vim.api.nvim_set_hl(0, "IblScopeChar", {
-          fg = "#fdfd96",
-        })
-        vim.api.nvim_set_hl(0, "IblScope", {
-          fg = "#fdfd96",
-        })
-        vim.api.nvim_set_hl(0, "IblChar", {
+        vim.api.nvim_set_hl(0, "IblIndent", {
           fg = "#383747",
         })
       end)
