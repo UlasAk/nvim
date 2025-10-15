@@ -119,12 +119,6 @@ return {
     },
     config = function()
       require("rainbow-delimiters.setup").setup {
-        strategy = {
-          -- ...
-        },
-        query = {
-          -- ...
-        },
         highlight = {
           "RainbowDelimiterRed",
           "RainbowDelimiterYellow",
