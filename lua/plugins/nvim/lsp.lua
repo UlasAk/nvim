@@ -159,68 +159,187 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
     event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("nvim-treesitter-textobjects").setup {
-        select = {
-          enable = true,
-          disable = { "dart" },
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-            ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-          },
-          selection_modes = {
-            ["@parameter.outer"] = "v",
-            ["@function.outer"] = "V",
-            ["@class.outer"] = "<c-v>",
-          },
-          include_surrounding_whitespace = true,
+    keys = {
+      {
+        mode = { "x", "o" },
+        "af",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+        end,
+        desc = "Select around function",
+      },
+      {
+        mode = { "x", "o" },
+        "if",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+        end,
+        desc = "Select inner function",
+      },
+      {
+        mode = { "x", "o" },
+        "ac",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+        end,
+        desc = "Select around class",
+      },
+      {
+        mode = { "x", "o" },
+        "ic",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+        end,
+        desc = "Select inner class",
+      },
+      {
+        mode = { "x", "o" },
+        "as",
+        function()
+          require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
+        end,
+        desc = "Select scope",
+      },
+      {
+        mode = "n",
+        "<leader>ps",
+        function()
+          require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+        end,
+        desc = "Parameter swap with next",
+      },
+      {
+        mode = "n",
+        "<leader>pS",
+        function()
+          require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+        end,
+        desc = "Parameter swap with previous",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]m",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+        end,
+        desc = "Jump Next function start",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]]",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+        end,
+        desc = "Jump Next class start",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]o",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start({ "@loop.inner", "@loop.outer" }, "textobjects")
+        end,
+        desc = "Jump Next loop",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]s",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
+        end,
+        desc = "Jump Next scope",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]z",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
+        end,
+        desc = "Jump Next fold",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]M",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+        end,
+        desc = "Jump Next function end",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "][",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+        end,
+        desc = "Jump Next class end",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "[m",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+        end,
+        desc = "Jump Previous function start",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "[[",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+        end,
+        desc = "Jump Previous class start",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "[M",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+        end,
+        desc = "Jump Previous function end",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "[]",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+        end,
+        desc = "Jump Previous class end",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "]d",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
+        end,
+        desc = "Jump Next condition",
+      },
+      {
+        mode = { "n", "x", "o" },
+        "[d",
+        function()
+          require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
+        end,
+        desc = "Jump Previous condition",
+      },
+    },
+    opts = {
+      select = {
+        disable = { "dart" },
+        lookahead = true,
+        selection_modes = {
+          ["@parameter.outer"] = "v",
+          ["@function.outer"] = "V",
+          ["@class.outer"] = "<c-v>",
         },
-        swap = {
-          enable = true,
-          disable = { "dart" },
-          swap_next = {
-            ["<leader>ps"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>pS"] = "@parameter.inner",
-          },
-        },
-        move = {
-          enable = true,
-          disable = { "dart" },
-          set_jumps = true,
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = { query = "@class.outer", desc = "Next class start" },
-            ["]o"] = "@loop.*",
-            ["]s"] = { query = "@local.scope", query_group = "locals", desc = "Next scope" },
-            ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
-          goto_next = {
-            ["]d"] = "@conditional.outer",
-          },
-          goto_previous = {
-            ["[d"] = "@conditional.outer",
-          },
-        },
-      }
-    end,
+        include_surrounding_whitespace = true,
+      },
+      swap = {
+        disable = { "dart" },
+      },
+      move = {
+        disable = { "dart" },
+        set_jumps = true,
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
