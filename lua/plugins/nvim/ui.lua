@@ -465,43 +465,6 @@ return {
   {
     "y3owk1n/undo-glow.nvim",
     event = { "VeryLazy" },
-    ---@type UndoGlow.Config
-    opts = {
-      animation = {
-        enabled = true,
-        duration = 300,
-        animation_type = "fade",
-        window_scoped = true,
-      },
-      fallback_for_transparency = {
-        bg = "#000000",
-        fg = "#FFFFFF",
-      },
-      highlights = {
-        undo = {
-          hl_color = { bg = "#693232" },
-        },
-        redo = {
-          hl_color = { bg = "#2F4640" },
-        },
-        yank = {
-          hl_color = { bg = "#7A683A" },
-        },
-        paste = {
-          hl_color = { bg = "#325B5B" },
-        },
-        search = {
-          hl_color = { bg = "#5C475C" },
-        },
-        comment = {
-          hl_color = { bg = "#7A5A3D" },
-        },
-        cursor = {
-          hl_color = { bg = "#793D54" },
-        },
-      },
-      priority = 2048 * 3,
-    },
     keys = {
       {
         "u",
@@ -542,6 +505,35 @@ return {
         mode = "n",
         desc = "Paste above with highlight",
         noremap = true,
+      },
+    },
+    opts = {
+      animation = {
+        enabled = true,
+        duration = 300,
+      },
+      highlights = {
+        undo = {
+          hl_color = { bg = "#693232" },
+        },
+        redo = {
+          hl_color = { bg = "#2F4640" },
+        },
+        yank = {
+          hl_color = { bg = "#7A683A" },
+        },
+        paste = {
+          hl_color = { bg = "#325B5B" },
+        },
+        search = {
+          hl_color = { bg = "#5C475C" },
+        },
+        comment = {
+          hl_color = { bg = "#7A5A3D" },
+        },
+        cursor = {
+          hl_color = { bg = "#793D54" },
+        },
       },
     },
     init = function()
