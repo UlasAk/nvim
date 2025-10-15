@@ -20,11 +20,25 @@ return {
         "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
         "--stdio",
       },
-      filewatching = true,
-      choose_target = nil,
-      ignore_target = nil,
-      broad_search = false,
-      lock_target = false,
+    },
+  },
+  {
+    "nicholasmata/nvim-dap-cs",
+    name = "dap-cs",
+    dependencies = { "mfussenegger/nvim-dap" },
+    ft = "cs",
+    opts = {
+      dap_configurations = {
+        {
+          type = "coreclr",
+          name = "Attach remote",
+          mode = "remote",
+          request = "attach",
+        },
+      },
+      netcoredbg = {
+        path = "netcoredbg",
+      },
     },
   },
 }
