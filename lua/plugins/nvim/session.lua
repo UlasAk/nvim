@@ -13,7 +13,6 @@ return {
       auto_restore = false,
       suppressed_dirs = { "~/", "~/Downloads", "/" },
       cwd_change_handling = true,
-      auto_restore_last_session = false,
       session_lens = {
         picker = "telescope",
         mappings = {
@@ -23,7 +22,6 @@ return {
         },
         load_on_setup = false,
       },
-      pre_save_cmds = {},
     },
   },
 }
