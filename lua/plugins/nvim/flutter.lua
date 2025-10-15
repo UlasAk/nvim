@@ -40,10 +40,6 @@ return {
     opts = function()
       local lspconfig = require "lsp-opts"
       return {
-        ui = {
-          border = "rounded",
-          notification_style = "native", -- "native" | "plugin",
-        },
         decorations = {
           statusline = {
             app_version = true,
@@ -67,42 +63,27 @@ return {
             require("dap.ext.vscode").load_launchjs(path)
           end,
         },
-        flutter_path = nil,
-        flutter_lookup_cmd = nil,
         root_patterns = { ".git", "android", "ios", "macos", "linux" },
-        fvm = false,
         widget_guides = {
           enabled = true,
         },
         closing_tags = {
+          enabled = true,
           highlight = "htmlBoldItalic",
           prefix = "> ",
-          priority = 10,
-          enabled = true,
         },
         dev_log = {
           enabled = false,
-          filter = nil,
-          notify_errors = false,
-          open_cmd = "botright 70vnew",
-          focus_on_open = false,
-        },
-        dev_tools = {
-          autostart = false,
-          auto_open_browser = false,
         },
         outline = {
           open_cmd = "60vnew",
-          auto_open = false,
         },
         lsp = {
           color = {
             enabled = true,
             background = true,
             background_color = { r = 19, g = 17, b = 24 },
-            foreground = false,
             virtual_text = false,
-            virtual_text_str = "■",
           },
           capabilities = lspconfig.capabilities,
           settings = {
