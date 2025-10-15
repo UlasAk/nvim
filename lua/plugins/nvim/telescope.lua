@@ -180,40 +180,21 @@ return {
           },
           cache_picker = {
             num_pickers = 10,
-            limit_entries = 1000,
-            ignore_empty_prompt = false,
           },
           prompt_prefix = "   ",
-          selection_caret = "> ",
-          entry_prefix = "  ",
-          initial_mode = "insert",
-          selection_strategy = "reset",
           sorting_strategy = "ascending",
-          layout_strategy = "horizontal",
           layout_config = {
             horizontal = {
               prompt_position = "top",
               preview_width = 0.4,
             },
-            vertical = {
-              mirror = false,
-            },
             width = 0.87,
             height = 0.80,
-            preview_cutoff = 120,
           },
           file_sorter = require("telescope.sorters").get_fuzzy_file,
           file_ignore_patterns = { ".git", ".angular" },
           path_display = { "truncate", "filename_first" },
-          winblend = 0,
-          border = {},
-          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-          color_devicons = true,
-          set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-          file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-          grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-          qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-          buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+          set_env = { ["COLORTERM"] = "truecolor" },
           mappings = {
             i = {
               ["<C-Down>"] = require("telescope.actions").preview_scrolling_down,
@@ -232,27 +213,10 @@ return {
             },
           },
         },
-        extensions_list = {},
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-          },
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown {},
-          },
-        },
       }
     end,
     config = function(_, opts)
-      local telescope = require "telescope"
-      telescope.setup(opts)
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
-      end
-
+      require("telescope").setup(opts)
       require("colors").add_and_set_color_module("telescope", function()
         vim.api.nvim_set_hl(0, "TelescopeMatching", {
           fg = "#89b4fa",
@@ -324,7 +288,15 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
     event = "VeryLazy",
     config = function()
-      require("telescope").load_extension "ui-select"
+      local telescope = require "telescope"
+      telescope.setup {
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {},
+          },
+        },
+      }
+      telescope.load_extension "ui-select"
     end,
   },
   {
