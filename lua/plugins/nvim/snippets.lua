@@ -3,12 +3,11 @@ return {
     "L3MON4D3/LuaSnip",
     dependencies = "rafamadriz/friendly-snippets",
     event = { "InsertEnter" },
-    opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+    opts = { update_events = { "TextChanged", "TextChangedI" } },
     config = function(_, opts)
       require("luasnip").config.set_config(opts)
       -- vscode format
       require("luasnip.loaders.from_vscode").lazy_load { exclude = vim.g.vscode_snippets_exclude or {} }
-      require("luasnip.loaders.from_vscode").lazy_load { paths = "your path!" }
       require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
 
       -- snipmate format
