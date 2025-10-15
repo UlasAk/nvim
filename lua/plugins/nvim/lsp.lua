@@ -467,13 +467,7 @@ return {
       },
     },
     opts = {
-      cmd_name = "IncRename",
-      hl_group = "Substitute",
-      preview_empty_name = false,
-      show_message = true,
       save_in_cmdline_history = false,
-      input_buffer_type = nil,
-      post_hook = nil,
     },
   },
   {
