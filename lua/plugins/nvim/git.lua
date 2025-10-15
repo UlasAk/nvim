@@ -10,25 +10,11 @@ return {
       { "<leader>gbl", "<cmd>Gitsigns blame_line<CR>", desc = "Git Blame Line" },
       { "<leader>gbc", "<cmd>Gitsigns blame<CR>", desc = "Git Blame Current Buffer" },
     },
-    opts = function()
-      local options = {
-        signs = {
-          add = { text = "│" },
-          change = { text = "│" },
-          delete = { text = "󰍵" },
-          topdelete = { text = "‾" },
-          changedelete = { text = "~" },
-          untracked = { text = "│" },
-        },
-        preview_config = {
-          style = "minimal",
-          relative = "cursor",
-          border = "rounded",
-        },
-      }
-
-      return options
-    end,
+    opts = {
+      preview_config = {
+        border = "rounded",
+      },
+    },
   },
   {
     "sindrets/diffview.nvim",
