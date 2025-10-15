@@ -576,10 +576,7 @@ return {
       }
     end,
     opts = {
-      skip_filetypes = {},
       enabled = false,
-      allow_scroll_move = true,
-      disable_on_mouse = true,
     },
   },
   {
