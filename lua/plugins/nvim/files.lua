@@ -147,6 +147,9 @@ return {
           return new_conf
         end,
       },
+      confirmation = {
+        border = "rounded",
+      },
       preview_win = {
         update_on_cursor_moved = true,
         border = "rounded",
