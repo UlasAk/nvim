@@ -377,14 +377,7 @@ return {
           },
         },
       },
-      cmdline = {
-        enabled = true,
-      },
-      notify = {
-        enabled = true,
-      },
       popupmenu = {
-        enabled = true,
         backend = "cmp",
       },
       lsp = {
