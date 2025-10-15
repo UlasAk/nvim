@@ -453,9 +453,6 @@ return {
     event = "LspAttach",
     opts = {
       bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
       hint_prefix = "",
     },
   },
