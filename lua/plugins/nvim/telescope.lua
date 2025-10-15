@@ -308,9 +308,7 @@ return {
     keys = {
       { "<leader>fto", "<cmd>TodoTelescope<CR>", desc = "Telescope TODOs" },
     },
-    config = function()
-      require("todo-comments").setup()
-    end,
+    opts = {},
   },
   {
     "isak102/telescope-git-file-history.nvim",
