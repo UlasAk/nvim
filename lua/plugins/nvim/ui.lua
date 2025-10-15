@@ -264,7 +264,6 @@ return {
             statusline = 32,
           },
         },
-        ignore_focus = {},
         sections = sections,
         inactive_sections = sections,
         extensions = { "trouble", "mason", "lazy" },
