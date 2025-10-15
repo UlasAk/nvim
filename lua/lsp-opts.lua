@@ -294,6 +294,7 @@ M.defaults = function()
   -- LSPs without specific config
   local lsp_servers = {
     "cssls",
+    "csharp_ls",
     "docker_compose_language_service",
     "jsonls",
     "kotlin_language_server",
