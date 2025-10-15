@@ -279,8 +279,9 @@ return {
       }
     end,
     config = function(_, opts)
-      require("telescope").setup(opts)
-      require("telescope").load_extension "live_grep_args"
+      local telescope = require "telescope"
+      telescope.setup(opts)
+      telescope.load_extension "live_grep_args"
     end,
   },
   {
