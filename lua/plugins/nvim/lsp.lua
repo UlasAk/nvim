@@ -14,6 +14,7 @@ return {
   },
   {
     "antosha417/nvim-lsp-file-operations",
+    name = "lsp-file-operations",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
@@ -21,9 +22,7 @@ return {
     },
     event = { "User NvimTreeSetup" },
     ft = { "oil" },
-    config = function()
-      require("lsp-file-operations").setup()
-    end,
+    opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter",
