@@ -431,14 +431,14 @@ return {
     end,
     opts = {
       options = {
-        use_icons_from_diagnostic = false,
-        show_source = true,
-        add_messages = true,
+        show_source = {
+          enabled = true,
+          if_many = true,
+        },
         multilines = {
           enabled = true,
           always_show = true,
         },
-        show_all_diags_on_cursorline = true,
       },
     },
     config = function(_, opts)
