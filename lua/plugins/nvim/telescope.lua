@@ -272,6 +272,9 @@ return {
         vim.api.nvim_set_hl(0, "TelescopeBorder", {
           fg = "#f9e2af",
         })
+        vim.api.nvim_set_hl(0, "TelescopePreviewLine", {
+          bg = "#76758a",
+        })
       end)
     end,
   },
