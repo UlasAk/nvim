@@ -15,7 +15,7 @@ map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
 map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
 
 -- Jump
-map("n", "<C-m>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
+map("n", "<C-i>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
 map("n", "<C-o>", "<C-o>zz", { desc = "Jump Forwards in Jumplist and center" })
 map("n", "<leader>S", "<cmd>vert sf #<CR>", { desc = "Jump Last file in split" })
 
