@@ -1,4 +1,4 @@
-local filetype_map = {
+local formatter_filetype_map = {
   bash = { "shfmt" },
   bib = { "texlab" },
   cs = { "csharpier" },
@@ -13,13 +13,44 @@ local filetype_map = {
   yaml = { "yamlfmt" },
 }
 
+local linter_filetype_map = {
+  lua = "luacheck",
+  markdown = "markdownlint",
+  sh = "shellcheck",
+  dart = "trivy",
+}
+
+local get_linter_filetypes = function()
+  local filetypes = {}
+  for filetype, _ in pairs(linter_filetype_map) do
+    table.insert(filetypes, filetype)
+  end
+  return filetypes
+end
+
+local get_filetype_linter_nvim_lint_map = function()
+  local result = {}
+  for filetype, linter_name_or_table in pairs(linter_filetype_map) do
+    if type(linter_name_or_table) == "table" then
+      local linters = {}
+      for _, linter in pairs(linter_name_or_table) do
+        table.insert(linters, linter)
+      end
+      result[filetype] = linters
+    else
+      result[filetype] = { linter_name_or_table }
+    end
+  end
+  return result
+end
+
 return {
   {
     "stevearc/conform.nvim",
     cmd = { "ConformInfo" },
     ft = function()
       local filetypes = {}
-      for key, _ in pairs(filetype_map) do
+      for key, _ in pairs(formatter_filetype_map) do
         table.insert(filetypes, key)
       end
       return filetypes
@@ -66,7 +97,7 @@ return {
       })
 
       return {
-        formatters_by_ft = filetype_map,
+        formatters_by_ft = formatter_filetype_map,
         formatters = {
           dart_format = {
             args = function()
@@ -98,13 +129,10 @@ return {
     dependencies = {
       "rachartier/tiny-inline-diagnostic.nvim",
     },
-    ft = function()
-      return require("mason-opts").get_linter_filetypes()
-    end,
+    ft = get_linter_filetypes(),
     config = function()
       local lint = require "lint"
-      local mason_config = require "mason-opts"
-      lint.linters_by_ft = mason_config.get_filetype_linter_nvim_lint_map()
+      lint.linters_by_ft = get_filetype_linter_nvim_lint_map()
 
       -- Linter configs
       lint.linters.luacheck = {
