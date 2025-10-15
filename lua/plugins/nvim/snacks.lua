@@ -19,46 +19,15 @@ local pause_notifications = false
 
 local options = {
   bigfile = {
-    notify = true,
-    size = 1.5 * 1024 * 1024,
-    line_length = 1000,
-    ---@param ctx {buf: number, ft:string}
-    setup = function(ctx)
-      if vim.fn.exists ":NoMatchParen" ~= 0 then
-        vim.cmd [[NoMatchParen]]
-      end
-      Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
-      vim.b.minianimate_disable = true
-      vim.schedule(function()
-        if vim.api.nvim_buf_is_valid(ctx.buf) then
-          vim.bo[ctx.buf].syntax = ctx.ft
-        end
-      end)
-    end,
+    enabled = true,
   },
   quickfile = { enabled = false },
   statuscolumn = { enabled = false },
   styles = {
     input = {
-      backdrop = false,
-      position = "float",
-      border = "rounded",
-      title_pos = "center",
-      height = 1,
-      width = 60,
-      relative = "editor",
-      noautocmd = true,
-      row = 2,
-      wo = {
-        winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle",
-        cursorline = false,
-      },
-      bo = {
-        filetype = "snacks_input",
-        buftype = "prompt",
-      },
+      relative = "cursor",
       b = {
-        completion = false,
+        completion = true,
       },
       keys = {
         n_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n", expr = true },
@@ -72,47 +41,12 @@ local options = {
       },
     },
     notification = {
-      border = "rounded",
-      zindex = 100,
-      ft = "markdown",
-      wo = {
-        winblend = 5,
-        wrap = false,
-        conceallevel = 2,
-        colorcolumn = "",
-      },
       bo = { filetype = "markdown" },
-      history = {
-        border = "rounded",
-        zindex = 100,
-        width = 0.6,
-        height = 0.6,
-        minimal = false,
-        title = "Notification History",
-        title_pos = "center",
-        ft = "markdown",
-        bo = { filetype = "snacks_notif_history" },
-        wo = { winhighlight = "Normal:SnacksNotifierHistory" },
-        keys = { q = "close" },
-      },
     },
   },
   notifier = {
     enabled = true,
-    timeout = 3000,
-    width = { min = 40, max = 0.4 },
-    height = { min = 1, max = 0.6 },
     margin = { top = 0, right = 1, bottom = 3 },
-    padding = true,
-    sort = { "level", "added" },
-    level = vim.log.levels.TRACE,
-    icons = {
-      error = " ",
-      warn = " ",
-      info = " ",
-      debug = " ",
-      trace = " ",
-    },
     filter = function(notification)
       if pause_notifications then
         return false
@@ -143,37 +77,16 @@ local options = {
     end,
     style = "fancy",
     top_down = false,
-    date_format = "%R",
-    refresh = 50,
   },
-  scroll = {
-    enabled = false,
-    animate = {
-      duration = { step = 15, total = 200 },
-      easing = "linear",
-    },
-    animate_repeat = {
-      delay = 10,
-      duration = { step = 1, total = 10 },
-      easing = "linear",
-    },
-  },
-  toggle = {},
   input = {
-    enabled = false,
+    enabled = true,
   },
   words = {
+    enabled = true,
     debounce = 100,
-    notify_jump = false,
-    notify_end = true,
-    foldopen = true,
-    jumplist = true,
-    modes = { "n", "i", "c" },
-    filter = function(buf)
-      return vim.g.snacks_words ~= false and vim.b[buf].snacks_words ~= false
-    end,
   },
   dashboard = {
+    enabled = true,
     sections = {
       { section = "header" },
       { section = "startup" },
@@ -184,6 +97,7 @@ local options = {
 return {
   {
     "folke/snacks.nvim",
+    dependencies = { "OXY2DEV/markview.nvim" },
     priority = 1000,
     lazy = false,
     keys = {
@@ -244,20 +158,6 @@ return {
         desc = "Toggle Words (LSP reference highlighting)",
       },
       {
-        "<leader>tS",
-        function()
-          local is_enabled = Snacks.scroll.enabled
-          if is_enabled then
-            Snacks.scroll.disable()
-            Snacks.notify.info "  Scroll animations disabled"
-          else
-            Snacks.scroll.enable()
-            Snacks.notify.info "  Scroll animations enabled"
-          end
-        end,
-        desc = "Toggle Scroll Animations",
-      },
-      {
         "<leader>tn",
         function()
           pause_notifications = not pause_notifications
@@ -265,9 +165,7 @@ return {
         desc = "Toggle Notifications",
       },
     },
-    opts = function()
-      return options
-    end,
+    opts = options,
     init = function()
       setup_colors()
     end,
