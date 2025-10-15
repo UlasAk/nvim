@@ -456,7 +456,11 @@ return {
   {
     "petertriho/nvim-scrollbar",
     event = { "BufEnter", "BufNewFile" },
-    opts = {},
+    opts = {
+      handlers = {
+        gitsigns = true,
+      },
+    },
   },
   {
     "y3owk1n/undo-glow.nvim",
