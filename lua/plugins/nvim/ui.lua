@@ -360,6 +360,7 @@ return {
     },
     opts = {
       presets = {
+        bottom_search = true,
         inc_rename = {
           cmdline = {
             format = {
