@@ -27,7 +27,7 @@ local options = {
     input = {
       relative = "cursor",
       b = {
-        completion = true,
+        completion = false,
       },
       keys = {
         n_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n", expr = true },
