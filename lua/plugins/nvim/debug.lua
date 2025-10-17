@@ -14,6 +14,13 @@ return {
       { "<leader>dba", "<cmd>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
       { "<leader>dc", "<cmd>DapContinue<CR>", desc = "Debug Continue" },
       {
+        "<leader>dr",
+        function()
+          require("dap").reverse_continue()
+        end,
+        desc = "Debug Reverse Continue",
+      },
+      {
         "<leader>dC",
         function()
           require("dap").run_to_cursor()
@@ -45,6 +52,13 @@ return {
       { "<leader>dsO", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
       { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
       {
+        "<leader>dsb",
+        function()
+          require("dap").step_back()
+        end,
+        desc = "Debug Step Back",
+      },
+      {
         "<leader>de",
         function()
           require("dap").set_exception_breakpoints()
@@ -58,7 +72,6 @@ return {
         end,
         desc = "Debug Widgets hover",
       },
-      { "<leader>dr", "<cmd>DapToggleRepl<CR>", desc = "Debug Toggle Repl" },
       { "<leader>dd", "<cmd>DapDisconnect<CR>", desc = "Debug Disconnect" },
       { "<leader>dt", "<cmd>DapTerminate<CR>", desc = "Debug Terminate" },
       {
