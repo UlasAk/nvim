@@ -14,10 +14,10 @@ local formatter_filetype_map = {
 }
 
 local linter_filetype_map = {
+  dart = "trivy",
   lua = "luacheck",
   markdown = "markdownlint",
   sh = "shellcheck",
-  dart = "trivy",
 }
 
 local get_linter_filetypes = function()
