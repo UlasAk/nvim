@@ -54,6 +54,14 @@ return {
         vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
           bg = "#474656",
         })
+        if vim.g.transparent_enabled then
+          vim.api.nvim_set_hl(0, "NvimTreeNormal", {
+            bg = "NONE",
+          })
+          vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", {
+            bg = "NONE",
+          })
+        end
       end)
     end,
   },

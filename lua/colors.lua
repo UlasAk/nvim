@@ -15,7 +15,15 @@ M.get_color_module = function(module_name)
   return M.color_modules[module_name]
 end
 
-M.set_colors = function(module_name)
+M.set_all_colors = function()
+  for _, module in pairs(M.color_modules) do
+    if module ~= nil then
+      module()
+    end
+  end
+end
+
+M.set_colors_of_module = function(module_name)
   local module = M.color_modules[module_name]
   if module ~= nil then
     module()

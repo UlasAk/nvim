@@ -269,20 +269,16 @@ return {
         extensions = { "trouble", "mason", "lazy" },
       }
       require("lualine").setup(opts)
-      local colors = require "colors"
-      colors.add_color_module("lualine_transparent", function()
-        vim.api.nvim_set_hl(0, "lualine_c_normal", {
-          bg = "NONE",
-        })
-        vim.api.nvim_set_hl(0, "lualine_c_transparent", {
-          bg = "NONE",
-        })
-      end)
-      if vim.g.transparent_enabled then
-        colors.set_colors "lualine_transparent"
-        require("transparent").clear_prefix "lualine_x"
-      end
-      colors.add_and_set_color_module("lualine", function()
+      require("colors").add_and_set_color_module("lualine", function()
+        if vim.g.transparent_enabled then
+          vim.api.nvim_set_hl(0, "lualine_c_normal", {
+            bg = "NONE",
+          })
+          vim.api.nvim_set_hl(0, "lualine_c_transparent", {
+            bg = "NONE",
+          })
+          require("transparent").clear_prefix "lualine_x"
+        end
         vim.api.nvim_set_hl(0, "lualine_c_diff_added_normal", {
           fg = "#a6e3a1",
         })
@@ -419,8 +415,6 @@ return {
     opts = {
       extra_groups = {
         "NormalFloat",
-        "NvimTreeNormal",
-        "NvimTreeWinSeparator",
       },
       exclude_groups = {
         "IndentBlanklineChar",
@@ -439,19 +433,8 @@ return {
       transparent.setup(opts)
       local toggle_transparency = function()
         transparent.toggle()
-        local colors = require "colors"
-        colors.set_colors "lualine"
-        colors.set_colors "ibl"
-        colors.set_colors "treesitter-context"
-        colors.set_colors "octo"
-        colors.set_colors "nvim-tree"
+        require("colors").set_all_colors()
         require("utils").run_global_function "ibl_setup"
-        colors.set_colors "telescope"
-        if vim.g.transparent_enabled then
-          colors.set_colors "lualine_transparent"
-          transparent.clear_prefix "lualine_x"
-          transparent.clear_prefix "TabLineFill"
-        end
       end
       vim.api.nvim_create_user_command("ToggleTransparency", toggle_transparency, {})
     end,
