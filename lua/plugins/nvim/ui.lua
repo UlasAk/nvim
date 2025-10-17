@@ -420,6 +420,7 @@ return {
       extra_groups = {
         "NormalFloat",
         "NvimTreeNormal",
+        "NvimTreeWinSeparator",
       },
       exclude_groups = {
         "IndentBlanklineChar",
@@ -443,6 +444,7 @@ return {
         colors.set_colors "ibl"
         colors.set_colors "treesitter-context"
         colors.set_colors "octo"
+        colors.set_colors "nvim-tree"
         require("utils").run_global_function "ibl_setup"
         colors.set_colors "telescope"
         if vim.g.transparent_enabled then
