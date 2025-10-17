@@ -89,7 +89,7 @@ return {
       local dap = require "dap"
 
       -- Adapters
-      local dartAdapter = function()
+      local dart_adapter = function()
         dap.adapters.dart = {
           type = "executable",
           command = "dart",
@@ -100,7 +100,7 @@ return {
         }
       end
 
-      local flutterAdapter = function()
+      local flutter_adapter = function()
         dap.adapters.flutter = {
           type = "executable",
           command = "flutter",
@@ -111,7 +111,7 @@ return {
         }
       end
 
-      local javascriptAdapter = function()
+      local javascript_adapter = function()
         dap.adapters["pwa-node"] = {
           type = "server",
           host = "localhost",
@@ -136,7 +136,7 @@ return {
         dap.adapters["node"] = dap.adapters["pwa-node"]
       end
 
-      local chromeAdapter = function()
+      local chrome_adapter = function()
         dap.adapters["pwa-chrome"] = {
           type = "executable",
           host = "localhost",
@@ -157,7 +157,7 @@ return {
       end
 
       -- Configurations
-      local javascriptConfigurations = function()
+      local javascript_configurations = function()
         dap.configurations.javascript = {
           {
             name = "Launch file",
@@ -209,7 +209,7 @@ return {
         }
       end
 
-      local typescriptConfigurations = function()
+      local typescript_configurations = function()
         dap.configurations.typescript = {
           {
             name = "Launch Node",
@@ -297,15 +297,15 @@ return {
       end
 
       M.setup_adapters = function()
-        dartAdapter()
-        flutterAdapter()
-        javascriptAdapter()
-        chromeAdapter()
+        dart_adapter()
+        flutter_adapter()
+        javascript_adapter()
+        chrome_adapter()
       end
 
       M.setup_configurations = function()
-        javascriptConfigurations()
-        typescriptConfigurations()
+        javascript_configurations()
+        typescript_configurations()
       end
 
       M.setup_colors = function()
