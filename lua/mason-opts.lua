@@ -16,6 +16,7 @@ M.get_all_ensure_installed_mason_names = function()
     "lua-language-server",
     "luacheck",
     "markdownlint",
+    "netcoredbg",
     "prettier",
     "pyright",
     "qmlls",
