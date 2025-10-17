@@ -203,9 +203,6 @@ M.setup_keymaps = function()
       },
     }
   end, opts "Lsp Go to outgoing calls")
-  map("n", "<leader>lsh", function()
-    require("lsp_signature").toggle_float_win()
-  end, opts "Lsp Show signature help")
   map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts "Lsp Add workspace folder")
   map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts "Lsp Remove workspace folder")
   map({ "n", "v", "x" }, "<leader>lca", vim.lsp.buf.code_action, opts "Lsp Code action")

@@ -508,6 +508,23 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "LspAttach",
+    keys = {
+      {
+        "<leader>lsh",
+        function()
+          require("lsp_signature").toggle_float_win()
+        end,
+        desc = "Lsp Toggle signature help",
+      },
+      {
+        "<C-h>",
+        function()
+          require("lsp_signature").toggle_float_win()
+        end,
+        mode = "i",
+        desc = "Lsp Toggle signature help (i)",
+      },
+    },
     opts = {
       bind = true,
       hint_prefix = "",
