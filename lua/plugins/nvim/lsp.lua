@@ -389,7 +389,6 @@ return {
         local name_table = {
           "angular-language-server",
           "bash-language-server",
-          "csharp-language-server",
           "css-lsp",
           "dart-debug-adapter",
           "docker-compose-language-service",
