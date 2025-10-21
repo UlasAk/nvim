@@ -278,6 +278,8 @@ return {
             bg = "NONE",
           })
           require("transparent").clear_prefix "lualine_x"
+          require("transparent").clear_prefix "lualine_transitional_lualine_b"
+          require("transparent").clear_prefix "lualine_transitional_lualine_y"
         end
         vim.api.nvim_set_hl(0, "lualine_c_diff_added_normal", {
           fg = "#a6e3a1",
