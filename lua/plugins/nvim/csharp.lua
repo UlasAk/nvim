@@ -8,9 +8,25 @@ return {
         "<leader>Dr",
         function()
           local dotnet = require "easy-dotnet"
-          dotnet.run_project()
+          dotnet.run()
         end,
         desc = "Dotnet Run",
+      },
+      {
+        "<leader>DR",
+        function()
+          local dotnet = require "easy-dotnet"
+          dotnet.run_with_profile()
+        end,
+        desc = "Dotnet Run with profile",
+      },
+      {
+        "<leader>Dw",
+        function()
+          local dotnet = require "easy-dotnet"
+          dotnet.watch()
+        end,
+        desc = "Dotnet Watch",
       },
     },
     config = function()
