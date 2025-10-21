@@ -308,11 +308,14 @@ M.defaults = function()
   -- LSPs with specific config
 
   -- Angular
-  local angular_json_path = vim.fs.dirname(vim.fs.find({ "angular.json" }, {
-    path = vim.loop.cwd(),
-    upward = true,
-  })[1])
-  if angular_json_path ~= nil then
+  local found_angular_json, angular_json_path = pcall(
+    vim.fs.dirname,
+    vim.fs.find({ "angular.json" }, {
+      path = vim.loop.cwd(),
+      upward = true,
+    })[1]
+  )
+  if found_angular_json and angular_json_path ~= nil then
     local ok, mason_registry = pcall(require, "mason-registry")
     if not ok then
       vim.notify "mason-registry could not be loaded"
