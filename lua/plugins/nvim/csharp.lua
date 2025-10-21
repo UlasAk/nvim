@@ -38,7 +38,7 @@ return {
     end,
   },
   {
-    "nicholasmata/nvim-dap-cs",
+    "NorinB/nvim-dap-cs",
     name = "dap-cs",
     dependencies = { "mfussenegger/nvim-dap" },
     ft = "cs",
