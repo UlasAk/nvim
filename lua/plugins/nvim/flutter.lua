@@ -59,8 +59,11 @@ return {
             local path = fs.dirname(fs.find({ ".git" }, {
               path = buffer_path,
               upward = true,
-            })[1]) .. "/.vscode/launch.json"
-            require("dap.ext.vscode").load_launchjs(path)
+            })[1])
+            if path ~= nil then
+              path = path .. "/.vscode/launch.json"
+              require("dap.ext.vscode").load_launchjs(path)
+            end
           end,
         },
         root_patterns = { ".git", "android", "ios", "macos", "linux" },
