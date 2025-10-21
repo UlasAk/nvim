@@ -440,15 +440,6 @@ return {
     end,
   },
   {
-    "petertriho/nvim-scrollbar",
-    event = { "BufEnter", "BufNewFile" },
-    opts = {
-      handlers = {
-        gitsigns = true,
-      },
-    },
-  },
-  {
     "y3owk1n/undo-glow.nvim",
     event = { "VeryLazy" },
     keys = {
