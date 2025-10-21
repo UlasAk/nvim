@@ -102,7 +102,7 @@ return {
     lazy = false,
     keys = {
       {
-        "<leader>dn",
+        "<leader>N",
         function()
           Snacks.notifier.hide()
         end,

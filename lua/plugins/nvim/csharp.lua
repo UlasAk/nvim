@@ -3,6 +3,16 @@ return {
     "GustavEikaas/easy-dotnet.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
     ft = "cs",
+    keys = {
+      {
+        "<leader>Dr",
+        function()
+          local dotnet = require "easy-dotnet"
+          dotnet.run_project()
+        end,
+        desc = "Dotnet Run",
+      },
+    },
     config = function()
       local function get_secret_path(secret_guid)
         local path = ""
@@ -29,7 +39,6 @@ return {
           config = {},
         },
         debugger = {
-          -- The path to netcoredbg executable
           bin_path = "netcoredbg",
           auto_register_dap = true,
           mappings = {
@@ -42,9 +51,9 @@ return {
           viewmode = "float",
           ---@type number|nil
           vsplit_width = nil,
-          ---@type string|nil "topleft" | "topright"
+          ---@type string|nil
           vsplit_pos = nil,
-          enable_buffer_test_execution = true, --Experimental, run tests directly from buffer
+          enable_buffer_test_execution = true,
           noBuild = true,
           icons = {
             passed = "",
@@ -74,12 +83,11 @@ return {
             close = { lhs = "q", desc = "close testrunner" },
             refresh_testrunner = { lhs = "<C-r>", desc = "refresh testrunner" },
           },
-          --- Optional table of extra args e.g "--blame crash"
           additional_args = {},
         },
         new = {
           project = {
-            prefix = "sln", -- "sln" | "none"
+            prefix = "sln",
           },
         },
         ---@param action "test" | "restore" | "build" | "run"
@@ -115,27 +123,20 @@ return {
         csproj_mappings = true,
         fsproj_mappings = true,
         auto_bootstrap_namespace = {
-          --block_scoped, file_scoped
           type = "block_scoped",
           enabled = true,
           use_clipboard_json = {
-            behavior = "prompt", --'auto' | 'prompt' | 'never',
-            register = "+", -- which register to check
+            behavior = "prompt",
+            register = "+",
           },
         },
         server = {
           ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
           log_level = nil,
         },
-        -- choose which picker to use with the plugin
-        -- possible values are "telescope" | "fzf" | "snacks" | "basic"
-        -- if no picker is specified, the plugin will determine
-        -- the available one automatically with this priority:
-        -- telescope -> fzf -> snacks ->  basic
         picker = "telescope",
         background_scanning = true,
         notifications = {
-          --Set this to false if you have configured lualine to avoid double logging
           handler = function(start_event)
             local spinner = require("easy-dotnet.ui-modules.spinner").new()
             spinner:start_spinner(start_event.job.name)
@@ -150,16 +151,9 @@ return {
           setqflist = false,
         },
       }
-
-      -- Example command
-      vim.api.nvim_create_user_command("Secrets", function()
+      vim.api.nvim_create_user_command("DotnetSecrets", function()
         dotnet.secrets()
       end, {})
-
-      -- Example keybinding
-      vim.keymap.set("n", "<C-p>", function()
-        dotnet.run_project()
-      end)
     end,
   },
 }

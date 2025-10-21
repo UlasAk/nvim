@@ -354,7 +354,6 @@ return {
     event = "VeryLazy",
     keys = {
       { "<leader>fn", "<cmd>Noice telescope<CR>", desc = "Notifications Show history" },
-      -- { "<leader>dm", "<cmd>Noice dismiss<CR>", desc = "Noice Dismiss messages" },
     },
     opts = {
       presets = {
