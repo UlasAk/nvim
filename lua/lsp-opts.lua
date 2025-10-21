@@ -308,53 +308,53 @@ M.defaults = function()
   -- LSPs with specific config
 
   -- Angular
-  local found_angular_json, angular_json_path = pcall(
-    vim.fs.dirname,
-    vim.fs.find({ "angular.json" }, {
-      path = vim.loop.cwd(),
-      upward = true,
-    })[1]
-  )
-  if found_angular_json and angular_json_path ~= nil then
-    local ok, mason_registry = pcall(require, "mason-registry")
-    if not ok then
-      vim.notify "mason-registry could not be loaded"
-      return
-    end
-
-    local angularls_path = vim.fn.expand "$MASON/packages/angular-language-server"
-    local handle_angular_exit = function(code, signal, client_id)
-      if code > 0 then
-        vim.schedule(function()
-          vim.cmd "LspStart angularls"
-        end)
+  local angular_json_found, found_angular_json = pcall(vim.fs.find, { "angular.json" }, {
+    path = vim.loop.cwd(),
+    upward = true,
+  })
+  if angular_json_found then
+    local angular_json_path = vim.fs.dirname(found_angular_json[1])
+    if angular_json_path ~= nil then
+      local ok, mason_registry = pcall(require, "mason-registry")
+      if not ok then
+        vim.notify "mason-registry could not be loaded"
+        return
       end
+
+      local angularls_path = vim.fn.expand "$MASON/packages/angular-language-server"
+      local handle_angular_exit = function(code, signal, client_id)
+        if code > 0 then
+          vim.schedule(function()
+            vim.cmd "LspStart angularls"
+          end)
+        end
+      end
+
+      local cmd = {
+        "ngserver",
+        "--stdio",
+        "--tsProbeLocations",
+        table.concat({
+          angularls_path,
+          vim.uv.cwd(),
+        }, ","),
+        "--ngProbeLocations",
+        table.concat({
+          angularls_path .. "/node_modules/@angular/language-server",
+          vim.uv.cwd(),
+        }, ","),
+      }
+
+      vim.lsp.config("angularls", {
+        cmd = cmd,
+        on_exit = handle_angular_exit,
+        on_new_config = function(new_config, _)
+          new_config.cmd = cmd
+        end,
+        filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
+      })
+      vim.lsp.enable "angularls"
     end
-
-    local cmd = {
-      "ngserver",
-      "--stdio",
-      "--tsProbeLocations",
-      table.concat({
-        angularls_path,
-        vim.uv.cwd(),
-      }, ","),
-      "--ngProbeLocations",
-      table.concat({
-        angularls_path .. "/node_modules/@angular/language-server",
-        vim.uv.cwd(),
-      }, ","),
-    }
-
-    vim.lsp.config("angularls", {
-      cmd = cmd,
-      on_exit = handle_angular_exit,
-      on_new_config = function(new_config, _)
-        new_config.cmd = cmd
-      end,
-      filetypes = { "htmlangular", "typescript", "html", "typescriptreact", "typescript.tsx" },
-    })
-    vim.lsp.enable "angularls"
   end
 
   -- Bash
