@@ -49,7 +49,6 @@ return {
         },
         debugger = {
           enabled = true,
-          exception_breakpoints = {},
           evaluate_to_string_in_debug_views = true,
           register_configurations = function(paths)
             local api = vim.api
