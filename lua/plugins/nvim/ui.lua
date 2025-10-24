@@ -375,6 +375,11 @@ return {
           },
         },
       },
+      cmdline = {
+        format = {
+          input = { view = "cmdline" },
+        },
+      },
       popupmenu = {
         backend = "cmp",
       },
