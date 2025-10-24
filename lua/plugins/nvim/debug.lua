@@ -109,6 +109,7 @@ return {
             detached = false,
           },
         }
+        require("dap").defaults.flutter.exception_breakpoints = {}
       end
 
       local javascript_adapter = function()
