@@ -452,12 +452,6 @@ return {
     end,
   },
   {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cmd = "Trouble",
-    opts = {},
-  },
-  {
     "rachartier/tiny-inline-diagnostic.nvim",
     priority = 1000,
     event = "VeryLazy",
