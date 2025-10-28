@@ -271,6 +271,7 @@ return {
                 ["<C-c>"] = lga_actions.quote_prompt { postfix = " -s " },
                 ["<C-f>"] = lga_actions.quote_prompt { postfix = " -SF " },
                 ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+                ["<C-t>"] = lga_actions.quote_prompt { postfix = " --type " },
                 ["<C-space>"] = lga_actions.to_fuzzy_refine,
               },
             },
