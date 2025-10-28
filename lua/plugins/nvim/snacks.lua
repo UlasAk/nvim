@@ -132,9 +132,29 @@ return {
       {
         "<leader>bo",
         function()
+          Snacks.bufdelete.delete {
+            filter = function(bufnr)
+              local is_buf_visible = function(nr)
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                  if vim.api.nvim_win_get_buf(win) == nr then
+                    return true
+                  end
+                end
+                return false
+              end
+
+              return not is_buf_visible(bufnr)
+            end,
+          }
+        end,
+        desc = "Buffer Close others (respecting open buffers in splits)",
+      },
+      {
+        "<leader>bO",
+        function()
           Snacks.bufdelete.other()
         end,
-        desc = "Buffer Close others",
+        desc = "Buffer Close others (all others)",
       },
       {
         "<leader>si",
