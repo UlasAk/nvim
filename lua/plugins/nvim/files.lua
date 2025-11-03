@@ -6,7 +6,7 @@ return {
     },
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     keys = {
-      { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle window" },
+      { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle window" },
       { "<leader>e", "<cmd>NvimTreeFocus<CR>", desc = "NvimTree Focus window" },
     },
     opts = {
