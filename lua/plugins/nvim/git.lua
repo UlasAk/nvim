@@ -83,6 +83,45 @@ return {
           fg = "#f9e2b0",
           bg = "#45475b",
         })
+        vim.api.nvim_set_hl(0, "OctoDiffstatAdditions", {
+          link = "OctoGreen",
+        })
+        vim.api.nvim_set_hl(0, "OctoDiffstatDeletions", {
+          link = "OctoRed",
+        })
+        vim.api.nvim_set_hl(0, "OctoDiffstatNeutral", {
+          link = "OctoGrey",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusAdded", {
+          link = "OctoGreen",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusUntracked", {
+          link = "OctoGreen",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusModified", {
+          link = "OctoBlue",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusRenamed", {
+          link = "OctoBlue",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusCopied", {
+          link = "OctoBlue",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusTypeChange", {
+          link = "OctoBlue",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusUnmerged", {
+          link = "OctoBlue",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusUnknown", {
+          link = "OctoYellow",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusDeleted", {
+          link = "OctoRed",
+        })
+        vim.api.nvim_set_hl(0, "OctoStatusBroken", {
+          link = "OctoRed",
+        })
       end)
     end,
   },
