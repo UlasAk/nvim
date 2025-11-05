@@ -12,7 +12,7 @@ local function colored_icon(filename, ext, is_active)
 
   local hl_name = (is_active and "TabLineIcon_" or "TabLineIconInactive_") .. ext
   if vim.fn.hlID(hl_name) == 0 and not string.match(hl_name, ":") then
-    vim.api.nvim_set_hl(0, hl_name, { fg = fg_color, bg = "NONE" })
+    vim.api.nvim_set_hl(0, hl_name, { fg = fg_color, bg = is_active and "NONE" or "#11111b" })
   end
 
   local restore_bg = is_active and "%#TabLineSel#" or "%#TabLine#"
