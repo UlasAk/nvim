@@ -91,6 +91,7 @@ return {
             cwd = function()
               return vim.fn.getcwd()
             end,
+            jestCommand = "npm test --",
           },
         },
       }
