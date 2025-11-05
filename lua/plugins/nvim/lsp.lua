@@ -496,6 +496,67 @@ return {
       vim.schedule(function()
         vim.diagnostic.config { virtual_text = false }
       end)
+      require("colors").add_and_set_color_module("tiny-inline-diagnostic", function()
+        local config = require("tiny-inline-diagnostic").config
+        require("tiny-inline-diagnostic.highlights").setup_highlights(
+          config.blend,
+          config.hi,
+          config.transparent_bg,
+          config.transparent_cursorline
+        )
+        vim.api.nvim_set_hl(0, "TinyInlineDiagnosticVirtualTextHint", {
+          fg = "#94e2d5",
+          bg = "#384953",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextHint", {
+          fg = "#384953",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextHintNoBg", {
+          fg = "#384953",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineDiagnosticVirtualTextInfo", {
+          fg = "#89dceb",
+          bg = "#364858",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextInfo", {
+          fg = "#364858",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextInfoNoBg", {
+          fg = "#364858",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineDiagnosticVirtualTextWarn", {
+          fg = "#f9e2af",
+          bg = "#4e494a",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextWarn", {
+          fg = "#4e494a",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextWarnNoBg", {
+          fg = "#4e494a",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineDiagnosticVirtualTextError", {
+          fg = "#f38ba8",
+          bg = "#4d3649",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextError", {
+          fg = "#4d3649",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineInvDiagnosticVirtualTextErrorNoBg", {
+          fg = "#4d3649",
+          bg = "NONE",
+        })
+        vim.api.nvim_set_hl(0, "TinyInlineDiagnosticVirtualTextArrow", {
+          fg = "#6c7086",
+          bg = "NONE",
+        })
+      end)
     end,
   },
   {
