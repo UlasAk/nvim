@@ -439,8 +439,9 @@ return {
       transparent.setup(opts)
       local toggle_transparency = function()
         transparent.toggle()
-        require("colors").set_all_colors()
+        require("catppuccin").load "mocha"
         require("utils").run_global_function "ibl_setup"
+        require("colors").set_all_colors()
       end
       vim.api.nvim_create_user_command("ToggleTransparency", toggle_transparency, {})
     end,
