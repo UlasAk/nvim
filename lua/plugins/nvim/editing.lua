@@ -31,7 +31,7 @@ return {
       },
       {
         "<leader>ti",
-        "<cmd>IBLToggle<CR>",
+        "<CMD>IBLToggle<CR>",
         desc = "Toggle Indentation lines",
       },
     },
@@ -65,7 +65,7 @@ return {
       },
       {
         "<leader>/",
-        "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+        "<esc><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
         desc = "Toggle Comment",
         mode = "v",
       },
@@ -100,7 +100,7 @@ return {
   {
     "jiaoshijie/undotree",
     keys = {
-      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Toggle Undotree" },
+      { "<leader>u", "<CMD>lua require('undotree').toggle()<CR>", desc = "Toggle Undotree" },
     },
     opts = {},
   },

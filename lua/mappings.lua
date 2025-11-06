@@ -1,23 +1,23 @@
 local map = vim.keymap.set
 
 -- General
-map("n", "<leader>q", "<cmd>q<CR>", { desc = "General Close window" })
-map("n", "<leader>Q", "<cmd>wqa<CR>", { desc = "General Save all and quit neovim" })
+map("n", "<leader>q", "<CMD>q<CR>", { desc = "General Close window" })
+map("n", "<leader>Q", "<CMD>wqa<CR>", { desc = "General Save all and quit neovim" })
 
 -- Lazy
-map("n", "L", "<cmd>Lazy<CR>", { desc = "Lazy Open" })
+map("n", "L", "<CMD>Lazy<CR>", { desc = "Lazy Open" })
 
 -- Buffer
-map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
+map("n", "<leader>bn", "<CMD>enew<CR>", { desc = "Buffer New" })
 
 -- Tabs
-map("n", "<C-Tab>", "<cmd>tabnext<CR>", { desc = "Tab Next" })
-map("n", "<C-S-Tab>", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
+map("n", "<C-Tab>", "<CMD>tabnext<CR>", { desc = "Tab Next" })
+map("n", "<C-S-Tab>", "<CMD>tabprevious<CR>", { desc = "Tab Previous" })
 
 -- Jump
 map("n", "<C-i>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
 map("n", "<C-o>", "<C-o>zz", { desc = "Jump Forwards in Jumplist and center" })
-map("n", "<leader>S", "<cmd>vert sf #<CR>", { desc = "Jump Last file in split" })
+map("n", "<leader>S", "<CMD>vert sf #<CR>", { desc = "Jump Last file in split" })
 
 -- Centering after scroll and search commands
 map("n", "n", "nzz", { desc = "Search next and center" })
@@ -26,30 +26,30 @@ map("n", "<c-d>", "<c-d>zz", { desc = "Scroll down and center" })
 map("n", "<c-u>", "<c-u>zz", { desc = "Scroll up and center" })
 
 -- Move lines
-map("i", "<M-k>", "<cmd> m-2<CR>", { desc = "Move Move line up" })
-map("i", "<M-j>", "<cmd> m+1<CR>", { desc = "Move Move line down" })
-map("i", "<M-h>", "<cmd><<CR>", { desc = "Move Move line left" })
-map("i", "<M-l>", "<cmd>><CR>", { desc = "Move Move line right" })
+map("i", "<M-k>", "<CMD> m-2<CR>", { desc = "Move Move line up" })
+map("i", "<M-j>", "<CMD> m+1<CR>", { desc = "Move Move line down" })
+map("i", "<M-h>", "<CMD><<CR>", { desc = "Move Move line left" })
+map("i", "<M-l>", "<CMD>><CR>", { desc = "Move Move line right" })
 
 -- Highlights
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear all highlights" })
+map("n", "<Esc>", "<CMD>noh<CR>", { desc = "General Clear all highlights" })
 map("n", "<leader>a", "ggVG<CR>", { desc = "Highlight Highlight all" })
 
 -- Window operations
-map("n", "<leader>sh", "<cmd> split<CR>", { desc = "Window Split Window horizontally" })
-map("n", "<leader>sv", "<cmd> vsplit<CR>", { desc = "Window Split Window vertically" })
+map("n", "<leader>sh", "<CMD> split<CR>", { desc = "Window Split Window horizontally" })
+map("n", "<leader>sv", "<CMD> vsplit<CR>", { desc = "Window Split Window vertically" })
 map("n", "<leader>Wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
 map("n", "<leader>We", "<C-w>=", { desc = "Window Equalize windows" })
 
 -- File operations
-map("n", "<leader>w", "<cmd>update<CR>", { desc = "General Copy whole file" })
-map("n", "<leader>C", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
+map("n", "<leader>w", "<CMD>update<CR>", { desc = "General Copy whole file" })
+map("n", "<leader>C", "<CMD>%y+<CR>", { desc = "General Copy whole file" })
 map("n", "<leader>n", ":norm ", { desc = "General Start norm command" })
 map("n", "<leader>r", ":%s///g<left><left><left>", { desc = "General Start substitute command" })
 
 -- Line numbers
-map("n", "<leader>tln", "<cmd>set nu!<CR>", { desc = "Toggle Line number" })
-map("n", "<leader>tlr", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
+map("n", "<leader>tln", "<CMD>set nu!<CR>", { desc = "Toggle Line number" })
+map("n", "<leader>tlr", "<CMD>set rnu!<CR>", { desc = "Toggle Relative number" })
 
 -- Wrap
 map("n", "<leader>tw", function()

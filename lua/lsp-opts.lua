@@ -55,7 +55,7 @@ local function rename()
   vim.cmd "normal A"
   vim.cmd "startinsert"
 
-  map({ "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
+  map({ "n" }, "<Esc>", "<CMD>q<CR>", { buffer = 0 })
 
   map({ "i", "n" }, "<CR>", function()
     apply_rename(currName, win)
@@ -458,7 +458,7 @@ M.defaults = function()
         bufnr,
         "n",
         "<leader>loi",
-        "<cmd>OrganizeImports<CR>",
+        "<CMD>OrganizeImports<CR>",
         { desc = "Lsp Organize Imports (TypeScript)" }
       )
     end,

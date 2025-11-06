@@ -6,8 +6,8 @@ return {
     },
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     keys = {
-      { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "NvimTree Toggle window" },
-      { "<leader>e", "<cmd>NvimTreeFocus<CR>", desc = "NvimTree Focus window" },
+      { "<C-n>", "<CMD>NvimTreeToggle<CR>", desc = "NvimTree Toggle window" },
+      { "<leader>e", "<CMD>NvimTreeFocus<CR>", desc = "NvimTree Focus window" },
     },
     opts = {
       hijack_netrw = false,

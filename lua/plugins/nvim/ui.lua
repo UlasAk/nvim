@@ -353,7 +353,7 @@ return {
     },
     event = "VeryLazy",
     keys = {
-      { "<leader>fn", "<cmd>Noice telescope<CR>", desc = "Notifications Show history" },
+      { "<leader>fn", "<CMD>Noice telescope<CR>", desc = "Notifications Show history" },
     },
     opts = {
       presets = {
@@ -567,56 +567,56 @@ return {
     "mrjones2014/smart-splits.nvim",
     keys = {
       {
-        "<Right>",
+        "<RIGHT>",
         function()
           require("smart-splits").resize_right()
         end,
         desc = "Window Resize right",
       },
       {
-        "<Left>",
+        "<LEFT>",
         function()
           require("smart-splits").resize_left()
         end,
         desc = "Window Resize left",
       },
       {
-        "<Up>",
+        "<UP>",
         function()
           require("smart-splits").resize_up()
         end,
         desc = "Window Resize up",
       },
       {
-        "<Down>",
+        "<DOWN>",
         function()
           require("smart-splits").resize_down()
         end,
         desc = "Window Resize down",
       },
       {
-        "<M-Right>",
+        "<M-RIGHT>",
         function()
           require("smart-splits").swap_buf_right()
         end,
         desc = "Window Swap right",
       },
       {
-        "<M-Left>",
+        "<M-LEFT>",
         function()
           require("smart-splits").swap_buf_left()
         end,
         desc = "Window Swap left",
       },
       {
-        "<M-Up>",
+        "<M-UP>",
         function()
           require("smart-splits").swap_buf_up()
         end,
         desc = "Window Swap up",
       },
       {
-        "<M-Down>",
+        "<M-DOWN>",
         function()
           require("smart-splits").swap_buf_down()
         end,

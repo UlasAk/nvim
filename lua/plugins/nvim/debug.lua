@@ -2,8 +2,8 @@ return {
   {
     "mfussenegger/nvim-dap",
     keys = {
-      { "<leader>dn", "<cmd>DapNew<CR>", desc = "Debug New" },
-      { "<leader>dbt", "<cmd>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
+      { "<leader>dn", "<CMD>DapNew<CR>", desc = "Debug New" },
+      { "<leader>dbt", "<CMD>DapToggleBreakpoint<CR>", desc = "Debug Toggle Breakpoint" },
       {
         "<leader>dbc",
         function()
@@ -11,8 +11,8 @@ return {
         end,
         desc = "Debug Breakpoint with condition",
       },
-      { "<leader>dba", "<cmd>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
-      { "<leader>dc", "<cmd>DapContinue<CR>", desc = "Debug Continue" },
+      { "<leader>dba", "<CMD>DapClearBreakpoints<CR>", desc = "Debug Clear Breakpoints" },
+      { "<leader>dc", "<CMD>DapContinue<CR>", desc = "Debug Continue" },
       {
         "<leader>dr",
         function()
@@ -48,9 +48,9 @@ return {
         end,
         desc = "Debug Down",
       },
-      { "<leader>dso", "<cmd>DapStepOver<CR>", desc = "Debug Step Over" },
-      { "<leader>dsO", "<cmd>DapStepOut<CR>", desc = "Debug Step Out" },
-      { "<leader>dsi", "<cmd>DapStepIn<CR>", desc = "Debug Step In" },
+      { "<leader>dso", "<CMD>DapStepOver<CR>", desc = "Debug Step Over" },
+      { "<leader>dsO", "<CMD>DapStepOut<CR>", desc = "Debug Step Out" },
+      { "<leader>dsi", "<CMD>DapStepIn<CR>", desc = "Debug Step In" },
       {
         "<leader>dsb",
         function()
@@ -72,8 +72,8 @@ return {
         end,
         desc = "Debug Widgets hover",
       },
-      { "<leader>dd", "<cmd>DapDisconnect<CR>", desc = "Debug Disconnect" },
-      { "<leader>dt", "<cmd>DapTerminate<CR>", desc = "Debug Terminate" },
+      { "<leader>dd", "<CMD>DapDisconnect<CR>", desc = "Debug Disconnect" },
+      { "<leader>dt", "<CMD>DapTerminate<CR>", desc = "Debug Terminate" },
       {
         "<leader>dus",
         function()
@@ -366,7 +366,7 @@ return {
     keys = {
       {
         "<leader>dv",
-        "<cmd>DapViewToggle<CR>",
+        "<CMD>DapViewToggle<CR>",
         desc = "Debug Toggle UI",
       },
     },

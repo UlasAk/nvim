@@ -22,11 +22,11 @@ return {
         end,
         desc = "Telescope Flutter commands",
       },
-      { "<leader>fld", "<cmd>FlutterDevices<CR>", desc = "Flutter Select Device" },
-      { "<leader>fle", "<cmd>FlutterEmulators<CR>", desc = "Flutter Emulators" },
-      { "<leader>flr", "<cmd>FlutterRun<CR>", desc = "Flutter Run" },
-      { "<leader>flh", "<cmd>FlutterReload<CR>", desc = "Flutter Hot Reload" },
-      { "<leader>flH", "<cmd>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
+      { "<leader>fld", "<CMD>FlutterDevices<CR>", desc = "Flutter Select Device" },
+      { "<leader>fle", "<CMD>FlutterEmulators<CR>", desc = "Flutter Emulators" },
+      { "<leader>flr", "<CMD>FlutterRun<CR>", desc = "Flutter Run" },
+      { "<leader>flh", "<CMD>FlutterReload<CR>", desc = "Flutter Hot Reload" },
+      { "<leader>flH", "<CMD>FlutterRestart<CR>", desc = "Flutter Hot Restart" },
       {
         "<leader>flt",
         function()
@@ -34,8 +34,8 @@ return {
         end,
         desc = "Flutter Open Dev Tools",
       },
-      { "<leader>flo", "<cmd>FlutterOutlineToggle<CR>", desc = "Flutter Toggle Outline" },
-      { "<leader>flq", "<cmd>FlutterQuit<CR>", desc = "Flutter Quit" },
+      { "<leader>flo", "<CMD>FlutterOutlineToggle<CR>", desc = "Flutter Toggle Outline" },
+      { "<leader>flq", "<CMD>FlutterQuit<CR>", desc = "Flutter Quit" },
     },
     opts = function()
       local lspconfig = require "lsp-opts"
