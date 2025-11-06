@@ -583,6 +583,15 @@ return {
       bind = true,
       hint_prefix = "",
     },
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+      require("colors").add_and_set_color_module("lsp_signature", function()
+        vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", {
+          bg = "#45475a",
+          bold = true,
+        })
+      end)
+    end,
   },
   {
     "smjonas/inc-rename.nvim",
