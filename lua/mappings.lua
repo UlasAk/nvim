@@ -13,6 +13,7 @@ map("n", "<leader>bn", "<CMD>enew<CR>", { desc = "Buffer New" })
 -- Tabs
 map("n", "<C-Tab>", "<CMD>tabnext<CR>", { desc = "Tab Next" })
 map("n", "<C-S-Tab>", "<CMD>tabprevious<CR>", { desc = "Tab Previous" })
+map("n", "<leader>TO", "<CMD>tabonly<CR>", { desc = "Tab Close others" })
 
 -- Jump
 map("n", "<C-i>", "<C-i>zz", { desc = "Jump Backwards in Jumplist and center" })
@@ -40,6 +41,7 @@ map("n", "<leader>sh", "<CMD> split<CR>", { desc = "Window Split Window horizont
 map("n", "<leader>sv", "<CMD> vsplit<CR>", { desc = "Window Split Window vertically" })
 map("n", "<leader>Wm", "<C-w>|<C-w>_", { desc = "Window Maximize" })
 map("n", "<leader>We", "<C-w>=", { desc = "Window Equalize windows" })
+map("n", "<leader>Wo", "<CMD>only<CR>", { desc = "Window Close others" })
 
 -- File operations
 map("n", "<leader>w", "<CMD>update<CR>", { desc = "General Copy whole file" })
