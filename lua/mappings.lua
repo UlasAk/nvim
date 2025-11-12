@@ -5,7 +5,7 @@ map("n", "<leader>q", "<CMD>q<CR>", { desc = "General Close window" })
 map("n", "<leader>Q", "<CMD>wqa<CR>", { desc = "General Save all and quit neovim" })
 
 -- Lazy
-map("n", "L", "<CMD>Lazy<CR>", { desc = "Lazy Open" })
+map("n", "<leader>L", "<CMD>Lazy<CR>", { desc = "Lazy Open" })
 
 -- Buffer
 map("n", "<leader>bn", "<CMD>enew<CR>", { desc = "Buffer New" })

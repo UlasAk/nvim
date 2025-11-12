@@ -380,7 +380,7 @@ return {
     "mason-org/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     keys = {
-      { "M", "<CMD>Mason<CR>", desc = "Mason Open" },
+      { "<leader>M", "<CMD>Mason<CR>", desc = "Mason Open" },
     },
     opts = function()
       local M = {}
